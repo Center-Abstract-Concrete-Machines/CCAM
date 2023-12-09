@@ -1,5 +1,6 @@
 ---
 import metadata from '../metadata.js';
+import Header from '../components/Header/Header.astro';
 ---
 
 <!doctype html>
@@ -13,6 +14,24 @@ import metadata from '../metadata.js';
         <title>{metadata.siteTitle}</title>
     </head>
     <body>
-        <slot />
+        <Header />
+        <div class="container mx-auto">
+            <div class="body-border">
+                <slot />
+            </div>
+        </div>
     </body>
 </html>
+
+<style>
+    .body-border {
+        @apply border-x border-dashed border-black;
+        @apply px-4 mx-4;
+    }
+</style>
+
+<style is:global>
+    body {
+        @apply bg-stone-50;
+    }
+</style>

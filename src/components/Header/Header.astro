@@ -5,15 +5,35 @@ import Logo from '../../svg/logo.svg';
 import { Image } from 'astro:assets';
 ---
 
-<div
-    class="grid grid-cols-1 justify-items-center p-4 gap-4
-    sm:items-center sm:grid-cols-2
-    bg-stone-50 border-b-black border-b border-solid"
->
-    <Image
-        src={Logo}
-        alt="Logo"
-        class="justify-self-center sm:justify-self-start"
-    />
-    <Navigation class="justify-self-center sm:justify-self-end" />
+<div class="header-container">
+    <div class="header">
+        <a href="/" class="logo">
+            <Image src={Logo} alt="Logo" />
+        </a>
+        <div class="nav">
+            <Navigation />
+        </div>
+    </div>
 </div>
+
+<style>
+    .header-container {
+        @apply w-full mx-auto;
+        @apply bg-stone-50 border-b-black border-b border-dashed;
+    }
+
+    .header {
+        @apply container mx-auto grid gap-4 items-center justify-items-center col-span-6 p-4;
+        @apply grid-cols-1 sm:grid-cols-6;
+    }
+
+    .logo {
+        @apply sm:justify-self-start;
+        @apply sm:col-span-3 lg:col-span-4;
+    }
+
+    .nav {
+        @apply w-fit sm:w-full lg:justify-self-stretch;
+        @apply sm:col-span-3 lg:col-span-2;
+    }
+</style>

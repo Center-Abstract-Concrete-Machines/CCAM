@@ -1,0 +1,22 @@
+---
+import metadata from '../../metadata';
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-3 gap-x-4 max-w-fit">
+    {
+        metadata.navLinks.map((nav) => (
+            <a
+                href={nav.url}
+                class="flex justify-between items-stretch gap-4 pb-1.5 w-[12rem] max-w-full"
+            >
+                <div class="text-black text-lg grow whitespace-nowrap">
+                    {nav.name}
+                </div>
+                <div class="justify-between items-stretch flex gap-5">
+                    <div class="text-black text-lg whitespace-nowrap">[</div>
+                    <div class="text-black text-lg whitespace-nowrap">]</div>
+                </div>
+            </a>
+        ))
+    }
+</div>

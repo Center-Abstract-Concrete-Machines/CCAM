@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 <div class="header-container">
     <div class="header">
         <a href="/" class="logo">
-            <Image src={Logo} alt="Logo" />
+            <Image src={Logo} alt="CCAM" />
         </a>
         <div class="nav">
             <Navigation />
@@ -23,7 +23,7 @@ import { Image } from 'astro:assets';
     }
 
     .header {
-        @apply container mx-auto grid gap-y-4 items-center justify-items-center col-span-6 p-4;
+        @apply container mx-auto max-w-7xl grid gap-y-4 items-center justify-items-center col-span-6 p-4;
         @apply grid-cols-1 sm:grid-cols-6;
     }
 

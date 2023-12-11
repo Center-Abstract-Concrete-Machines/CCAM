@@ -1,9 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allPrograms = await getCollection('programs');
 ---
 
 <Base>
-    <div class="container mx-auto">
-        <h1 class="text-center">Programs</h1>
+    <div class="container mx-auto p-4">
+        <h1 class="text-center text-4xl">Programs</h1>
+        <div>
+            {
+                allPrograms.map((program) => (
+                    <a href={`/programs/${program.slug}`}>
+                        <p>{program.data.title}</p>
+                    </a>
+                ))
+            }
+        </div>
     </div>
 </Base>

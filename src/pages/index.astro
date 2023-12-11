@@ -1,8 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 import Splash from '../components/Splash/Splash.astro';
+import Overview from '../components/Overview/Overview.astro';
+import ProgramCard from '../components/Programs/ProgramCard.astro';
+
+import { getCollection } from 'astro:content';
+
+const featuredPrograms = await getCollection('programs', ({ data }) => {
+    return data.featured === true;
+});
 ---
 
 <Base>
     <Splash />
+    <Overview />
+    <div class="grid grid-cols-1 sm:grid-cols-2">
+        {
+            featuredPrograms.map((program) => (
+                <div class="program-card-container">
+                    <ProgramCard
+                        title={program.data.title}
+                        metadata={program.data.metadata}
+                        imagePath={program.data.imageUrl}
+                        imageAlt={program.data.imageAlt}
+                        tags={program.data.tags}
+                    />
+                </div>
+            ))
+        }
+    </div>
 </Base>
+
+<style>
+    .program-card-container:first-of-type {
+        @apply border-b sm:border-b-0 sm:border-r border-black border-dashed;
+    }
+</style>

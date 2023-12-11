@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import leftBracket from './leftBracket.svg';
+import rightBracket from './rightBracket.svg';
+---
+
+<div class="p-4">
+    <div class="pb-4 border-b border-dashed border-black grid grid-cols-6">
+        <div
+            class="flex justify-between items-center
+            col-span-6 sm:col-span-4
+            border-b sm:border-b-0 sm:border-r border-dashed border-black pb-4 sm:pb-0 sm:pr-4"
+        >
+            <Image src={leftBracket} alt="Left Bracket" />
+            <p class="max-w-xs">
+                Center for Concrete and Abstract Machines is an artist-run
+                platform at the nexus of art, technology, and contemporary
+                thought.
+            </p>
+            <Image src={rightBracket} alt="Right Bracket" />
+        </div>
+        <div
+            class="flex gap-4 justify-stretch align-stretch flex-col col-span-6 sm:col-span-2 pt-4 sm:pt-0 min-h-[195px]"
+        >
+            <button class="border border-dashed border-black ml-4 grow"
+                >Program Calendar</button
+            >
+            <button class="border border-dashed border-black ml-4 grow"
+                >Research Projects</button
+            >
+            <button class="border border-dashed border-black ml-4 grow"
+                >About us</button
+            >
+        </div>
+    </div>
+</div>

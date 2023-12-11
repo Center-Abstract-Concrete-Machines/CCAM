@@ -1,6 +1,7 @@
 ---
 import metadata from '../metadata.js';
 import Header from '../components/Header/Header.astro';
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -27,11 +28,5 @@ import Header from '../components/Header/Header.astro';
     .body-border {
         @apply border-x border-dashed border-black;
         @apply mx-4;
-    }
-</style>
-
-<style is:global>
-    body {
-        @apply bg-stone-50;
     }
 </style>

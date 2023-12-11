@@ -5,30 +5,57 @@ import Overview from '../components/Overview/Overview.astro';
 import ProgramCard from '../components/Programs/ProgramCard.astro';
 
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import space from '../images/space.png';
 
 const featuredPrograms = await getCollection('programs', ({ data }) => {
     return data.featured === true;
-});
+}).then((result) => result.slice(0, 2));
 ---
 
 <Base>
     <Splash />
+
     <Overview />
+
     <!-- Programs -->
     <div class="grid grid-cols-1 sm:grid-cols-2">
         {
             featuredPrograms.map((program) => (
                 <div class="program-card-container">
                     <ProgramCard
-                        title={program.data.title}
-                        metadata={program.data.metadata}
-                        imagePath={program.data.imageUrl}
-                        imageAlt={program.data.imageAlt}
-                        tags={program.data.tags}
+                        slug={program.slug}
+                        frontmatter={program.data}
                     />
                 </div>
             ))
         }
+    </div>
+
+    <!-- About -->
+    <div
+        class="grid place-items-center border-t border-b border-dashed border-black mx-4 mt-4"
+    >
+        <div class="grid grid-cols-1 md:grid-cols-2 max-w-3xl py-20 gap-8">
+            <div
+                class="flex flex-col justify-between items-start order-2 sm:order-1"
+            >
+                <p>
+                    Nomadically based in Chicago, CCAM is an artist-run platform
+                    at the nexus of art, technology, and contemporary thought.
+                    CCAM’s primary goal is building an accessible community for
+                    the development and sharing of abstract ideas and forms of
+                    technical know-how, know-when, and know-why historically
+                    siloed in academia.
+                </p>
+                <button class="border border-dashed border-black px-4 py-2 mt-8"
+                    >Learn More</button
+                >
+            </div>
+            <div class="mt-8 sm:mt-0 order-1 sm:order-2">
+                <Image src={space} alt="Image of workshop space" />
+            </div>
+        </div>
     </div>
 </Base>
 

@@ -1,12 +1,16 @@
 ---
 import Base from './Base.astro';
-const { frontmatter } = Astro.props;
+import { Image } from 'astro:assets';
+
+const { title, subtitle, image } = Astro.props.frontmatter;
 ---
 
 <Base>
-    <div class="prose p-4">
-        <h1>{frontmatter.title}</h1>
-        <p>Description: {frontmatter.description}</p>
+    <div class="prose p-4 max-w-xl mx-auto">
+        <h1 class="text-center py-24 border-b border-dashed border-black">
+            {title.toUpperCase()}: <br />{subtitle.toUpperCase()}
+        </h1>
+        <Image src={image.url} alt={image.alt} <p />
         <slot />
     </div>
 </Base>

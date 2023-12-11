@@ -1,41 +1,33 @@
 ---
 import { Image } from 'astro:assets';
-
-const { title, metadata, imagePath, imageAlt, tags } = Astro.props;
-const images = import.meta.glob('/src/content/programs/**/*.png');
+import Tag from './Tag.astro';
+const { slug } = Astro.props;
+const { title, subtitle, dates, time, location, image, tags } =
+    Astro.props.frontmatter;
 ---
 
 <div class="flex flex-col justify-between items-start p-4">
-    <Image
-        src={images[imagePath]()}
-        alt={imageAlt}
-        class="aspect-[1.5] object-contain object-center w-full overflow-hidden max-w-full"
-    />
-    <h1
-        class="text-neutral-900 text-4xl font-medium leading-10 tracking-tight w-full mt-6"
-    >
-        {title}
-    </h1>
+    <a href={`programs/${slug}`}>
+        <Image
+            src={image.url}
+            alt={image.alt}
+            class="aspect-[1.5] object-contain object-center w-full overflow-hidden max-w-full"
+        />
+        <h1
+            class="text-neutral-900 text-4xl font-medium leading-10 tracking-tight w-full mt-6"
+        >
+            {title}: {subtitle}
+        </h1>
+    </a>
+
     <div class="mt-6">
-        {metadata.dates} | {metadata.time} | {metadata.location}
+        {dates} | {time} | {location}
     </div>
     <div class="flex gap-2 mt-4 grow">
         <!-- TODO: add date checking -->
-        <a
-            href="#"
-            class="text-neutral-50 whitespace-nowrap bg-neutral-900 px-4 py-2"
-        >
+        <div class="text-neutral-50 whitespace-nowrap bg-neutral-900 px-4 py-2">
             Upcoming
-        </a>
-        {
-            tags.map((tag) => (
-                <a
-                    href="#"
-                    class="text-neutral-900 text-lg whitespace-nowrap bg-lime-400 px-4 py-2"
-                >
-                    {tag}
-                </a>
-            ))
-        }
+        </div>
+        {tags.map((tag) => <Tag tag={tag} />)}
     </div>
 </div>

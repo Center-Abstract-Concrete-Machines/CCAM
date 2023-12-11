@@ -1,12 +1,13 @@
 ---
-title: '1000 Plateaus 101: How to Make a Rhizome'
-description: How to Make a Rhizome
-metadata:
-    dates: Aug 9 & 16, 2023
-    time: 6-7 PM CT
-    location: Hybrid
-imageUrl: /src/content/programs/1000-plateaus-101/1000-plateaus.png
-imageAlt: alt
+title: '1000 Plateaus 101'
+subtitle: How to Make a Rhizome
+pubDate: 2023-12-11
+dates: Aug 9 & 16, 2023
+time: 6-7 PM CT
+location: Hybrid
+image:
+    url: ./1000-plateaus.png
+    alt: alt
 tags:
     - Course
 featured: true

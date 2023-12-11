@@ -4,19 +4,23 @@ import { z, defineCollection } from 'astro:content';
 // Define a `type` and `schema` for each collection
 const programsCollection = defineCollection({
     type: 'content',
-    schema: z.object({
-        title: z.string(),
-        description: z.string(),
-        metadata: z.object({
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            subtitle: z.string(),
+            pubDate: z.date(),
             dates: z.string(),
             time: z.string(),
             location: z.string(),
+            image: z.object({
+                url: image(),
+                alt: z.string(),
+            }),
+            tags: z.array(
+                z.enum(['Course', 'Working Group', 'Event', 'Workshop'])
+            ),
+            featured: z.boolean().optional(),
         }),
-        imageUrl: z.string(),
-        imageAlt: z.string(),
-        tags: z.array(z.string()),
-        featured: z.boolean().optional(),
-    }),
 });
 // Export a single `collections` object to register your collection(s)
 export const collections = {

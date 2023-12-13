@@ -1,12 +1,15 @@
 ---
-import Base from '../layouts/Base.astro';
-import Splash from '../components/Splash/Splash.astro';
-import Overview from '../components/Overview/Overview.astro';
-import ProgramCard from '../components/Programs/ProgramCard.astro';
-
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ProgramCard from '../components/Programs/ProgramCard.astro';
+import ResourcesDisplay from '../components/Resources/ResourcesDisplay.astro';
+
 import space from '../images/space.png';
+import squareSpace from '../images/space-square.png';
+import CCAM from '../images/CCAM.png';
+import leftBracket from '../svg/leftBracket.svg';
+import rightBracket from '../svg/rightBracket.svg';
 
 const featuredPrograms = await getCollection('programs', ({ data }) => {
     return data.featured === true;
@@ -14,11 +17,65 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 ---
 
 <Base>
-    <Splash />
+    <!-- Splash -->
 
-    <Overview />
+    <div
+        class="grid grid-cols-6 p-4 justify-items-center border-b border-dashed border-black"
+    >
+        <div
+            class="col-span-6 sm:col-span-4
+    border-b sm:border-b-0 sm:border-r border-dashed border-black"
+        >
+            <Image
+                src={CCAM}
+                alt="Center for Concrete and Abtract Machines"
+                class="pb-4 sm:pb-0 sm:pr-4"
+            />
+        </div>
+        <div class="col-span-6 sm:col-span-2 w-full pt-4 sm:pt-0 sm:pl-4">
+            <Image
+                src={squareSpace}
+                alt="Studio Space"
+                class="max-w-full mx-auto"
+            />
+        </div>
+    </div>
+
+    <!-- Overview -->
+
+    <div class="p-4">
+        <div class="pb-4 border-b border-dashed border-black grid grid-cols-6">
+            <div
+                class="flex justify-between items-center
+                col-span-6 sm:col-span-4
+                border-b sm:border-b-0 sm:border-r border-dashed border-black pb-4 sm:pb-0 sm:pr-4"
+            >
+                <Image src={leftBracket} alt="Left Bracket" />
+                <p class="max-w-xs">
+                    Center for Concrete and Abstract Machines is an artist-run
+                    platform at the nexus of art, technology, and contemporary
+                    thought.
+                </p>
+                <Image src={rightBracket} alt="Right Bracket" />
+            </div>
+            <div
+                class="flex gap-4 justify-stretch align-stretch flex-col col-span-6 sm:col-span-2 pt-4 sm:pt-0 min-h-[195px]"
+            >
+                <button class="border border-dashed border-black ml-4 grow"
+                    >Program Calendar</button
+                >
+                <button class="border border-dashed border-black ml-4 grow"
+                    >Research Projects</button
+                >
+                <button class="border border-dashed border-black ml-4 grow"
+                    >About us</button
+                >
+            </div>
+        </div>
+    </div>
 
     <!-- Programs -->
+
     <div class="grid grid-cols-1 sm:grid-cols-2">
         {
             featuredPrograms.map((program) => (
@@ -33,6 +90,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     </div>
 
     <!-- About -->
+
     <div
         class="grid place-items-center border-t border-b border-dashed border-black mx-4 mt-4"
     >
@@ -57,6 +115,10 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
             </div>
         </div>
     </div>
+
+    <!-- Resources -->
+
+    <ResourcesDisplay />
 </Base>
 
 <style>

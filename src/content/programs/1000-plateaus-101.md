@@ -6,7 +6,7 @@ dates: Aug 9 & 16, 2023
 time: 6-7 PM CT
 location: Hybrid
 image:
-    url: ./1000-plateaus.png
+    url: ./images/1000-plateaus.png
     alt: alt
 tags:
     - Course

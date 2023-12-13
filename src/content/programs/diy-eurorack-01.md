@@ -6,7 +6,7 @@ dates: Every other Thursday
 time: 6-8 PM CT
 location: Hybrid
 image:
-    url: ./diy-eurorack.png
+    url: ./images/diy-eurorack.png
     alt: alt
 tags:
     - Working Group

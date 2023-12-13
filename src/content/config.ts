@@ -1,7 +1,5 @@
-// Import utilities from `astro:content`
 import { z, defineCollection } from 'astro:content';
 
-// Define a `type` and `schema` for each collection
 const programsCollection = defineCollection({
     type: 'content',
     schema: ({ image }) =>
@@ -22,7 +20,24 @@ const programsCollection = defineCollection({
             featured: z.boolean().optional(),
         }),
 });
-// Export a single `collections` object to register your collection(s)
+
+const resourcesCollection = defineCollection({
+    type: 'content',
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            author: z.string(),
+            type: z.string(),
+            year: z.number(),
+            image: z.object({
+                url: image(),
+                alt: z.string(),
+            }),
+            dateAdded: z.date(),
+        }),
+});
+
 export const collections = {
     programs: programsCollection,
+    resources: resourcesCollection,
 };

@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import bookImg from './book.png';
+
+const { image, title, type, author, year} = Astro.props.metadata;
+
+function randomBG() {
+    const colors = ['bg-orange-600', 'bg-lime-400', 'bg-yellow-400', 'bg-indigo-400', 'bg-blue-400']
+    return colors[Math.floor(Math.random() * colors.length)]
+}
+
+---
+<div class="flex gap-4 py-4 border-t border-dashed border-black">
+    <Image src={image.url} alt={image.alt} class="aspect-square object-contain object-center overflow-hidden max-w-full shrink-0" />
+    <div>
+        <h3 class="text-xl font-medium">{title}</h3>
+        <div class="flex justify-start items-center gap-2 pt-2">
+            <div class=`flex justify-center items-center ${randomBG()} px-4 py-2 whitespace-nowrap`>{type}</div>
+            <span>{author}</span><span class="opacity-30">|</span><span>{year}</span>
+        </div>
+    </div>
+</div>

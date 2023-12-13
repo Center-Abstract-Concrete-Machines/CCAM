@@ -20,11 +20,11 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     <!-- Splash -->
 
     <div
-        class="grid grid-cols-6 p-4 justify-items-center border-b border-dashed border-black"
+        class="grid grid-cols-6 p-4 justify-items-center border-b border-dashed border-Black-30"
     >
         <div
             class="col-span-6 sm:col-span-4
-    border-b sm:border-b-0 sm:border-r border-dashed border-black"
+    border-b sm:border-b-0 sm:border-r border-dashed border-Black-30"
         >
             <Image
                 src={CCAM}
@@ -44,11 +44,13 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     <!-- Overview -->
 
     <div class="p-4">
-        <div class="pb-4 border-b border-dashed border-black grid grid-cols-6">
+        <div
+            class="pb-4 border-b border-dashed border-Black-30 grid grid-cols-6"
+        >
             <div
                 class="flex justify-between items-center
                 col-span-6 sm:col-span-4
-                border-b sm:border-b-0 sm:border-r border-dashed border-black pb-4 sm:pb-0 sm:pr-4"
+                border-b sm:border-b-0 sm:border-r border-dashed border-Black-30 pb-4 sm:pb-0 sm:pr-4"
             >
                 <Image src={leftBracket} alt="Left Bracket" />
                 <p class="max-w-xs">
@@ -61,13 +63,13 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
             <div
                 class="flex gap-4 justify-stretch align-stretch flex-col col-span-6 sm:col-span-2 pt-4 sm:pt-0 min-h-[195px]"
             >
-                <button class="border border-dashed border-black ml-4 grow"
+                <button class="border border-dashed border-Black-30 ml-4 grow"
                     >Program Calendar</button
                 >
-                <button class="border border-dashed border-black ml-4 grow"
+                <button class="border border-dashed border-Black-30 ml-4 grow"
                     >Research Projects</button
                 >
-                <button class="border border-dashed border-black ml-4 grow"
+                <button class="border border-dashed border-Black-30 ml-4 grow"
                     >About us</button
                 >
             </div>
@@ -92,7 +94,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     <!-- About -->
 
     <div
-        class="grid place-items-center border-t border-b border-dashed border-black mx-4 mt-4"
+        class="grid place-items-center border-t border-b border-dashed border-Black-30 mx-4 mt-4"
     >
         <div class="grid grid-cols-1 md:grid-cols-2 max-w-3xl py-20 gap-8">
             <div
@@ -106,7 +108,8 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
                     technical know-how, know-when, and know-why historically
                     siloed in academia.
                 </p>
-                <button class="border border-dashed border-black px-4 py-2 mt-8"
+                <button
+                    class="border border-dashed border-Black-30 px-4 py-2 mt-8"
                     >Learn More</button
                 >
             </div>
@@ -123,6 +126,6 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
 <style>
     .program-card-container:first-of-type {
-        @apply border-b sm:border-b-0 sm:border-r border-black border-dashed;
+        @apply border-b sm:border-b-0 sm:border-r border-Black-30 border-dashed;
     }
 </style>

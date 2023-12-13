@@ -1,3 +1,14 @@
+:root {
+    --Blue: #74acff;
+    --Green: #a5f91d;
+    --Orange: #ff7a1a;
+    --Purple: #747fef;
+    --Sand: #fffbf1;
+    --Yellow: #ffd400;
+    --Black: #121212;
+    --Black-30: #1212124d;
+}
+
 body {
-    @apply bg-stone-50;
+    background-color: var(--Sand);
 }

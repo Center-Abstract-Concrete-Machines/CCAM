@@ -12,3 +12,7 @@
 body {
     background-color: var(--Sand);
 }
+
+* {
+    min-width: 0;
+}

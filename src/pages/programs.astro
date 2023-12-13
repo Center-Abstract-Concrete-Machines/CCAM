@@ -24,10 +24,12 @@ const pastPrograms = await getCollection('programs');
     <div class="mx-auto w-full p-4">
         <TitleCard title={heading.title} text={heading.description} />
 
-        <div>
-            <div class="flex justify-between items-center text-sm py-4">
+        <div class="min-w-0">
+            <div
+                class="flex flex-wrap justify-between items-center text-sm py-4"
+            >
                 <span>Filter</span>
-                <div class="flex gap-x-4">
+                <div class="flex gap-4 flex-wrap">
                     <Tag tag="Event" />
                     <Tag tag="Working Group" />
                     <Tag tag="Course" />

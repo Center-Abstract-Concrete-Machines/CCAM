@@ -1,9 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+import TitleCard from '../components/TitleCard.astro';
+
+const heading = {
+    title: 'Resources',
+    description:
+        'Lorem ipsum dolor sit amet consectetur. Faucibus elit magna aliquet nisi neque convallis tempor. Blandit pellentesque egestas luctus hendrerit amet amet ac fermentum egestas.',
+};
 ---
 
 <Base>
     <div class="container mx-auto">
-        <h1 class="text-center">Resources</h1>
+        <TitleCard title={heading.title} text={heading.description} />
     </div>
 </Base>

@@ -1,21 +1,104 @@
 ---
 import Base from '../layouts/Base.astro';
+import TitleCard from '../components/TitleCard.astro';
+import ProgramCard from '../components/Programs/ProgramCard.astro';
 import { getCollection } from 'astro:content';
+import Tag from '../components/Programs/Tag.astro';
 
 const allPrograms = await getCollection('programs');
+
+const heading = {
+    title: 'Programs',
+    description:
+        'Our school supports interdisciplinary study in art, code, hardware and critical theory through events, classes, and workshops.',
+};
+
+const featuredPrograms = await getCollection('programs', ({ data }) => {
+    return data.featured === true;
+}).then((result) => result.slice(0, 2));
+
+const pastPrograms = await getCollection('programs');
 ---
 
 <Base>
-    <div class="container mx-auto p-4">
-        <h1 class="text-center text-4xl">Programs</h1>
+    <div class="mx-auto w-full p-4">
+        <TitleCard title={heading.title} text={heading.description} />
+
         <div>
-            {
-                allPrograms.map((program) => (
-                    <a href={`/programs/${program.slug}`}>
-                        <p>{program.data.title}</p>
-                    </a>
-                ))
-            }
+            <div class="flex justify-between items-center text-sm py-4">
+                <span>Filter</span>
+                <div class="flex gap-x-4">
+                    <Tag tag="Event" />
+                    <Tag tag="Working Group" />
+                    <Tag tag="Course" />
+                    <Tag tag="Workshop" />
+                </div>
+            </div>
+            <div class="border-t border-dashed border-Black-30 py-4">
+                <div class="grid two-columns gap-4">
+                    {
+                        featuredPrograms.map((program) => (
+                            <>
+                                <ProgramCard
+                                    slug={program.slug}
+                                    frontmatter={program.data}
+                                />
+                                <div class="spacer border-t sm:border-r sm:border-t-0 border-dashed border-Black-30" />
+                            </>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="border-t border-dashed border-Black-30">
+                <h2 class="text-center py-16 font-medium text-3xl">
+                    Past Programs
+                </h2>
+            </div>
+            <div class="border-t border-dashed border-Black-30 py-4">
+                <div class="grid gap-4 three-columns">
+                    {
+                        pastPrograms.map((program) => (
+                            <>
+                                <ProgramCard
+                                    slug={program.slug}
+                                    frontmatter={program.data}
+                                    headingSize="text-xl"
+                                />
+                                <div class="spacer border-t sm:border-r sm:border-t-0 border-dashed border-Black-30" />
+                            </>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </Base>
+
+<style>
+    .two-columns,
+    .three-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .spacer:last-child,
+    .spacer:last-child {
+        display: none;
+    }
+
+    @media (min-width: 640px) {
+        .two-columns {
+            grid-template-columns:
+                minmax(0, 1fr) 1px
+                minmax(0, 1fr);
+        }
+        .three-columns {
+            grid-template-columns:
+                minmax(0, 1fr) 1px
+                minmax(0, 1fr) 1px
+                minmax(0, 1fr);
+        }
+    }
+</style>

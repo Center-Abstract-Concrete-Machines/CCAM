@@ -78,15 +78,16 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
     <!-- Programs -->
 
-    <div class="grid grid-cols-1 sm:grid-cols-2">
+    <div class="grid two-columns px-4 gap-x-4">
         {
             featuredPrograms.map((program) => (
-                <div class="program-card-container">
+                <>
                     <ProgramCard
                         slug={program.slug}
                         frontmatter={program.data}
                     />
-                </div>
+                    <div class="spacer border-r border-dashed border-Black-30" />
+                </>
             ))
         }
     </div>
@@ -125,7 +126,27 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 </Base>
 
 <style>
-    .program-card-container:first-of-type {
-        @apply border-b sm:border-b-0 sm:border-r border-Black-30 border-dashed;
+    .two-columns,
+    .three-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .spacer:last-child,
+    .spacer:last-child {
+        display: none;
+    }
+
+    @media (min-width: 640px) {
+        .two-columns {
+            grid-template-columns:
+                minmax(0, 1fr) 1px
+                minmax(0, 1fr);
+        }
+        .three-columns {
+            grid-template-columns:
+                minmax(0, 1fr) 1px
+                minmax(0, 1fr) 1px
+                minmax(0, 1fr);
+        }
     }
 </style>

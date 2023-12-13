@@ -1,29 +1,29 @@
 ---
 import { Image } from 'astro:assets';
 import Tag from './Tag.astro';
-const { slug } = Astro.props;
+const { slug, headingSize = 'text-3xl' } = Astro.props;
 const { title, subtitle, dates, time, location, image, tags } =
     Astro.props.frontmatter;
 ---
 
-<div class="flex flex-col justify-between items-start p-4">
+<div class="flex flex-col items-start">
     <a href={`programs/${slug}`}>
         <Image
             src={image.url}
             alt={image.alt}
-            class="aspect-[1.5] object-contain object-center w-full overflow-hidden max-w-full"
+            class="aspect-[1.5] object-cover object-center w-full overflow-hidden max-w-full"
         />
         <h1
-            class="text-neutral-900 text-4xl font-medium leading-10 tracking-tight w-full mt-6"
+            class=`${headingSize} text-neutral-900 font-medium leading-tight tracking-tight w-full mt-6`
         >
             {title}: {subtitle}
         </h1>
     </a>
 
-    <div class="mt-6 font-mono text-sm">
+    <div class="mt-6 font-mono text-xs">
         {dates} | {time} | {location}
     </div>
-    <div class="flex gap-2 mt-4 grow">
+    <div class="flex gap-2 mt-4 grow-0 flex-wrap text-sm">
         <!-- TODO: add date checking -->
         <div class="text-neutral-50 whitespace-nowrap bg-neutral-900 px-4 py-2">
             Upcoming

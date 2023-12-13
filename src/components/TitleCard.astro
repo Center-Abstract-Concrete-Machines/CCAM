@@ -1,0 +1,18 @@
+---
+const { title, text } = Astro.props;
+---
+
+<div class="grid place-content-center min-h-[16rem]">
+    <div class="max-w-lg text-center flex flex-col gap-4">
+        <h1 class="text-4xl uppercase font-semibold">{title}</h1>
+        <p>
+            {text}
+        </p>
+    </div>
+</div>
+
+<style>
+    p {
+        text-wrap: balance;
+    }
+</style>

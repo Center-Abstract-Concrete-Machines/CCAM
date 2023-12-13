@@ -23,16 +23,18 @@ function randomBG() {
         class="aspect-square object-contain object-center overflow-hidden max-w-full shrink-0"
     />
     <div>
+        <!-- TODO: mobile collapse view -->
+
         <h3 class="text-xl font-medium">{title}</h3>
-        <div class="flex justify-start items-center gap-2 pt-2">
+        <div class="flex flex-wrap justify-start items-center gap-2 pt-2">
             <div
                 class=`flex justify-center items-center ${randomBG()} px-4 py-2 whitespace-nowrap`
             >
                 {type}
             </div>
-            <span>{author}</span><span class="opacity-30">|</span><span
-                >{year}</span
-            >
+            <div class="flex gap-2 flex-wrap">
+                {author}<span class="opacity-30">|</span>{year}
+            </div>
         </div>
     </div>
 </div>

@@ -1,39 +1,37 @@
 ---
-import Navigation from './Navigation.astro';
 import metadata from '../../metadata';
 import Logo from '../../svg/logo.svg';
 import { Image } from 'astro:assets';
 ---
 
-<div class="header-container">
-    <div class="header">
-        <a href="/" class="logo">
+<div class="w-full mx-auto border-Black-30 border-b border-dashed p-4">
+    <div
+        class="container mx-auto max-w-7xl grid gap-y-4 items-center justify-items-center col-span-6 grid-cols-1 sm:grid-cols-6"
+    >
+        <a href="/" class="sm:justify-self-start sm:col-span-3 lg:col-span-4">
             <Image src={Logo} alt="CCAM" />
         </a>
-        <div class="nav">
-            <Navigation />
+        <div
+            class="navigation w-full lg:justify-self-stretch sm:col-span-3 lg:col-span-2"
+        >
+            <div
+                class="grid grid-cols-2 grid-rows-3 gap-x-4 w-full max-w-lg mx-auto"
+            >
+                {
+                    metadata.navLinks.map((nav) => (
+                        <a
+                            href={nav.url}
+                            class="flex justify-between items-center gap-4 sm:px-0"
+                        >
+                            <div class="whitespace-nowrap">{nav.name}</div>
+                            <div class="flex justify-between gap-4 whitespace-nowrap">
+                                <span>[</span>
+                                <span class="pl-1">]</span>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
         </div>
     </div>
 </div>
-
-<style>
-    .header-container {
-        @apply w-full mx-auto;
-        @apply border-b-black border-b border-dashed;
-    }
-
-    .header {
-        @apply container mx-auto max-w-7xl grid gap-y-4 items-center justify-items-center col-span-6 p-4;
-        @apply grid-cols-1 sm:grid-cols-6;
-    }
-
-    .logo {
-        @apply sm:justify-self-start;
-        @apply sm:col-span-3 lg:col-span-4;
-    }
-
-    .nav {
-        @apply w-full lg:justify-self-stretch;
-        @apply sm:col-span-3 lg:col-span-2;
-    }
-</style>

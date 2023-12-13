@@ -3,15 +3,16 @@ import { getCollection } from 'astro:content';
 
 import ResourceCard from './ResourceCard.astro';
 
-// Most recent on top
 const resources = (await getCollection('resources')).sort(
-    (a, b) => b.data.dateAdded - a.data.dateAdded
+    // Most recent on top
+    (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
 );
-console.log('resources', resources);
 ---
 
-<div class="p-4">
-    <div class="header flex justify-between items-center">
+<div class="px-4">
+    <div
+        class="header flex justify-between items-center pt-4 border-t border-dashed border-Black-30"
+    >
         <h2 class="text-2xl font-medium">Resources</h2>
         <button class="border border-dashed border-Black-30 px-4 py-2"
             >View All</button

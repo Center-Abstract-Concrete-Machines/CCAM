@@ -15,7 +15,7 @@ import { ViewTransitions } from 'astro:transitions';
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{metadata.siteTitle}</title>
-        <ViewTransitions />
+        <ViewTransitions fallback="none" />
     </head>
     <body>
         <Header />

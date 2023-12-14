@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import TitleCard from '../components/TitleCard.astro';
+import ResourcesDisplay from '../components/Resources/ResourcesDisplay.astro';
 
 const heading = {
     title: 'Resources',
@@ -10,7 +11,8 @@ const heading = {
 ---
 
 <Base>
-    <div class="container mx-auto">
+    <div class="mx-auto px-4">
         <TitleCard title={heading.title} text={heading.description} />
+        <ResourcesDisplay />
     </div>
 </Base>

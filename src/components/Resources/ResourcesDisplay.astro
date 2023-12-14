@@ -4,19 +4,17 @@ import { getCollection } from 'astro:content';
 import ResourceCard from './ResourceCard.astro';
 import HorizontalSpacer from '../HorizontalSpacer.astro';
 
-const resources = (await getCollection('resources')).sort(
+const { displayCount } = Astro.props;
+
+let resources = (await getCollection('resources')).sort(
     // Most recent on top
     (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
 );
+if (displayCount) {
+    resources = resources.slice(0, displayCount);
+}
 ---
 
-<div class="px-4">
-    <HorizontalSpacer />
-    <div class="header flex justify-between items-center">
-        <h2 class="text-2xl font-medium">Resources</h2>
-        <button class="button">View All</button>
-    </div>
-    <div class="pt-4">
-        {resources.map((resource) => <ResourceCard metadata={resource.data} />)}
-    </div>
+<div class="pt-4">
+    {resources.map((resource) => <ResourceCard metadata={resource.data} />)}
 </div>

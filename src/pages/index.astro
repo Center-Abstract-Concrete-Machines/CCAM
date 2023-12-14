@@ -114,8 +114,16 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     </div>
 
     <!-- Resources -->
-
-    <ResourcesDisplay />
+    <div class="px-4">
+        <HorizontalSpacer />
+        <div class="header flex justify-between items-center">
+            <h2 class="text-2xl font-medium">Resources</h2>
+            <a href="/resources">
+                <button class="button">View All</button>
+            </a>
+        </div>
+        <ResourcesDisplay displayCount={5} />
+    </div>
 </Base>
 
 <style>

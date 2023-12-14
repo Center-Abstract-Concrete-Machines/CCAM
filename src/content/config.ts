@@ -51,8 +51,22 @@ const projectsCollection = defineCollection({
         }),
 });
 
+const aboutCollection = defineCollection({
+    type: 'content',
+    schema: ({ image }) =>
+        z.object({
+            name: z.string(),
+            description: z.string(),
+            image: z.object({
+                url: image(),
+                alt: z.string(),
+            }),
+        }),
+});
+
 export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
+    about: aboutCollection,
 };

@@ -1,10 +1,110 @@
 ---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
 import Base from '../layouts/Base.astro';
 import TitleCard from '../components/TitleCard.astro';
+import HorizontalSpacer from '../components/HorizontalSpacer.astro';
+import OrganizerCard from '../components/About/OrganizerCard.astro';
+
+import Space from '/src/images/space.png';
+import SpaceLarge from '/src/images/space-large.png';
+
+const heading =
+    'CCAM is an artist-run platform at the nexus of art, technology, and contemporary thought.';
+
+const organizers = await getCollection('about');
+console.log('organizers', organizers);
 ---
 
 <Base>
-    <div class="container mx-auto">
-        <TitleCard title="About" />
+    <div class="mx-auto p-4">
+        <h1 class="text-center text-4xl font-semibold py-16 max-w-2xl mx-auto">
+            CCAM is an artist-run platform at the nexus of art, technology, and
+            contemporary thought.
+        </h1>
+        <HorizontalSpacer />
+        <section class="max-w-2xl mx-auto pt-12 pb-16">
+            <p>
+                CCAM’s primary goal is building an accessible community for the
+                development and sharing of abstract ideas and forms of technical
+                know-how, know-when, and know-why historically siloed in
+                academia. Reciprocally, CCAM aims to hybridize the art,
+                technology, and research cultures it borrows from the academy by
+                drawing on and inviting in queer, anti-racist, and decolonial
+                perspectives. By intentionally developing this community outside
+                of the academy, CCAM seeks to break down barriers to access for
+                engaging in research in art, technology, and surrounding
+                criticism and theory. CCAMstrives to center queer, anti-racist,
+                and decolonial perspectives in art and art technology.
+            </p>
+            <figure class="text-center flex flex-col gap-2 py-16">
+                <Image src={Space} alt="CCAM Artist Space" class="mx-auto" />
+                <figcaption class="text-Black-50 text-sm">Caption</figcaption>
+            </figure>
+            <p>
+                CCAM serves artists in our community by offering donation-based
+                seminars, talks, and working groups investigating the liberatory
+                potentials of different theories of art, science, and
+                technology. In its workshop programming and future residency
+                offerings, CCAM takes a para-academic approach that prioritizes
+                transdisciplinary exchange between residents, mentors, and
+                guests. CCAM’s focus on technology aims to provide artists with
+                diverse and experimental approaches to expressive interactive
+                media art creation. We build community through collaborative
+                learning workshops and working groups focused on both
+                bleeding-edge toolkits as well as DIY and open-source platforms
+                for sound and video instrument composition.
+            </p>
+            <div class="mt-4">
+                <p class="text-Purple">Contact</p>
+                <a href="mailto:info@abstractconcrete.center"
+                    >info@abstractconcrete.center</a
+                >
+            </div>
+            <div class="mt-4">
+                <p class="text-Purple">Instragram</p>
+                <a href="https://www.instagram.com/ccam_chicago/"
+                    >@ccam_chicago</a
+                >
+            </div>
+            <div class="mt-4">
+                <p class="text-Purple">Contribute</p>
+                <p>
+                    If you have additional suggestions for materials for
+                    inclusion, please send us an email!
+                </p>
+            </div>
+        </section>
+        <HorizontalSpacer />
+        <section class="max-w-2xl mx-auto pt-12 pb-16">
+            <h3 class="text-center text-Purple">Organizers</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                {
+                    organizers.map((organizer) => (
+                        <OrganizerCard
+                            name={organizer.data.name}
+                            description={organizer.data.description}
+                            image={organizer.data.image}
+                            slug={organizer.slug}
+                        />
+                    ))
+                }
+            </div>
+        </section>
+        <HorizontalSpacer />
+        <figure class="text-center flex flex-col gap-2">
+            <Image src={SpaceLarge} alt="CCAM Artist Space" class="mx-auto" />
+            <figcaption class="text-Black-50 text-sm">Caption</figcaption>
+        </figure>
     </div>
 </Base>
+
+<style>
+    h1 {
+        text-wrap: balance;
+    }
+    a {
+        @apply border-b border-dashed border-Black;
+    }
+</style>

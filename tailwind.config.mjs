@@ -12,6 +12,7 @@ export default {
                 Yellow: '#ffd400',
                 Black: '#121212',
                 'Black-30': '#1212124d',
+                'Black-50': '#00000080',
             },
         },
     },

@@ -1,0 +1,15 @@
+---
+import Base from './Base.astro';
+import { Image } from 'astro:assets';
+
+const { name, description, image } = Astro.props.frontmatter;
+---
+
+<Base>
+    <div class="prose py-16 max-w-xl mx-auto flex flex-col items-center">
+        <Image src={image.url} alt={image.alt} class="mx-auto" />
+        <h1>{name}</h1>
+        <h2>{description}</h2>
+        <slot />
+    </div>
+</Base>

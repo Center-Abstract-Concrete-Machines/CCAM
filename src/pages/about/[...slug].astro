@@ -1,0 +1,19 @@
+---
+import BioLayout from '../../layouts/BioLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const organizers = await getCollection('about');
+    return organizers.map((organizer) => ({
+        params: { slug: organizer.slug },
+        props: { organizer },
+    }));
+}
+
+const { organizer } = Astro.props;
+const { Content } = await organizer.render();
+---
+
+<BioLayout frontmatter={organizer.data}>
+    <Content />
+</BioLayout>

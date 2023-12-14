@@ -16,3 +16,7 @@ body {
 * {
     min-width: 0;
 }
+
+.button {
+    @apply border border-dashed border-Black-30 px-4 py-2;
+}

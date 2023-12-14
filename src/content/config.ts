@@ -37,7 +37,22 @@ const resourcesCollection = defineCollection({
         }),
 });
 
+const projectsCollection = defineCollection({
+    type: 'content',
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            image: z.object({
+                url: image(),
+                alt: z.string(),
+            }),
+            dateAdded: z.date(),
+        }),
+});
+
 export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
+    projects: projectsCollection,
 };

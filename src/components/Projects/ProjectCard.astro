@@ -5,10 +5,12 @@ const { image, title, description } = Astro.props.metadata;
 ---
 
 <div class="mx-auto flex flex-col gap-4 max-w-2xl pb-16">
-    <a href=`projects/${slug}`>
+    <a href=`/projects/${slug}`>
         <Image src={image.url} alt={image.alt} />
     </a>
-    <div class="project-card grid sm:grid-rows-2 grid-cols-1 sm:grid-cols-2 gap-4">
+    <div
+        class="project-card grid sm:grid-rows-2 grid-cols-1 sm:grid-cols-2 gap-4"
+    >
         <h2 class="text-4xl font-medium">{title}</h2>
         <p class="row-span-2">{description}</p>
         <a href=`projects/${slug}`>
@@ -20,9 +22,7 @@ const { image, title, description } = Astro.props.metadata;
 </div>
 
 <style>
-
     p {
         text-wrap: balance;
     }
-
 </style>

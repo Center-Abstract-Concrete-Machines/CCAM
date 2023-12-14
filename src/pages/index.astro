@@ -40,7 +40,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
     <div class="px-4 pt-4">
         <HorizontalSpacer />
-        <div class="grid thirds-container">
+        <div class="grid thirds-container gap-4">
             <div
                 class="flex justify-between items-center
                 pb-4 sm:pb-0 sm:pr-4"
@@ -57,14 +57,20 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
             <div
                 class="flex gap-4 justify-stretch align-stretch flex-col pt-4 sm:pt-0 min-h-[195px]"
             >
-                <button class="border border-dashed border-Black-30 ml-4 grow"
-                    >Program Calendar</button
+                <a href="/programs" class="flex grow">
+                    <button class="border border-dashed border-Black-30 grow"
+                        >Program Calendar</button
+                    ></a
                 >
-                <button class="border border-dashed border-Black-30 ml-4 grow"
-                    >Research Projects</button
+                <a href="/projects" class="flex grow">
+                    <button class="border border-dashed border-Black-30 grow"
+                        >Research Projects</button
+                    ></a
                 >
-                <button class="border border-dashed border-Black-30 ml-4 grow"
-                    >About us</button
+                <a href="/about" class="flex grow">
+                    <button class="border border-dashed border-Black-30 grow"
+                        >About us</button
+                    ></a
                 >
             </div>
         </div>
@@ -104,7 +110,9 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
                         abstract ideas and forms of technical know-how,
                         know-when, and know-why historically siloed in academia.
                     </p>
-                    <button class="button mt-8">Learn More</button>
+                    <a href="/about"
+                        ><button class="button mt-8">Learn More</button></a
+                    >
                 </div>
                 <div class="mt-8 sm:mt-0 mx-auto order-1 md:order-2">
                     <Image src={space} alt="Image of workshop space" />

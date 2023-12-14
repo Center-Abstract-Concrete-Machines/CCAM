@@ -1,24 +1,38 @@
 ---
+import HorizontalSpacer from '../components/HorizontalSpacer.astro';
 import Base from './Base.astro';
 import { Image } from 'astro:assets';
 
 const { title, subtitle, image } = Astro.props.frontmatter;
+const { slug } = Astro.props;
 ---
 
 <Base>
-    <div class="prose p-4 max-w-xl mx-auto">
-        <h1 class="text-center py-24 border-b border-dashed border-Black-30">
-            {title.toUpperCase()}
-            {
-                subtitle && (
-                    <span>
-                        : <br />
-                        {subtitle.toUpperCase()}
-                    </span>
-                )
-            }
-        </h1>
-        <Image src={image.url} alt={image.alt} <p />
-        <slot />
+    <div class="p-4">
+        <div class="prose mx-auto">
+            <h1 class="text-center py-24">
+                {title.toUpperCase()}
+                {
+                    subtitle && (
+                        <span>
+                            : <br />
+                            {subtitle.toUpperCase()}
+                        </span>
+                    )
+                }
+            </h1>
+        </div>
+        <HorizontalSpacer />
+        <div class="prose mx-auto pb-4">
+            <Image
+                src={image.url}
+                alt={image.alt}
+                transition:name=`image-${slug}`
+            />
+        </div>
+        <HorizontalSpacer />
+        <div class="prose mx-auto">
+            <slot />
+        </div>
     </div>
 </Base>

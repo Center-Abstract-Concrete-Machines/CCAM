@@ -12,6 +12,7 @@ const { title, subtitle, dates, time, location, image, tags } =
             src={image.url}
             alt={image.alt}
             class="aspect-[1.5] object-cover object-center w-full overflow-hidden max-w-full"
+            transition:name=`image-${slug}`
         />
         <h1
             class=`${headingSize} text-neutral-900 font-medium leading-tight tracking-tight w-full mt-6`

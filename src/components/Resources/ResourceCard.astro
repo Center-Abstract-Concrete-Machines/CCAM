@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import bookImg from './book.png';
+import HorizontalSpacer from '../HorizontalSpacer.astro';
 
 const { image, title, type, author, year } = Astro.props.metadata;
 
@@ -16,7 +16,8 @@ function randomBG() {
 }
 ---
 
-<div class="flex gap-4 py-4 border-t border-dashed border-Black-30">
+<HorizontalSpacer />
+<div class="flex gap-4 pb-4">
     <Image
         src={image.url}
         alt={image.alt}

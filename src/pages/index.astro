@@ -4,12 +4,14 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProgramCard from '../components/Programs/ProgramCard.astro';
 import ResourcesDisplay from '../components/Resources/ResourcesDisplay.astro';
+import GridSpacer from '../components/GridSpacer.astro';
 
 import space from '../images/space.png';
 import squareSpace from '../images/space-square.png';
 import CCAM from '../images/CCAM.png';
 import leftBracket from '../svg/leftBracket.svg';
 import rightBracket from '../svg/rightBracket.svg';
+import HorizontalSpacer from '../components/HorizontalSpacer.astro';
 
 const featuredPrograms = await getCollection('programs', ({ data }) => {
     return data.featured === true;
@@ -18,21 +20,14 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
 <Base>
     <!-- Splash -->
-
-    <div
-        class="grid grid-cols-6 p-4 justify-items-center border-b border-dashed border-Black-30"
-    >
-        <div
-            class="col-span-6 sm:col-span-4
-    border-b sm:border-b-0 sm:border-r border-dashed border-Black-30"
-        >
-            <Image
-                src={CCAM}
-                alt="Center for Concrete and Abtract Machines"
-                class="pb-4 sm:pb-0 sm:pr-4"
-            />
-        </div>
-        <div class="col-span-6 sm:col-span-2 w-full pt-4 sm:pt-0 sm:pl-4">
+    <div class="thirds-container grid px-4 pt-4 justify-items-center">
+        <Image
+            src={CCAM}
+            alt="Center for Concrete and Abtract Machines"
+            class="pb-4 sm:pb-0 sm:pr-4"
+        />
+        <GridSpacer />
+        <div class="w-full pt-4 sm:pt-0 sm:pl-4">
             <Image
                 src={squareSpace}
                 alt="Studio Space"
@@ -43,14 +38,12 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
     <!-- Overview -->
 
-    <div class="p-4">
-        <div
-            class="pb-4 border-b border-dashed border-Black-30 grid grid-cols-6"
-        >
+    <div class="px-4 pt-4">
+        <HorizontalSpacer />
+        <div class="grid thirds-container">
             <div
                 class="flex justify-between items-center
-                col-span-6 sm:col-span-4
-                border-b sm:border-b-0 sm:border-r border-dashed border-Black-30 pb-4 sm:pb-0 sm:pr-4"
+                pb-4 sm:pb-0 sm:pr-4"
             >
                 <Image src={leftBracket} alt="Left Bracket" />
                 <p class="max-w-xs">
@@ -60,8 +53,9 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
                 </p>
                 <Image src={rightBracket} alt="Right Bracket" />
             </div>
+            <GridSpacer />
             <div
-                class="flex gap-4 justify-stretch align-stretch flex-col col-span-6 sm:col-span-2 pt-4 sm:pt-0 min-h-[195px]"
+                class="flex gap-4 justify-stretch align-stretch flex-col pt-4 sm:pt-0 min-h-[195px]"
             >
                 <button class="border border-dashed border-Black-30 ml-4 grow"
                     >Program Calendar</button
@@ -77,45 +71,47 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     </div>
 
     <!-- Programs -->
-
-    <div class="grid two-columns px-4 gap-x-4">
-        {
-            featuredPrograms.map((program) => (
-                <>
-                    <ProgramCard
-                        slug={program.slug}
-                        frontmatter={program.data}
-                    />
-                    <div class="spacer border-r border-dashed border-Black-30" />
-                </>
-            ))
-        }
+    <div class="px-4 pt-4">
+        <HorizontalSpacer />
+        <div class="grid two-columns gap-4">
+            {
+                featuredPrograms.map((program) => (
+                    <>
+                        <ProgramCard
+                            slug={program.slug}
+                            frontmatter={program.data}
+                        />
+                        <GridSpacer />
+                    </>
+                ))
+            }
+        </div>
     </div>
 
     <!-- About -->
-
-    <div
-        class="grid place-items-center border-t border-dashed border-Black-30 mx-4 mt-4"
-    >
-        <div class="grid grid-cols-1 md:grid-cols-2 max-w-3xl py-20 gap-8">
-            <div
-                class="flex flex-col justify-between items-start order-2 md:order-1"
-            >
-                <p>
-                    Nomadically based in Chicago, CCAM is an artist-run platform
-                    at the nexus of art, technology, and contemporary thought.
-                    CCAM’s primary goal is building an accessible community for
-                    the development and sharing of abstract ideas and forms of
-                    technical know-how, know-when, and know-why historically
-                    siloed in academia.
-                </p>
-                <button
-                    class="border border-dashed border-Black-30 px-4 py-2 mt-8"
-                    >Learn More</button
+    <div class="px-4 pt-4">
+        <HorizontalSpacer />
+        <div class="grid place-items-center mx-4 mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 max-w-3xl py-20 gap-8">
+                <div
+                    class="flex flex-col justify-between items-start order-2 md:order-1"
                 >
-            </div>
-            <div class="mt-8 sm:mt-0 mx-auto order-1 md:order-2">
-                <Image src={space} alt="Image of workshop space" />
+                    <p>
+                        Nomadically based in Chicago, CCAM is an artist-run
+                        platform at the nexus of art, technology, and
+                        contemporary thought. CCAM’s primary goal is building an
+                        accessible community for the development and sharing of
+                        abstract ideas and forms of technical know-how,
+                        know-when, and know-why historically siloed in academia.
+                    </p>
+                    <button
+                        class="border border-dashed border-Black-30 px-4 py-2 mt-8"
+                        >Learn More</button
+                    >
+                </div>
+                <div class="mt-8 sm:mt-0 mx-auto order-1 md:order-2">
+                    <Image src={space} alt="Image of workshop space" />
+                </div>
             </div>
         </div>
     </div>
@@ -126,6 +122,18 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 </Base>
 
 <style>
+    .thirds-container {
+        grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 640px) {
+        .thirds-container {
+            grid-template-columns:
+                minmax(0, 2fr) 1px
+                minmax(0, 1fr);
+        }
+    }
+
     .two-columns,
     .three-columns {
         grid-template-columns: 1fr;

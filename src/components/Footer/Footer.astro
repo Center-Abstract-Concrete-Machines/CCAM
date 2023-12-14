@@ -1,14 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import CCAMFooter from './CCAM-footer.png';
-import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg'
+import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg';
+import HorizontalSpacer from '../HorizontalSpacer.astro';
 ---
 
 <!-- Mailing List -->
 <div class="px-4">
-    <div
-        class="flex justify-between items-center border-t border-dashed border-Black-30 pt-4"
-    >
+    <HorizontalSpacer />
+    <div class="flex justify-between items-center">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 28 368"
@@ -17,8 +17,7 @@ import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg'
             height="368"
             class="flex-shrink-0"
         >
-            <path d="M28 2H2V366H28" stroke="#121212" stroke-width="4"
-            ></path>
+            <path d="M28 2H2V366H28" stroke="#121212" stroke-width="4"></path>
         </svg>
         <div class="max-w-sm text-center flex flex-col gap-4 min-w-0">
             <h3 class="text-2xl font-medium">
@@ -55,7 +54,6 @@ import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg'
 </div>
 
 <div class="pt-4">
-
     <!-- Image -->
 
     <Image src={CCAMFooter} alt="CCAM" />

@@ -4,6 +4,8 @@ import TitleCard from '../components/TitleCard.astro';
 import ProgramCard from '../components/Programs/ProgramCard.astro';
 import { getCollection } from 'astro:content';
 import Tag from '../components/Programs/Tag.astro';
+import GridSpacer from '../components/GridSpacer.astro';
+import HorizontalSpacer from '../components/HorizontalSpacer.astro';
 
 const allPrograms = await getCollection('programs');
 
@@ -36,44 +38,41 @@ const pastPrograms = await getCollection('programs');
                     <Tag tag="Workshop" />
                 </div>
             </div>
-            <div class="border-t border-dashed border-Black-30 py-4">
-                <div class="grid two-columns gap-4">
-                    {
-                        featuredPrograms.map((program) => (
-                            <>
-                                <ProgramCard
-                                    slug={program.slug}
-                                    frontmatter={program.data}
-                                />
-                                <div class="spacer border-t sm:border-r sm:border-t-0 border-dashed border-Black-30" />
-                            </>
-                        ))
-                    }
-                </div>
+            <HorizontalSpacer />
+            <div class="grid two-columns gap-4 pb-4">
+                {
+                    featuredPrograms.map((program) => (
+                        <>
+                            <ProgramCard
+                                slug={program.slug}
+                                frontmatter={program.data}
+                            />
+                            <GridSpacer />
+                        </>
+                    ))
+                }
             </div>
         </div>
 
         <div>
-            <div class="border-t border-dashed border-Black-30">
-                <h2 class="text-center py-16 font-medium text-3xl">
-                    Past Programs
-                </h2>
-            </div>
-            <div class="border-t border-dashed border-Black-30 py-4">
-                <div class="grid gap-4 three-columns">
-                    {
-                        pastPrograms.map((program) => (
-                            <>
-                                <ProgramCard
-                                    slug={program.slug}
-                                    frontmatter={program.data}
-                                    headingSize="text-xl"
-                                />
-                                <div class="spacer border-t sm:border-r sm:border-t-0 border-dashed border-Black-30" />
-                            </>
-                        ))
-                    }
-                </div>
+            <HorizontalSpacer />
+            <h2 class="text-center py-16 font-medium text-3xl">
+                Past Programs
+            </h2>
+            <HorizontalSpacer class="pb-4" />
+            <div class="grid gap-4 three-columns">
+                {
+                    pastPrograms.map((program) => (
+                        <>
+                            <ProgramCard
+                                slug={program.slug}
+                                frontmatter={program.data}
+                                headingSize="text-xl"
+                            />
+                            <GridSpacer />
+                        </>
+                    ))
+                }
             </div>
         </div>
     </div>

@@ -25,3 +25,11 @@ img {
     vertical-align: middle;
     font-style: italic;
 }
+
+.body-border {
+    @apply border-x border-dashed border-Black-30;
+    @apply mx-4;
+    min-height: calc(100vh - 105px);
+    display: grid;
+    grid-template-rows: 1fr auto;
+}

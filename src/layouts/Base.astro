@@ -15,7 +15,7 @@ import { ViewTransitions } from 'astro:transitions';
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{metadata.siteTitle}</title>
-        <!-- <ViewTransitions /> -->
+        <ViewTransitions />
     </head>
     <body>
         <Header />
@@ -27,13 +27,5 @@ import { ViewTransitions } from 'astro:transitions';
                 <Footer />
             </div>
         </div>
-    </body><style>
-        .body-border {
-            @apply border-x border-dashed border-Black-30;
-            @apply mx-4;
-            min-height: calc(100vh - 105px);
-            display: grid;
-            grid-template-rows: 1fr auto;
-        }
-    </style>
+    </body>
 </html>

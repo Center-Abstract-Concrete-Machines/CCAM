@@ -5,9 +5,10 @@ const programsCollection = defineCollection({
     schema: ({ image }) =>
         z.object({
             title: z.string(),
-            subtitle: z.string(),
+            subtitle: z.string().optional(),
             pubDate: z.date(),
-            dates: z.string(),
+            endDate: z.date().or(z.literal('ongoing')),
+            presentationalDates: z.string(),
             time: z.string(),
             location: z.string(),
             image: z.object({

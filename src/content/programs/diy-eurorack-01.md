@@ -2,7 +2,8 @@
 title: 'DIY Eurorack Synth Workshop'
 subtitle: Envelope Follower & Random CV/Audio Generator
 pubDate: 2023-12-11
-dates: Every other Thursday
+endDate: ongoing
+presentationalDates: Every other Thursday
 time: 6-8 PM CT
 location: Hybrid
 image:

@@ -19,7 +19,20 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     return data.featured === true;
 }).then((result) => result.slice(0, 2));
 
-const pastPrograms = await getCollection('programs');
+function isEventUpcoming(eventData) {
+    if (eventData.endDate instanceof Date) {
+        return Date.now() < eventData.endDate.getTime();
+    } else return true;
+}
+
+const upcomingPrograms = await getCollection('programs', ({ data }) =>
+    isEventUpcoming(data)
+);
+
+const pastPrograms = await getCollection(
+    'programs',
+    ({ data }) => !isEventUpcoming(data)
+);
 ---
 
 <Base>
@@ -41,7 +54,7 @@ const pastPrograms = await getCollection('programs');
             <HorizontalSpacer />
             <div class="grid two-columns gap-4 pb-4">
                 {
-                    featuredPrograms.map((program) => (
+                    upcomingPrograms.map((program) => (
                         <>
                             <ProgramCard
                                 slug={program.slug}

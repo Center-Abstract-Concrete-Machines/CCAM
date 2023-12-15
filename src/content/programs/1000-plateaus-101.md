@@ -2,7 +2,8 @@
 title: '1000 Plateaus 101'
 subtitle: How to Make a Rhizome
 pubDate: 2023-12-11
-dates: Aug 9 & 16, 2023
+endDate: 2023-09-16
+presentationalDates: Aug 9 & 16, 2023
 time: 6-7 PM CT
 location: Hybrid
 image:

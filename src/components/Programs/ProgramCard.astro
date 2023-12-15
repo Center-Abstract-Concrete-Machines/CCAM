@@ -2,8 +2,26 @@
 import { Image } from 'astro:assets';
 import Tag from './Tag.astro';
 const { slug, headingSize = 'text-3xl' } = Astro.props;
-const { title, subtitle, dates, time, location, image, tags } =
-    Astro.props.frontmatter;
+const {
+    title,
+    subtitle,
+    presentationalDates,
+    endDate,
+    time,
+    location,
+    image,
+    tags,
+} = Astro.props.frontmatter;
+
+function returnDateStatus(endDate) {
+    if (endDate === 'ongoing') {
+        return 'Ongoing';
+    } else if (Date.now() < endDate.getTime()) {
+        return 'Upcoming';
+    } else {
+        return 'Past';
+    }
+}
 ---
 
 <div class="flex flex-col items-start">
@@ -17,17 +35,17 @@ const { title, subtitle, dates, time, location, image, tags } =
         <h1
             class=`${headingSize} text-neutral-900 font-medium leading-tight tracking-tight w-full mt-6`
         >
-            {title}: {subtitle}
+            {title}{subtitle && `: ${subtitle}`}
         </h1>
     </a>
 
     <div class="mt-6 font-mono text-xs">
-        {dates} | {time} | {location}
+        {presentationalDates} | {time} | {location}
     </div>
     <div class="flex gap-2 mt-4 grow-0 flex-wrap text-sm">
         <!-- TODO: add date checking -->
         <div class="text-neutral-50 whitespace-nowrap bg-neutral-900 px-4 py-2">
-            Upcoming
+            {returnDateStatus(endDate)}
         </div>
         {tags.map((tag) => <Tag tag={tag} />)}
     </div>

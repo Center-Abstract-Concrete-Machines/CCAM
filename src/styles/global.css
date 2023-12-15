@@ -7,6 +7,17 @@
     --Yellow: #ffd400;
     --Black: #121212;
     --Black-30: #1212124d;
+
+    --base-font-size: 14;
+    --type-scale: calc(7 / 6);
+
+    --step-4: calc(var(--step-3) * var(--type-scale));
+    --step-3: calc(var(--step-2) * var(--type-scale));
+    --step-2: calc(var(--step-1) * var(--type-scale));
+    --step-1: calc(var(--step-0) * var(--type-scale));
+    --step-0: var(--base-font-size);
+    --step--1: calc(var(--step-0) / var(--type-scale));
+    --step--2: calc(var(--step--1) / var(--type-scale));
 }
 
 body {

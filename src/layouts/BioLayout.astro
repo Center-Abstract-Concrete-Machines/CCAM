@@ -7,15 +7,17 @@ const { slug } = Astro.props;
 ---
 
 <Base>
-    <div class="prose py-16 max-w-xl mx-auto flex flex-col items-center">
+    <div
+        class="prose prose-stone py-16 max-w-xl mx-auto flex flex-col items-center"
+    >
         <Image
             src={image.url}
             alt={image.alt}
             class="mx-auto"
             transition:name=`image-${slug}`
         />
-        <h1 transition:name=`name-${slug}`>{name}</h1>
-        <h2 transition:name=`description-${slug}`>{description}</h2>
+        <h1>{name}</h1>
+        <h2>{description}</h2>
         <slot />
     </div>
 </Base>

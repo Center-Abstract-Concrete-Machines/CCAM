@@ -3,7 +3,7 @@ dialog {
 }
 
 ::backdrop {
-    background-color: hsl(235deg 79% 70% / 0.8);
+    background-color: hsl(235deg 79% 70% / 0.5);
 
     /* animation: backdrop-fade-in 300ms forwards; */
 }

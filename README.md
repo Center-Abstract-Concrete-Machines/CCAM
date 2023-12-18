@@ -6,7 +6,7 @@ Work in progress
 -   [ ] Refine fonts, font sizes, font weights
 -   [ ] Headings glitch animations
 -   [ ] Splash page glitch animations
--   [ ] Contact + Follow page/popup/links
+-   [x] Contact + Follow page/popup/links
 -   [ ] Newsletter signup
 -   [ ] Location/date widget
 -   [ ] Images / Text
@@ -18,4 +18,3 @@ Work in progress
 -   [x] Dark theme
 -   [x] Programs upcoming/past date logic
 -   [x] Theme picker
-        

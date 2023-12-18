@@ -1,5 +1,5 @@
 :root {
-    --Blue: #74acff;
+    /* --Blue: #74acff;
     --Green: #a5f91d;
     --Orange: #ff7a1a;
     --Purple: #747fef;
@@ -7,26 +7,33 @@
     --Yellow: #ffd400;
     --Black: #121212;
     --Black-30: #1212124d;
-    --White: #e6e6e6;
+    --White: #e6e6e6; */
 
-    --base-font-size: 14;
-    --type-scale: calc(7 / 6);
+    /* HSL token values */
+    --Blue: 216deg 100% 73%;
+    --Green: 83deg 95% 55%;
+    --Orange: 25deg 100% 55%;
+    --Purple: 235deg 79% 70%;
+    --Sand: 43deg 100% 97%;
+    --Yellow: 50deg 100% 50%;
+    --Black: 0deg 0% 7%;
+    --White: 0deg 0% 90%;
 
-    --step-4: calc(var(--step-3) * var(--type-scale));
-    --step-3: calc(var(--step-2) * var(--type-scale));
-    --step-2: calc(var(--step-1) * var(--type-scale));
-    --step-1: calc(var(--step-0) * var(--type-scale));
-    --step-0: var(--base-font-size);
-    --step--1: calc(var(--step-0) / var(--type-scale));
-    --step--2: calc(var(--step--1) / var(--type-scale));
-
-    --theme-bg: var(--Sand);
+    color-scheme: light;
+    --backgroundColor: var(--Sand);
+    --textColor: var(--Black);
+    --linkColor: var(--Black);
+    --borderColor: var(--Black-30);
+    --meta-background: hsl(var(--Green));
 }
 
-html.dark {
-    background-color: var(--Black);
-    color: var(--White);
-    --theme-bg: var(--Black);
+:root.dark {
+    color-scheme: dark;
+    --backgroundColor: var(--Black);
+    --text: var(--White);
+    --link: var(--White);
+    --borders: var(--White);
+    --meta-background: hsl(var(--Purple));
 }
 
 html {
@@ -38,7 +45,7 @@ html {
 }
 
 .button {
-    @apply border border-dashed border-Black-30 dark:border-White px-4 py-2;
+    @apply border border-dashed border-borderColor/30 px-4 py-2;
 }
 
 img {
@@ -47,7 +54,7 @@ img {
 }
 
 .body-border {
-    @apply border-x border-dashed border-Black-30 dark:border-White;
+    @apply border-x border-dashed border-borderColor/30;
     @apply mx-0 sm:mx-4;
     min-height: calc(100vh - 105px);
     display: grid;

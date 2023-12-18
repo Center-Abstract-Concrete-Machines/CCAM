@@ -36,12 +36,26 @@
     <button
         type="button"
         id="toggle-theme"
-        class="group relative h-9 w-9 rounded-md p-2 ring-zinc-400 transition-all hover:ring-1"
+        class="group relative h-9 w-9 rounded-md p-2 transition-all"
         aria-label="Toggle Dark Mode"
     >
-        <svg
+        <!-- <svg
             id="sun-svg"
             class="absolute start-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-pressed:scale-100 group-aria-pressed:opacity-100"
+            aria-hidden="true"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            ><path
+                fill="currentColor"
+                d="M11 5V1h2v4zm6.65 2.75l-1.375-1.375l2.8-2.875l1.4 1.425zM19 13v-2h4v2zm-8 10v-4h2v4zM6.35 7.7L3.5 4.925l1.425-1.4L7.75 6.35zm12.7 12.8l-2.775-2.875l1.35-1.35l2.85 2.75zM1 13v-2h4v2zm3.925 7.5l-1.4-1.425l2.8-2.8l.725.675l.725.7zM12 18q-2.5 0-4.25-1.75T6 12q0-2.5 1.75-4.25T12 6q2.5 0 4.25 1.75T18 12q0 2.5-1.75 4.25T12 18m0-2q1.65 0 2.825-1.175T16 12q0-1.65-1.175-2.825T12 8q-1.65 0-2.825 1.175T8 12q0 1.65 1.175 2.825T12 16m0-4"
+            ></path></svg
+        > -->
+        <svg
+            id="sun-svg"
+            class="absolute start-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-pressed:scale-100 group-aria-pressed:opacity-100"
             aria-hidden="true"
             focusable="false"
             stroke-width="1.5"
@@ -97,6 +111,30 @@
         </svg>
         <svg
             id="moon-svg"
+            class="absolute start-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-[pressed=false]:scale-100 group-aria-[pressed=false]:opacity-100"
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 24 24"
+            ><path
+                fill="currentColor"
+                d="M9.5 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T19.5 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T9.5 22q-1.325 0-2.588-.337T4.5 20.65Q6.825 19.3 8.163 17T9.5 12q0-2.7-1.338-5T4.5 3.35q1.15-.675 2.413-1.012T9.5 2"
+            ></path></svg
+        >
+
+        <!-- <svg
+            id="moon-svg"
+            class="absolute start-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-[pressed=false]:scale-100 group-aria-[pressed=false]:opacity-100"
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 24 24"
+            ><path
+                fill="currentColor"
+                d="M12 21q-3.75 0-6.375-2.625T3 12q0-3.75 2.625-6.375T12 3q.35 0 .688.025t.662.075q-1.025.725-1.638 1.888T11.1 7.5q0 2.25 1.575 3.825T16.5 12.9q1.375 0 2.525-.613T20.9 10.65q.05.325.075.662T21 12q0 3.75-2.625 6.375T12 21Zm0-2q2.2 0 3.95-1.213t2.55-3.162q-.5.125-1 .2t-1 .075q-3.075 0-5.238-2.163T9.1 7.5q0-.5.075-1t.2-1q-1.95.8-3.163 2.55T5 12q0 2.9 2.05 4.95T12 19Zm-.25-6.75Z"
+            ></path></svg
+        > -->
+
+        <!-- <svg
+            id="moon-svg"
             class="absolute start-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-[pressed=false]:scale-100 group-aria-[pressed=false]:opacity-100"
             aria-hidden="true"
             focusable="false"
@@ -129,7 +167,7 @@
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"></path>
-        </svg>
+        </svg> -->
     </button>
 </theme-toggle>
 

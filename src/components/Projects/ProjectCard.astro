@@ -15,7 +15,9 @@ const { image, title, description } = Astro.props.metadata;
     <div
         class="project-card grid sm:grid-rows-2 grid-cols-1 sm:grid-cols-2 gap-4"
     >
-        <h2 class="text-4xl font-medium">{title}</h2>
+        <h2 class="text-4xl font-semibold leading-tight tracking-tight">
+            {title}
+        </h2>
         <p class="row-span-2">{description}</p>
         <a href=`/projects/${slug}`>
             <button class="button justify-self-start self-start"

@@ -1,0 +1,98 @@
+---
+import '/src/styles/modal.css';
+---
+
+<dialog class="contact">
+    <div
+        class="dialog-container p-4 max-w-lg bg-backgroundColor border border-borderColor border-dashed flex gap-4 items-center justify-between"
+    >
+        <!-- Left Bracket -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 28 492"
+            fill="none"
+            class="h-96 shrink-0"
+        >
+            <path d="M28 2H2V490H28" stroke="currentColor" stroke-width="4"
+            ></path>
+        </svg>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="mt-4">
+                <p class="text-Purple">Contact</p>
+                <a href="mailto:info@abstractconcrete.center"
+                    >info@abstractconcrete.center</a
+                >
+            </div>
+            <div class="mt-4">
+                <p class="text-Purple">Instragram</p>
+                <a href="https://www.instagram.com/ccam_chicago/"
+                    >@ccam_chicago</a
+                >
+            </div>
+            <div class="mt-4">
+                <p class="text-Purple">Contribute</p>
+                <p>
+                    If you have additional suggestions for materials for
+                    inclusion, please send us an email!
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Bracket -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 28 492"
+            fill="none"
+            class="h-96 shrink-0"
+        >
+            <path
+                d="M9.53674e-07 2H26V490H9.53674e-07"
+                stroke="currentColor"
+                stroke-width="4"></path>
+        </svg>
+
+        <!-- Close Button  -->
+        <button id="close" class="absolute top-8 right-8">
+            <svg
+                viewBox="0 0 24 24"
+                class="h-4 w-4"
+                stroke="currentColor"
+                stroke-width="2px"
+                stroke-linecap="butt"
+            >
+                <line x1="2" y1="2" x2="22" y2="22"></line>
+                <line x1="22" y1="2" x2="2" y2="22"></line>
+            </svg>
+        </button>
+    </div>
+</dialog>
+
+<script>
+    import dialogPolyfill from 'dialog-polyfill';
+
+    const contactAnchor = document.querySelector('[data-name="Contact"]');
+    const contactModal = document.querySelector('dialog[class="contact"]');
+    const contactContainer = document.querySelector('.dialog-container');
+    const closeButton = document.querySelector('button#close');
+
+    dialogPolyfill.registerDialog(contactModal);
+
+    contactAnchor.addEventListener('click', () => {
+        contactModal.showModal();
+        console.log('yes clicked');
+    });
+
+    closeButton.addEventListener('click', () => {
+        contactModal.close();
+    });
+
+    contactModal.addEventListener('click', () => {
+        contactModal.close();
+    });
+
+    contactContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+</script>

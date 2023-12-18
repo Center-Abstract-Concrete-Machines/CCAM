@@ -21,7 +21,7 @@
             '--theme-bg'
         );
 
-        colorThemeMetaTag.setAttribute('content', `hsl(${bgColour})`);
+        colorThemeMetaTag.setAttribute('content', `${bgColour}`);
         if (typeof localStorage !== 'undefined') {
             localStorage.setItem('theme', theme);
         }

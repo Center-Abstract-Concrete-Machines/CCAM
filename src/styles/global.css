@@ -20,12 +20,13 @@
     --step--1: calc(var(--step-0) / var(--type-scale));
     --step--2: calc(var(--step--1) / var(--type-scale));
 
-    --theme-bg: #747fef;
+    --theme-bg: var(--Sand);
 }
 
 html.dark {
     background-color: var(--Black);
     color: var(--White);
+    --theme-bg: var(--Black);
 }
 
 html {
@@ -47,7 +48,7 @@ img {
 
 .body-border {
     @apply border-x border-dashed border-Black-30 dark:border-White;
-    @apply mx-4;
+    @apply mx-0 sm:mx-4;
     min-height: calc(100vh - 105px);
     display: grid;
     grid-template-rows: 1fr auto;

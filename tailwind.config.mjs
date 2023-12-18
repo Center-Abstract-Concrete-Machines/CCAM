@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {
@@ -13,6 +14,7 @@ export default {
                 Black: '#121212',
                 'Black-30': '#1212124d',
                 'Black-50': '#00000080',
+                White: '#E6E6E6',
             },
         },
     },

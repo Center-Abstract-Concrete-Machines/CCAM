@@ -7,6 +7,7 @@
     --Yellow: #ffd400;
     --Black: #121212;
     --Black-30: #1212124d;
+    --White: #e6e6e6;
 
     --base-font-size: 14;
     --type-scale: calc(7 / 6);
@@ -18,9 +19,16 @@
     --step-0: var(--base-font-size);
     --step--1: calc(var(--step-0) / var(--type-scale));
     --step--2: calc(var(--step--1) / var(--type-scale));
+
+    --theme-bg: #747fef;
 }
 
-body {
+html.dark {
+    background-color: var(--Black);
+    color: var(--White);
+}
+
+html {
     background-color: var(--Sand);
 }
 
@@ -29,7 +37,7 @@ body {
 }
 
 .button {
-    @apply border border-dashed border-Black-30 px-4 py-2;
+    @apply border border-dashed border-Black-30 dark:border-White px-4 py-2;
 }
 
 img {
@@ -38,7 +46,7 @@ img {
 }
 
 .body-border {
-    @apply border-x border-dashed border-Black-30;
+    @apply border-x border-dashed border-Black-30 dark:border-White;
     @apply mx-4;
     min-height: calc(100vh - 105px);
     display: grid;

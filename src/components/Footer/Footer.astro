@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import CCAMFooter from './CCAM-footer.png';
-import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg';
+// import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg';
 import HorizontalSpacer from '../HorizontalSpacer.astro';
+import ThemeToggle from '../ThemeToggle.astro';
 ---
 
 <!-- Mailing List -->
@@ -17,7 +18,8 @@ import HorizontalSpacer from '../HorizontalSpacer.astro';
             height="368"
             class="flex-shrink-0"
         >
-            <path d="M28 2H2V366H28" stroke="#121212" stroke-width="4"></path>
+            <path d="M28 2H2V366H28" stroke="currentColor" stroke-width="4"
+            ></path>
         </svg>
         <div class="max-w-sm text-center flex flex-col gap-4 min-w-0">
             <h3 class="text-2xl font-medium">
@@ -27,7 +29,7 @@ import HorizontalSpacer from '../HorizontalSpacer.astro';
                 <input
                     type="email"
                     name="email"
-                    class="border border-dashed border-Black-30 bg-Sand px-4 py-2 min-w-0 max-w-full"
+                    class="border border-dashed border-Black-30 dark:border-White bg-Sand px-4 py-2 min-w-0 max-w-full"
                     placeholder="Email"
                 />
                 <button type="submit" class="button">Submit</button>
@@ -43,7 +45,7 @@ import HorizontalSpacer from '../HorizontalSpacer.astro';
         >
             <path
                 d="M9.53674e-07 2H26V366H9.53674e-07"
-                stroke="#121212"
+                stroke="currentColor"
                 stroke-width="4"></path>
         </svg>
     </div>
@@ -52,7 +54,7 @@ import HorizontalSpacer from '../HorizontalSpacer.astro';
 <div class="pt-4">
     <!-- Image -->
 
-    <Image src={CCAMFooter} alt="CCAM" />
+    <Image src={CCAMFooter} alt="CCAM" class="dark:invert dark:grayscale" />
 
     <!-- Footer -->
 
@@ -62,7 +64,8 @@ import HorizontalSpacer from '../HorizontalSpacer.astro';
             <span class="hidden sm:inline">Pilsen, Chicago</span>
             <span class="hidden sm:inline">5:24PM</span>
             <div class="theme-toggle">
-                <Image src={ThemeToggle} alt="Theme Toggle" />
+                <!-- <Image src={ThemeToggle} alt="Theme Toggle" /> -->
+                <ThemeToggle />
             </div>
         </div>
     </div>

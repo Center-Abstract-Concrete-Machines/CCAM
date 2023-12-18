@@ -4,6 +4,7 @@ import Header from '../components/Header/Header.astro';
 import Footer from '../components/Footer/Footer.astro';
 import '../styles/global.css';
 import { ViewTransitions } from 'astro:transitions';
+import ThemeProvider from '../components/ThemeProvider.astro';
 ---
 
 <!doctype html>
@@ -14,10 +15,12 @@ import { ViewTransitions } from 'astro:transitions';
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="" />
         <title>{metadata.siteTitle}</title>
         <ViewTransitions fallback="none" />
     </head>
     <body>
+        <ThemeProvider />
         <Header />
         <div class="container mx-auto max-w-7xl">
             <div class="body-border">

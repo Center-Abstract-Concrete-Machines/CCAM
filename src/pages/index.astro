@@ -20,19 +20,21 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
 <Base>
     <!-- Splash -->
-    <div class="thirds-container grid px-4 pt-4 justify-items-center">
-        <Image
-            src={CCAM}
-            alt="Center for Concrete and Abtract Machines"
-            class="pb-4 sm:pb-0 sm:pr-4"
-        />
-        <GridSpacer />
-        <div class="w-full pt-4 sm:pt-0 sm:pl-4">
+    <div class="px-4 pt-4">
+        <div class="thirds-container grid gap-4 justify-items-center">
             <Image
-                src={squareSpace}
-                alt="Studio Space"
-                class="max-w-full mx-auto"
+                src={CCAM}
+                alt="Center for Concrete and Abtract Machines"
+                class="dark:invert"
             />
+            <GridSpacer />
+            <div class="w-full">
+                <Image
+                    src={squareSpace}
+                    alt="Studio Space"
+                    class="max-w-full mx-auto"
+                />
+            </div>
         </div>
     </div>
 
@@ -41,34 +43,56 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     <div class="px-4 pt-4">
         <HorizontalSpacer />
         <div class="grid thirds-container gap-4">
-            <div
-                class="flex justify-between items-center
-                pb-4 sm:pb-0 sm:pr-4"
-            >
-                <Image src={leftBracket} alt="Left Bracket" />
+            <div class="flex justify-between items-center">
+                <svg
+                    width="28"
+                    height="195"
+                    viewBox="0 0 28 195"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M28 2H2V193H28"
+                        stroke="currentColor"
+                        stroke-width="4"></path>
+                </svg>
                 <p class="max-w-xs">
                     Center for Concrete and Abstract Machines is an artist-run
                     platform at the nexus of art, technology, and contemporary
                     thought.
                 </p>
-                <Image src={rightBracket} alt="Right Bracket" />
+                <svg
+                    width="28"
+                    height="195"
+                    viewBox="0 0 28 195"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M9.53674e-07 2H26V193H9.53674e-07"
+                        stroke="currentColor"
+                        stroke-width="4"></path>
+                </svg>
             </div>
             <GridSpacer />
             <div
                 class="flex gap-4 justify-stretch align-stretch flex-col pt-4 sm:pt-0 min-h-[195px]"
             >
                 <a href="/programs" class="flex grow">
-                    <button class="border border-dashed border-Black-30 grow"
+                    <button
+                        class="border border-dashed border-Black-30 dark:border-White grow"
                         >Program Calendar</button
                     ></a
                 >
                 <a href="/projects" class="flex grow">
-                    <button class="border border-dashed border-Black-30 grow"
+                    <button
+                        class="border border-dashed border-Black-30 dark:border-White grow"
                         >Research Projects</button
                     ></a
                 >
                 <a href="/about" class="flex grow">
-                    <button class="border border-dashed border-Black-30 grow"
+                    <button
+                        class="border border-dashed border-Black-30 dark:border-White grow"
                         >About us</button
                     ></a
                 >

@@ -4,11 +4,16 @@ import Logo from '../../svg/logo.svg';
 import { Image } from 'astro:assets';
 ---
 
-<div class="w-full mx-auto border-Black-30 border-b border-dashed p-4">
+<div
+    class="w-full mx-auto border-Black-30 dark:border-White border-b border-dashed p-4"
+>
     <div
         class="container mx-auto max-w-7xl grid gap-y-4 items-center justify-items-center col-span-6 grid-cols-1 sm:grid-cols-6"
     >
-        <a href="/" class="sm:justify-self-start sm:col-span-3 lg:col-span-4">
+        <a
+            href="/"
+            class="sm:justify-self-start sm:col-span-3 lg:col-span-4 dark:invert"
+        >
             <Image src={Logo} alt="CCAM" />
         </a>
         <div

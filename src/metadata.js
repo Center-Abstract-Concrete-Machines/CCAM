@@ -1,31 +1,32 @@
 const metadata = {
-    siteTitle: "CCAM: Center for Concrete and Abstract Machines",
+    siteTitle: 'CCAM: Center for Concrete and Abstract Machines',
     navLinks: [
         {
-            name: "Programs",
-            url: "/programs"
+            name: 'Programs',
+            url: '/programs',
         },
         {
-            name: "Projects",
-            url: "/projects"
+            name: 'Projects',
+            url: '/projects',
         },
         {
-            name: "Resources",
-            url: "/resources"
+            name: 'Resources',
+            url: '/resources',
         },
         {
-            name: "About",
-            url: "/about"
+            name: 'About',
+            url: '/about',
         },
         {
-            name: "Contact",
-            url: "/contact"
+            name: 'Contact',
+            url: '#contact',
         },
         {
-            name: "Follow",
-            url: "/follow"
+            name: 'Follow',
+            url: 'https://www.instagram.com/ccam_chicago/',
+            new_window: true,
         },
-    ]
-}
+    ],
+};
 
 export default metadata;

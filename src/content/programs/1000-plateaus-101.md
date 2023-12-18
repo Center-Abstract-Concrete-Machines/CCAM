@@ -14,19 +14,19 @@ tags:
 featured: true
 ---
 
-DATES: wednesdays 1800-2000, Aug 9, 2023 - Aug 16, 2023
+**DATES**: wednesdays 1800-2000, Aug 9, 2023 - Aug 16, 2023
 
-LOCATION: Hybrid; in-person in Pilsen, Chicago, IL on on Zoom
+**LOCATION**: Hybrid; in-person in Pilsen, Chicago, IL on on Zoom
 
-FOR WHOM: artists, designers, dancers, choreographers, programmers, theorists, experimentalists otherwise. The course will be taught at a graduate/post-graduate level; non-academics, students, graduates, and faculty are welcome.
+**FOR WHOM**: artists, designers, dancers, choreographers, programmers, theorists, experimentalists otherwise. The course will be taught at a graduate/post-graduate level; non-academics, students, graduates, and faculty are welcome.
 
-INSTRUCTOR: Garrett Laroy Johnson
+**INSTRUCTOR**: Garrett Laroy Johnson
 
-GOALS: to learn how to make a Rhizome
+**GOALS**: to learn how to make a Rhizome
 
-APPLY: Here ahead of time or day of
+**APPLY**: Here ahead of time or day of
 
-COST: 0-50$ sliding scale
+**COST**: 0-50$ sliding scale
 
 ## description
 

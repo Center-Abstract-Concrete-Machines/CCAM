@@ -39,7 +39,15 @@
 }
 
 html {
-    background-color: var(--Sand);
+    background-color: hsl(var(--backgroundColor));
+}
+
+:focus {
+    outline: hsl(var(--Green)) 2px solid;
+}
+
+::selection {
+    background-color: hsl(var(--Green));
 }
 
 * {

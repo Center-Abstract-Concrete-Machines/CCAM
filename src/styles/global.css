@@ -21,6 +21,7 @@
 
     color-scheme: light;
     --backgroundColor: var(--Sand);
+    --backgroundHover: var(--Black);
     --textColor: var(--Black);
     --linkColor: var(--Black);
     --borderColor: var(--Black-30);
@@ -30,6 +31,7 @@
 :root.dark {
     color-scheme: dark;
     --backgroundColor: var(--Black);
+    --backgroundHover: var(--White);
     --text: var(--White);
     --link: var(--White);
     --borders: var(--White);
@@ -45,7 +47,7 @@ html {
 }
 
 .button {
-    @apply border border-dashed border-borderColor/30 px-4 py-2;
+    @apply border border-dashed border-borderColor/30 px-4 py-2 hover:bg-backgroundHover/5;
 }
 
 img {

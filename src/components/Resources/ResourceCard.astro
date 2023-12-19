@@ -16,25 +16,27 @@ function randomBG() {
 }
 ---
 
-<HorizontalSpacer />
-<div class="flex gap-4 pb-4">
-    <Image
-        src={image.url}
-        alt={image.alt}
-        class="aspect-square object-contain object-center overflow-hidden max-w-full shrink-0"
-    />
-    <div>
-        <!-- TODO: mobile collapse view -->
-
-        <h3 class="text-xl font-medium">{title}</h3>
-        <div class="flex flex-wrap justify-start items-center gap-2 pt-2">
+<div class="hover:bg-backgroundHover/5">
+    <HorizontalSpacer />
+    <div class="flex gap-4 pb-4">
+        <Image
+            src={image.url}
+            alt={image.alt}
+            class="aspect-square object-contain object-center overflow-hidden max-w-full shrink-0"
+        />
+        <div>
+            <h3 class="text-xl font-medium">{title}</h3>
             <div
-                class=`flex justify-center items-center ${randomBG()} px-4 py-2 whitespace-nowrap`
+                class="flex flex-wrap justify-start items-center gap-2 pt-2 font-mono text-xs"
             >
-                {type}
-            </div>
-            <div class="flex gap-2 flex-wrap">
-                {author}<span class="opacity-30">|</span>{year}
+                <div
+                    class=`flex justify-center items-center ${randomBG()} px-4 py-2 whitespace-nowrap`
+                >
+                    {type}
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                    {author}<span class="opacity-30">|</span>{year}
+                </div>
             </div>
         </div>
     </div>

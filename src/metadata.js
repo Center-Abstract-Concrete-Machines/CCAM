@@ -19,7 +19,7 @@ const metadata = {
         },
         {
             name: 'Contact',
-            url: '#contact',
+            url: '/contact',
         },
         {
             name: 'Follow',

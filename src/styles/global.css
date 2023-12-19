@@ -24,7 +24,7 @@
     --textColor: var(--Black);
     --linkColor: var(--Black);
     --borderColor: var(--Black-30);
-    --meta-background: hsl(var(--Green));
+    --meta-background: hsl(var(--Purple));
 }
 
 :root.dark {

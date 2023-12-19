@@ -9,6 +9,7 @@ import OrganizerCard from '../components/About/OrganizerCard.astro';
 
 import Space from '/src/images/space.png';
 import SpaceLarge from '/src/images/space-large.png';
+import ContactInfo from '../components/ContactInfo.astro';
 
 const heading =
     'CCAM is an artist-run platform at the nexus of art, technology, and contemporary thought.';
@@ -55,25 +56,7 @@ const organizers = await getCollection('about');
                 bleeding-edge toolkits as well as DIY and open-source platforms
                 for sound and video instrument composition.
             </p>
-            <div class="mt-4">
-                <p class="text-Purple">Contact</p>
-                <a href="mailto:info@abstractconcrete.center"
-                    >info@abstractconcrete.center</a
-                >
-            </div>
-            <div class="mt-4">
-                <p class="text-Purple">Instragram</p>
-                <a href="https://www.instagram.com/ccam_chicago/"
-                    >@ccam_chicago</a
-                >
-            </div>
-            <div class="mt-4">
-                <p class="text-Purple">Contribute</p>
-                <p>
-                    If you have additional suggestions for materials for
-                    inclusion, please send us an email!
-                </p>
-            </div>
+            <ContactInfo />
         </section>
         <HorizontalSpacer />
         <section class="max-w-2xl mx-auto pt-12 pb-16">

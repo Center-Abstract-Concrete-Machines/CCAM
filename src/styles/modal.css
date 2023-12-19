@@ -3,7 +3,11 @@ dialog {
 }
 
 ::backdrop {
-    background-color: hsl(235deg 79% 70% / 0.5);
+    background: linear-gradient(
+        0.5turn,
+        hsl(235deg 79% 70% / 1),
+        hsl(235deg 79% 70% / 0.5)
+    );
 
     /* animation: backdrop-fade-in 300ms forwards; */
 }

@@ -1,5 +1,6 @@
 ---
 import '/src/styles/modal.css';
+import ContactInfo from './ContactInfo.astro';
 ---
 
 <dialog class="contact">
@@ -17,28 +18,7 @@ import '/src/styles/modal.css';
             ></path>
         </svg>
 
-        <!-- Content -->
-        <div class="content">
-            <div class="mt-4">
-                <p class="text-Purple">Contact</p>
-                <a href="mailto:info@abstractconcrete.center"
-                    >info@abstractconcrete.center</a
-                >
-            </div>
-            <div class="mt-4">
-                <p class="text-Purple">Instragram</p>
-                <a href="https://www.instagram.com/ccam_chicago/"
-                    >@ccam_chicago</a
-                >
-            </div>
-            <div class="mt-4">
-                <p class="text-Purple">Contribute</p>
-                <p>
-                    If you have additional suggestions for materials for
-                    inclusion, please send us an email!
-                </p>
-            </div>
-        </div>
+        <ContactInfo />
 
         <!-- Right Bracket -->
         <svg
@@ -70,29 +50,30 @@ import '/src/styles/modal.css';
 </dialog>
 
 <script>
-    import dialogPolyfill from 'dialog-polyfill';
-
     const contactAnchor = document.querySelector('[data-name="Contact"]');
-    const contactModal = document.querySelector('dialog[class="contact"]');
+    const contactModal: HTMLDialogElement = document.querySelector(
+        'dialog[class="contact"]'
+    );
     const contactContainer = document.querySelector('.dialog-container');
     const closeButton = document.querySelector('button#close');
 
-    dialogPolyfill.registerDialog(contactModal);
+    if (typeof window.HTMLDialogElement === 'function') {
+        contactAnchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactModal.showModal();
+            console.log('yes clicked');
+        });
 
-    contactAnchor.addEventListener('click', () => {
-        contactModal.showModal();
-        console.log('yes clicked');
-    });
+        closeButton.addEventListener('click', () => {
+            contactModal.close();
+        });
 
-    closeButton.addEventListener('click', () => {
-        contactModal.close();
-    });
+        contactModal.addEventListener('click', () => {
+            contactModal.close();
+        });
 
-    contactModal.addEventListener('click', () => {
-        contactModal.close();
-    });
-
-    contactContainer.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
+        contactContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
 </script>

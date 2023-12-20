@@ -14,7 +14,7 @@ Work in progress
     -   [ ] About page: 2 images (+captions?), higher res headshots
     -   [ ] Bio pages: Bios
 -   [ ] Embed CCAM p5 at footer
--   [ ] Make presentational brackets more responsive
+-   [x] Make presentational brackets more responsive
 -   [x] Dark theme
 -   [x] Programs upcoming/past date logic
 -   [x] Theme picker

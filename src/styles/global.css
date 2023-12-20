@@ -32,14 +32,34 @@
     color-scheme: dark;
     --backgroundColor: var(--Black);
     --backgroundHover: var(--White);
-    --text: var(--White);
+    --textColor: var(--White);
     --link: var(--White);
     --borders: var(--White);
     --meta-background: hsl(var(--Purple));
 }
 
+* {
+    min-width: 0;
+}
+
 html {
     background-color: hsl(var(--backgroundColor));
+}
+
+/* Scrollbar colors */
+html {
+    scrollbar-color: hsl(var(--Green)) hsl(var(--backgroundColor));
+}
+/* *::-webkit-scrollbar {
+    background: hsl(var(--backgroundColor));
+}
+*::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--Blue));
+    border-radius: 20px;
+} */
+
+input {
+    caret-color: hsl(var(--Orange));
 }
 
 :focus {
@@ -48,10 +68,6 @@ html {
 
 ::selection {
     background-color: hsl(var(--Green));
-}
-
-* {
-    min-width: 0;
 }
 
 .button {

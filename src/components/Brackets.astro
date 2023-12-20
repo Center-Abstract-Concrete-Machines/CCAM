@@ -1,0 +1,26 @@
+---
+const { class: className } = Astro.props;
+---
+
+<div class=`background grid place-items-center p-[4px] ${className}`>
+    <div
+        class="m-[4px] h-full w-full bg-backgroundColor grid place-items-center"
+    >
+        <div class="p-4">
+            <slot />
+        </div>
+    </div>
+</div>
+
+<style>
+    .background {
+        background: linear-gradient(
+            90deg,
+            hsl(var(--textColor)) 5%,
+            hsl(var(--textColor)) 5%,
+            hsl(var(--backgroundColor)) 5%,
+            hsl(var(--backgroundColor)) 95%,
+            hsl(var(--textColor)) 95%
+        );
+    }
+</style>

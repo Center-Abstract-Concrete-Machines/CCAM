@@ -7,7 +7,7 @@ Work in progress
 -   [ ] Headings glitch animations
 -   [ ] Splash page glitch animations
 -   [x] Contact + Follow page/popup/links
--   [ ] Newsletter signup
+-   [x] Newsletter signup
 -   [ ] Location/date widget
 -   [ ] Images / Text
     -   [ ] Home page: 2 images

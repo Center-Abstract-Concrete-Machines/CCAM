@@ -7,8 +7,6 @@ import Tag from '../components/Programs/Tag.astro';
 import GridSpacer from '../components/GridSpacer.astro';
 import HorizontalSpacer from '../components/HorizontalSpacer.astro';
 
-const allPrograms = await getCollection('programs');
-
 const heading = {
     title: 'Programs',
     description:
@@ -22,7 +20,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 function isEventUpcoming(eventData) {
     if (eventData.endDate instanceof Date) {
         return Date.now() < eventData.endDate.getTime();
-    } else return true;
+    } else return true; // Such as if endDate is string 'ongoing'
 }
 
 const upcomingPrograms = await getCollection('programs', ({ data }) =>

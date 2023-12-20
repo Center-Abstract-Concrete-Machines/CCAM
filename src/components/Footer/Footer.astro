@@ -1,57 +1,38 @@
 ---
 import { Image } from 'astro:assets';
 import CCAMFooter from './CCAM-footer.png';
-// import ThemeToggle from '/src/svg/theme-toggle-placeholder.svg';
 import HorizontalSpacer from '../HorizontalSpacer.astro';
 import ThemeToggle from '../ThemeToggle.astro';
 import Brackets from '../Brackets.astro';
+import EmailSignup from '../EmailSignup.jsx';
 ---
 
 <!-- Mailing List -->
 <div class="px-4">
     <HorizontalSpacer />
-    <!-- <div class="flex justify-between items-center">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 28 368"
-            fill="none"
-            width="28"
-            height="368"
-            class="flex-shrink-0"
-        >
-            <path d="M28 2H2V366H28" stroke="currentColor" stroke-width="4"
-            ></path>
-        </svg> -->
     <Brackets class="min-h-[15rem] sm:min-h-[20rem]">
         <div class="max-w-sm text-center flex flex-col gap-4 min-w-0">
             <h3 class="text-2xl font-medium">
                 Stay up to date by signing <br />up for our newsletter
             </h3>
-            <form action="" class="flex flex-wrap justify-center gap-4">
+            <EmailSignup client:load />
+            <!-- <form
+                id="subscribe"
+                action="https://parkerdavis-saveFormData.web.val.run"
+                method="POST"
+                class="flex flex-wrap justify-center gap-4"
+            >
                 <input
                     type="email"
                     name="email"
                     class="border border-dashed border-borderColor bg-backgroundColor px-4 py-2 min-w-0 max-w-full"
                     placeholder="Email"
+                    required
                 />
                 <button type="submit" class="button">Submit</button>
-            </form>
+            </form> -->
         </div>
     </Brackets>
-    <!-- <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 28 368"
-            fill="none"
-            width="28"
-            height="368"
-            class="flex-shrink-0"
-        >
-            <path
-                d="M9.53674e-07 2H26V366H9.53674e-07"
-                stroke="currentColor"
-                stroke-width="4"></path>
-        </svg>
-    </div> -->
 </div>
 
 <div class="pt-4">
@@ -74,5 +55,7 @@ import Brackets from '../Brackets.astro';
     </div>
 </div>
 
-<!-- <script src="/p5/p5.min.js" is:inline></script> -->
-<!-- <script src="/p5/new-sketch.js" is:inline></script> -->
+<!-- <script src="/p5/p5.min.js" is:inline></script>
+<script src="/p5/sketch.js" is:inline></script>
+<script src="/p5/particle.js" is:inline></script>
+<script src="/p5/drawer.js" is:inline></script> -->

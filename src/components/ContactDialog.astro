@@ -1,40 +1,28 @@
 ---
 import '/src/styles/modal.css';
 import ContactInfo from './ContactInfo.astro';
+import Brackets from './Brackets.astro';
+import HorizontalSpacer from './HorizontalSpacer.astro';
+import EmailSignup from './EmailSignup';
 ---
 
-<dialog class="contact">
+<dialog class="contact" autofocus>
     <div
-        class="dialog-container p-4 max-w-lg bg-backgroundColor flex gap-4 items-center justify-between"
+        class="dialog-container p-2 max-w-lg bg-backgroundColor flex gap-4 items-center justify-between min-h-min"
     >
-        <!-- Left Bracket -->
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 28 492"
-            fill="none"
-            class="h-96 shrink-0"
-        >
-            <path d="M28 2H2V490H28" stroke="currentColor" stroke-width="4"
-            ></path>
-        </svg>
-
-        <ContactInfo />
-
-        <!-- Right Bracket -->
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 28 492"
-            fill="none"
-            class="h-96 shrink-0"
-        >
-            <path
-                d="M9.53674e-07 2H26V490H9.53674e-07"
-                stroke="currentColor"
-                stroke-width="4"></path>
-        </svg>
+        <Brackets class="hello">
+            <div class="p-4">
+                <ContactInfo />
+                <HorizontalSpacer />
+                <h2 class="font-medium tracking-tight text-lg pb-2">
+                    Stay up to date by signing up for our newsletter
+                </h2>
+                <EmailSignup client:load />
+            </div>
+        </Brackets>
 
         <!-- Close Button  -->
-        <button id="close" class="absolute top-8 right-8">
+        <button id="close" class="absolute top-6 right-6">
             <svg
                 viewBox="0 0 24 24"
                 class="h-4 w-4"
@@ -61,7 +49,6 @@ import ContactInfo from './ContactInfo.astro';
         contactAnchor.addEventListener('click', (e) => {
             e.preventDefault();
             contactModal.showModal();
-            console.log('yes clicked');
         });
 
         closeButton.addEventListener('click', () => {

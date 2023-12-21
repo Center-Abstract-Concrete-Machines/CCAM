@@ -67,6 +67,7 @@ input {
 }
 
 ::selection {
+    color: hsl(var(--Black));
     background-color: hsl(var(--Green));
 }
 

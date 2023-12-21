@@ -1,0 +1,91 @@
+---
+const { nav, pathname } = Astro.props;
+---
+
+<a
+    href={nav.url}
+    class="flex justify-between items-center gap-4 sm:px-0 relative"
+    data-name={nav.name}
+    target={nav.new_window ? '_blank' : '_self'}
+    aria-current={nav.url === pathname ? 'page' : 'false'}
+>
+    <div class="whitespace-nowrap">{nav.name}</div>
+    <div aria-hidden="true" class="status-container">
+        <span class="bracket bracket-l">
+            <svg
+                width="5"
+                height="17"
+                viewBox="0 0 5 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M0.478 16.628V0.176H4.078V1.4H1.828V15.404H4.078V16.628H0.478Z"
+                    fill="currentColor"></path>
+            </svg>
+        </span>
+
+        <span class="indicator">
+            <svg
+                width="13"
+                height="12"
+                viewBox="0 0 13 12"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    id="Path"
+                    fill="currentColor"
+                    stroke="none"
+                    d="M 6.51942 7.9044 L 4.26699 12 L 2.55825 10.9352 L 4.84951 7.0034 L 0.5 7.0444 L 0.5 4.955629 L 4.84951 4.99659 L 2.55825 1.06485 L 4.26699 0 L 6.51942 4.09556 L 8.6942 0 L 10.4417 1.06485 L 8.1505 4.99659 L 12.5 4.955629 L 12.5 7.0444 L 8.1505 7.0034 L 10.4417 10.9352 L 8.6942 12 L 6.51942 7.9044 Z"
+                ></path>
+            </svg>
+        </span>
+
+        <span class="bracket bracket-r">
+            <svg
+                width="5"
+                height="17"
+                viewBox="0 0 5 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M4.322 16.628H0.722V15.404H2.972V1.4H0.722V0.176H4.322V16.628Z"
+                    fill="currentColor"></path>
+            </svg>
+        </span>
+    </div>
+</a>
+
+<style>
+    .status-container {
+        display: grid;
+        grid-template-columns: [status-start] auto auto [status-end];
+        grid-template-rows: [status-start] auto [status-end];
+        justify-items: center;
+        align-items: center;
+        gap: 1rem;
+        white-space: nowrap;
+    }
+    .indicator {
+        opacity: 0;
+        transition: opacity 200ms 0ms;
+        grid-column: status;
+        grid-row: status;
+        place-self: center;
+    }
+    .bracket {
+        grid-row: 1;
+        text-align: center;
+    }
+    .bracket-l {
+        grid-column: 1 / 2;
+    }
+    .bracket-r {
+        grid-column: 2 / 3;
+    }
+    a[aria-current='page'] .indicator,
+    a:hover .indicator {
+        opacity: 1;
+    }
+</style>

@@ -1,8 +1,10 @@
 ---
-import metadata from '../../metadata';
-import Logo from '../../svg/logo.svg';
+import NavLink from './NavLink.astro';
+import metadata from '/src/metadata.js';
+import Logo from '/src/svg/logo.svg';
 import { Image } from 'astro:assets';
-import ContactDialog from '../ContactDialog.astro';
+
+const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <div class="w-full mx-auto border-borderColor/30 border-b border-dashed p-4">
@@ -23,18 +25,7 @@ import ContactDialog from '../ContactDialog.astro';
             >
                 {
                     metadata.navLinks.map((nav) => (
-                        <a
-                            href={nav.url}
-                            class="flex justify-between items-center gap-4 sm:px-0"
-                            data-name={nav.name}
-                            target={nav.new_window ? '_blank' : '_self'}
-                        >
-                            <div class="whitespace-nowrap">{nav.name}</div>
-                            <div class="flex justify-between gap-4 whitespace-nowrap">
-                                <span>[</span>
-                                <span class="pl-1">]</span>
-                            </div>
-                        </a>
+                        <NavLink nav={nav} pathname={pathname} />
                     ))
                 }
             </div>

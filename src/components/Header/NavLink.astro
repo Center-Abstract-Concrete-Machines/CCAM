@@ -7,7 +7,7 @@ const { nav, pathname } = Astro.props;
     class="flex justify-between items-center gap-4 sm:px-0 relative"
     data-name={nav.name}
     target={nav.new_window ? '_blank' : '_self'}
-    aria-current={nav.url === pathname ? 'page' : 'false'}
+    aria-current={pathname.includes(nav.url) ? 'page' : 'false'}
 >
     <div class="whitespace-nowrap">{nav.name}</div>
     <div aria-hidden="true" class="status-container">

@@ -18,3 +18,4 @@ Work in progress
 -   [x] Dark theme
 -   [x] Programs upcoming/past date logic
 -   [x] Theme picker
+-   [x] Navbar current location and hover states (*)

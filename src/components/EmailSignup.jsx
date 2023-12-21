@@ -1,5 +1,7 @@
 import { useRef, useState } from 'preact/hooks';
 
+const endpoint = 'https://parkerdavis-subscribeForm.web.val.run';
+
 export default function EmailSignup() {
     const [responseMessage, setResponseMessage] = useState('');
     const [disabled, setDisabled] = useState(false);
@@ -10,13 +12,10 @@ export default function EmailSignup() {
         setDisabled(true);
         e.preventDefault();
         const formData = new FormData(e.target);
-        const response = await fetch(
-            'https://parkerdavis-saveFormData.web.val.run',
-            {
-                method: 'POST',
-                body: formData,
-            }
-        );
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+        });
         const data = await response.json();
 
         if (data.message) {
@@ -35,7 +34,7 @@ export default function EmailSignup() {
     }
 
     return (
-        <form onSubmit={submit} ref={form}>
+        <form action={endpoint} method="POST" onSubmit={submit} ref={form}>
             <div class="flex flex-wrap gap-4 justify-center">
                 <input
                     type="email"

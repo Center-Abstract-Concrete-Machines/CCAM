@@ -26,9 +26,9 @@ export default function EmailSignup() {
 
         if (data.status === 'success') {
             form.current.reset();
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 3000);
+            // setTimeout(() => {
+            //     setShowMessage(false);
+            // }, 3000);
         }
 
         setDisabled(false);
@@ -49,9 +49,11 @@ export default function EmailSignup() {
                     Submit
                 </button>
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center pt-2 ">
                 {showMessage && responseMessage && (
-                    <span>{responseMessage}</span>
+                    <span class="text-sm text-textColor/80">
+                        {responseMessage}
+                    </span>
                 )}
             </div>
         </form>

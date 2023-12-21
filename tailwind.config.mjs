@@ -17,7 +17,7 @@ export default {
                 White: '#E6E6E6',
                 backgroundColor: 'hsl(var(--backgroundColor) / <alpha-value>)',
                 backgroundHover: 'hsl(var(--backgroundHover) / <alpha-value>)',
-                textColor: 'hsl(var(--text) / <alpha-value>)',
+                textColor: 'hsl(var(--textColor) / <alpha-value>)',
                 linkColor: 'hsl(var(--link) / <alpha-value>)',
                 borderColor: 'hsl(var(--borders) / <alpha-value>)',
             },

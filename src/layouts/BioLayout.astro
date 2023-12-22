@@ -1,23 +1,15 @@
 ---
 import Base from './Base.astro';
+import BasicMarkdownLayout from './BasicMarkdownLayout.astro';
 import { Image } from 'astro:assets';
 
 const { name, description, image } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 ---
 
-<Base>
-    <div
-        class="prose dark:prose-invert prose-stone py-16 max-w-xl mx-auto flex flex-col items-center"
-    >
-        <Image
-            src={image.url}
-            alt={image.alt}
-            class="mx-auto"
-            transition:name=`image-${slug}`
-        />
-        <h1>{name}</h1>
-        <h2>{description}</h2>
-        <slot />
-    </div>
-</Base>
+<BasicMarkdownLayout>
+    <Image src={image.url} alt={image.alt} transition:name=`image-${slug}` />
+    <h1>{name}</h1>
+    <h2>{description}</h2>
+    <slot />
+</BasicMarkdownLayout>

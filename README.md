@@ -8,7 +8,7 @@ Work in progress
 -   [ ] Splash page glitch animations
 -   [x] Contact + Follow page/popup/links
 -   [x] Newsletter signup
--   [ ] Location/date widget
+-   [ ] Location/date widget?
 -   [ ] Images / Text
     -   [ ] Home page: 2 images
     -   [ ] About page: 2 images (+captions?), higher res headshots
@@ -18,4 +18,4 @@ Work in progress
 -   [x] Dark theme
 -   [x] Programs upcoming/past date logic
 -   [x] Theme picker
--   [x] Navbar current location and hover states (*)
+-   [x] Navbar current location and hover states (\*)

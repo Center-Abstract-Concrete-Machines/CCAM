@@ -50,6 +50,7 @@ html {
 html {
     scrollbar-color: hsl(var(--Green)) hsl(var(--backgroundColor));
 }
+/* Safari scrollbar  */
 /* *::-webkit-scrollbar {
     background: hsl(var(--backgroundColor));
 }

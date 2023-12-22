@@ -21,7 +21,7 @@ This full-day workshop is intended to give participants a solid grounding in the
 -   a pico [2HP] envelope follower
 -   a random CV/audio generator
 
-The pico envelope follower is based on a design by Bumm Bumm Garage. The random and chaotic oscillator is based on Erica's Synth Swamp. The Swamp inherits from the Wiard Wogglebug and the Buchla Source of Uncertainty.
+The pico envelope follower is [based on a design by Bumm Bumm Garage](https://www.bummbummgarage.com/modules/envelope-follower/). The random and chaotic oscillator is based on [Erica's Synth Swamp](https://www.ericasynths.lv/shop/discontinued-products/diy-swamp/). The Swamp inherits from the [Wiard Wogglebug](https://learningmodular.com/glossary/wogglebug/) and the [Buchla Source of Uncertainty](https://learningmodular.com/glossary/source-of-uncertainty/).
 
 In addition to this walk-through, we will teach some practical skills related to soldering, sourcing and pricing materials based on a BOM, troubleshooting, and other precautions related to constructing DIY synth modules.
 
@@ -41,7 +41,7 @@ Enrollment is strictly capped at 10 participants due to space and material const
 
 All electronics components for the synth build are provided in the cost. You
 
-You will, however, need to bring your own soldering iron and helping hands. Limited solder, flux, and de-soldering wick will be available. If you do not own a soldering iron, we recommend this kit from Amazon.
+**You will, however, need to bring your own soldering iron and helping hands**. Limited solder, flux, and de-soldering wick will be available. If you do not own a soldering iron, we recommend [this kit from Amazon](https://www.amazon.com/Soldering-Kit-Temperature-Desoldering-Electronics/dp/B07GTGGLXN/ref=sr_1_7?crid=3V2T0W59ICL46&keywords=soldering+kit&qid=1683133029&sprefix=soldering+kit%2Caps%2C174&sr=8-7).
 
 ## Open Source Hardware/Software Statement
 

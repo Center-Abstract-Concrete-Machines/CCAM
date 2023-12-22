@@ -13,23 +13,24 @@ const heading = {
         'Our school supports interdisciplinary study in art, code, hardware and critical theory through events, classes, and workshops.',
 };
 
-const featuredPrograms = await getCollection('programs', ({ data }) => {
-    return data.featured === true;
-}).then((result) => result.slice(0, 2));
-
 function isEventUpcoming(eventData) {
     if (eventData.endDate instanceof Date) {
         return Date.now() < eventData.endDate.getTime();
     } else return true; // Such as if endDate is string 'ongoing'
 }
 
-const upcomingPrograms = await getCollection('programs', ({ data }) =>
-    isEventUpcoming(data)
+function sortByPubDate(array) {
+    return array.sort(
+        (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    );
+}
+
+const upcomingPrograms = sortByPubDate(
+    await getCollection('programs', ({ data }) => isEventUpcoming(data))
 );
 
-const pastPrograms = await getCollection(
-    'programs',
-    ({ data }) => !isEventUpcoming(data)
+const pastPrograms = sortByPubDate(
+    await getCollection('programs', ({ data }) => !isEventUpcoming(data))
 );
 ---
 

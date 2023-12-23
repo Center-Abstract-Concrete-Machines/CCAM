@@ -8,3 +8,5 @@ image:
     alt: Microsolidarity Book Cover
 dateAdded: 2023-12-03
 ---
+
+Slaps.

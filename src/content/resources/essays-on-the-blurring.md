@@ -8,3 +8,5 @@ image:
     alt: The Hologram Book Cover
 dateAdded: 2023-12-01
 ---
+
+Slaps.

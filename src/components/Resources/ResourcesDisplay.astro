@@ -16,5 +16,9 @@ if (displayCount) {
 ---
 
 <div class="pt-4">
-    {resources.map((resource) => <ResourceCard metadata={resource.data} />)}
+    {
+        resources.map((resource) => (
+            <ResourceCard metadata={resource.data} slug={resource.slug} />
+        ))
+    }
 </div>

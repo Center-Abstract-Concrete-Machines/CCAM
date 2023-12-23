@@ -1,0 +1,40 @@
+---
+import HorizontalSpacer from '../components/HorizontalSpacer.astro';
+import Base from './Base.astro';
+import { Image } from 'astro:assets';
+
+const { title, author, type, year, image } = Astro.props.frontmatter;
+const { slug } = Astro.props;
+---
+
+<Base title={title}>
+    <div class="p-4">
+        <div class="mx-auto max-w-2xl">
+            <Image
+                src={image.url}
+                alt={image.alt}
+                transition:name=`image-${slug}`
+                class="mx-auto py-16"
+            />
+            <HorizontalSpacer />
+            <div>
+                <h1 class="text-xl font-medium">{title}</h1>
+                <div
+                    class="flex flex-wrap justify-start items-center gap-2 pt-2 font-mono text-xs"
+                >
+                    <div
+                        class=`flex justify-center items-center px-4 py-2 whitespace-nowrap bg-Orange`
+                    >
+                        {type}
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        {author}<span class="opacity-30">|</span>{year}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="prose dark:prose-invert mx-auto max-w-2xl py-4">
+            <slot />
+        </div>
+    </div>
+</Base>

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import HorizontalSpacer from '../HorizontalSpacer.astro';
 
 const { image, title, type, author, year } = Astro.props.metadata;
+const { slug } = Astro.props;
 
 function randomBG() {
     const colors = [
@@ -18,7 +19,7 @@ function randomBG() {
 
 <div class="hover:bg-backgroundHover/5">
     <HorizontalSpacer />
-    <div class="flex gap-4 pb-4">
+    <a href=`/resources/${slug}` class="flex gap-4 pb-4">
         <Image
             src={image.url}
             alt={image.alt}
@@ -39,5 +40,5 @@ function randomBG() {
                 </div>
             </div>
         </div>
-    </div>
+    </a>
 </div>

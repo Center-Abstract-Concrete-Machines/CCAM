@@ -3,45 +3,43 @@ title: '(in)formal (in)formations'
 subtitle: tactics and infrastructure for participatory and collaborative study & making
 pubDate: 2023-07-03
 endDate: 2023-07-03
+<<<<<<< Updated upstream
 presentationalDates: July 3, 2023
 time: 11 AM - 6 PM ET
 location: NEW INC
+=======
+presentationalDates: July 3rd, 2023
+tags: 
+- Event
+time: 1100-1800 ET
+location: NEWinc
+>>>>>>> Stashed changes
 image:
     url: ./images/iiny.png
-    alt: (in)formal (in)formations
-tags:
-    - Event
-featured: false
+    alt: perlin noise oscillations with informal information in red text on top
+
 ---
-
-### Location
-
-[NEW INC](https://www.newinc.org/)
-
-### Date
-
-July 3 2023, 1100-1800 ET
 
 ### Attendees
 
 #### Presenters
 
--   Muindi Fanuel Muindi (philosophy, performance)
--   Garrett Laroy Johnson (media arts and sciences)
--   Daniel Lichtman (media art)
--   Kristin McWharter (game and media art)
--   Asa Sakrison (cultural geography, process theory)
--   Lee Tusman (media art)
+- Muindi Fanuel Muindi (philosophy, performance)
+- Garrett Laroy Johnson (media arts and sciences)
+- Daniel Lichtman (media art)
+- Kristin McWharter (game and media art)
+- Asa Sakrison (cultural geography, process theory)
+- Lee Tusman (media art)
 
 #### Respondents
 
--   Maria Fernanda (philosophy)
--   Meg Hartwig (sculpture)
--   Dakota Gearhart (media art)
--   Man Kaplan (sociology and women's/gender studies)
--   Sam Stoelje (literature and the occult)
--   Phillip Thurtle (philosophy of science and technology)
--   Çaca Yvair (conservation and geoecology)
+- Maria Fernanda (philosophy)
+- Meg Hartwig (sculpture)
+- Dakota Gearhart (media art)
+- Man Kaplan (sociology and women's/gender studies)
+- Sam Stoelje (literature and the occult)
+- Phillip Thurtle (philosophy of science and technology)
+- Çaca Yvair (conservation and geoecology)
 
 ![IINY Program Cover](./images/iiny-program-cover.png)
 

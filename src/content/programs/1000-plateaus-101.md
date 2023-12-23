@@ -10,7 +10,7 @@ image:
     url: ./images/1000-plateaus.png
     alt: alt
 tags:
-    - Course
+    - Study
 featured: true
 ---
 

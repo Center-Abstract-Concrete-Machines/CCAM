@@ -4,7 +4,7 @@ subtitle: transnational telematic audio performance
 pubDate: 2023-05-10
 endDate: 2023-05-10
 presentationalDates: May 10, 2023
-time: 1400-1530
+time: 2-3:30 PM CT
 location: telepresent
 image:
     url: ./images/dispersionology.jpg

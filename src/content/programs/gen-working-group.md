@@ -10,7 +10,7 @@ image:
     url: ./images/gen.png
     alt: alt
 tags:
-    - Working Group
+    - Workshop
 featured: true
 ---
 

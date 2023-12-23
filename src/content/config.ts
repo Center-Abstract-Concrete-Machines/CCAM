@@ -15,9 +15,7 @@ const programsCollection = defineCollection({
                 url: image(),
                 alt: z.string(),
             }),
-            tags: z.array(
-                z.enum(['Course', 'Working Group', 'Event', 'Workshop'])
-            ),
+            tags: z.array(z.enum(['Event', 'Workshop', 'Study'])),
             featured: z.boolean().optional(),
         }),
 });

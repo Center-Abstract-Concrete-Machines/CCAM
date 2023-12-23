@@ -4,7 +4,7 @@ subtitle: tactics and infrastructure for participatory and collaborative study &
 pubDate: 2023-07-03
 endDate: 2023-07-03
 presentationalDates: July 3, 2023
-time: 1100-1800
+time: 11 AM - 6 PM ET
 location: NEW INC
 image:
     url: ./images/iiny.png

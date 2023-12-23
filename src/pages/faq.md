@@ -1,5 +1,5 @@
 ---
-title: learning FAQ
+title: Learning FAQ
 layout: /src/layouts/BasicMarkdownLayout.astro
 ---
 

@@ -1,5 +1,6 @@
 const metadata = {
-    siteTitle: 'CCAM: Center for Concrete and Abstract Machines',
+    siteTitle: 'CCAM',
+    subtitle: 'Center for Concrete and Abstract Machines',
     navLinks: [
         {
             name: 'Programs',

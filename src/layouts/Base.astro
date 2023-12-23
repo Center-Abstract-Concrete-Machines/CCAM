@@ -6,6 +6,8 @@ import '../styles/global.css';
 import { ViewTransitions } from 'astro:transitions';
 import ThemeProvider from '../components/ThemeProvider.astro';
 import ContactDialog from '../components/ContactDialog.astro';
+
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +19,11 @@ import ContactDialog from '../components/ContactDialog.astro';
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <meta name="theme-color" content="" />
-        <title>{metadata.siteTitle}</title>
+        <title>
+            {title && `${title} - `}{metadata.siteTitle}{
+                title ? '' : `: ${metadata.subtitle}`
+            }
+        </title>
         <!-- <ViewTransitions fallback="none" /> -->
     </head>
     <body>

@@ -7,7 +7,7 @@ const { title, subtitle, image } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 ---
 
-<Base>
+<Base title={title}>
     <div class="p-4">
         <div class="mx-auto max-w-2xl">
             <h1

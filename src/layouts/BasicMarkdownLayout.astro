@@ -1,8 +1,9 @@
 ---
 import Base from './Base.astro';
+const { title } = Astro.props.frontmatter;
 ---
 
-<Base>
+<Base title={title}>
     <div
         class="prose dark:prose-invert prose-stone py-16 max-w-xl mx-auto px-4"
     >

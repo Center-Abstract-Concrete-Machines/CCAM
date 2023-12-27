@@ -77,11 +77,13 @@ const pastPrograms = sortByPubDate(
                 {
                     pastPrograms.map((program) => (
                         <>
-                            <ProgramCard
-                                slug={program.slug}
-                                frontmatter={program.data}
-                                headingSize="text-xl"
-                            />
+                            <div class="program-card">
+                                <ProgramCard
+                                    slug={program.slug}
+                                    frontmatter={program.data}
+                                    headingSize="text-xl"
+                                />
+                            </div>
                             <GridSpacer />
                         </>
                     ))
@@ -106,13 +108,16 @@ const pastPrograms = sortByPubDate(
         .two-columns {
             grid-template-columns:
                 minmax(0, 1fr) 1px
-                minmax(0, 1fr);
+                minmax(0, 1fr) 1px;
         }
         .three-columns {
             grid-template-columns:
                 minmax(0, 1fr) 1px
                 minmax(0, 1fr) 1px
-                minmax(0, 1fr);
+                minmax(0, 1fr) 1px;
+        }
+        .program-card:nth-child(n + 6) {
+            /* @apply outline-t outline-dashed outline-borderColor; */
         }
     }
 </style>

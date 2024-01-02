@@ -4,35 +4,33 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
-@layer base {
-	@font-face {
-		font-family: 'denim';
-		src: url('/fonts/DenimINKTRIALVF.ttf') format('truetype-variations');
-		font-weight: 400 500;
-		font-style: normal italic;
-	}
-	@font-face {
-		font-family: 'matter-reg';
-		src: url('/fonts/MatterSQMonoTRIAL-Regular.otf') format('opentype');
-		font-weight: 400;
-		font-style: normal;
-	}
-	@font-face {
-		font-family: 'matter-it';
-		src: url('/fonts/MatterSQMonoTRIAL-RegularItalic.otf') format('opentype');
-		font-weight: 400;
-		font-style: italic;
-	}
-	@font-face {
-		font-family: 'moonbase-sq';
-		src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
-		font-variation-settings: 'Blur' 40;
-	}
-	@font-face {
-		font-family: 'moonbase-rd';
-		src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
-		font-variation-settings: 'Blur' 80;
-	}
+@font-face {
+	font-family: 'matter-reg';
+	src: url('/fonts/MatterSQMonoTRIAL-Regular.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'matter-it';
+	src: url('/fonts/MatterSQMonoTRIAL-RegularItalic.otf') format('opentype');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'denim';
+	src: url('/fonts/DenimINKTRIALVF.ttf') format('truetype-variations');
+	font-weight: 400 500 600;
+	font-style: normal italic;
+}
+
+@font-face {
+	font-family: 'moonbase';
+	src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
+	font-weight: 400;
+	font-style: normal;
+	font-variation-settings: 'BLUR' 40 80;
 }
 
 :root {
@@ -124,4 +122,12 @@ img {
 	min-height: calc(100vh - 105px);
 	display: grid;
 	grid-template-rows: 1fr auto;
+}
+
+.mbsq {
+	font-variation-settings: 'BLUR' 40;
+}
+
+.mbrd {
+	font-variation-settings: 'BLUR' 80;
 }

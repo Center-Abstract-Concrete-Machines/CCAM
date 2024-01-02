@@ -26,8 +26,7 @@ export default {
 			fontFamily: {
 				sans: ['denim', ...defaultTheme.fontFamily.sans],
 				serif: [...defaultTheme.fontFamily.serif],
-				moonbaseSq: ['moonbase-sq', ...defaultTheme.fontFamily.sans],
-				moonbaseRd: ['moonbase-rd', ...defaultTheme.fontFamily.sans],
+				moonbase: ['moonbase', ...defaultTheme.fontFamily.sans],
 				mono: ['matter-reg', ...defaultTheme.fontFamily.mono],
 			},
 		},

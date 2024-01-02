@@ -4,12 +4,12 @@ const { nav, pathname } = Astro.props;
 
 <a
     href={nav.url}
-    class="flex justify-between items-center gap-4 sm:px-0 relative"
+    class="flex justify-between items-center gap-4 sm:px-0 py-0.5 first:pt-0 last:pb-0 relative"
     data-name={nav.name}
     target={nav.new_window ? '_blank' : '_self'}
     aria-current={pathname.includes(nav.url) ? 'page' : 'false'}
 >
-    <div class="whitespace-nowrap">{nav.name}</div>
+    <div class="whitespace-nowrap font-mono">{nav.name}</div>
     <div aria-hidden="true" class="status-container">
         <span class="bracket bracket-l">
             <svg
@@ -40,8 +40,8 @@ const { nav, pathname } = Astro.props;
                     </svg>
                 ) : (
                     <svg
-                        width="13"
-                        height="12"
+                        width="11"
+                        height="11"
                         viewBox="0 0 13 12"
                         xmlns="http://www.w3.org/2000/svg"
                     >
@@ -84,7 +84,6 @@ const { nav, pathname } = Astro.props;
     }
     .indicator {
         opacity: 0;
-        transition: opacity 200ms 0ms;
         grid-column: status;
         grid-row: status;
         place-self: center;

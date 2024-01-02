@@ -6,36 +6,32 @@
 
 @layer base {
 	@font-face {
-		font-family: 'denim-reg';
-		src: url('../public/fonts/Fakt-Normal.woff') format('woff');
+		font-family: 'denim';
+		src: url('/fonts/DenimINKTRIALVF.ttf') format('truetype-variations');
+		font-weight: 400 500;
+		font-style: normal italic;
+	}
+	@font-face {
+		font-family: 'matter-reg';
+		src: url('/fonts/MatterSQMonoTRIAL-Regular.otf') format('opentype');
 		font-weight: 400;
 		font-style: normal;
 	}
 	@font-face {
-		font-family: 'denim-med';
-		src: url('../public/fonts/Fakt-NormalItalic.woff') format('woff');
-		font-weight: 400;
-		font-style: italic;
-	}
-	@font-face {
-		font-family: 'matter';
-		src: url('../public/Inter-Bold.woff') format('woff');
-		font-weight: 700;
-		font-style: normal;
-	}
-	@font-face {
-		font-family: 'moonbase-rd';
-		src: url('../public/fonts/GT-Alpina-Standard-Regular-Italic-Trial.otf') format('opentype');
-		src: url('/fonts/GT-Alpina-Standard-Regular-Italic-Trial.otf') format('truetype');
+		font-family: 'matter-it';
+		src: url('/fonts/MatterSQMonoTRIAL-RegularItalic.otf') format('opentype');
 		font-weight: 400;
 		font-style: italic;
 	}
 	@font-face {
 		font-family: 'moonbase-sq';
-		src: url('../public/fonts/GT-Alpina-Standard-Light-Italic-Trial.otf') format('opentype');
-		src: url('/fonts/GT-Alpina-Standard-Light-Italic-Trial.otf') format('truetype');
-		font-weight: 300;
-		font-style: italic;
+		src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
+		font-variation-settings: 'Blur' 40;
+	}
+	@font-face {
+		font-family: 'moonbase-rd';
+		src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
+		font-variation-settings: 'Blur' 80;
 	}
 }
 

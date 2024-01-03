@@ -2,14 +2,14 @@
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import ProgramCard from '../components/Programs/ProgramCard.astro';
+import ProgramCard from '../components/Programs/ProgramCard.jsx';
 import ResourcesDisplay from '../components/Resources/ResourcesDisplay.astro';
 import GridSpacer from '../components/GridSpacer.astro';
 
 import space from '../images/space.png';
 import squareSpace from '../images/space-square.png';
 import CCAM from '../images/CCAM.png';
-import HorizontalSpacer from '../components/HorizontalSpacer.astro';
+import HorizontalSpacer from '../components/HorizontalSpacer.jsx';
 import Brackets from '../components/Brackets.astro';
 
 const featuredPrograms = await getCollection('programs', ({ data }) => {
@@ -26,7 +26,38 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
                 alt="Center for Concrete and Abtract Machines"
                 class="dark:invert"
             /> -->
-            <h1 class="text-6xl lg:text-8xl leading-none uppercase font-sans font-medium">Cent<span class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]">e</span>r fo<span class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]">r</span> C<span class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]">o</span>ncr<span class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]">e</span>te <br/> and <span class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]">A</span>bs<span class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]">t</span>ra<span class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]">c</span>t <span class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]">M</span>a<span class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]">c</span>hines</h1>
+            <h1
+                class="text-6xl lg:text-8xl leading-none uppercase font-sans font-medium"
+            >
+                Cent<span
+                    class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]"
+                    >e</span
+                >r fo<span
+                    class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]"
+                    >r</span
+                > C<span
+                    class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]"
+                    >o</span
+                >ncr<span
+                    class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]"
+                    >e</span
+                >te <br /> and <span
+                    class="font-moonbase mbsq text-[58.5px] lg:text-[93.5px]"
+                    >A</span
+                >bs<span
+                    class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]"
+                    >t</span
+                >ra<span
+                    class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]"
+                    >c</span
+                >t <span
+                    class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]"
+                    >M</span
+                >a<span
+                    class="font-moonbase mbrd text-[58.5px] lg:text-[93.5px]"
+                    >c</span
+                >hines
+            </h1>
             <GridSpacer />
             <div class="w-full">
                 <Image
@@ -111,7 +142,9 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
                         know-when, and know-why historically siloed in academia.
                     </p>
                     <a href="/about"
-                        ><button class="button font-mono mt-8">Learn More</button></a
+                        ><button class="button font-mono mt-8"
+                            >Learn More</button
+                        ></a
                     >
                 </div>
                 <div class="mt-8 sm:mt-0 mx-auto order-1 md:order-2">

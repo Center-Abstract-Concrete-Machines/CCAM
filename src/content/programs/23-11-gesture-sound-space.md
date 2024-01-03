@@ -8,9 +8,8 @@ time: 10-1600
 location: TriTriangle, Chicago
 image:
     url: ./images/studio-drawing.png
-    alt: computationally generated line drawing of 
-tags:
-    - Workshop
+    alt: computationally generated line drawing of
+type: Workshop
 featured: true
 ---
 

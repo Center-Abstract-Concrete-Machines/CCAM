@@ -9,8 +9,7 @@ location: Hybrid
 image:
     url: ./images/gen.png
     alt: alt
-tags:
-    - Workshop
+type: Workshop
 featured: true
 ---
 

@@ -5,12 +5,11 @@ pubDate: 2023-09-10
 endDate: 2023-09-10
 presentationalDates: September 10, 2023
 time: 530 - 8
-location: 2328 N Milwaukee, top floor / Logan square 
+location: 2328 N Milwaukee, top floor / Logan square
 image:
     url: ./images/all-watched.png
     alt: Forrster Diagram
-tags:
-    - Event
+type: Event
 featured: true
 ---
 

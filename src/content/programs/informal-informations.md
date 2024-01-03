@@ -4,8 +4,7 @@ subtitle: tactics and infrastructure for participatory and collaborative study &
 pubDate: 2023-07-03
 endDate: 2023-07-03
 presentationalDates: July 3rd, 2023
-tags:
-    - Event
+type: Event
 time: 1100-1800 ET
 location: NEWinc
 image:

@@ -9,8 +9,7 @@ location: CCAM Headquarters
 image:
     url: ./images/diy-eurorack.png
     alt: alt
-tags:
-    - Workshop
+type: Workshop
 featured: true
 ---
 
@@ -18,8 +17,8 @@ featured: true
 
 This full-day workshop is intended to give participants a solid grounding in the technical mentality and skills required to construct a DIY eurorack module. In the hands-on portion of the workshop, we will walk participants through the construction of their own two synth modules:
 
-- a pico [2HP] envelope follower
-- a random CV/audio generator
+-   a pico [2HP] envelope follower
+-   a random CV/audio generator
 
 The pico envelope follower is [based on a design by Bumm Bumm Garage](https://www.bummbummgarage.com/modules/envelope-follower/). The random and chaotic oscillator is based on [Erica's Synth Swamp](https://www.ericasynths.lv/shop/discontinued-products/diy-swamp/). The Swamp inherits from the [Wiard Wogglebug](https://learningmodular.com/glossary/wogglebug/) and the [Buchla Source of Uncertainty](https://learningmodular.com/glossary/source-of-uncertainty/).
 

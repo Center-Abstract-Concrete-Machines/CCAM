@@ -44,32 +44,3 @@ const allPrograms = sortByPubDate(await getCollection('programs'));
         <ProgramFilter programs={allPrograms} client:load />
     </div>
 </Base>
-
-<style is:global>
-    .two-columns,
-    .three-columns {
-        grid-template-columns: 1fr;
-    }
-
-    .spacer:last-child,
-    .spacer:last-child {
-        display: none;
-    }
-
-    @media (min-width: 640px) {
-        .two-columns {
-            grid-template-columns:
-                minmax(0, 1fr) 1px
-                minmax(0, 1fr) 1px;
-        }
-        .three-columns {
-            grid-template-columns:
-                minmax(0, 1fr) 1px
-                minmax(0, 1fr) 1px
-                minmax(0, 1fr) 1px;
-        }
-        .program-card:nth-child(n + 6) {
-            /* @apply outline-t outline-dashed outline-borderColor; */
-        }
-    }
-</style>

@@ -5,36 +5,36 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'matter-reg';
-	src: url('/fonts/MatterSQMonoTRIAL-Regular.otf') format('opentype');
-	font-weight: 400;
-	font-style: normal;
+    font-family: 'matter-reg';
+    src: url('/fonts/MatterSQMonoTRIAL-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
-	font-family: 'matter-it';
-	src: url('/fonts/MatterSQMonoTRIAL-RegularItalic.otf') format('opentype');
-	font-weight: 400;
-	font-style: italic;
+    font-family: 'matter-it';
+    src: url('/fonts/MatterSQMonoTRIAL-RegularItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
 }
 
 @font-face {
-	font-family: 'denim';
-	src: url('/fonts/DenimINKTRIALVF.ttf') format('truetype-variations');
-	font-weight: 400 500 600;
-	font-style: normal italic;
+    font-family: 'denim';
+    src: url('/fonts/DenimINKTRIALVF.ttf') format('truetype-variations');
+    font-weight: 400 500 600;
+    font-style: normal italic;
 }
 
 @font-face {
-	font-family: 'moonbase';
-	src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
-	font-weight: 400;
-	font-style: normal;
-	font-variation-settings: 'BLUR' 40 80;
+    font-family: 'moonbase';
+    src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: 'BLUR' 40 80;
 }
 
 :root {
-	/* --Blue: #74acff;
+    /* --Blue: #74acff;
     --Green: #a5f91d;
     --Orange: #ff7a1a;
     --Purple: #747fef;
@@ -44,46 +44,46 @@
     --Black-30: #1212124d;
     --White: #e6e6e6; */
 
-	/* HSL token values */
-	--Blue: 216deg 100% 73%;
-	--Green: 83deg 95% 55%;
-	--Orange: 25deg 100% 55%;
-	--Purple: 235deg 79% 70%;
-	--Sand: 43deg 100% 97%;
-	--Yellow: 50deg 100% 50%;
-	--Black: 0deg 0% 7%;
-	--White: 0deg 0% 90%;
+    /* HSL token values */
+    --Blue: 216deg 100% 73%;
+    --Green: 83deg 95% 55%;
+    --Orange: 25deg 100% 55%;
+    --Purple: 235deg 79% 70%;
+    --Sand: 43deg 100% 97%;
+    --Yellow: 50deg 100% 50%;
+    --Black: 0deg 0% 7%;
+    --White: 0deg 0% 90%;
 
-	color-scheme: light;
-	--backgroundColor: var(--Sand);
-	--backgroundHover: var(--Black);
-	--textColor: var(--Black);
-	--linkColor: var(--Black);
-	--borderColor: var(--Black-30);
-	--meta-background: hsl(var(--Purple));
+    color-scheme: light;
+    --backgroundColor: var(--Sand);
+    --backgroundHover: var(--Black);
+    --textColor: var(--Black);
+    --linkColor: var(--Black);
+    --borderColor: var(--Black-30);
+    --meta-background: hsl(var(--Purple));
 }
 
 :root.dark {
-	color-scheme: dark;
-	--backgroundColor: var(--Black);
-	--backgroundHover: var(--White);
-	--textColor: var(--White);
-	--link: var(--White);
-	--borders: var(--White);
-	--meta-background: hsl(var(--Purple));
+    color-scheme: dark;
+    --backgroundColor: var(--Black);
+    --backgroundHover: var(--White);
+    --textColor: var(--White);
+    --link: var(--White);
+    --borders: var(--White);
+    --meta-background: hsl(var(--Purple));
 }
 
 * {
-	min-width: 0;
+    min-width: 0;
 }
 
 html {
-	background-color: hsl(var(--backgroundColor));
+    background-color: hsl(var(--backgroundColor));
 }
 
 /* Scrollbar colors */
 html {
-	scrollbar-color: hsl(var(--Green)) hsl(var(--backgroundColor));
+    scrollbar-color: hsl(var(--Green)) hsl(var(--backgroundColor));
 }
 /* Safari scrollbar  */
 /* *::-webkit-scrollbar {
@@ -95,39 +95,79 @@ html {
 } */
 
 input {
-	caret-color: hsl(var(--Orange));
+    caret-color: hsl(var(--Orange));
 }
 
 :focus {
-	outline: hsl(var(--Green)) 2px solid;
+    outline: hsl(var(--Green)) 2px solid;
 }
 
 ::selection {
-	color: hsl(var(--Black));
-	background-color: hsl(var(--Green));
+    color: hsl(var(--Black));
+    background-color: hsl(var(--Green));
 }
 
 .button {
-	@apply border border-dashed border-borderColor/30 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10;
+    @apply border border-dashed border-borderColor/30 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10;
 }
 
 img {
-	vertical-align: middle;
-	font-style: italic;
+    vertical-align: middle;
+    font-style: italic;
 }
 
 .body-border {
-	@apply border-x border-dashed border-borderColor/30;
-	@apply mx-0 sm:mx-4;
-	min-height: calc(100vh - 105px);
-	display: grid;
-	grid-template-rows: 1fr auto;
+    @apply border-x border-dashed border-borderColor/30;
+    @apply mx-0 sm:mx-4;
+    min-height: calc(100vh - 105px);
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 .mbsq {
-	font-variation-settings: 'BLUR' 40;
+    font-variation-settings: 'BLUR' 40;
 }
 
 .mbrd {
-	font-variation-settings: 'BLUR' 80;
+    font-variation-settings: 'BLUR' 80;
+}
+
+.two-columns,
+.three-columns {
+    grid-template-columns: 1fr;
+}
+
+.spacer:last-child,
+.spacer:last-child {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .two-columns {
+        grid-template-columns:
+            minmax(0, 1fr) 1px
+            minmax(0, 1fr) 1px;
+    }
+    .three-columns {
+        grid-template-columns:
+            minmax(0, 1fr) 1px
+            minmax(0, 1fr) 1px
+            minmax(0, 1fr) 1px;
+    }
+}
+
+.thirds-container {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+    .thirds-container {
+        grid-template-columns:
+            minmax(0, 2fr) 1px
+            minmax(0, 1fr);
+    }
+}
+
+.dashed-background {
+    /* background: url('/src/images/background.png'); */
 }

@@ -5,6 +5,7 @@ import HorizontalSpacer from '../HorizontalSpacer.jsx';
 import ThemeToggle from '../ThemeToggle.astro';
 import Brackets from '../Brackets.astro';
 import EmailSignup from '../EmailSignup.jsx';
+import Logo from '/src/svg/logo.svg';
 ---
 
 <!-- Mailing List -->
@@ -16,46 +17,38 @@ import EmailSignup from '../EmailSignup.jsx';
                 Stay up to date by signing <br />up for our newsletter
             </h3>
             <EmailSignup client:load />
-            <!-- <form
-                id="subscribe"
-                action="https://parkerdavis-saveFormData.web.val.run"
-                method="POST"
-                class="flex flex-wrap justify-center gap-4"
-            >
-                <input
-                    type="email"
-                    name="email"
-                    class="border border-dashed border-borderColor bg-backgroundColor px-4 py-2 min-w-0 max-w-full"
-                    placeholder="Email"
-                    required
-                />
-                <button type="submit" class="button">Submit</button>
-            </form> -->
         </div>
     </Brackets>
 </div>
 
 <div class="pt-4">
-    <!-- Image -->
-
-    <Image src={CCAMFooter} alt="CCAM" class="dark:invert dark:grayscale" />
+    <!-- Image/Sketch -->
+    <div class="ccam-container grid place-items-center min-h-80 relative">
+        <!-- <Image src={CCAMFooter} alt="CCAM" class="dark:invert dark:grayscale" /> -->
+        <div
+            class="absolute w-full h-full -z-10 bg-gradient-to-r from-Green via-Orange to-Purple"
+            id="sketch"
+        >
+        </div>
+        <Image
+            src={Logo}
+            alt="CCAM"
+            class="z-10 w-11/12 h-5/6 pointer-events-none"
+        />
+    </div>
 
     <!-- Footer -->
-
     <div class="flex justify-between items-center py-2 text-xs gap-x-4">
         <p class="ps-2">&copy; Center for Concrete and Abstract Machines</p>
         <div class="flex gap-4 items-center ml-auto">
             <span class="hidden sm:inline">Pilsen, Chicago</span>
             <span class="hidden sm:inline">5:24PM</span>
             <div class="theme-toggle">
-                <!-- <Image src={ThemeToggle} alt="Theme Toggle" /> -->
                 <ThemeToggle />
             </div>
         </div>
     </div>
 </div>
 
-<!-- <script src="/p5/p5.min.js" is:inline></script>
-<script src="/p5/sketch.js" is:inline></script>
-<script src="/p5/particle.js" is:inline></script>
-<script src="/p5/drawer.js" is:inline></script> -->
+<script src="/p5/p5.min.js" is:inline defer></script>
+<script src="/p5/placeholder.js" is:inline defer></script>

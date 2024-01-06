@@ -96,20 +96,20 @@ export default function ProgramFilter({ programs }) {
                 </h2>
 
                 <HorizontalSpacer />
-
-                <div className="grid gap-4 three-columns">
-                    {pastPrograms.map((program) => (
-                        <>
-                            <div className="program-card">
-                                <ProgramCard
-                                    slug={program.slug}
-                                    frontmatter={program.data}
-                                    headingSize="text-xl"
-                                />
+                <div className="dashed-background">
+                    <div className="grid gap-4 grid-cols-3">
+                        {pastPrograms.map((program) => (
+                            <div class="bg-background">
+                                <div className="">
+                                    <ProgramCard
+                                        slug={program.slug}
+                                        frontmatter={program.data}
+                                        headingSize="text-xl"
+                                    />
+                                </div>
                             </div>
-                            <GridSpacer />
-                        </>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

@@ -1,5 +1,5 @@
 // nevermind don't use this
-import { sketch } from '/src/utils/p5-wrapper.js';
+import { sketch } from 'p5js-wrapper';
 
 function getContainerDimensions() {
     const container = document.querySelector('#sketch');

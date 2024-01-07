@@ -97,7 +97,7 @@ export default function ProgramFilter({ programs }) {
 
                 <HorizontalSpacer />
                 <div className="dashed-background">
-                    <div className="grid gap-4 grid-cols-3">
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
                         {pastPrograms.map((program) => (
                             <div class="bg-background">
                                 <div className="">

@@ -4,7 +4,6 @@ export default function Tag({ tag }) {
         ['workshop', 'bg-Orange'],
         ['study', 'bg-Green'],
     ]);
-    console.log('tag!', tag);
     return (
         <button
             className={`text-Black whitespace-nowrap px-4 py-2 ${bgColors.get(

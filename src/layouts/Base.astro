@@ -11,7 +11,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="none">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content="Astro description" />
@@ -24,6 +24,18 @@ const { title } = Astro.props;
                 title ? '' : `: ${metadata.subtitle}`
             }
         </title>
+        <link
+            rel="preload"
+            href="/fonts/DenimINKTRIALVF.ttf"
+            as="font"
+            type="font/ttf"
+        />
+        <link
+            rel="preload"
+            href="/fonts/MatterSQMonoTRIAL-Regular.otf"
+            as="font"
+            type="font/opentype"
+        />
         <ViewTransitions fallback="swap" />
     </head>
     <body transition:animate="none">

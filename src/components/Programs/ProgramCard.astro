@@ -10,7 +10,7 @@ const {
     time,
     location,
     image,
-    tags,
+    type,
 } = Astro.props.frontmatter;
 
 function returnDateStatus(endDate) {
@@ -46,6 +46,6 @@ function returnDateStatus(endDate) {
         <div class="text-neutral-50 whitespace-nowrap bg-neutral-900 px-4 py-2">
             {returnDateStatus(endDate)}
         </div>
-        {tags.map((tag) => <Tag tag={tag} />)}
+        <Tag tag={type} />
     </div>
 </div>

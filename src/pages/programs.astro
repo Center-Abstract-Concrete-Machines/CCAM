@@ -41,6 +41,72 @@ const allPrograms = sortByPubDate(await getCollection('programs'));
 <Base title="Programs">
     <div class="mx-auto w-full p-4">
         <TitleCard title={heading.title} text={heading.description} />
-        <ProgramFilter programs={allPrograms} client:load />
+        <div class="min-w-0">
+            <div
+                class="flex flex-wrap justify-between items-center text-sm py-4 gap-x-4 gap-y-2"
+            >
+                <span>Filter</span>
+                <div class="flex gap-4 flex-wrap">
+                    <button
+                        class="text-Black whitespace-nowrap px-4 py-2 bg-Blue"
+                    >
+                        Event
+                    </button>
+                    <button
+                        class="text-Black whitespace-nowrap px-4 py-2 bg-Orange"
+                    >
+                        Workshop
+                    </button>
+                    <button
+                        class="text-Black whitespace-nowrap px-4 py-2 bg-Green"
+                    >
+                        Study
+                    </button>
+                </div>
+            </div>
+            <HorizontalSpacer />
+            <div class="grid two-columns gap-4 pb-4">
+                {
+                    upcomingPrograms.map((program) => (
+                        <>
+                            <ProgramCard
+                                slug={program.slug}
+                                frontmatter={program.data}
+                            />
+                            <GridSpacer />
+                        </>
+                    ))
+                }
+            </div>
+        </div>
+
+        <div>
+            <HorizontalSpacer />
+
+            <h2
+                class="text-center py-16 pt-12 font-medium leading-tight tracking-tight text-3xl"
+            >
+                Past Programs
+            </h2>
+
+            <HorizontalSpacer />
+            <div class="dashed-background">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
+                    {
+                        pastPrograms.map((program) => (
+                            <div class="bg-background">
+                                <div class="">
+                                    <ProgramCard
+                                        slug={program.slug}
+                                        frontmatter={program.data}
+                                        headingSize="text-xl"
+                                    />
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </Base>

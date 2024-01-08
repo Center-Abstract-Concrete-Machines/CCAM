@@ -121,4 +121,15 @@
         button.setAttribute('aria-pressed', String(bodyThemeIsDark));
     }
     setButtonPresssed();
+
+    document.addEventListener('astro:page-load', () => {
+        const button = document.getElementById('toggle-theme');
+
+        function setButtonPresssed() {
+            const bodyThemeIsDark =
+                document.documentElement.classList.contains('dark');
+            button.setAttribute('aria-pressed', String(bodyThemeIsDark));
+        }
+        setButtonPresssed();
+    });
 </script>

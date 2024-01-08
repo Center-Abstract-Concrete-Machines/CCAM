@@ -38,29 +38,38 @@ import EmailSignup from './EmailSignup';
 </dialog>
 
 <script>
-    const contactAnchor = document.querySelector('[data-name="Contact"]');
-    const contactModal: HTMLDialogElement = document.querySelector(
-        'dialog[class="contact"]'
-    );
-    const contactContainer = document.querySelector('.dialog-container');
-    const closeButton = document.querySelector('button#close');
+    function addModalListeners() {
+        const contactAnchor = document.querySelector('[data-name="Contact"]');
+        const contactModal: HTMLDialogElement = document.querySelector(
+            'dialog[class="contact"]'
+        );
+        const contactContainer = document.querySelector('.dialog-container');
+        const closeButton = document.querySelector('button#close');
 
-    if (typeof window.HTMLDialogElement === 'function') {
-        contactAnchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            contactModal.showModal();
-        });
+        if (typeof window.HTMLDialogElement === 'function') {
+            contactAnchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                contactModal.showModal();
+            });
 
-        closeButton.addEventListener('click', () => {
-            contactModal.close();
-        });
+            closeButton.addEventListener('click', () => {
+                contactModal.close();
+            });
 
-        contactModal.addEventListener('click', () => {
-            contactModal.close();
-        });
+            contactModal.addEventListener('click', () => {
+                contactModal.close();
+            });
 
-        contactContainer.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+            contactContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
     }
+
+    addModalListeners();
+
+    // necessary when using page transitions
+    document.addEventListener('astro:page-load', () => {
+        addModalListeners();
+    });
 </script>

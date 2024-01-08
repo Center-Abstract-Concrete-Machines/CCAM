@@ -1,5 +1,4 @@
-// nevermind don't use this
-import { sketch } from 'p5js-wrapper';
+import { p5 } from '/src/utils/p5wrapper.js';
 
 function getContainerDimensions() {
     const container = document.querySelector('#sketch');
@@ -9,22 +8,35 @@ function getContainerDimensions() {
         containerHeight: dimensions.height,
     };
 }
+function setupSketch() {
+    let sketch1 = new p5((p) => {
+        p.setup = () => {
+            const { containerWidth, containerHeight } =
+                getContainerDimensions();
+            p.createCanvas(containerWidth, containerHeight).parent('#sketch');
+        };
 
-sketch.setup = () => {
-    const { containerWidth, containerHeight } = getContainerDimensions();
-    createCanvas(containerWidth, containerHeight).parent('#sketch');
-};
+        p.draw = () => {
+            if (p.mouseIsPressed) {
+                p.fill(0);
+            } else {
+                p.fill(255);
+            }
+            p.ellipse(p.mouseX, p.mouseY, 80, 80);
+        };
 
-sketch.draw = () => {
-    if (mouseIsPressed) {
-        fill(0);
-    } else {
-        fill(255);
-    }
-    ellipse(mouseX, mouseY, 80, 80);
-};
+        p.windowResized = () => {
+            const { containerWidth, containerHeight } =
+                getContainerDimensions();
+            p.resizeCanvas(containerWidth, containerHeight);
+        };
+    });
+}
 
-sketch.windowResized = () => {
-    const { containerWidth, containerHeight } = getContainerDimensions();
-    resizeCanvas(containerWidth, containerHeight);
-};
+// Uncomment below if you disable page transitions
+// setupSketch();
+
+// Necessary for page transitions
+document.addEventListener('astro:page-load', () => {
+    setupSketch();
+});

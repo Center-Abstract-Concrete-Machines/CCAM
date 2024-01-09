@@ -5,11 +5,9 @@ const { name, description, image, slug } = Astro.props;
 
 <div class="flex flex-col gap-2 items-center text-center">
     <a href=`/about/${slug}`>
-        <Image
-            src={image.url}
-            alt={image.alt}
-            transition:name=`image-${slug}`
-        />
+        <div transition:name=`image-${slug}`>
+            <Image src={image.url} alt={image.alt} />
+        </div>
         <p class="text-lg font-medium">{name}</p>
     </a>
     <p class="font-mono text-sm">{description}</p>

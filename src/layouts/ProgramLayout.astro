@@ -26,12 +26,9 @@ const { slug } = Astro.props;
         </div>
         <HorizontalSpacer />
         <div class="mx-auto pb-4 max-w-2xl">
-            <Image
-                src={image.url}
-                alt={image.alt}
-                transition:name=`image-${slug}`
-                class="mx-auto"
-            />
+            <div transition:name=`image-${slug}`>
+                <Image src={image.url} alt={image.alt} class="mx-auto" />
+            </div>
         </div>
         <HorizontalSpacer />
         <div class="prose dark:prose-invert mx-auto">

@@ -10,12 +10,9 @@ const { slug } = Astro.props;
 <Base title={title}>
     <div class="p-4">
         <div class="mx-auto max-w-2xl">
-            <Image
-                src={image.url}
-                alt={image.alt}
-                transition:name=`image-${slug}`
-                class="mx-auto py-16"
-            />
+            <div transition:name=`image-${slug}`>
+                <Image src={image.url} alt={image.alt} class="mx-auto py-16" />
+            </div>
             <HorizontalSpacer />
             <div>
                 <h1 class="text-xl font-medium">{title}</h1>

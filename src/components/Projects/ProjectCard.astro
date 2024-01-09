@@ -6,11 +6,9 @@ const { image, title, description } = Astro.props.metadata;
 
 <div class="mx-auto flex flex-col gap-4 max-w-2xl pb-16">
     <a href=`/projects/${slug}`>
-        <Image
-            src={image.url}
-            alt={image.alt}
-            transition:name=`image-${slug}`
-        />
+        <div transition:name=`image-${slug}`>
+            <Image src={image.url} alt={image.alt} />
+        </div>
     </a>
     <div
         class="project-card grid sm:grid-rows-2 grid-cols-1 sm:grid-cols-2 gap-4"

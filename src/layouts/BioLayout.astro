@@ -7,7 +7,9 @@ const { slug } = Astro.props;
 ---
 
 <BasicMarkdownLayout frontmatter={{ title: name }}>
-    <Image src={image.url} alt={image.alt} transition:name=`image-${slug}` />
+    <div transition:name=`image-${slug}`>
+        <Image src={image.url} alt={image.alt} />
+    </div>
     <h1>{name}</h1>
     <h2>{description}</h2>
     <slot />

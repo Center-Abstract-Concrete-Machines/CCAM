@@ -26,12 +26,13 @@ function returnDateStatus(endDate) {
 
 <div class=`flex flex-col items-start ${className}`>
     <a href={`/programs/${slug}`}>
-        <Image
-            src={image.url}
-            alt={image.alt}
-            class="aspect-[1.5] object-cover object-center w-full overflow-hidden max-w-full"
-            transition:name=`image-${slug}`
-        />
+        <div transition:name=`image-${slug}`>
+            <Image
+                src={image.url}
+                alt={image.alt}
+                class="aspect-[1.5] object-cover object-center w-full overflow-hidden max-w-full"
+            />
+        </div>
         <h1
             class=`${headingSize} font-medium leading-none tracking-tight w-full mt-6`
         >

@@ -1,7 +1,3 @@
-let pix =
-  Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) /
-  200;
-
 class Particle {
   constructor(x, y) {
     this.pos = createVector(x, y);
@@ -9,7 +5,7 @@ class Particle {
     this.speed = random(spdRange[0], spdRange[1]);
     this.col1 = color(random(colors));
     this.col2 = color(random(colors));
-    this.r = (spdRange[1] + spdRange[0] - this.speed) * pix;
+    this.r = spdRange[1] + spdRange[0] - this.speed;
     this.alpha = 255;
   }
   move() {

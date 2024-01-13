@@ -1,0 +1,20 @@
+---
+title: Generating Sound and Organizing Time
+type: Book
+author: Graham Wakefield and Gregory Taylor
+year: 2022
+tags: 
+- generative sound
+- gen~ working group
+- gregory taylor
+- graham wakefield 
+- modular synthesis
+- daisy
+url: https://cycling74.com/books/go
+image:
+    url: ./images/go.png
+    alt: Generating Sound and Organizing Time Book Cover
+dateAdded: 2024-01-13
+---
+
+Beginner introduction to building sound synthesis components and compositional systems from a low level in MaxMSP gen~.

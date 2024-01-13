@@ -1,42 +1,68 @@
-import { p5 } from '/src/utils/p5wrapper.js';
-
 function getContainerDimensions() {
-    const container = document.querySelector('#sketch');
-    const dimensions = container.getBoundingClientRect();
-    return {
-        containerWidth: dimensions.width,
-        containerHeight: dimensions.height,
-    };
-}
-function setupSketch() {
-    let sketch1 = new p5((p) => {
-        p.setup = () => {
-            const { containerWidth, containerHeight } =
-                getContainerDimensions();
-            p.createCanvas(containerWidth, containerHeight).parent('#sketch');
-        };
-
-        p.draw = () => {
-            if (p.mouseIsPressed) {
-                p.fill(0);
-            } else {
-                p.fill(255);
-            }
-            p.ellipse(p.mouseX, p.mouseY, 80, 80);
-        };
-
-        p.windowResized = () => {
-            const { containerWidth, containerHeight } =
-                getContainerDimensions();
-            p.resizeCanvas(containerWidth, containerHeight);
-        };
-    });
+  const container = document.querySelector("#sketch");
+  const dimensions = container.getBoundingClientRect();
+  return {
+    containerWidth: dimensions.width,
+    containerHeight: dimensions.height,
+  };
 }
 
-// Uncomment below if you disable page transitions
-// setupSketch();
+function setup() {
+  const { containerWidth, containerHeight } = getContainerDimensions();
+  createCanvas(containerWidth, containerHeight).parent("#sketch");
+  textCol2 = color("#98CE00");
+  // fontGen();
+}
 
-// Necessary for page transitions
-document.addEventListener('astro:page-load', () => {
-    setupSketch();
-});
+function draw() {
+  noFill();
+  stroke(10);
+  circle(width / 2, height / 2, height / 2);
+  //   for (i = 0; i < particles.length; i++) {
+  //     particles[i].move();
+  //     particles[i].display();
+  //   }
+}
+
+function windowResized() {
+  const { containerWidth, containerHeight } = getContainerDimensions();
+  resizeCanvas(containerWidth, containerHeight);
+}
+
+let pix =
+  Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) /
+  200;
+
+class Particle {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.dir = createVector(0, 0);
+    this.speed = random(spdRange[0], spdRange[1]);
+    this.col1 = color(random(colors));
+    this.col2 = color(random(colors));
+    this.r = (spdRange[1] + spdRange[0] - this.speed) * pix;
+    this.alpha = 255;
+  }
+  move() {
+    this.noise =
+      500 *
+      map(
+        noise(this.pos.x * noiseScale, this.pos.y * noiseScale),
+        0.2,
+        0.8,
+        -1,
+        1
+      );
+    this.dir = createVector(cos(this.noise), sin(this.noise));
+    this.dir.mult(this.speed);
+    this.pos.add(this.dir);
+  }
+
+  display() {
+    let col = lerpColor(this.col1, this.col2, this.noise);
+    col.setAlpha(40);
+    stroke(col);
+    strokeWeight(this.r);
+    point(this.pos.x, this.pos.y);
+  }
+}

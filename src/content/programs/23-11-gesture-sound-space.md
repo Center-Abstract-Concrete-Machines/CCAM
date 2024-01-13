@@ -10,7 +10,7 @@ image:
     url: ./images/studio-drawing.png
     alt: computationally generated line drawing of
 type: Workshop
-featured: true
+featured: false
 ---
 
 Multichannel sound workshop run by Oakland/ chicago sound artist, composer, and technologist Kim Nucci.

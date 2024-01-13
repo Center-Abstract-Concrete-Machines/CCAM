@@ -5,8 +5,6 @@ function setup() {
 
   fontGen();
 
-  let element = document.getElementById("spacer");
-  element.style.height = textSize() + "px";
   image(textMask, 0, 0);
 }
 

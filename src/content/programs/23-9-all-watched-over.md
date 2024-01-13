@@ -10,7 +10,7 @@ image:
     url: ./images/all-watched.png
     alt: Forrster Diagram
 type: Event
-featured: true
+featured: false
 ---
 
 ## overview

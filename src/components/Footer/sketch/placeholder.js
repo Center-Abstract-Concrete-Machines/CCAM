@@ -1,13 +1,6 @@
 import { p5 } from '/src/utils/p5wrapper.js';
+import { getContainerDimensions } from './dimensions';
 
-function getContainerDimensions() {
-    const container = document.querySelector('#sketch');
-    const dimensions = container.getBoundingClientRect();
-    return {
-        containerWidth: dimensions.width,
-        containerHeight: dimensions.height,
-    };
-}
 function setupSketch() {
     let sketch1 = new p5((p) => {
         p.setup = () => {

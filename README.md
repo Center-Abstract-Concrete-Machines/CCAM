@@ -20,4 +20,8 @@ Work in progress
 -   [x] Programs upcoming/past date logic
 -   [x] Theme picker
 -   [x] Navbar current location and hover states (\*)
+-   [ ] resources
+    -   [ ] replace "type" with "tags" (?)         
+    -   [ ] render out tags
+    -   [ ] generate color for new tags (pre-existing color palette?)        
 

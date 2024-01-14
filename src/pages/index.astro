@@ -27,38 +27,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
                 alt="Center for Concrete and Abtract Machines"
                 class="dark:invert"
             /> -->
-            <h1
-                class="text-6xl lg:text-8xl leading-none uppercase font-sans font-medium"
-            >
-                Cent<span
-                    class="morpher text-[58.5px] lg:text-[93.5px]"
-                    >e</span
-                >r fo<span
-                    class="morpher text-[58.5px] lg:text-[93.5px]"
-                    >r</span
-                > C<span
-                    class="morpher  text-[58.5px] lg:text-[93.5px]"
-                    >o</span
-                >ncr<span
-                    class="morpher  text-[58.5px] lg:text-[93.5px]"
-                    >e</span
-                >te <br /> and <span
-                    class="morpher mbsq text-[58.5px] lg:text-[93.5px]"
-                    >A</span
-                >bs<span
-                    class="morpher  text-[58.5px] lg:text-[93.5px]"
-                    >t</span
-                >ra<span
-                    class="morpher text-[58.5px] lg:text-[93.5px]"
-                    >c</span
-                >t <span
-                    class="morpher text-[58.5px] lg:text-[93.5px]"
-                    >M</span
-                >a<span
-                    class="morpher text-[58.5px] lg:text-[93.5px]"
-                    >c</span
-                >hines
-            </h1>
+            <IndexGlitchTitle />
             <GridSpacer />
             <div class="w-full">
                 <Image
@@ -166,40 +135,4 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
         </div>
         <ResourcesDisplay displayCount={5} />
     </div>
-
-
-    <script>
-        const colors = ["#747fef","#a5f91d","#ffd500"]
-        const classes = [["font-sans","font-medium"],["font-moonbase","mbsq"],["font-moonbase","mbrd"]]
-        const elements = document.getElementsByClassName("morpher");
-        let classState=[];
-      
-        for(let i = 0; i< elements.length; i++){
-            classify(i);
-        }
-
-        function classify(i){
-        let newClasses = classes[Math.floor(Math.random()*classes.length)]
-        let newColor = classes[Math.floor(Math.random()*colors.length)]
-        
-        for(let n of newClasses){
-            elements[i].classList.add(n);
-                   }
-      // elements[i].style.color = newColor;
-
-        classState[i]=newClasses;
-        let duration = 200+ Math.random()* 2000;
-        setTimeout(() => {
-            declassify(i)
-    }, duration);
-
-       }
-       function declassify(i){
-        for (let s of classState[i]){
-            elements[i].classList.remove(s);
-                    }
-                    classify(i)
-}
-    </script> 
-    
 </Base>

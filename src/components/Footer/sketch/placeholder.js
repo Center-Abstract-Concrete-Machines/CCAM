@@ -51,13 +51,29 @@ export function setupSketch() {
     });
 }
 
+// Use Intersection Observer API to load sketch once it is visible
+function callback(entries, observer) {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            sketchEl = setupSketch();
+            observer.disconnect();
+        }
+    });
+}
+
+function setupObserver() {
+    const sketchObserver = new IntersectionObserver(callback, {
+        threshold: 0.5,
+    });
+    sketchObserver.observe(document.querySelector('#sketch'));
+}
+
+let sketchEl;
+
 // This is all to prevent memory leaks when using page transitions
-
-let sketchEl = setupSketch();
-
 document.addEventListener('astro:page-load', () => {
     if (!sketchEl) {
-        sketchEl = setupSketch();
+        setupObserver();
     }
 });
 

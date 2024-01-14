@@ -11,7 +11,8 @@ image:
     url: ./images/weird-dreams.png
     alt: social media flyer for weird dreams, weird analysis 
 tags:
-    - Event
+    - vernissage
+    - Wrong Biennale
 featured: false
 gallery: weird-dreams-slsa
 ---

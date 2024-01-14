@@ -22,9 +22,11 @@
     const elements = document.getElementsByClassName('morpher');
     let classState = [];
 
-    for (let i = 0; i < elements.length; i++) {
-        classify(i);
-    }
+    document.addEventListener('astro:page-load', () => {
+        for (let i = 0; i < elements.length; i++) {
+            classify(i);
+        }
+    });
 
     function classify(i) {
         let newClasses = classes[Math.floor(Math.random() * classes.length)];

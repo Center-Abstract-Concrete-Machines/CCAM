@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import CCAMFooter from './CCAM-footer.png';
 import HorizontalSpacer from '../HorizontalSpacer.jsx';
 import ThemeToggle from '../ThemeToggle.astro';
 import Brackets from '../Brackets.astro';
@@ -24,7 +23,6 @@ import Logo from '/src/svg/logo.svg';
 <div class="pt-4">
     <!-- Image/Sketch -->
     <div class="ccam-container grid place-items-center min-h-80 relative">
-        <!-- <Image src={CCAMFooter} alt="CCAM" class="dark:invert dark:grayscale" /> -->
         <div class="absolute w-full h-full -z-10" id="sketch"></div>
         <Image
             src={Logo}

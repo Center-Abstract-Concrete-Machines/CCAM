@@ -1,0 +1,17 @@
+---
+import ProgramsLayout from '@layouts/ProgramsLayout.astro';
+import { getCollection } from 'astro:content';
+
+const filter = 'Workshop';
+const events = await getCollection(
+    'programs',
+    ({ data }) => data.type === filter
+);
+---
+
+<ProgramsLayout
+    events={events}
+    subtitle="Workshops"
+    description="Workshops workshops workshops"
+    filter={filter}
+/>

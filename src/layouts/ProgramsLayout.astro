@@ -1,0 +1,83 @@
+---
+import Base from '@layouts/Base.astro';
+import TitleCard from '@components/TitleCard.astro';
+import ProgramCard from '@components/Programs/ProgramCard.astro';
+import { getCollection } from 'astro:content';
+import Tag from '@components/Programs/Tag.astro';
+import GridSpacer from '@components/GridSpacer.astro';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import FilterBar from '@components/Programs/FilterBar.astro';
+import { isEventUpcoming, sortByPubDate } from 'src/utils/programFilters';
+
+const { events, subtitle, description, filter } = Astro.props;
+
+const heading = {
+    title: subtitle ? `Programs - ${subtitle}` : 'Programs',
+    description: description
+        ? description
+        : 'Our school supports interdisciplinary study in art, code, hardware and critical theory through events, classes, and workshops.',
+};
+
+const upcomingPrograms = sortByPubDate(events).filter(({ data }) =>
+    isEventUpcoming(data)
+);
+
+const pastPrograms = sortByPubDate(events).filter(
+    ({ data }) => !isEventUpcoming(data)
+);
+---
+
+<Base title={subtitle}>
+    <div class="mx-auto w-full p-4">
+        <TitleCard title={heading.title} text={heading.description} />
+        <div class="min-w-0">
+            <FilterBar filter={filter} />
+            {
+                upcomingPrograms.length > 0 && (
+                    <>
+                        <HorizontalSpacer />
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
+                            {upcomingPrograms.map((program) => (
+                                <>
+                                    <ProgramCard
+                                        slug={program.slug}
+                                        frontmatter={program.data}
+                                    />
+                                </>
+                            ))}
+                        </div>
+                    </>
+                )
+            }
+        </div>
+
+        <div>
+            <HorizontalSpacer />
+
+            <h2
+                class="text-center py-16 pt-12 font-medium leading-tight tracking-tight text-3xl"
+            >
+                Past Programs
+            </h2>
+
+            <HorizontalSpacer />
+            <div class="dashed-background">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
+                    {
+                        pastPrograms.map((program) => (
+                            <div class="bg-background">
+                                <div class="">
+                                    <ProgramCard
+                                        slug={program.slug}
+                                        frontmatter={program.data}
+                                        headingSize="text-xl"
+                                    />
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</Base>

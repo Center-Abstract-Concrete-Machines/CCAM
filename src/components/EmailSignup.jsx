@@ -39,7 +39,7 @@ export default function EmailSignup() {
                 <input
                     type="email"
                     name="email"
-                    className="border border-dashed border-borderColor bg-backgroundColor px-4 py-2 min-w-0 max-w-full grow"
+                    className="border border-dashed border-borderColor/30 bg-backgroundColor px-4 py-2 min-w-0 max-w-full grow"
                     placeholder="Email"
                     required
                 />

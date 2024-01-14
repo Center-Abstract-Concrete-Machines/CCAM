@@ -1,0 +1,38 @@
+---
+const { filter } = Astro.props;
+---
+
+<div
+    class="flex flex-wrap justify-between items-center text-sm py-4 gap-x-4 gap-y-2"
+>
+    <span>Filter</span>
+    <div class="flex gap-4 flex-wrap">
+        <a href="/programs">
+            <button
+                class=`text-Black whitespace-nowrap px-4 py-2 border ${filter === 'none' ? 'border-borderColor' : 'border-borderColor/20'}`
+                >All Programs</button
+            >
+        </a>
+        <a href="/programs/events">
+            <button
+                class=`text-Black whitespace-nowrap px-4 py-2 ${(filter === 'Event' || filter === 'none') && 'bg-Blue'}`
+            >
+                Event
+            </button>
+        </a>
+        <a href="/programs/workshops">
+            <button
+                class=`text-Black whitespace-nowrap px-4 py-2 ${(filter === 'Workshop' || filter === 'none') && 'bg-Orange'}`
+            >
+                Workshop
+            </button>
+        </a>
+        <a href="/programs/study">
+            <button
+                class=`text-Black whitespace-nowrap px-4 py-2 ${(filter === 'Study' || filter === 'none') && 'bg-Green'}`
+            >
+                Study
+            </button>
+        </a>
+    </div>
+</div>

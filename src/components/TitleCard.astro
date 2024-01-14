@@ -9,7 +9,7 @@ const { title, text } = Astro.props;
         >
             {title}
         </h1>
-        {text ? <p>{text}</p> : ''}
+        {text && <p>{text}</p>}
     </div>
 </div>
 

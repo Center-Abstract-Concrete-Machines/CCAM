@@ -59,7 +59,7 @@
     --backgroundHover: var(--Black);
     --textColor: var(--Black);
     --linkColor: var(--Black);
-    --borderColor: var(--Black-30);
+    --borders: var(--Black);
     --meta-background: hsl(var(--Purple));
 }
 

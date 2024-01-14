@@ -1,17 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import ProgramCard from '../components/Programs/ProgramCard.astro';
-import ResourcesDisplay from '../components/Resources/ResourcesDisplay.astro';
-import GridSpacer from '../components/GridSpacer.astro';
+import Base from '@layouts/Base.astro';
+import ProgramCard from '@components/Programs/ProgramCard.astro';
+import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
+import GridSpacer from '@components/GridSpacer.astro';
 
-import space from '../images/space.png';
-import squareSpace from '../images/space-square.png';
-import CCAM from '../images/CCAM.png';
-import HorizontalSpacer from '../components/HorizontalSpacer.jsx';
-import Brackets from '../components/Brackets.astro';
-import IndexGlitchTitle from '../components/IndexGlitchTitle.astro';
+import space from 'src/images/space.png';
+import squareSpace from 'src/images/space-square.png';
+import CCAM from 'src/images/CCAM.png';
+import HorizontalSpacer from '@components/HorizontalSpacer.jsx';
+import Brackets from '@components/Brackets.astro';
+import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
 
 const featuredPrograms = await getCollection('programs', ({ data }) => {
     return data.featured === true;

@@ -1,8 +1,8 @@
 ---
-const { title, text } = Astro.props;
+const { title, text, class: className } = Astro.props;
 ---
 
-<div class="grid place-content-center py-24">
+<div class=`grid place-content-center py-24 ${className}`>
     <div class="max-w-lg text-center flex flex-col gap-4">
         <h1
             class="text-4xl uppercase font-semibold leading-tight tracking-tight"

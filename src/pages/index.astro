@@ -9,7 +9,7 @@ import GridSpacer from '@components/GridSpacer.astro';
 import space from 'src/images/space.png';
 import squareSpace from 'src/images/space-square.png';
 import CCAM from 'src/images/CCAM.png';
-import HorizontalSpacer from '@components/HorizontalSpacer.jsx';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
 
@@ -42,7 +42,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     <!-- Overview -->
 
     <div class="px-4 pt-4">
-        <HorizontalSpacer />
+        <HorizontalSpacer class="pb-4" />
         <div class="grid thirds-container gap-4">
             <Brackets>
                 <p class="max-w-[60%] mx-auto text-xl">
@@ -78,18 +78,17 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
     </div>
 
     <!-- Programs -->
-    <div class="px-4 pt-4">
-        <HorizontalSpacer />
-        <div class="grid two-columns gap-4">
+    <div class="pt-4">
+        <HorizontalSpacer class="mx-4" />
+        <div class="card-grid double">
             {
                 featuredPrograms.map((program) => (
-                    <>
+                    <div>
                         <ProgramCard
                             slug={program.slug}
                             frontmatter={program.data}
                         />
-                        <GridSpacer />
-                    </>
+                    </div>
                 ))
             }
         </div>
@@ -126,7 +125,7 @@ const featuredPrograms = await getCollection('programs', ({ data }) => {
 
     <!-- Resources -->
     <div class="px-4">
-        <HorizontalSpacer />
+        <HorizontalSpacer class="pb-4" />
         <div class="header flex justify-between items-center">
             <h2 class="text-2xl font-medium">Resources</h2>
             <a href="/resources">

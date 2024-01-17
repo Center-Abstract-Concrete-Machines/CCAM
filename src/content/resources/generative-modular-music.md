@@ -8,10 +8,10 @@ image:
     url: ./images/generative-kasten.png
     alt: Generative Music book cover
 dateAdded: 2023-12-01
-tags: 
-- generative sound
-- gen~ working group
-- modular synthesis
+tags:
+    - generative sound
+    - gen~ working group
+    - modular synthesis
 ---
 
 You can purchase this e-book from Rolf's website. Excerpts are available from Uryanmodular's website and (instagram)[https://www.instagram.com/uryanmodular/].

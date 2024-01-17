@@ -5,6 +5,8 @@ image:
     url: ./images/weird-dreams.png
     alt: Weird Dreams, Weird Analysis
 dateAdded: 2023-12-14
+tags:
+    - hello
 ---
 
 We’ve been having weird dreams.

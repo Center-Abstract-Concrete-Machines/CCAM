@@ -11,6 +11,8 @@ image:
     alt: Forrster Diagram
 type: Event
 featured: false
+tags:
+    - hello
 ---
 
 ## overview

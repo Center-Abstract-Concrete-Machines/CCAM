@@ -10,6 +10,8 @@ location: NEWinc
 image:
     url: ./images/iiny.png
     alt: perlin noise oscillations with informal information in red text on top
+tags:
+    - hello
 ---
 
 ### Attendees

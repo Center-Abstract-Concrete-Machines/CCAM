@@ -3,7 +3,7 @@ title: 'gen~ Working Group'
 subtitle: ''
 pubDate: 2023-12-01
 endDate: ongoing
-presentationalDates: "Next: 1/23/24"  
+presentationalDates: 'Next: 1/23/24'
 time: 6-8 PM CT
 location: Hybrid / Pilsen + Zoom
 image:
@@ -11,6 +11,8 @@ image:
     alt: alt
 type: Workshop
 featured: true
+tags:
+    - hello
 ---
 
 # get involved

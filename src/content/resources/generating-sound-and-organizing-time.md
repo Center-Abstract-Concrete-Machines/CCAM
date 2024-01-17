@@ -3,13 +3,13 @@ title: Generating Sound and Organizing Time
 type: Book
 author: Graham Wakefield and Gregory Taylor
 year: 2022
-tags: 
-- generative sound
-- gen~ working group
-- gregory taylor
-- graham wakefield 
-- modular synthesis
-- daisy
+tags:
+    - generative sound
+    - gen~ working group
+    - gregory taylor
+    - graham wakefield
+    - modular synthesis
+    - daisy
 url: https://cycling74.com/books/go
 image:
     url: ./images/go.png

@@ -8,6 +8,8 @@ image:
     alt: The Anthropocene Laboratory Book Cover
 dateAdded: 2023-12-02
 url: https://forlaget284.se/
+tags:
+    - hello
 ---
 
 [284 Press](https://forlaget284.se/)

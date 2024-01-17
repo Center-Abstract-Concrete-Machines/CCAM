@@ -17,6 +17,7 @@ const programsCollection = defineCollection({
             }),
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
+            tags: z.array(z.string()),
         }),
 });
 
@@ -33,6 +34,7 @@ const resourcesCollection = defineCollection({
                 alt: z.string(),
             }),
             dateAdded: z.date(),
+            tags: z.array(z.string()),
         }),
 });
 
@@ -47,6 +49,7 @@ const projectsCollection = defineCollection({
                 alt: z.string(),
             }),
             dateAdded: z.date(),
+            tags: z.array(z.string()),
         }),
 });
 

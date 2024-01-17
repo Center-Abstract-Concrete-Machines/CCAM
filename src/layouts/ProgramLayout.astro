@@ -3,7 +3,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.jsx';
 import Base from '@layouts/Base.astro';
 import { Image } from 'astro:assets';
 
-const { title, subtitle, image } = Astro.props.frontmatter;
+const { title, subtitle, image, tags } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 ---
 
@@ -32,6 +32,13 @@ const { slug } = Astro.props;
         </div>
         <HorizontalSpacer />
         <div class="prose dark:prose-invert mx-auto">
+            <div>
+                <span class="flex gap-2 flex-wrap">
+                    Tags: {
+                        tags.map((tag) => <a href={`/tags/${tag}`}>{tag}</a>)
+                    }
+                </span>
+            </div>
             <slot />
         </div>
     </div>

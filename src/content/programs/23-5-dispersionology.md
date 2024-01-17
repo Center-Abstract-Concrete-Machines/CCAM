@@ -11,7 +11,10 @@ image:
     alt: dispersionology & other tales
 type: Event
 featured: false
+tags:
+    - hello
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 
 [dispersionology score](/assets/pdf/dispersionology.pdf) by Doug Van Nort

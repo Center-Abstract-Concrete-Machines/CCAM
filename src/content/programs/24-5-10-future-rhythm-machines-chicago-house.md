@@ -11,4 +11,6 @@ image:
     alt: alt
 type: Event
 featured: true
+tags:
+    - hello
 ---

@@ -1,9 +1,10 @@
 ---
-import HorizontalSpacer from '@components/HorizontalSpacer.jsx';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
 import { Image } from 'astro:assets';
 
-const { title, author, type, year, image } = Astro.props.frontmatter;
+const { title, author, type, year, image, tags } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 ---
 
@@ -31,6 +32,7 @@ const { slug } = Astro.props;
             </div>
         </div>
         <div class="prose dark:prose-invert mx-auto max-w-2xl py-4">
+            <TagsList tags={tags} />
             <slot />
         </div>
     </div>

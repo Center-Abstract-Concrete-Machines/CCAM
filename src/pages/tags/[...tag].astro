@@ -41,47 +41,53 @@ const { programs, resources, projects } = Astro.props;
 
 <Base title={tag}>
     <div class="prose dark:prose-invert mx-auto">
-        <section>
-            <h2>Programs tagged with "{tag}"</h2>
-            <ul>
-                {
-                    programs.map((program) => (
-                        <div>
-                            <a href={`/programs/${program.slug}`}>
-                                {program.data.title}
-                            </a>
-                        </div>
-                    ))
-                }
-            </ul>
-        </section>
-        <section>
-            <h2>Resources tagged with "{tag}"</h2>
-            <ul>
-                {
-                    resources.map((resource) => (
-                        <div>
-                            <a href={`/resources/${resource.slug}`}>
-                                {resource.data.title}
-                            </a>
-                        </div>
-                    ))
-                }
-            </ul>
-        </section>
-        <section>
-            <h2>Projects tagged with "{tag}"</h2>
-            <ul>
-                {
-                    projects.map((project) => (
-                        <div>
-                            <a href={`/projects/${project.slug}`}>
-                                {project.data.title}
-                            </a>
-                        </div>
-                    ))
-                }
-            </ul>
-        </section>
+        {
+            programs.length > 0 && (
+                <section>
+                    <h2>Programs tagged with "{tag}"</h2>
+                    <ul>
+                        {programs.map((program) => (
+                            <div>
+                                <a href={`/programs/${program.slug}`}>
+                                    {program.data.title}
+                                </a>
+                            </div>
+                        ))}
+                    </ul>
+                </section>
+            )
+        }
+        {
+            resources.length > 0 && (
+                <section>
+                    <h2>Resources tagged with "{tag}"</h2>
+                    <ul>
+                        {resources.map((resource) => (
+                            <div>
+                                <a href={`/resources/${resource.slug}`}>
+                                    {resource.data.title}
+                                </a>
+                            </div>
+                        ))}
+                    </ul>
+                </section>
+            )
+        }
+        {
+            projects.length > 0 && (
+                <section>
+                    <h2>Projects tagged with "{tag}"</h2>
+                    <ul>
+                        {projects.map((project) => (
+                            <div>
+                                <a href={`/projects/${project.slug}`}>
+                                    {project.data.title}
+                                </a>
+                            </div>
+                        ))}
+                    </ul>
+                </section>
+            )
+        }
     </div>
 </Base>

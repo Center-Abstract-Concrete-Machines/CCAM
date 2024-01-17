@@ -1,12 +1,30 @@
 ---
 const { title, text, class: className } = Astro.props;
+
+function morphify(string, num) {
+    const stringArray = string.split('');
+
+    let indexes = new Set();
+    for (let i = 0; i < num; i++) {
+        indexes.add(Math.floor(Math.random() * stringArray.length));
+    }
+    function spanify(index) {
+        const letter = stringArray[index];
+        stringArray[index] = `<span class="morpher">${letter}</span>`;
+    }
+    indexes.forEach((index) => spanify(index));
+    return stringArray.join('');
+}
+
+const newHeading = morphify(title, 2);
 ---
 
 <div class=`grid place-content-center py-24 ${className}`>
     <div class="max-w-lg text-center flex flex-col gap-4">
         <h1
-            class="text-4xl uppercase font-semibold leading-tight tracking-tight"
+            class="text-5xl sm:text-6xl uppercase font-semibold leading-tight tracking-tight mightymorpher"
         >
+            <!-- <Fragment set:html={newHeading} /> -->
             {title}
         </h1>
         {text && <p>{text}</p>}
@@ -18,3 +36,32 @@ const { title, text, class: className } = Astro.props;
         text-wrap: balance;
     }
 </style>
+
+<script is:inline>
+    function morphify(string, num) {
+        const stringArray = string.split('');
+
+        let indexes = new Set();
+        const length = string.length;
+        // for (let i = 0; i < num; i++) {
+        indexes.add(Math.floor(Math.random() * (length / 2)));
+        indexes.add(
+            Math.floor(Math.random() * (length / 2)) + Math.floor(length / 2)
+        );
+        // }
+        function spanify(index) {
+            const letter = stringArray[index];
+            stringArray[index] = `<span class="morpher">${letter}</span>`;
+        }
+        indexes.forEach((index) => spanify(index));
+        return stringArray.join('');
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        console.log('running title morpher');
+        const heading = document.querySelector('.mightymorpher');
+        heading.innerHTML = morphify(heading.innerText, 2);
+    });
+    // import 'src/utils/morpher.js';
+</script>
+<script src="/src/utils/morpher.js" is:inline></script>

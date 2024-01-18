@@ -1,15 +1,15 @@
 ---
 import { Image } from 'astro:assets';
-import HorizontalSpacer from '../HorizontalSpacer.jsx';
-import ThemeToggle from '../ThemeToggle.astro';
-import Brackets from '../Brackets.astro';
-import EmailSignup from '../EmailSignup.jsx';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import ThemeToggle from '@components/ThemeToggle.astro';
+import Brackets from '@components/Brackets.astro';
+import EmailSignup from '@components/EmailSignup.jsx';
 import Logo from '/src/svg/logo.svg';
 ---
 
 <!-- Mailing List -->
 <div class="px-4 mt-24">
-    <HorizontalSpacer />
+    <HorizontalSpacer class="mb-4" />
     <Brackets class="min-h-[15rem] sm:min-h-[20rem]">
         <div class="max-w-sm text-center flex flex-col gap-4 min-w-0">
             <h3 class="text-2xl font-medium">

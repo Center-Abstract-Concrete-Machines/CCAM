@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import HorizontalSpacer from '../HorizontalSpacer.jsx';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 
 const { image, title, type, author, year } = Astro.props.metadata;
 const { slug } = Astro.props;
@@ -18,7 +18,7 @@ function randomBG() {
 ---
 
 <div class="hover:bg-backgroundHover/5">
-    <HorizontalSpacer />
+    <HorizontalSpacer class="mb-4" />
     <a href=`/resources/${slug}` class="resource-grid grid gap-4 pb-4 pl-4">
         <div transition:name=`image-${slug}`>
             <Image

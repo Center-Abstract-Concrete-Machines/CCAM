@@ -17,10 +17,11 @@ const { image, title, description } = Astro.props.metadata;
             {title}
         </h2>
         <p class="row-span-2">{description}</p>
-        <a href=`/projects/${slug}`>
-            <button class="button justify-self-start self-start"
-                >Learn More</button
-            >
+        <a
+            href=`/projects/${slug}`
+            class="justify-self-start self-start button font-mono"
+        >
+            Learn More
         </a>
     </div>
 </div>

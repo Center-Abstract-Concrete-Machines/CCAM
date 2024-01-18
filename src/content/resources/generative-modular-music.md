@@ -14,4 +14,4 @@ tags:
     - modular synthesis
 ---
 
-You can purchase this e-book from Rolf's website. Excerpts are available from Uryanmodular's website and (instagram)[https://www.instagram.com/uryanmodular/].
+You can purchase this e-book from Rolf's website. Excerpts are available from Uryanmodular's website and [instagram](https://www.instagram.com/uryanmodular/).

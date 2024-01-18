@@ -8,9 +8,9 @@ const { slug } = Astro.props;
 
 <BasicMarkdownLayout frontmatter={{ title: name }}>
     <div transition:name=`image-${slug}`>
-        <Image src={image.url} alt={image.alt} />
+        <Image src={image.url} alt={image.alt} class="mx-auto" />
     </div>
-    <h1>{name}</h1>
-    <h2>{description}</h2>
+    <h1 class="text-center">{name}</h1>
+    <h2 class="text-center">{description}</h2>
     <slot />
 </BasicMarkdownLayout>

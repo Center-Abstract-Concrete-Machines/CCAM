@@ -23,7 +23,7 @@ function classify(i) {
     elements[i].style.color = newColor;
 
     classState[i] = newClasses;
-    let duration = 1000 + Math.random() * 2000;
+    let duration = 1000 + Math.random() * 20000;
     setTimeout(() => {
         declassify(i);
     }, duration);

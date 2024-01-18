@@ -7,24 +7,28 @@ import Tag from '@components/Programs/Tag.astro';
 import GridSpacer from '@components/GridSpacer.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import FilterBar from '@components/Programs/FilterBar.astro';
-import { isEventUpcoming, sortByPubDate } from 'src/utils/programFilters';
+import {
+    isEventUpcoming,
+    sortByPubDate,
+    isAfterPubDate,
+} from 'src/utils/programFilters';
 
 const { events, subtitle, description, filter } = Astro.props;
 
 const heading = {
-    title: subtitle ? `Programs - ${subtitle}` : 'Programs',
+    title: subtitle ? subtitle : 'Programs',
     description: description
         ? description
         : 'Our school supports interdisciplinary study in art, code, hardware and critical theory through events, classes, and workshops.',
 };
 
-const upcomingPrograms = sortByPubDate(events).filter(({ data }) =>
-    isEventUpcoming(data)
-);
+const upcomingPrograms = sortByPubDate(events)
+    .filter(({ data }) => import.meta.env.DEV || isAfterPubDate(data)) // if in development, show all posts. if in production, filter out events that have a later pubDate
+    .filter(({ data }) => isEventUpcoming(data));
 
-const pastPrograms = sortByPubDate(events).filter(
-    ({ data }) => !isEventUpcoming(data)
-);
+const pastPrograms = sortByPubDate(events)
+    .filter(({ data }) => import.meta.env.DEV || isAfterPubDate(data)) // if in development, show all posts. if in production, filter out events that have a later pubDate
+    .filter(({ data }) => !isEventUpcoming(data));
 ---
 
 <Base title={subtitle}>

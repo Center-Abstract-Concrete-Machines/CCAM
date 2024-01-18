@@ -9,7 +9,6 @@ const { title, subtitle, image, tags, gallery } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 
 const allProgramImages = await Astro.glob('/src/content/programs/images/*/*');
-console.log('allProgramImages', allProgramImages);
 const galleryImages = allProgramImages.filter((image) =>
     image.default.src.includes(gallery)
 );

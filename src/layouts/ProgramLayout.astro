@@ -3,19 +3,16 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 
 const { title, subtitle, image, tags, gallery } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 
-const allProgramImages = await Astro.glob('/src/content/programs/images/*/*');
-const galleryImages = allProgramImages.filter((image) =>
-    image.default.src.includes(gallery)
-);
+const allImages = await import.meta.glob('/src/content/programs/images/*/*');
+let galleryImageKeys;
 if (gallery) {
-    console.log('allProgramImages', allProgramImages);
-    console.log('gallery', gallery);
-    console.log('galleryImages', galleryImages);
+    galleryImageKeys = Object.keys(allImages).filter((key) =>
+        key.includes(gallery)
+    );
 }
 ---
 
@@ -51,11 +48,11 @@ if (gallery) {
     <HorizontalSpacer class="mx-4" />
     <div class="card-grid triple">
         {
-            galleryImages &&
-                galleryImages.map((image) => (
+            gallery &&
+                galleryImageKeys.map((key) => (
                     <div>
                         <Image
-                            src={image.default}
+                            src={allImages[key]()}
                             alt="Gallery Image"
                             widths={[640]}
                             class="aspect-square object-cover object-center"

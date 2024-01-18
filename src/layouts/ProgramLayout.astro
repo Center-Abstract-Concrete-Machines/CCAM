@@ -45,20 +45,24 @@ if (gallery) {
             <slot />
         </div>
     </div>
-    <HorizontalSpacer class="mx-4" />
-    <div class="card-grid triple">
-        {
-            gallery &&
-                galleryImageKeys.map((key) => (
-                    <div>
-                        <Image
-                            src={allImages[key]()}
-                            alt="Gallery Image"
-                            widths={[640]}
-                            class="aspect-square object-cover object-center"
-                        />
-                    </div>
-                ))
-        }
-    </div>
+    {
+        gallery && (
+            <>
+                <HorizontalSpacer class="mx-4" />
+                <div class="card-grid triple">
+                    {gallery &&
+                        galleryImageKeys.map((key) => (
+                            <div>
+                                <Image
+                                    src={allImages[key]()}
+                                    alt="Gallery Image"
+                                    widths={[640]}
+                                    class="aspect-square object-cover object-center"
+                                />
+                            </div>
+                        ))}
+                </div>
+            </>
+        )
+    }
 </Base>

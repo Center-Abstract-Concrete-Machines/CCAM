@@ -1,22 +1,5 @@
 ---
 const { title, text, class: className } = Astro.props;
-
-function morphify(string, num) {
-    const stringArray = string.split('');
-
-    let indexes = new Set();
-    for (let i = 0; i < num; i++) {
-        indexes.add(Math.floor(Math.random() * stringArray.length));
-    }
-    function spanify(index) {
-        const letter = stringArray[index];
-        stringArray[index] = `<span class="morpher">${letter}</span>`;
-    }
-    indexes.forEach((index) => spanify(index));
-    return stringArray.join('');
-}
-
-const newHeading = morphify(title, 2);
 ---
 
 <div class=`grid place-content-center py-24 ${className}`>
@@ -37,18 +20,18 @@ const newHeading = morphify(title, 2);
     }
 </style>
 
-<script is:inline>
-    function morphify(string, num) {
+<script>
+    function addMorphClasses(string) {
         const stringArray = string.split('');
 
         let indexes = new Set();
         const length = string.length;
-        // for (let i = 0; i < num; i++) {
+        // Add to first half of title
         indexes.add(Math.floor(Math.random() * (length / 2)));
+        // Add to second half of title
         indexes.add(
             Math.floor(Math.random() * (length / 2)) + Math.floor(length / 2)
         );
-        // }
         function spanify(index) {
             const letter = stringArray[index];
             stringArray[index] = `<span class="morpher">${letter}</span>`;
@@ -56,12 +39,31 @@ const newHeading = morphify(title, 2);
         indexes.forEach((index) => spanify(index));
         return stringArray.join('');
     }
+    function addStylesAttrToElement(element) {
+        const colors = [
+            'text-Blue',
+            'text-Green',
+            'text-Orange',
+            'text-Purple',
+            'text-Yellow',
+        ];
+        const fonts = [
+            ['font-sans', 'font-medium'],
+            ['font-moonbase', 'mbsq'],
+            ['font-moonbase', 'mbrd'],
+        ];
+        element.classList.add(
+            ...fonts[Math.floor(Math.random() * fonts.length)]
+        );
+        element.classList.add(
+            colors[Math.floor(Math.random() * colors.length)]
+        );
+    }
 
     document.addEventListener('astro:page-load', () => {
-        console.log('running title morpher');
         const heading = document.querySelector('.mightymorpher');
-        heading.innerHTML = morphify(heading.innerText, 2);
+        heading.innerHTML = addMorphClasses(heading.innerText);
+        const morphers = document.querySelectorAll('.morpher');
+        morphers.forEach((element) => addStylesAttrToElement(element));
     });
-    // import 'src/utils/morpher.js';
 </script>
-<script src="/src/utils/morpher.js" is:inline></script>

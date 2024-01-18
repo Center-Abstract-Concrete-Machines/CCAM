@@ -8,7 +8,6 @@ const elements = document.getElementsByClassName('morpher');
 let classState = [];
 
 document.addEventListener('astro:page-load', () => {
-    console.log('running morpher');
     for (let i = 0; i < elements.length; i++) {
         classify(i);
     }

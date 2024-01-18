@@ -12,6 +12,11 @@ const allProgramImages = await Astro.glob('/src/content/programs/images/*/*');
 const galleryImages = allProgramImages.filter((image) =>
     image.default.src.includes(gallery)
 );
+if (gallery) {
+    console.log('allProgramImages', allProgramImages);
+    console.log('gallery', gallery);
+    console.log('galleryImages', galleryImages);
+}
 ---
 
 <Base title={title}>

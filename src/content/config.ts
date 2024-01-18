@@ -18,6 +18,7 @@ const programsCollection = defineCollection({
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
             tags: z.array(z.string()),
+            gallery: z.string().optional(),
         }),
 });
 

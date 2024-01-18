@@ -1,11 +1,18 @@
 ---
-import HorizontalSpacer from '@components/HorizontalSpacer.jsx';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 
-const { title, subtitle, image, tags } = Astro.props.frontmatter;
+const { title, subtitle, image, tags, gallery } = Astro.props.frontmatter;
 const { slug } = Astro.props;
+
+const allProgramImages = await Astro.glob('/src/content/programs/images/*/*');
+console.log('allProgramImages', allProgramImages);
+const galleryImages = allProgramImages.filter((image) =>
+    image.default.src.includes(gallery)
+);
 ---
 
 <Base title={title}>
@@ -26,15 +33,31 @@ const { slug } = Astro.props;
             </h1>
         </div>
         <HorizontalSpacer />
-        <div class="mx-auto pb-4 max-w-2xl">
+        <div class="mx-auto py-4 max-w-2xl">
             <div transition:name=`image-${slug}`>
                 <Image src={image.url} alt={image.alt} class="mx-auto" />
             </div>
         </div>
         <HorizontalSpacer />
-        <div class="prose dark:prose-invert mx-auto">
+        <div class="prose dark:prose-invert mx-auto my-4">
             <TagsList tags={tags} />
             <slot />
         </div>
+    </div>
+    <HorizontalSpacer class="mx-4" />
+    <div class="card-grid triple">
+        {
+            galleryImages &&
+                galleryImages.map((image) => (
+                    <div>
+                        <Image
+                            src={image.default}
+                            alt="Gallery Image"
+                            widths={[640]}
+                            class="aspect-square object-cover object-center"
+                        />
+                    </div>
+                ))
+        }
     </div>
 </Base>

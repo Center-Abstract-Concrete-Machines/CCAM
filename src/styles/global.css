@@ -207,7 +207,7 @@ img {
         content: '';
         position: absolute;
         top: -1rem;
-        width: calc(100%);
+        width: 100%;
         border-top: 1px hsl(var(--borders) / 30%) dashed;
     }
 
@@ -221,7 +221,7 @@ img {
         position: absolute;
         left: -1rem;
         border-right: 1px hsl(var(--borders) / 30%) dashed;
-        height: calc(100%);
+        height: 100%;
     }
     /* top border */
     .card-grid.triple > *:nth-child(n + 3):after {
@@ -232,6 +232,6 @@ img {
         position: absolute;
         top: -1rem;
         border-top: 1px hsl(var(--borders) / 30%) dashed;
-        width: calc(100%);
+        width: 100%;
     }
 }

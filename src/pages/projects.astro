@@ -11,7 +11,10 @@ const heading = {
         'Our organizers, teachers and participants regularly collaborate on a space of experimentation to define and redefine “poetic computation” and imagine just and beautiful futures. Collectively, we have produced publications, online and in person showcases and exhibitions, websites, special sessions, event series, radio productions and other outcomes.',
 };
 
-const projects = await getCollection('projects');
+const projects = (await getCollection('projects')).sort(
+    // More recent on top
+    (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
+);
 ---
 
 <Base title="Projects">

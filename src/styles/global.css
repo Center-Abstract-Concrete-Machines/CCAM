@@ -157,7 +157,7 @@ img {
 }
 
 .thirds-container {
-    grid-template-columns: 1fr;
+    @apply grid-cols-1;
 }
 
 @media (min-width: 640px) {

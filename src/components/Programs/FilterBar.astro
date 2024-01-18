@@ -7,32 +7,36 @@ const { filter, class: className } = Astro.props;
 >
     <span>Filter</span>
     <div class="flex gap-4 flex-wrap">
-        <a href="/programs">
-            <button
-                class=`text-textColor whitespace-nowrap px-4 py-2 border ${filter === 'none' ? 'border-borderColor' : 'border-borderColor/20'}`
-                >All Programs</button
-            >
-        </a>
-        <a href="/programs/events">
-            <button
-                class=`whitespace-nowrap px-4 py-2 ${(filter === 'Event' || filter === 'none') ? 'bg-Blue text-Black' : 'text-textColor border border-borderColor/20'}`
-            >
-                Event
-            </button>
-        </a>
-        <a href="/programs/workshops">
-            <button
-                class=`text-Black whitespace-nowrap px-4 py-2 ${(filter === 'Workshop' || filter === 'none') ? 'bg-Orange text-Black' : 'text-textColor border border-borderColor/20'}`
-            >
-                Workshop
-            </button>
-        </a>
-        <a href="/programs/study">
-            <button
-                class=`whitespace-nowrap px-4 py-2 ${(filter === 'Study' || filter === 'none') ? 'bg-Green text-Black' : 'text-textColor border border-borderColor/20'}`
-            >
-                Study
-            </button>
-        </a>
+        <div class="flex gap-4 flex-wrap">
+            <a href="/programs">
+                <button
+                    class=`text-textColor whitespace-nowrap px-4 py-2 border ${filter === 'none' ? 'border-borderColor' : 'border-borderColor/20'}`
+                    >All Programs</button
+                >
+            </a>
+            <a href="/programs/events">
+                <button
+                    class=`whitespace-nowrap px-4 py-2 ${(filter === 'Event' || filter === 'none') ? 'bg-Blue text-Black' : 'text-textColor border border-borderColor/20'}`
+                >
+                    Event
+                </button>
+            </a>
+        </div>
+        <div class="flex gap-4 flex-wrap">
+            <a href="/programs/workshops">
+                <button
+                    class=`text-Black whitespace-nowrap px-4 py-2 ${(filter === 'Workshop' || filter === 'none') ? 'bg-Orange text-Black' : 'text-textColor border border-borderColor/20'}`
+                >
+                    Workshop
+                </button>
+            </a>
+            <a href="/programs/study">
+                <button
+                    class=`whitespace-nowrap px-4 py-2 ${(filter === 'Study' || filter === 'none') ? 'bg-Green text-Black' : 'text-textColor border border-borderColor/20'}`
+                >
+                    Study
+                </button>
+            </a>
+        </div>
     </div>
 </div>

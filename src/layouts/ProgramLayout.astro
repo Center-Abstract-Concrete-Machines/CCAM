@@ -7,12 +7,21 @@ import { Image } from 'astro:assets';
 const { title, subtitle, image, tags, gallery } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 
+function sortFilePath(stringA, stringB) {
+    const [fileA, fileB] = [
+        stringA.split('/').at(-1),
+        stringB.split('/').at(-1),
+    ];
+    const [nameA, nameB] = [fileA.split('.').at(0), fileB.split('.').at(0)];
+    return nameA - nameB;
+}
+
 const allImages = await import.meta.glob('/src/content/programs/images/*/*');
 let galleryImageKeys;
 if (gallery) {
-    galleryImageKeys = Object.keys(allImages).filter((key) =>
-        key.includes(gallery)
-    );
+    galleryImageKeys = Object.keys(allImages)
+        .filter((key) => key.includes(gallery))
+        .sort(sortFilePath);
 }
 ---
 

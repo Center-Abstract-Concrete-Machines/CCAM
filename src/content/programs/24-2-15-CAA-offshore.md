@@ -1,8 +1,8 @@
 ---
 title: I WANT AN AI FOR PRESIDENT
 subtitle: an interactive role-playing experiment around machinic intelligence and institutional power
-pubDate: 2024-02-15
-endDate: 2024-02-15
+pubDate: 2024-01-01
+endDate: 2024-02-17
 presentationalDates: February 16, 2024
 time: '19:00-22:00'
 location: Chicago Athletic Association, Chicago

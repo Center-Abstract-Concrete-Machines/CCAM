@@ -12,10 +12,13 @@ import CCAM from 'src/images/CCAM.png';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
+import { isAfterPubDate } from 'src/utils/programFilters';
 
-const featuredPrograms = await getCollection('programs', ({ data }) => {
-    return data.featured === true;
-}).then((result) => result.slice(0, 2));
+const featuredPrograms = (await getCollection('programs'))
+    .filter(({ data }) => import.meta.env.DEV || isAfterPubDate(data))
+    .filter(({ data }) => data.featured === true)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    .slice(0, 2);
 ---
 
 <Base>

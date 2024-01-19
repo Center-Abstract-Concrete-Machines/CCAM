@@ -16,8 +16,10 @@ function sortByFileName(stringA, stringB) {
 }
 
 // const allImages = await import.meta.glob('/src/content/programs/images/*/*');
-const allImages = await import.meta.glob('public/assets/images/*/*');
-let galleryImageKeys;
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+    'public/assets/images/*/*'
+);
+let galleryImageKeys: string[];
 if (gallery) {
     galleryImageKeys = Object.keys(allImages)
         .filter((key) => key.includes(gallery))

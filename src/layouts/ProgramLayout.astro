@@ -61,7 +61,8 @@ if (gallery) {
                                 <Image
                                     src={allImages[key]()}
                                     alt="Gallery Image"
-                                    widths={[400, 600, 1200]}
+                                    widths={[400, 600, 1200, 2000]}
+                                    sizes="(min-width: 640px) 33vw, 100vw"
                                     class="aspect-square object-cover object-center"
                                 />
                             </div>

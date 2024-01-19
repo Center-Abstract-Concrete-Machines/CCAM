@@ -35,7 +35,12 @@ const organizers = await getCollection('about');
                 and decolonial perspectives in art and art technology.
             </p>
             <figure class="text-center flex flex-col gap-2 py-16">
-                <Image src={Space} alt="CCAM Artist Space" class="mx-auto" />
+                <Image
+                    src={Space}
+                    alt="CCAM Artist Space"
+                    class="mx-auto"
+                    widths={[400, 600, 1200, Space.width]}
+                />
                 <figcaption class="text-textColor/50 text-sm">
                     Caption
                 </figcaption>
@@ -74,7 +79,12 @@ const organizers = await getCollection('about');
         </section>
         <HorizontalSpacer class="pb-4" />
         <figure class="text-center flex flex-col gap-2">
-            <Image src={SpaceLarge} alt="CCAM Artist Space" class="mx-auto" />
+            <Image
+                src={SpaceLarge}
+                alt="CCAM Artist Space"
+                class="mx-auto"
+                widths={[400, 600, 1200, SpaceLarge.width]}
+            />
             <figcaption class="text-textColor/50 text-sm">Caption</figcaption>
         </figure>
     </div>

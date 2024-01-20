@@ -15,8 +15,6 @@ const associatedPrograms = (
         return data.projectId === projectId;
     })
 ).sort(sortByPubDate);
-
-console.log('associatedPrograms', associatedPrograms);
 ---
 
 <Base title={title}>
@@ -61,7 +59,7 @@ console.log('associatedPrograms', associatedPrograms);
                         <div class="card-grid double">
                             {associatedPrograms.map((program) => (
                                 <ProgramCard
-                                    headingSize="text-2xl"
+                                    headingSize="text-xl"
                                     slug={program.slug}
                                     frontmatter={program.data}
                                 />

@@ -21,6 +21,7 @@ const programsCollection = defineCollection({
             projectId: z.string().optional(),
             gallery: z.string().optional(),
             draft: z.boolean().default(false),
+            participants: z.array(z.string()).optional(),
         }),
 });
 

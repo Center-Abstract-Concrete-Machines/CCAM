@@ -15,7 +15,6 @@ tags:
     - 'Kristin McWharter'
     - 'Artificial Intelligence'
     - Machinic Intelligence
-draft: true
 ---
 
 The president of the ASIC, the Art School of the Illinois City, is stepping down, leaving in their wake a budgetary crisis, faculty labor organizing, and an impending "demographic cliff". CCAM believes it is time to take higher ed administration into the 21st century. That's why we're designing an AI to step in as president of ASIC, and we want you to join us.

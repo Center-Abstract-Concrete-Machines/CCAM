@@ -1,25 +1,22 @@
 ---
 import Base from '@layouts/Base.astro';
-import Gallery from '@components/Gallery.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
-import Tag from '@components/Programs/Tag.astro';
 import { Image } from 'astro:assets';
-import DateStatus from '@components/DateStatus.astro';
+import { getCollection } from 'astro:content';
+import { sortByPubDate } from 'src/utils/programFilters';
+import ProgramCard from '@components/Programs/ProgramCard.astro';
 
-const {
-    title,
-    subtitle,
-    image,
-    tags,
-    gallery,
-    presentationalDates,
-    time,
-    location,
-    endDate,
-    type,
-} = Astro.props.frontmatter;
+const { title, subtitle, image, tags, projectId } = Astro.props.frontmatter;
 const { slug } = Astro.props;
+
+const associatedPrograms = (
+    await getCollection('programs', ({ data }) => {
+        return data.projectId === projectId;
+    })
+).sort(sortByPubDate);
+
+console.log('associatedPrograms', associatedPrograms);
 ---
 
 <Base title={title}>
@@ -54,6 +51,25 @@ const { slug } = Astro.props;
         <div class="prose dark:prose-invert mx-auto my-4">
             <TagsList tags={tags} />
             <slot />
+            {
+                associatedPrograms && (
+                    <>
+                        <HorizontalSpacer class="my-4" />
+                        <h2 class="text-3xl font-medium text-center">
+                            Associated Programs
+                        </h2>
+                        <div class="card-grid double">
+                            {associatedPrograms.map((program) => (
+                                <ProgramCard
+                                    headingSize="text-2xl"
+                                    slug={program.slug}
+                                    frontmatter={program.data}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )
+            }
         </div>
     </div>
 </Base>

@@ -1,46 +1,51 @@
 ---
 import { Image } from 'astro:assets';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import placeholder from 'src/content/resources/images/placeholder.png';
+import TagsList from '@components/TagsList.astro';
+import ResourceType from '@components/ResourceType.astro';
 
-const { image, title, type, author, year } = Astro.props.metadata;
+const { image, title, type, author, year, tags } = Astro.props.metadata;
 const { slug } = Astro.props;
-
-function randomBG() {
-    const colors = [
-        'bg-Orange',
-        'bg-Green',
-        'bg-Yellow',
-        'bg-Purple',
-        'bg-Blue',
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
 ---
 
 <div class="hover:bg-backgroundHover/5">
     <HorizontalSpacer class="mb-4" />
     <a href=`/resources/${slug}` class="resource-grid grid gap-4 pb-4 pl-4">
         <div transition:name=`image-${slug}`>
-            <Image
-                src={image.url}
-                alt={image.alt}
-                class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
-                widths={[400, 600, 1200, image.url.width]}
-            />
+            {
+                image ? (
+                    <Image
+                        src={image.url}
+                        alt={image.alt}
+                        class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
+                        widths={[400, 600, 1200, image.url.width]}
+                    />
+                ) : (
+                    <Image
+                        src={placeholder}
+                        alt="Placeholder image"
+                        class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
+                        widths={[400, 600, 1200, placeholder.width]}
+                    />
+                )
+            }
         </div>
         <div>
             <h3 class="text-xl font-medium">{title}</h3>
             <div
                 class="flex flex-wrap justify-start items-center gap-2 pt-2 font-mono text-xs"
             >
-                <div
-                    class=`flex justify-center items-center ${randomBG()} px-4 py-2 whitespace-nowrap`
-                >
-                    {type}
-                </div>
-                <div class="flex gap-2 flex-wrap">
-                    {author}<span class="opacity-30">|</span>{year}
-                </div>
+                <ResourceType type={type} />
+                {
+                    author && year && (
+                        <div class="flex gap-2 flex-wrap">
+                            {author}
+                            <span class="opacity-30">|</span>
+                            {year}
+                        </div>
+                    )
+                }
             </div>
         </div>
     </a>
@@ -49,7 +54,7 @@ function randomBG() {
 <style>
     @media (min-width: 400px) {
         .resource-grid {
-            grid-template-columns: 5rem 1fr;
+            grid-template-columns: 5rem repeat(1, minmax(0, 1fr));
         }
     }
 </style>

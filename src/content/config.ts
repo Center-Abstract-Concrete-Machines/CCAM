@@ -19,6 +19,7 @@ const programsCollection = defineCollection({
             featured: z.boolean().optional(),
             tags: z.array(z.string()),
             gallery: z.string().optional(),
+            draft: z.boolean().default(false),
         }),
 });
 

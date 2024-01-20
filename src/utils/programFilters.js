@@ -8,8 +8,12 @@ export function isAfterPubDate(eventData) {
     return eventData.pubDate < Date.now();
 }
 
-export function sortByPubDate(array) {
-    return array.sort(
-        (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
-    );
+export function sortByPubDate(a, b) {
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+}
+
+export function filterDraftsAndPubDate({ data }) {
+    // Don't filter drafts and prePubDate programs in DEV mode
+    // DO filter in production
+    return import.meta.env.DEV || (!data.draft && isAfterPubDate(data));
 }

@@ -1,9 +1,10 @@
 ---
 import Base from '@layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { filterDraftsAndPubDate } from 'src/utils/programFilters';
 
 export async function getStaticPaths() {
-    const allPrograms = await getCollection('programs');
+    const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
     const allResources = await getCollection('resources');
     const allProjects = await getCollection('projects');
 

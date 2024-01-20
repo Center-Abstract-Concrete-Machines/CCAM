@@ -1,0 +1,66 @@
+---
+const { gallery } = Astro.props;
+
+import { Image } from 'astro:assets';
+import HorizontalSpacer from './HorizontalSpacer.astro';
+
+function sortByFileName(stringA, stringB) {
+    const [nameA, nameB] = [
+        stringA.split('/').at(-1).split('.').at(0),
+        stringB.split('/').at(-1).split('.').at(0),
+    ];
+    return nameA - nameB;
+}
+
+// const allImages = await import.meta.glob('/src/content/programs/images/*/*');
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+    'public/assets/images/*/*'
+);
+let galleryImageKeys: string[];
+if (gallery) {
+    galleryImageKeys = Object.keys(allImages)
+        .filter((key) => key.includes(gallery))
+        .sort(sortByFileName);
+}
+function trimPublic(string: string) {
+    return string.replace('public/', '');
+}
+---
+
+<div id="lightgallery" class="card-grid quad">
+    {
+        gallery &&
+            galleryImageKeys.map((key) => (
+                // <div>
+                <a href={trimPublic(key)} target="_blank">
+                    <Image
+                        src={allImages[key]()}
+                        alt=""
+                        widths={[400, 600, 1200, 2000]}
+                        sizes="(min-width: 640px) 25vw, 100vw"
+                        class="aspect-[4/3] object-cover object-center"
+                    />
+                </a>
+                // class="aspect-square object-cover object-center"
+                // </div>
+            ))
+    }
+</div>
+
+<script>
+    import lightGallery from 'lightgallery';
+    import lgThumbnail from 'lightgallery/plugins/thumbnail';
+    import 'lightgallery/css/lightgallery.css';
+    import 'lightgallery/css/lg-thumbnail.css';
+
+    document.addEventListener('astro:page-load', () => {
+        lightGallery(document.getElementById('lightgallery'), {
+            plugins: [lgThumbnail],
+            licenseKey: '0000-0000-000-0000',
+            speed: 200,
+            download: false,
+            hideControlOnEnd: true,
+            loop: false,
+        });
+    });
+</script>

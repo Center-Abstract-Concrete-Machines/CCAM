@@ -200,7 +200,6 @@ img {
         left: -1rem;
         height: 100%;
         border-left: 1px hsl(var(--borders) / 30%) dashed;
-        /* @apply border-l border-borderColor/30 border-dashed; */
     }
     /* top border */
     .card-grid.double > *:nth-child(n + 3):after {
@@ -212,7 +211,7 @@ img {
     }
 
     .card-grid.triple {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .card-grid.triple > *:nth-child(3n + 2):before,
@@ -233,5 +232,28 @@ img {
         top: -1rem;
         border-top: 1px hsl(var(--borders) / 30%) dashed;
         width: 100%;
+    }
+
+    .card-grid.quad {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* top border */
+    .card-grid.quad > *:nth-child(n + 5):after {
+        content: '';
+        position: absolute;
+        top: -1rem;
+        width: 100%;
+        border-top: 1px hsl(var(--borders) / 30%) dashed;
+    }
+    /* left border */
+    .card-grid.quad > *:nth-child(4n + 2)::before,
+    .card-grid.quad > *:nth-child(4n + 3)::before,
+    .card-grid.quad > *:nth-child(4n + 4)::before {
+        content: '';
+        position: absolute;
+        left: -1rem;
+        height: 100%;
+        border-left: 1px hsl(var(--borders) / 30%) dashed;
     }
 }

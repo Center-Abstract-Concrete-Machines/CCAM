@@ -1,0 +1,10 @@
+---
+import { returnDateStatus } from 'src/utils/returnDateStatus';
+const { date } = Astro.props;
+---
+
+<div
+    class="text-neutral-50 whitespace-nowrap bg-neutral-900 dark:bg-neutral-800 px-4 py-2"
+>
+    {returnDateStatus(date)}
+</div>

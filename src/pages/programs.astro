@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import ProgramsLayout from '@layouts/ProgramsLayout.astro';
-import { sortByPubDate } from 'src/utils/programFilters';
 
 const heading = {
     title: 'Programs',
@@ -9,7 +8,7 @@ const heading = {
         'Our programming aims to cultivate thoughtful and inquiring technical practices in the non-academic sound, media arts and theory community.',
 };
 
-const allPrograms = sortByPubDate(await getCollection('programs'));
+const allPrograms = await getCollection('programs');
 ---
 
 <ProgramsLayout

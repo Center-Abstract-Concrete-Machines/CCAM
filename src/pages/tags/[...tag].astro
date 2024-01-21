@@ -1,21 +1,27 @@
 ---
 import Base from '@layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { filterDraftsAndPubDate } from 'src/utils/programFilters';
 
 export async function getStaticPaths() {
-    const allPrograms = await getCollection('programs');
+    const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
     const allResources = await getCollection('resources');
     const allProjects = await getCollection('projects');
 
     const uniqueTags = [
         ...new Set(allPrograms.map((program) => program.data.tags).flat()),
+        ...new Set(
+            allPrograms.map((program) => program.data.participants).flat()
+        ),
         ...new Set(allResources.map((resource) => resource.data.tags).flat()),
         ...new Set(allProjects.map((project) => project.data.tags).flat()),
     ];
 
     return uniqueTags.map((tag) => {
-        const filteredPrograms = allPrograms.filter((program) =>
-            program.data.tags.includes(tag)
+        const filteredPrograms = allPrograms.filter(
+            (program) =>
+                program.data.tags.includes(tag) ||
+                program.data.participants?.includes(tag)
         );
         const filteredResources = allResources.filter((resource) =>
             resource.data.tags.includes(tag)

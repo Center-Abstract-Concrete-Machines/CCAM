@@ -25,9 +25,6 @@ export default function EmailSignup() {
 
         if (data.status === 'success') {
             form.current.reset();
-            // setTimeout(() => {
-            //     setShowMessage(false);
-            // }, 3000);
         }
 
         setDisabled(false);

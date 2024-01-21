@@ -18,7 +18,10 @@ const programsCollection = defineCollection({
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
             tags: z.array(z.string()),
+            projectId: z.string().optional(),
             gallery: z.string().optional(),
+            draft: z.boolean().default(false),
+            participants: z.array(z.string()).optional(),
         }),
 });
 
@@ -27,13 +30,15 @@ const resourcesCollection = defineCollection({
     schema: ({ image }) =>
         z.object({
             title: z.string(),
-            author: z.string(),
+            author: z.string().optional(),
             type: z.string(),
-            year: z.number(),
-            image: z.object({
-                url: image(),
-                alt: z.string(),
-            }),
+            year: z.number().optional(),
+            image: z
+                .object({
+                    url: image(),
+                    alt: z.string(),
+                })
+                .optional(),
             dateAdded: z.date(),
             tags: z.array(z.string()),
         }),
@@ -51,6 +56,7 @@ const projectsCollection = defineCollection({
             }),
             dateAdded: z.date(),
             tags: z.array(z.string()),
+            projectId: z.string(),
         }),
 });
 

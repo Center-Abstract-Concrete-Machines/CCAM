@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import Tag from './Tag.astro';
+import { returnDateStatus } from 'src/utils/returnDateStatus';
+import DateStatus from '@components/DateStatus.astro';
 const { slug, headingSize = 'text-5xl', class: className } = Astro.props;
 const {
     title,
@@ -13,15 +15,15 @@ const {
     type,
 } = Astro.props.frontmatter;
 
-function returnDateStatus(endDate) {
-    if (endDate === 'ongoing') {
-        return 'Ongoing';
-    } else if (Date.now() < endDate.getTime()) {
-        return 'Upcoming';
-    } else {
-        return 'Past';
-    }
-}
+// function returnDateStatus(endDate) {
+//     if (endDate === 'ongoing') {
+//         return 'Ongoing';
+//     } else if (Date.now() < endDate.getTime()) {
+//         return 'Upcoming';
+//     } else {
+//         return 'Past';
+//     }
+// }
 ---
 
 <div class=`flex flex-col items-start ${className}`>
@@ -35,20 +37,18 @@ function returnDateStatus(endDate) {
                 sizes="(max-width: 640px) 50vw, 100vw"
             />
         </div>
-        <h1
+        <h2
             class=`${headingSize} font-medium leading-none tracking-tight w-full mt-6`
         >
             {title}{subtitle && `: ${subtitle}`}
-        </h1>
+        </h2>
     </a>
 
     <div class="mt-6 font-mono text-sm">
         {presentationalDates} | {time} | {location}
     </div>
     <div class="flex gap-2 mt-4 grow-0 flex-wrap text-sm">
-        <div class="text-neutral-50 whitespace-nowrap bg-neutral-900 px-4 py-2">
-            {returnDateStatus(endDate)}
-        </div>
+        <DateStatus date={endDate} />
         <Tag tag={type} />
     </div>
 </div>

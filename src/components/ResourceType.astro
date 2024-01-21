@@ -1,0 +1,26 @@
+---
+const { type } = Astro.props;
+
+const colorMap = new Map([
+    ['book', 'bg-Orange text-Black'],
+    ['website', 'bg-Green text-Black'],
+    ['image', 'bg-Yellow'],
+    ['video', 'bg-Purple text-White'],
+    ['codebase', 'bg-Blue'],
+    ['article', 'bg-Orange/50'],
+    ['magazine', 'bg-Green/50'],
+    ['periodical', 'bg-Yellow/50'],
+    ['organization', 'bg-Purple/50'],
+    ['link', 'bg-Blue/50'],
+]);
+
+function colorFromType(type: string) {
+    return colorMap.get(type.toLowerCase());
+}
+---
+
+<div
+    class=`flex justify-center items-center px-4 py-2 whitespace-nowrap ${colorFromType(type)}`
+>
+    {type}
+</div>

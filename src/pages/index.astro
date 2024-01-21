@@ -8,14 +8,13 @@ import GridSpacer from '@components/GridSpacer.astro';
 
 import space from 'src/images/space.png';
 import squareSpace from 'src/images/space-square.png';
-import CCAM from 'src/images/CCAM.png';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
-import { isAfterPubDate } from 'src/utils/programFilters';
+import { filterDraftsAndPubDate } from 'src/utils/programFilters';
 
 const featuredPrograms = (await getCollection('programs'))
-    .filter(({ data }) => import.meta.env.DEV || isAfterPubDate(data))
+    .filter(filterDraftsAndPubDate)
     .filter(({ data }) => data.featured === true)
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
     .slice(0, 2);

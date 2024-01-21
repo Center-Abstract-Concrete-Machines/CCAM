@@ -1,0 +1,14 @@
+---
+const { participants } = Astro.props;
+---
+
+<h2>Participants</h2>
+<ul>
+    {
+        participants.map((participant) => (
+            <li>
+                <a href={`/tags/${participant}`}>{participant}</a>
+            </li>
+        ))
+    }
+</ul>

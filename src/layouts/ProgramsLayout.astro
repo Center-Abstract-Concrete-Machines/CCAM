@@ -2,15 +2,12 @@
 import Base from '@layouts/Base.astro';
 import TitleCard from '@components/TitleCard.astro';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
-import { getCollection } from 'astro:content';
-import Tag from '@components/Programs/Tag.astro';
-import GridSpacer from '@components/GridSpacer.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import FilterBar from '@components/Programs/FilterBar.astro';
 import {
     isEventUpcoming,
     sortByPubDate,
-    isAfterPubDate,
+    filterDraftsAndPubDate,
 } from 'src/utils/programFilters';
 
 const { events, subtitle, description, filter } = Astro.props;
@@ -22,12 +19,14 @@ const heading = {
         : 'Our school supports interdisciplinary study in art, code, hardware and critical theory through events, classes, and workshops.',
 };
 
-const upcomingPrograms = sortByPubDate(events)
-    .filter(({ data }) => import.meta.env.DEV || isAfterPubDate(data)) // if in development, show all posts. if in production, filter out events that have a later pubDate
+const sortedEvents = events.sort(sortByPubDate);
+
+const upcomingPrograms = sortedEvents
+    .filter(filterDraftsAndPubDate)
     .filter(({ data }) => isEventUpcoming(data));
 
-const pastPrograms = sortByPubDate(events)
-    .filter(({ data }) => import.meta.env.DEV || isAfterPubDate(data)) // if in development, show all posts. if in production, filter out events that have a later pubDate
+const pastPrograms = sortedEvents
+    .filter(filterDraftsAndPubDate)
     .filter(({ data }) => !isEventUpcoming(data));
 ---
 

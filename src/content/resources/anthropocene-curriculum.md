@@ -1,5 +1,5 @@
 ---
-title: 'The Anthropocene Laboratory'
+title: 'The Anthropocene Curriculum'
 type: organization
 author: Haus der Kulturen der Welt 
 year: 2023

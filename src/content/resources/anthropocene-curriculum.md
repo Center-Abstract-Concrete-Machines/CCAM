@@ -1,0 +1,24 @@
+---
+title: 'The Anthropocene Laboratory'
+type: organization
+author: Haus der Kulturen der Welt 
+year: 2023
+image:
+    url: ./images/anthropocene-curriculum.png
+    alt: The Anthropocene Curriculum website screenshot
+dateAdded: 2023-01-21
+url: https://www.anthropocene-curriculum.org/
+tags:
+    - anthropocene
+    - more-than-human
+    - ecology
+    - deep time
+---
+
+[from the organization's website]
+
+The Anthropocene Curriculum began in 2013 as a long-term initiative exploring frameworks for critical knowledge and education in our ongoing transition into a new, human dominated geological epoch—the Anthropocene. The project has drawn together heterogeneous knowledge practices, inviting academics, artists, and activists from around the world to co-develop curricular experiments that collectively respond to this crisis of the customary. It has done so by producing experimental co-learning situations and research possibilities for transdisciplinary collaboration that are capable of explicitly tackling the epistemic and geo-social dimensions of knowledge that are at stake in this new epoch.
+
+What should a body of “earthbound” knowledge contain that traverses from the global to the local and back? What forms of knowledge transmission are appropriate and lasting in these trans-scalar conditions and mutual interdependencies? Taking into account issues of access and agency, asymmetrical justice, traditional knowledge forms, and ways of inhabiting the Earth, the project has accounted for the varied means of experience and sought to find a common ground for future scholarship and practice.
+
+The Anthropocene Curriculum was initiated by Haus der Kulturen der Welt (HKW) and the Max Planck Institute for the History of Science (MPIWG) as part of The Anthropocene Project, expanding into a collaborative network spanning the globe. From 2023, the website archive is hosted by the MPIWG while the network continues its activities via a decentralized, self-organized approach as the Anthropocene Commons.

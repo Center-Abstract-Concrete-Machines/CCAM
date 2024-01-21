@@ -1,0 +1,19 @@
+---
+title: 'Blank Forms 09: Sonic Signatures'
+type: Book
+author: Theo Parrish, Mike Rubin, Tony Allen, Alemia Cuni, Marcus Pal, Aki Ondo, Akio Suzuki, Lawrence Kumpf, ed. 
+year: 2023
+url: https://www.blankforms.org/publications/blank-forms-09-sound-signatures
+image:
+    url: ./images/sonic-signatures.jpg
+    alt: Sonic Signatures book cover
+dateAdded: 2024-01-21
+tags:
+    - house music 
+    - indeterminacy
+    - electronic music
+---
+
+The penultimate Blank Forms anthology presents new interviews with musicians Theo Parrish, Amelia Cuni, Akio Suzuki and more.
+
+At the centerpiece of Blank Forms 09: Sound Signatures is a career-spanning, twenty-hour conversation conducted over four days between producer, remixer, and Detroit house music legend Theo Parrish and veteran music journalist Mike Rubin. They go deep on Parrish’s childhood in Chicago’s South Side, sculptural training, and collaborations with Moodymann, Rick Wilhite, and Omar S, and explore how the social movements of 2020 have reshaped his practice and dance music at large. This volume also includes an illustrated discussion between Dhrupad singer Amelia Cuni and sound artist/tuning theorist Marcus Pal, covering Cuni’s years studying voice and dance in India, her interpretations of John Cage, and collaborations with the likes of Terry Riley and Catherine Christer Hennix—accompanied by deeply researched essays from Cuni on Hindustani classical music and avant-garde performance. Finally, the collection features reminiscences from composer and performer Akio Suzuki and musician Aki Onda on Fluxus pioneer and Taj Mahal Travellers founder Takehisa Kosugi, with newly translated criticism from Kosugi.

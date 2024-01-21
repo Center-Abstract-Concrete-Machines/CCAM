@@ -1,0 +1,19 @@
+---
+title: 'The Universe of Things'
+type: Book
+author: Steven Shaviro
+year: 2014
+image:
+    url: ./images/universe-things.jpg
+    alt: The Universe of Things book cover
+dateAdded: 2023-01-21
+url: https://www.upress.umn.edu/book-division/books/the-universe-of-things
+tags:
+    - anthropocene
+    - more-than-human
+    - speculative realism
+    - Alfred North Whitehead
+    - process philosophy
+---
+
+Steven Shaviro explores the common insistence of speculative realism on a noncorrelationist thought: that things or objects exist apart from how our own human minds relate to and comprehend them. Bringing together a wide array of contemporary thought, The Universe of Things is an invaluable guide to the evolution of speculative realism and the provocation of Alfred North Whitehead’s pathbreaking work.

@@ -9,7 +9,10 @@ image:
 dateAdded: 2023-12-02
 url: https://forlaget284.se/
 tags:
-    - hello
+    - anthropocene
+    - more-than-human
+    - ecology
+    - animal studies
 ---
 
 [284 Press](https://forlaget284.se/)

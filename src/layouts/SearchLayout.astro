@@ -1,0 +1,43 @@
+---
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import Base from '@layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { filterDraftsAndPubDate } from 'src/utils/programFilters';
+
+const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
+const allResources = await getCollection('resources');
+const allProjects = await getCollection('projects');
+
+const uniqueTags = Array.from(
+    new Set([
+        ...allProjects.map((project) => project.data.tags).flat(),
+        ...allPrograms.map((program) => program.data.tags).flat(),
+        ...allResources.map((resource) => resource.data.tags).flat(),
+    ])
+).sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
+
+const { tag } = Astro.props;
+---
+
+<Base title={tag}>
+    <div class="my-4 px-4 grid w-full grid-cols-1 sm:grid-cols-6">
+        <div class="sm:col-span-4 p-4">
+            <slot />
+        </div>
+        <div class="sm:col-span-2 px-4">
+            {tag && <div class="text-Purple py-4">#{tag}</div>}
+            <div class="flex gap-x-4 flex-wrap">
+                {
+                    uniqueTags.map((listTag) => (
+                        <a
+                            href={`/search/${listTag}`}
+                            class={listTag === tag ? 'text-Purple' : ''}
+                        >
+                            #{listTag}
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</Base>

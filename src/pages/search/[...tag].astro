@@ -1,0 +1,93 @@
+---
+import SearchLayout from '@layouts/SearchLayout.astro';
+import { getCollection } from 'astro:content';
+import { filterDraftsAndPubDate } from 'src/utils/programFilters';
+
+import SearchResultCard from '@components/SearchResultCard.astro';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+
+export async function getStaticPaths() {
+    const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
+    const allResources = await getCollection('resources');
+    const allProjects = await getCollection('projects');
+
+    const uniqueTags = Array.from(
+        new Set([
+            ...allProjects.map((project) => project.data.tags).flat(),
+            ...allPrograms.map((program) => program.data.tags).flat(),
+            ...allResources.map((resource) => resource.data.tags).flat(),
+        ])
+    ).sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
+
+    return uniqueTags.map((tag) => {
+        const filteredPrograms = allPrograms
+            .filter((program) => program.data.tags.includes(tag))
+            .map((obj) => ({
+                ...obj,
+                metaType: 'Program',
+                metaSlug: 'programs',
+            }));
+        const filteredResources = allResources
+            .filter((resource) => resource.data.tags.includes(tag))
+            .map((obj) => ({
+                ...obj,
+                metaType: 'Resource',
+                metaSlug: 'resources',
+            }));
+        const filteredProjects = allProjects
+            .filter((project) => project.data.tags.includes(tag))
+            .map((obj) => ({
+                ...obj,
+                metaType: 'Project',
+                metaSlug: 'projects',
+            }));
+
+        const allResults = [
+            ...filteredProjects,
+            ...filteredPrograms,
+            ...filteredResources,
+        ];
+
+        return {
+            params: { tag },
+            props: {
+                // programs: filteredPrograms,
+                // resources: filteredResources,
+                // projects: filteredProjects,
+                uniqueTags,
+                allResults,
+            },
+        };
+    });
+}
+
+const { tag } = Astro.params;
+const { allResults } = Astro.props;
+---
+
+<SearchLayout tag={tag}>
+    {
+        allResults &&
+            allResults.map((result) => (
+                <>
+                    <div class="search-result relative">
+                        <SearchResultCard
+                            metadata={result.data}
+                            slug={result.slug}
+                            metaType={result.metaType}
+                            metaSlug={result.metaSlug}
+                        />
+                    </div>
+                    <div class="result-spacer">
+                        <HorizontalSpacer class="mb-4" />
+                    </div>
+                </>
+            ))
+    }
+</SearchLayout>
+
+<style>
+    .result-spacer:last-of-type {
+        display: none;
+    }
+</style>

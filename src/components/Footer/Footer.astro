@@ -32,15 +32,25 @@ import Logo from '/src/svg/logo.svg';
     </div>
 
     <!-- Footer -->
-    <div class="flex justify-between items-center py-2 text-xs gap-x-4">
-        <p class="ps-2">&copy; Center for Concrete and Abstract Machines</p>
-        <div class="flex gap-4 items-center ml-auto">
-            <span class="hidden sm:inline">Pilsen, Chicago</span>
-            <span class="hidden sm:inline">5:24PM</span>
-            <div class="theme-toggle">
-                <ThemeToggle />
-            </div>
+    <div class="flex items-center py-2 text-xs gap-x-4">
+        <div
+            class="flex justify-between gap-4 items-center flex-wrap w-full pl-2"
+        >
+            <p>&copy; Center for Concrete and Abstract Machines</p>
+            <a
+                href="https://www.instagram.com/ccam_chicago/"
+                target="_blank"
+                class="hidden sm:inline">Instagram</a
+            >
         </div>
+        <!-- <div class="flex gap-4 items-center ml-auto"> -->
+        <!-- <span class="hidden sm:inline">Pilsen, Chicago</span>
+            <span class="hidden sm:inline">5:24PM</span> -->
+
+        <div class="theme-toggle grid place-content-center">
+            <ThemeToggle />
+        </div>
+        <!-- </div> -->
     </div>
 </div>
 

@@ -18,7 +18,7 @@ const programsCollection = defineCollection({
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
             tags: z.array(z.string()),
-            projectId: z.string().optional(),
+            assProjectId: z.string().optional(),
             gallery: z.string().optional(),
             draft: z.boolean().default(false),
             participants: z.array(z.string()).optional(),

@@ -12,7 +12,7 @@ const { slug } = Astro.props;
 
 const associatedPrograms = (
     await getCollection('programs', ({ data }) => {
-        return data.projectId === projectId;
+        return data.assProjectId === projectId;
     })
 ).sort(sortByPubDate);
 ---

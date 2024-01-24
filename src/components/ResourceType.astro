@@ -12,6 +12,11 @@ const colorMap = new Map([
     ['periodical', 'bg-Yellow/50'],
     ['organization', 'bg-Purple/50'],
     ['link', 'bg-Blue/50'],
+    // below are for tags search results
+    ['event', 'bg-Blue text-Black'],
+    ['workshop', 'bg-Orange text-Black'],
+    ['study', 'bg-Green text-Black'],
+    ['project', 'bg-textColor/10'],
 ]);
 
 function colorFromType(type: string) {
@@ -20,7 +25,7 @@ function colorFromType(type: string) {
 ---
 
 <div
-    class=`flex justify-center items-center px-4 py-2 whitespace-nowrap ${colorFromType(type)}`
+    class=`capitalize flex justify-center items-center px-4 py-2 whitespace-nowrap ${colorFromType(type)}`
 >
     {type}
 </div>

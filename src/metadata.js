@@ -23,10 +23,14 @@ const metadata = {
             url: '/contact',
         },
         {
-            name: 'Follow',
-            url: 'https://www.instagram.com/ccam_chicago/',
-            new_window: true,
+            name: 'Search',
+            url: '/search',
         },
+        // {
+        //     name: 'Follow',
+        //     url: 'https://www.instagram.com/ccam_chicago/',
+        //     new_window: true,
+        // },
     ],
 };
 

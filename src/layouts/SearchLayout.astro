@@ -20,11 +20,13 @@ const { tag } = Astro.props;
 ---
 
 <Base title={tag}>
-    <div class="my-4 px-4 grid w-full grid-cols-1 sm:grid-cols-6">
-        <div class="sm:col-span-4 p-4">
+    <div class="sm:my-4 grid w-full grid-cols-1 sm:grid-cols-6">
+        <div class="sm:col-span-4 mx-4 mb-4">
             <slot />
         </div>
-        <div class="sm:col-span-2 px-4">
+        <div
+            class="sm:col-span-2 py-4 px-4 sm:py-0 border-t sm:border-l sm:border-t-0 border-dashed border-borderColor/30"
+        >
             {tag && <div class="text-Purple py-4">#{tag}</div>}
             <div class="flex gap-x-4 flex-wrap">
                 {

@@ -22,7 +22,7 @@ const featuredPrograms = (await getCollection('programs'))
 
 <Base>
     <!-- Splash -->
-    <div class="px-4 pt-4">
+    <section class="px-4 pt-4">
         <div class="thirds-container grid gap-4 justify-items-center">
             <IndexGlitchTitle />
             <GridSpacer />
@@ -36,11 +36,11 @@ const featuredPrograms = (await getCollection('programs'))
                 />
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Overview -->
 
-    <div class="px-4 pt-4">
+    <section class="px-4 pt-4">
         <HorizontalSpacer class="pb-4" />
         <div class="grid thirds-container gap-4">
             <Brackets>
@@ -74,11 +74,17 @@ const featuredPrograms = (await getCollection('programs'))
                 >
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Programs -->
-    <div class="pt-4">
+    <section class="pt-4">
         <HorizontalSpacer class="mx-4" />
+        <div class="header flex justify-between items-center px-4 pt-4">
+            <h2 class="text-3xl font-medium">Programs</h2>
+            <a href="/programs">
+                <button class="button font-mono">View All</button>
+            </a>
+        </div>
         <div class="card-grid double">
             {
                 featuredPrograms.map((program) => (
@@ -91,10 +97,10 @@ const featuredPrograms = (await getCollection('programs'))
                 ))
             }
         </div>
-    </div>
+    </section>
 
     <!-- About -->
-    <div class="px-4 pt-4">
+    <section class="px-4 pt-4">
         <HorizontalSpacer />
         <div class="grid place-items-center mx-4 mt-4">
             <div class="grid grid-cols-1 md:grid-cols-2 md:w-10/12 py-20 gap-8">
@@ -125,17 +131,17 @@ const featuredPrograms = (await getCollection('programs'))
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Resources -->
-    <div class="px-4">
+    <section class="px-4">
         <HorizontalSpacer class="pb-4" />
         <div class="header flex justify-between items-center">
-            <h2 class="text-2xl font-medium">Resources</h2>
+            <h2 class="text-3xl font-medium">Resources</h2>
             <a href="/resources">
                 <button class="button font-mono">View All</button>
             </a>
         </div>
         <ResourcesDisplay displayCount={5} />
-    </div>
+    </section>
 </Base>

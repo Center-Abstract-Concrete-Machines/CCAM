@@ -4,15 +4,14 @@ import ResourceType from '@components/ResourceType.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
 import { Image } from 'astro:assets';
-import placeholder from 'src/content/resources/images/placeholder.png';
 
-const { title, author, type, year, image, tags } = Astro.props.frontmatter;
+const { title, author, type, year, image, tags, url } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 ---
 
 <Base title={title}>
     <div class="p-4">
-        <div class="mx-auto max-w-2xl">
+    <div class="mx-auto max-w-2xl">
             {image && (
 
                 <div transition:name=`image-${slug}` class="mb-4 mx-auto w-fit">
@@ -45,6 +44,7 @@ const { slug } = Astro.props;
         </div>
         <div class="prose dark:prose-invert mx-auto max-w-2xl py-4">
             <TagsList tags={tags} />
+            { url && <p><a href={url}>{url}</a></p>}
             <slot />
         </div>
     </div>

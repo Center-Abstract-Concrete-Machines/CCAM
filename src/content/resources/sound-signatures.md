@@ -10,6 +10,7 @@ image:
 dateAdded: 2024-01-21
 tags:
     - house music 
+    - Chicago
     - indeterminacy
     - electronic music
 ---

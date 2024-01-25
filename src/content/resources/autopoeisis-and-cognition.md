@@ -1,0 +1,18 @@
+---
+title: 'Autopoeisis and Cognition: Realization of the Living'
+type: Book
+author: Humberto Maturana and Francisco Varela
+year: 2023
+image:
+    url: ./images/autopoeisis.jpg
+    alt: The Autopoeisis and Cognition book cover
+dateAdded: 2023-12-02
+url:  https://monoskop.org/images/3/35/Maturana_Humberto_Varela_Francisco_Autopoiesis_and_Congition_The_Realization_of_the_Living.pdf
+tags:
+    - cybernetics
+    - biology 
+    - systems theory
+    - more-than-human
+    - ecology
+    - animal studies
+---

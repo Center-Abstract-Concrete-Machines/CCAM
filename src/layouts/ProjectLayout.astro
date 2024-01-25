@@ -49,25 +49,25 @@ const associatedPrograms = (
         <div class="prose dark:prose-invert mx-auto my-4">
             <TagsList tags={tags} />
             <slot />
-            {
-                associatedPrograms && (
-                    <>
-                        <HorizontalSpacer class="my-4" />
-                        <h2 class="text-3xl font-medium text-center">
-                            Associated Programs
-                        </h2>
-                        <div class="card-grid double">
-                            {associatedPrograms.map((program) => (
-                                <ProgramCard
-                                    headingSize="text-xl"
-                                    slug={program.slug}
-                                    frontmatter={program.data}
-                                />
-                            ))}
-                        </div>
-                    </>
-                )
-            }
         </div>
+        {
+            associatedPrograms && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+                    <h2 class="text-3xl font-medium text-center">
+                        Associated Programs
+                    </h2>
+                    <div class="card-grid double">
+                        {associatedPrograms.map((program) => (
+                            <ProgramCard
+                                headingSize="text-xl"
+                                slug={program.slug}
+                                frontmatter={program.data}
+                            />
+                        ))}
+                    </div>
+                </>
+            )
+        }
     </div>
 </Base>

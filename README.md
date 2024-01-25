@@ -19,4 +19,4 @@ Frontmatter
 
 Images
 
--   Images must have lowercase file extensions [(issue)](https://github.com/parkerdavis1/CCAM/issues/20)
+-   Images must have lowercase file extensions [(issue 20)](https://github.com/parkerdavis1/CCAM/issues/20)

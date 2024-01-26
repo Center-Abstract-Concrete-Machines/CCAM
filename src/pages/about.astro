@@ -6,7 +6,7 @@ import Base from '@layouts/Base.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import OrganizerCard from '@components/About/OrganizerCard.astro';
 
-import Space from 'src/images/space.jpg';
+import Screening from 'src/images/screening.jpg';
 import Workshop from 'src/images/workshop.jpg';
 import ContactInfo from '@components/ContactInfo.astro';
 
@@ -41,7 +41,8 @@ const organizers = await getCollection('about');
                     class="mx-auto"
                     widths={[400, 600, 1200, Workshop.width]}
                 />
-              
+                <figcaption class="text-textColor/50 text-sm">Participants at a multichannel sound workshop in November 2023 listening carefully.</figcaption>
+     
             </figure>
             <p>
                 CCAM serves artists in our community by offering donation-based
@@ -75,17 +76,17 @@ const organizers = await getCollection('about');
                 }
             </div>
         </section>
-        <!-- <HorizontalSpacer class="pb-4" />
+        <HorizontalSpacer class="pb-4" />
         <figure class="text-center flex flex-col gap-2">
             <Image
-                src={Workshop}
+                src={Screening}
                 alt="CCAM Artist Space"
                 class="mx-auto"
-                widths={[400, 600, 1200, Workshop.width]}
+                widths={[400, 600, 1200, Screening.width]}
             />
-            <figcaption class="text-textColor/50 text-sm">Participants at a 2023 multi-channel sound workshop</figcaption>
+            <figcaption class="text-textColor/50 text-sm">Panelists Seth Brodsky, Kristi McGuire, Doug Rosman, and Garrett Laroy Johnson at a September 2023 screening event.</figcaption>
         </figure>
-    </div> -->
+    </div>
 </Base>
 
 <style>

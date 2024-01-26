@@ -11,7 +11,9 @@ function sortByFileName(stringA, stringB) {
     return nameA - nameB;
 }
 
-const allImages = await import.meta.glob('/src/content/programs/images/*/*');
+const allImages = await import.meta.glob<{ default: ImageMetadata }>(
+    '/src/content/programs/images/*/*'
+);
 // const allImages = import.meta.glob<{ default: ImageMetadata }>(
 //     'public/assets/images/*/*'
 // );
@@ -29,19 +31,13 @@ const optimizedImages = await Promise.all(
             await getImage({ src: allImages[path](), format: 'webp' })
     )
 );
-console.log(optimizedImages, 'optimizedImages');
 ---
 
 <div id="lightgallery" class="card-grid quad">
     {
         gallery &&
             optimizedImages.map((obj) => (
-                <a
-                    href={obj.src}
-                    target="_blank"
-                    class="glightbox"
-                    data-gallery="project-gallery"
-                >
+                <a href={obj.src} target="_blank">
                     <Picture
                         src={obj.src}
                         alt=""

@@ -11,7 +11,12 @@ image:
     url: ./images/iiny.png
     alt: perlin noise oscillations with informal information in red text on top
 tags:
-    - hello
+    - Muindi Fanuel Muindi
+    - Garrett Laroy Johnson
+    - Daniel Lichtman
+    - Kristin McWharter
+    - Asa Sakrison
+    - Lee Tusman
 ---
 
 ### Attendees

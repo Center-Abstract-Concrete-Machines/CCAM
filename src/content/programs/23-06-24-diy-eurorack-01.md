@@ -12,7 +12,7 @@ image:
 type: Workshop
 featured: false
 tags:
-    - hello
+    - diysynth
 ---
 
 ## overview

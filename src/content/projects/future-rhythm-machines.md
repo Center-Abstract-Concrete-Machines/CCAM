@@ -6,7 +6,7 @@ image:
     alt: Weird Dreams, Weird Analysis
 dateAdded: 2023-12-14
 tags:
-    - hello
+    - future rhythm
 projectId: future-rhythm
 ---
 

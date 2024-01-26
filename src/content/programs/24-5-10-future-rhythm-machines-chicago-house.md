@@ -12,6 +12,6 @@ image:
 type: Event
 featured: true
 tags:
-    - hello
+    - future rhythm
 assProjectId: future-rhythm
 ---

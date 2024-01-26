@@ -3,7 +3,11 @@ import { Image, Picture } from 'astro:assets';
 import Tag from './Tag.astro';
 import { returnDateStatus } from 'src/utils/returnDateStatus';
 import DateStatus from '@components/DateStatus.astro';
-const { slug, headingSize = 'text-5xl', class: className } = Astro.props;
+const {
+    slug,
+    headingSize = 'text-4xl sm:text-5xl',
+    class: className,
+} = Astro.props;
 const {
     title,
     subtitle,

@@ -12,7 +12,7 @@ image:
 type: Workshop
 featured: true
 tags:
-    - hello
+    - gen~ working group
 ---
 
 # get involved

@@ -1,6 +1,6 @@
 ---
 import BasicMarkdownLayout from './BasicMarkdownLayout.astro';
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 
 const { name, description, image } = Astro.props.frontmatter;
 const { slug } = Astro.props;
@@ -8,7 +8,7 @@ const { slug } = Astro.props;
 
 <BasicMarkdownLayout frontmatter={{ title: name }}>
     <div transition:name=`image-${slug}`>
-        <Image
+        <Picture
             src={image.url}
             alt={image.alt}
             class="mx-auto"

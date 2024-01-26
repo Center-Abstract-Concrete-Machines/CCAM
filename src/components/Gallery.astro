@@ -1,7 +1,7 @@
 ---
 const { gallery } = Astro.props;
 
-import { Image } from 'astro:assets';
+import { Image, getImage, Picture } from 'astro:assets';
 
 function sortByFileName(stringA, stringB) {
     const [nameA, nameB] = [
@@ -11,23 +11,50 @@ function sortByFileName(stringA, stringB) {
     return nameA - nameB;
 }
 
-// const allImages = await import.meta.glob('/src/content/programs/images/*/*');
-const allImages = import.meta.glob<{ default: ImageMetadata }>(
-    'public/assets/images/*/*'
-);
+const allImages = await import.meta.glob('/src/content/programs/images/*/*');
+// const allImages = import.meta.glob<{ default: ImageMetadata }>(
+//     'public/assets/images/*/*'
+// );
+
 let galleryImageKeys: string[];
 if (gallery) {
     galleryImageKeys = Object.keys(allImages)
         .filter((key) => key.includes(gallery))
         .sort(sortByFileName);
 }
-function trimPublic(string: string) {
-    return string.replace('public/', '');
-}
+
+const optimizedImages = await Promise.all(
+    galleryImageKeys.map(
+        async (path) =>
+            await getImage({ src: allImages[path](), format: 'webp' })
+    )
+);
+console.log(optimizedImages, 'optimizedImages');
 ---
 
 <div id="lightgallery" class="card-grid quad">
     {
+        gallery &&
+            optimizedImages.map((obj) => (
+                <a
+                    href={obj.src}
+                    target="_blank"
+                    class="glightbox"
+                    data-gallery="project-gallery"
+                >
+                    <Picture
+                        src={obj.src}
+                        alt=""
+                        width={obj.attributes.width}
+                        height={obj.attributes.height}
+                        widths={[400, 600, 1200, 2000]}
+                        sizes="(min-width: 640px) 25vw, 100vw"
+                        class="aspect-[4/3] object-cover object-center"
+                    />
+                </a>
+            ))
+    }
+    <!-- {
         gallery &&
             galleryImageKeys.map((key) => (
                 // <div>
@@ -43,7 +70,7 @@ function trimPublic(string: string) {
                 // class="aspect-square object-cover object-center"
                 // </div>
             ))
-    }
+    } -->
 </div>
 
 <script>

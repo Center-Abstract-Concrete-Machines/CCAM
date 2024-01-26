@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import Tag from './Tag.astro';
 import { returnDateStatus } from 'src/utils/returnDateStatus';
 import DateStatus from '@components/DateStatus.astro';
@@ -29,7 +29,7 @@ const {
 <div class=`flex flex-col items-start ${className}`>
     <a href={`/programs/${slug}`}>
         <div transition:name=`image-${slug}`>
-            <Image
+            <Picture
                 src={image.url}
                 alt={image.alt}
                 class="aspect-[1.5] object-cover object-center w-full overflow-hidden max-w-full"

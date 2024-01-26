@@ -4,7 +4,7 @@ import Gallery from '@components/Gallery.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import DateStatus from '@components/DateStatus.astro';
 import Participants from '@components/Participants.astro';
 
@@ -44,7 +44,7 @@ const { slug } = Astro.props;
         <HorizontalSpacer />
         <div class="mx-auto py-4 max-w-2xl">
             <div transition:name=`image-${slug}`>
-                <Image
+                <Picture
                     src={image.url}
                     alt={image.alt}
                     class="mx-auto"

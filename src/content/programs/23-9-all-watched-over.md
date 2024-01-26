@@ -12,7 +12,9 @@ image:
 type: Event
 featured: false
 tags:
-    - hello
+    - Seth Brodsky
+    - Kristi McGuire
+    - Doug Rosman
 ---
 
 ## overview

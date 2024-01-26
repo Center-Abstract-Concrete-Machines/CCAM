@@ -12,7 +12,7 @@ image:
 type: Workshop
 featured: false
 tags:
-    - hello
+    - Kim Nucci
 ---
 
 Multichannel sound workshop run by Oakland/ chicago sound artist, composer, and technologist Kim Nucci.

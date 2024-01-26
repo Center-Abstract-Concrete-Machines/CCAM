@@ -3,7 +3,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import ResourceType from '@components/ResourceType.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 
 const { title, author, type, year, image, tags, url } = Astro.props.frontmatter;
 const { slug } = Astro.props;
@@ -15,7 +15,7 @@ const { slug } = Astro.props;
             {image && (
 
                 <div transition:name=`image-${slug}` class="mb-4 mx-auto w-fit">
-                    <Image
+                    <Picture
                         src={image.url}
                         alt={image.alt}
                         widths={[400, 600, 1200, image.url.width]}

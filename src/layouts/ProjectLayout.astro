@@ -2,7 +2,7 @@
 import Base from '@layouts/Base.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { sortByPubDate } from 'src/utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
@@ -37,7 +37,7 @@ const associatedPrograms = (
         <HorizontalSpacer />
         <div class="mx-auto py-4 max-w-2xl">
             <div transition:name=`image-${slug}`>
-                <Image
+                <Picture
                     src={image.url}
                     alt={image.alt}
                     class="mx-auto"

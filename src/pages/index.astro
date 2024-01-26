@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import Base from '@layouts/Base.astro';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
@@ -27,7 +27,7 @@ const featuredPrograms = (await getCollection('programs'))
             <IndexGlitchTitle />
             <GridSpacer />
             <div class="w-full">
-                <Image
+                <Picture
                     src={squareSpace}
                     alt="Studio Space"
                     class="max-w-full mx-auto"

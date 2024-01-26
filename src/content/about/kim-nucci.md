@@ -2,7 +2,7 @@
 name: Kim Nucci
 description: Artist, composer, technologist
 image:
-    url: './images/kim.png'
+    url: './images/kim.jpg'
     alt: Image of Kim Nucci
 ---
 

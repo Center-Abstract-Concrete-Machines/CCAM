@@ -6,8 +6,8 @@ import Base from '@layouts/Base.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import OrganizerCard from '@components/About/OrganizerCard.astro';
 
-import Space from 'src/images/space.png';
-import SpaceLarge from 'src/images/space-large.png';
+import Space from 'src/images/space.jpg';
+import Workshop from 'src/images/workshop.jpg';
 import ContactInfo from '@components/ContactInfo.astro';
 
 const organizers = await getCollection('about');
@@ -36,14 +36,12 @@ const organizers = await getCollection('about');
             </p>
             <figure class="text-center flex flex-col gap-2 py-16">
                 <Image
-                    src={Workshop}
+                    src={Space}
                     alt="CCAM Artist Space"
                     class="mx-auto"
                     widths={[400, 600, 1200, Space.width]}
                 />
-                <figcaption class="text-textColor/50 text-sm">
-                    Caption
-                </figcaption>
+              
             </figure>
             <p>
                 CCAM serves artists in our community by offering donation-based
@@ -80,12 +78,12 @@ const organizers = await getCollection('about');
         <HorizontalSpacer class="pb-4" />
         <figure class="text-center flex flex-col gap-2">
             <Image
-                src={SpaceLarge}
+                src={Workshop}
                 alt="CCAM Artist Space"
                 class="mx-auto"
-                widths={[400, 600, 1200, SpaceLarge.width]}
+                widths={[400, 600, 1200, Workshop.width]}
             />
-            <figcaption class="text-textColor/50 text-sm">Caption</figcaption>
+            <figcaption class="text-textColor/50 text-sm">Participants at a 2023 multi-channel sound workshop</figcaption>
         </figure>
     </div>
 </Base>

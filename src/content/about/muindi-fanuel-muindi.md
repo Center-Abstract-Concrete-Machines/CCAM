@@ -2,7 +2,7 @@
 name: Muindi Fanuel Muindi
 description: Poet, philosopher, theatre-artist
 image:
-    url: './images/muindi.png'
+    url: './images/muindi.jpg'
     alt: Image of Muindi Fanuel Muindi
 ---
 

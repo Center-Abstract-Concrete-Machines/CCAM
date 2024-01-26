@@ -6,9 +6,8 @@ import Base from '@layouts/Base.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import OrganizerCard from '@components/About/OrganizerCard.astro';
 
-import Space from 'src/images/space.png';
+import Screening from 'src/images/screening.jpg';
 import Workshop from 'src/images/workshop.jpg';
-import SpaceLarge from 'src/images/space-large.png';
 import ContactInfo from '@components/ContactInfo.astro';
 
 const organizers = await getCollection('about');
@@ -36,15 +35,14 @@ const organizers = await getCollection('about');
                 and decolonial perspectives in art and art technology.
             </p>
             <figure class="text-center flex flex-col gap-2 py-16">
-                <Picture
+                <Image
                     src={Workshop}
                     alt="CCAM Artist Space"
                     class="mx-auto"
                     widths={[400, 600, 1200, Workshop.width]}
                 />
-                <figcaption class="text-textColor/50 text-sm">
-                    Caption
-                </figcaption>
+                <figcaption class="text-textColor/50 text-sm">Participants at a multichannel sound workshop in November 2023 listening carefully.</figcaption>
+     
             </figure>
             <p>
                 CCAM serves artists in our community by offering donation-based
@@ -80,13 +78,13 @@ const organizers = await getCollection('about');
         </section>
         <HorizontalSpacer class="pb-4" />
         <figure class="text-center flex flex-col gap-2">
-            <Picture
-                src={SpaceLarge}
+            <Image
+                src={Screening}
                 alt="CCAM Artist Space"
                 class="mx-auto"
-                widths={[400, 600, 1200, SpaceLarge.width]}
+                widths={[400, 600, 1200, Screening.width]}
             />
-            <figcaption class="text-textColor/50 text-sm">Caption</figcaption>
+            <figcaption class="text-textColor/50 text-sm">Panelists Seth Brodsky, Kristi McGuire, Doug Rosman, and Garrett Laroy Johnson at a September 2023 screening event.</figcaption>
         </figure>
     </div>
 </Base>

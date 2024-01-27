@@ -3,7 +3,7 @@ title: 'DIY Eurorack Synth Workshop'
 subtitle: Envelope Follower & Random CV/Audio Generator
 pubDate: 2023-06-24
 endDate: 2023-06-24
-presentationalDates: June 24th, 2023
+presentationalDates: June 24, 2023
 time: 10-1400 CT
 location: CCAM Headquarters
 image:

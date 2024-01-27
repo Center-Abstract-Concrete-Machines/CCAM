@@ -4,7 +4,7 @@ subtitle: Utopian Desire and the Computational Imaginary
 pubDate: 2023-09-10
 endDate: 2023-09-10
 presentationalDates: September 10, 2023
-time: 530 - 8
+time: 17:30-20:00
 location: 2328 N Milwaukee, top floor / Logan square
 image:
     url: ./images/all-watched.png

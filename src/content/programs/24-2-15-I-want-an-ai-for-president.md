@@ -2,10 +2,10 @@
 title: I WANT AN AI FOR PRESIDENT
 subtitle: an interactive role-playing experiment around machinic intelligence and institutional power
 pubDate: 2024-01-01
-endDate: 2024-02-16
+endDate: 2024-02-15
 presentationalDates: February 15, 2024
 time: '19:00-22:00'
-location: TBA, Loop Chicago
+location: TBA [Chicago Loop]
 image:
     url: ./images/leviathon.png
     alt: computationally generated line drawing of an ai president

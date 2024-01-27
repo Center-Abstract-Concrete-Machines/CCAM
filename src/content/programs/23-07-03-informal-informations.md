@@ -3,7 +3,7 @@ title: '(in)formal (in)formations'
 subtitle: tactics and infrastructure for participatory and collaborative study & making
 pubDate: 2023-07-03
 endDate: 2023-07-03
-presentationalDates: July 3rd, 2023
+presentationalDates: July 3, 2023
 type: Event
 time: 1100-1800 ET
 location: NEWinc

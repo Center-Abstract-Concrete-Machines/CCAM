@@ -12,11 +12,11 @@ image:
 type: Event
 featured: true
 tags:
-    - Kristin McWharter
-    - Artificial Intelligence
-    - Doug Rosman
-    - Institutional Analysis
-    - Machinic Intelligence
+    - kristin mcwharter
+    - artificial intelligence
+    - doug rosman
+    - institutional analysis
+    - machinic intelligence
 participants:
     - Kristin McWharter
     - Garrett Laroy Johnson

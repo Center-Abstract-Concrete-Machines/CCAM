@@ -1,6 +1,6 @@
 ---
 title: 'Rhythm and Time Toolkit'
-type: Link
+type: codebase
 author: Philip Meyer
 year: 2023
 url: https://www.youtube.com/watch?v=F_CQEaXhyew
@@ -12,6 +12,7 @@ tags:
     - generative sound
     - gen~ working group
     - modular synthesis
+    - philip meyer
     - rhythm 
     - max/msp
 ---

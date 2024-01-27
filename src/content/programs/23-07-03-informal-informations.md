@@ -11,34 +11,37 @@ image:
     url: ./images/iiny.png
     alt: perlin noise oscillations with informal information in red text on top
 tags:
-    - Muindi Fanuel Muindi
-    - Garrett Laroy Johnson
-    - Daniel Lichtman
-    - Kristin McWharter
-    - Asa Sakrison
-    - Lee Tusman
+    - muindi fanuel muindi
+    - garrett laroy johnson
+    - daniel lichtman
+    - kristin mcwharter
+    - asa sakrison
+    - lee tusman
+    - newinc
+    - phillip thurtle
+    - dakota gearhart
 ---
 
 ### Attendees
 
 #### Presenters
 
--   Muindi Fanuel Muindi (philosophy, performance)
--   Garrett Laroy Johnson (media arts and sciences)
--   Daniel Lichtman (media art)
--   Kristin McWharter (game and media art)
--   Asa Sakrison (cultural geography, process theory)
--   Lee Tusman (media art)
+- Muindi Fanuel Muindi (philosophy, performance)
+- Garrett Laroy Johnson (media arts and sciences)
+- Daniel Lichtman (media art)
+- Kristin McWharter (game and media art)
+- Asa Sakrison (cultural geography, process theory)
+- Lee Tusman (media art)
 
 #### Respondents
 
--   Maria Fernanda (philosophy)
--   Meg Hartwig (sculpture)
--   Dakota Gearhart (media art)
--   Man Kaplan (sociology and women's/gender studies)
--   Sam Stoelje (literature and the occult)
--   Phillip Thurtle (philosophy of science and technology)
--   Çaca Yvair (conservation and geoecology)
+- Maria Fernanda (philosophy)
+- Meg Hartwig (sculpture)
+- Dakota Gearhart (media art)
+- Man Kaplan (sociology and women's/gender studies)
+- Sam Stoelje (literature and the occult)
+- Phillip Thurtle (philosophy of science and technology)
+- Çaca Yvair (conservation and geoecology)
 
 ![IINY Program Cover](./images/iiny-program-cover.png)
 

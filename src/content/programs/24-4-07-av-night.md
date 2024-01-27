@@ -1,23 +1,19 @@
 ---
-title: AV Performance Night
+title: >
+    CFP: Rhythm as the Texture of Experience
+subtitle: Audiovisual Performance Commission
 pubDate: 2024-01-01
-endDate: 2024-04-07
-presentationalDates: April 7, 2024
-time: '20:00'
-location: TBA
+endDate: 2024-03-02
+presentationalDates: Submissions close March 1st, 2024
+time: '23:59 CST'
+location: 'online'
 image:
     url: ./images/av-night-cfp-image.png
     alt: computationally generated line drawing of black grid and
 type: Event
-featured: false
-draft: true
+featured: true
 tags:
-    - audiovisual performance
-    - experimental
-    - Anna Johnson
-    - Paige Naylor
-    - Nicky Ni
-    - Onion City Film Festival
+    - SynthDIY
+    - hackathon
+    - collaboration
 ---
-
-Details soon.

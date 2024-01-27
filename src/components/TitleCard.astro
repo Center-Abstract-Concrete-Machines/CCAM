@@ -61,8 +61,12 @@ const { title, text, class: className } = Astro.props;
 
     document.addEventListener('astro:page-load', () => {
         const heading = document.querySelector('.mightymorpher');
-        heading.innerHTML = addMorphClasses(heading.innerText);
+        if (heading) {
+            heading.innerHTML = addMorphClasses(heading.innerText);
+        }
         const morphers = document.querySelectorAll('.morpher');
-        morphers.forEach((element) => addStylesAttrToElement(element));
+        if (morphers) {
+            morphers.forEach((element) => addStylesAttrToElement(element));
+        }
     });
 </script>

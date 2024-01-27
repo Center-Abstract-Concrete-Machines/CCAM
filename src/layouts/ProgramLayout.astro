@@ -7,6 +7,7 @@ import Tag from '@components/Programs/Tag.astro';
 import { Image, Picture } from 'astro:assets';
 import DateStatus from '@components/DateStatus.astro';
 import Participants from '@components/Participants.astro';
+import ProgramMetadata from '@components/ProgramMetadata.astro';
 
 const {
     title,
@@ -55,9 +56,11 @@ const { slug } = Astro.props;
         <HorizontalSpacer />
         <div class="prose dark:prose-invert mx-auto my-4">
             <div class="my-4">
-                <div class="font-mono text-sm">
-                    {presentationalDates} | {time} | {location}
-                </div>
+                <ProgramMetadata
+                    presentationalDates={presentationalDates}
+                    time={time}
+                    location={location}
+                />
                 <div class="flex gap-2 my-4 grow-0 flex-wrap text-sm">
                     <Tag tag={type} />
                     <DateStatus date={endDate} />

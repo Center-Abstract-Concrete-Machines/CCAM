@@ -10,6 +10,7 @@ tags:
     - graham wakefield
     - modular synthesis
     - daisy
+    - max/msp
 url: https://cycling74.com/books/go
 image:
     url: ./images/go.png

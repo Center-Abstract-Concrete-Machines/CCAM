@@ -3,7 +3,7 @@ title: Synth Hackathon
 subtitle: w PTRG @ SAIC
 pubDate: 2024-01-01
 endDate: 2024-03-18
-presentationalDates: March 14th-17th, 2024
+presentationalDates: March 14-17, 2024
 time: '00:00-23:59'
 location: School of the Art Institute of Chicago, Chicago
 image:

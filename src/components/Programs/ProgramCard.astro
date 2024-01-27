@@ -3,6 +3,7 @@ import { Image, Picture } from 'astro:assets';
 import Tag from './Tag.astro';
 import { returnDateStatus } from 'src/utils/returnDateStatus';
 import DateStatus from '@components/DateStatus.astro';
+import ProgramMetadata from '@components/ProgramMetadata.astro';
 const {
     slug,
     headingSize = 'text-4xl sm:text-5xl',
@@ -47,10 +48,12 @@ const {
             {title}{subtitle && `: ${subtitle}`}
         </h2>
     </a>
-
-    <div class="mt-6 font-mono text-sm">
-        {presentationalDates} | {time} | {location}
-    </div>
+    <ProgramMetadata
+        presentationalDates={presentationalDates}
+        time={time}
+        location={location}
+        class="mt-6"
+    />
     <div class="flex gap-2 mt-4 grow-0 flex-wrap text-sm">
         <DateStatus date={endDate} />
         <Tag tag={type} />

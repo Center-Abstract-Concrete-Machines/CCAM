@@ -4,7 +4,7 @@ subtitle: ''
 pubDate: 2023-12-01
 endDate: ongoing
 presentationalDates: 'Next: 1/23/24'
-time: 6-8 PM CT
+time: 18:00-20:00 CT
 location: Hybrid / Pilsen + Zoom
 image:
     url: ./images/gen.png

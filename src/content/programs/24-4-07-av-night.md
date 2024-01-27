@@ -1,17 +1,17 @@
 ---
-title: AV Night
+title: AV Performance Night
 subtitle: Audiovisual Performance Commission
 pubDate: 2024-01-01
-endDate: 2024-03-02
+endDate: 2024-04-07
 presentationalDates: April 7, 2024
-time: '19:00'
+time: '20:00'
 location: TBA
 image:
     url: ./images/av-night-cfp-image.png
     alt: computationally generated line drawing of black grid and
 type: Event
-featured: true
-draft: false
+featured: false
+draft: true
 tags:
     - audiovisual
     - experimental

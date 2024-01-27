@@ -7,6 +7,7 @@ tags:
     - generative sound
     - gen~ working group
     - gregory taylor
+    - max/msp
     - graham wakefield
     - modular synthesis
     - daisy

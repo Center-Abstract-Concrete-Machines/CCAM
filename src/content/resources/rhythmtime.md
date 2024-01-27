@@ -1,0 +1,19 @@
+---
+title: 'Rhythm and Time Toolkit'
+type: Link
+author: Philip Meyer
+year: 2023
+url: https://www.youtube.com/watch?v=F_CQEaXhyew
+image:
+    url: ./images/RTT.png
+    alt: rhythm and time toolkit logo
+dateAdded: 2023-12-01
+tags:
+    - generative sound
+    - gen~ working group
+    - modular synthesis
+    - rhythm 
+    - max/msp
+---
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F_CQEaXhyew?si=8O6sS6YaySOAceEe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

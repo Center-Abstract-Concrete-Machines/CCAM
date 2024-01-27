@@ -6,6 +6,7 @@ const classes = [
 ];
 const elements = document.getElementsByClassName('morpher');
 let classState = [];
+let timers = [];
 
 document.addEventListener('astro:page-load', () => {
     for (let i = 0; i < elements.length; i++) {
@@ -24,9 +25,10 @@ function classify(i) {
 
     classState[i] = newClasses;
     let duration = 1000 + Math.random() * 20000;
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
         declassify(i);
     }, duration);
+    timers.push(timeoutId);
 }
 
 function declassify(i) {
@@ -36,4 +38,7 @@ function declassify(i) {
     classify(i);
 }
 
-// TODO: add event listener to unregister setTimeout on navigation away
+document.addEventListener('astro:before-preparation', () => {
+    timers.forEach((id) => clearTimeout(id));
+    timers = [];
+});

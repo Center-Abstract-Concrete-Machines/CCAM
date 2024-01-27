@@ -78,6 +78,8 @@ document.addEventListener('astro:page-load', () => {
 });
 
 document.addEventListener('astro:before-swap', () => {
-    sketchEl.remove();
-    sketchEl = null;
+    if (sketchEl) {
+        sketchEl.remove();
+        sketchEl = null;
+    }
 });

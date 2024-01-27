@@ -1,0 +1,21 @@
+---
+title: Computer Music Book in Max/MSP Gen~
+type: Link
+author: Juan Flores
+year: 2023
+tags:
+    - generative sound
+    - gen~ working group
+    - Charles Dodge
+    - Juan Flores
+    - computer music
+    - RNBO
+    - max/msp
+url: https://juanedflores.com/Blog/Computer_Music_Book_in_Max_MSP/Computer_Music_Book_in_Max_MSP.html
+image:
+    url: ./images/computer.png
+    alt: cover image from Juan's blog
+dateAdded: 2024-01-27
+---
+
+This blogpost reimplements many examples from Charles Dodge's classic book, Computer Music: Synthesis, Composition, and Performance in Max/MSP gen~. The blog post embeds many examples in an interactive form thanks to Max's RNBO library.

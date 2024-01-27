@@ -15,6 +15,10 @@ tags:
     - Seth Brodsky
     - Kristi McGuire
     - Doug Rosman
+    - The Neu Lithium
+    - Nicky Ni
+    - Drone-Ambient-Noise
+gallery: all-watched-over
 ---
 
 ## overview

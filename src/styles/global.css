@@ -20,14 +20,14 @@
 
 @font-face {
     font-family: 'denim';
-    src: url('/fonts/DenimINKTRIALVF.ttf') format('truetype-variations');
+    src: url('/fonts/DenimINKTRIALVF-subset.woff2') format('woff2');
     font-weight: 400 500 600;
     font-style: normal italic;
 }
 
 @font-face {
     font-family: 'moonbase';
-    src: url('/fonts/MoonbaseLLVIPTrial.ttf') format('truetype-variations');
+    src: url('/fonts/MoonbaseLLVIPTrial-subset.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-variation-settings: 'BLUR' 40 80;

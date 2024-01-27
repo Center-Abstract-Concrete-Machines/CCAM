@@ -1,0 +1,11 @@
+---
+const { presentationalDates, time, location, class: className } = Astro.props;
+---
+
+<div class=`font-mono text-sm ${className}`>
+    {presentationalDates}
+    <span class="opacity-30">|</span>
+    {time}
+    <span class="opacity-30">|</span>
+    {location}
+</div>

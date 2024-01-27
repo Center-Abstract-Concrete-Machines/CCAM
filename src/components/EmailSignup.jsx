@@ -38,6 +38,7 @@ export default function EmailSignup() {
                     name="email"
                     className="border border-dashed border-borderColor/30 bg-backgroundColor px-4 py-2 min-w-0 max-w-full grow"
                     placeholder="Email"
+                    autoComplete="email"
                     required
                 />
                 <input type="text" name="trap" className="hidden" />

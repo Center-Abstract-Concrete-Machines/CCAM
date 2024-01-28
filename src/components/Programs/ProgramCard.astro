@@ -32,8 +32,8 @@ const {
 ---
 
 <div class=`flex flex-col items-start ${className}`>
-    <a href={`/programs/${slug}`}>
-        <div transition:name=`image-${slug}`>
+    <a href={`/programs/${slug}`} class="w-full">
+        <div transition:name=`image-${slug}` class="mx-auto">
             <Picture
                 src={image.url}
                 alt={image.alt}

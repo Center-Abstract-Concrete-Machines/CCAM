@@ -6,8 +6,10 @@ import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { sortByPubDate } from 'src/utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
+import PeopleCard from '@components/PeopleCard.astro';
 
-const { title, subtitle, image, tags, projectId } = Astro.props.frontmatter;
+const { title, subtitle, image, tags, projectId, people } =
+    Astro.props.frontmatter;
 const { slug } = Astro.props;
 
 const associatedPrograms = (
@@ -15,6 +17,9 @@ const associatedPrograms = (
         return data.assProjectId === projectId;
     })
 ).sort(sortByPubDate);
+
+const peopleCollection = await getCollection('people');
+console.log('people collection', peopleCollection);
 ---
 
 <Base title={title}>
@@ -54,9 +59,10 @@ const associatedPrograms = (
             associatedPrograms && (
                 <>
                     <HorizontalSpacer class="my-4" />
-                    <h2 class="text-3xl font-medium text-center">
+                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-8">
                         Associated Programs
                     </h2>
+                    <HorizontalSpacer class="my-4" />
                     <div class="card-grid double">
                         {associatedPrograms.map((program) => (
                             <ProgramCard
@@ -69,5 +75,36 @@ const associatedPrograms = (
                 </>
             )
         }
+        {
+            people &&
+                people.map((obj) => (
+                    <div>
+                        <HorizontalSpacer class="my-4" />
+                        <h2 class="text-2xl sm:text-3xl font-medium text-center my-8">
+                            {obj.label}
+                        </h2>
+                        <HorizontalSpacer class="my-4" />
+                        {obj.list.map((person) => {
+                            console.log('PERSON', person);
+                            const [cardPerson] = peopleCollection.filter(
+                                (obj) => obj.id === person
+                            );
+                            console.log('cardPerson', cardPerson);
+                            return (
+                                <>
+                                    <PeopleCard data={cardPerson} />
+                                    <HorizontalSpacer class="spacer my-4" />
+                                </>
+                            );
+                        })}
+                    </div>
+                ))
+        }
     </div>
 </Base>
+
+<style>
+    .spacer:last-of-type {
+        display: none;
+    }
+</style>

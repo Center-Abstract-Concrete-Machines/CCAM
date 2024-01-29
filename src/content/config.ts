@@ -58,6 +58,14 @@ const projectsCollection = defineCollection({
             dateAdded: z.date(),
             tags: z.array(z.string()),
             projectId: z.string(),
+            people: z
+                .array(
+                    z.object({
+                        label: z.string(),
+                        list: z.array(z.string()),
+                    })
+                )
+                .optional(),
         }),
 });
 
@@ -74,9 +82,23 @@ const aboutCollection = defineCollection({
         }),
 });
 
+const peopleCollection = defineCollection({
+    type: 'data',
+    schema: ({ image }) =>
+        z.object({
+            name: z.string(),
+            description: z.string(),
+            image: image().optional(),
+            email: z.string().email(),
+            social: z.string(),
+            website: z.string(),
+        }),
+});
+
 export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
     about: aboutCollection,
+    people: peopleCollection,
 };

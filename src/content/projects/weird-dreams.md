@@ -12,11 +12,10 @@ people:
     - label: Microresidents
       list:
           - garrett-laroy-johnson
-          - fake-person
-          - fake-person
     - label: Participants
       list:
-          - garrett-laroy-johnson
+          - fake-person
+          - fake-person
 ---
 
 We’ve been having weird dreams.

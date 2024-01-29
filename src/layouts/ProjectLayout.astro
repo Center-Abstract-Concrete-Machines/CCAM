@@ -6,7 +6,7 @@ import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { sortByPubDate } from 'src/utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
-import PeopleCard from '@components/PeopleCard.astro';
+import PersonCard from '@components/PersonCard.astro';
 
 const { title, subtitle, image, tags, projectId, people } =
     Astro.props.frontmatter;
@@ -62,7 +62,13 @@ const peopleCollection = await getCollection('people');
                         Associated Programs
                     </h2>
                     <HorizontalSpacer class="my-4" />
-                    <div class="card-grid double">
+                    <div
+                        class={
+                            associatedPrograms.length === 1
+                                ? 'max-w-lg mx-auto'
+                                : 'card-grid double'
+                        }
+                    >
                         {associatedPrograms.map((program) => (
                             <ProgramCard
                                 headingSize="text-xl"
@@ -89,7 +95,7 @@ const peopleCollection = await getCollection('people');
                             );
                             return (
                                 <>
-                                    <PeopleCard data={cardPerson} />
+                                    <PersonCard data={cardPerson} />
                                     <HorizontalSpacer class="spacer my-4" />
                                 </>
                             );

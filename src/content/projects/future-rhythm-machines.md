@@ -1,9 +1,9 @@
 ---
 title: Future Rhythm Machines
-description: Weird Dreams, Weird Analysis is a new transdisciplinary arts and humanities collaborative project gathering creative practitioners in the arts, theory, and technology from different continents and professional contexts to speculate on the political potentials of the Weird as an aesthetic category and new modes of (psycho-schizo)analysis sufficient to it.
+description: What can the history of Chicago House teach us about Future Rhythm Machines? In both workshop and panel we focus on the material, social, and technical particularities of Chicago house (the synthesizers and drum machines of the time and place, the spaces that hosted the parties and transportation modes, the music industry in that historical moment) to draw together a musical map for the future.
 image:
     url: ./images/future-rhythm-machines.png
-    alt: Weird Dreams, Weird Analysis
+    alt: Future rhythm Machines
 dateAdded: 2023-12-14
 tags:
     - future rhythm

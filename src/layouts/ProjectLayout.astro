@@ -19,7 +19,6 @@ const associatedPrograms = (
 ).sort(sortByPubDate);
 
 const peopleCollection = await getCollection('people');
-console.log('people collection', peopleCollection);
 ---
 
 <Base title={title}>
@@ -85,11 +84,9 @@ console.log('people collection', peopleCollection);
                         </h2>
                         <HorizontalSpacer class="my-4" />
                         {obj.list.map((person) => {
-                            console.log('PERSON', person);
                             const [cardPerson] = peopleCollection.filter(
                                 (obj) => obj.id === person
                             );
-                            console.log('cardPerson', cardPerson);
                             return (
                                 <>
                                     <PeopleCard data={cardPerson} />

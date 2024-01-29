@@ -14,7 +14,7 @@ people:
           - garrett-laroy-johnson
     - label: Conveners
       list:
-          - garrett-laroy-johnson
+          - fake-person
           - garrett-laroy-johnson
 ---
 

@@ -1,13 +1,30 @@
 ---
 const { data } = Astro.props.data;
 import { Image, Picture } from 'astro:assets';
+
+let image;
+const personCardImages = await import.meta.glob(
+    'src/images/person-cards/*.png'
+);
+if (!data.image) {
+    const keys = Object.keys(personCardImages);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    image = personCardImages[randomKey]();
+} else {
+    image = data.image;
+}
 ---
 
 <div class="person-grid grid gap-4">
-    <Picture src={data.image} alt="" />
+    <Picture
+        src={image}
+        alt=""
+        widths={[400, 600, 1200, image.width]}
+        sizes="(min-width: 640px) 10rem, 100vw"
+    />
     <div class="flex flex-col justify-between">
         <div>
-            <h3 class="text-lg font-medium">{data.name}</h3>
+            <h3 class="text-xl font-medium">{data.name}</h3>
             <p>{data.description}</p>
         </div>
         <div class="sm:flex flex-wrap gap-4 font-mono text-xs mt-4">

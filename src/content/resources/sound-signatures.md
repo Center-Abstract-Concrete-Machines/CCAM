@@ -1,7 +1,7 @@
 ---
 title: 'Blank Forms 09: Sonic Signatures'
 type: Book
-author: Theo Parrish, Mike Rubin, Tony Allen, Alemia Cuni, Marcus Pal, Aki Ondo, Akio Suzuki, Lawrence Kumpf, ed. 
+author: Theo Parrish, Mike Rubin, Tony Allen, Alemia Cuni, Marcus Pal, Aki Ondo, Akio Suzuki, Lawrence Kumpf, ed.
 year: 2023
 url: https://www.blankforms.org/publications/blank-forms-09-sound-signatures
 image:
@@ -9,7 +9,7 @@ image:
     alt: Sonic Signatures book cover
 dateAdded: 2024-01-21
 tags:
-    - house music 
+    - house music
     - Chicago
     - indeterminacy
     - electronic music

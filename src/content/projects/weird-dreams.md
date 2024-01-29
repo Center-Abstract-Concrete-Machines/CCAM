@@ -7,7 +7,16 @@ image:
 dateAdded: 2023-12-14
 tags:
     - weird dreams
-projectId: weird-dreams
+projectId: weird dreams
+people:
+    - label: Microresidents
+      list:
+          - garrett-laroy-johnson
+          - fake-person
+          - fake-person
+    - label: Participants
+      list:
+          - garrett-laroy-johnson
 ---
 
 We’ve been having weird dreams.

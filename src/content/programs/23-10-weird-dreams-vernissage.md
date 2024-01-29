@@ -14,6 +14,6 @@ tags:
     - vernissage
     - Wrong Biennale
 featured: false
-assProjectId: weird-dreams
+assProjectId: weird dreams
 gallery: weird-dreams-slsa
 ---

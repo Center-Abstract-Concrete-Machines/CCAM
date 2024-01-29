@@ -7,7 +7,7 @@ image:
 dateAdded: 2023-12-14
 tags:
     - future rhythm
-projectId: future-rhythm
+projectId: future rhythm
 people:
     - label: Principle Investigator
       list:

@@ -18,7 +18,7 @@ const peopleCollection = await getCollection('people');
             <HorizontalSpacer class="my-4" />
             {category.list.map((person) => {
                 const [cardPerson] = peopleCollection.filter(
-                    (obj) => obj.id === person
+                    (obj) => obj.slug === person
                 );
                 return (
                     <>

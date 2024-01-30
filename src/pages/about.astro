@@ -10,7 +10,15 @@ import Screening from 'src/images/screening.jpg';
 import Workshop from 'src/images/workshop.jpg';
 import ContactInfo from '@components/ContactInfo.astro';
 
-const organizers = await getCollection('about');
+// const organizers = await getCollection('about');
+// const organizers = await getCollection('people');
+const organizers = await getCollection(
+    'people',
+    (person) =>
+        person.slug === 'garrett-laroy-johnson' ||
+        person.slug === 'kim-nucci' ||
+        person.slug === 'muindi-fanuel-muindi'
+);
 ---
 
 <Base title="About">
@@ -31,7 +39,7 @@ const organizers = await getCollection('about');
                 perspectives. By intentionally developing this community outside
                 of the academy, CCAM seeks to break down barriers to access for
                 engaging in research in art, technology, and surrounding
-                criticism and theory. CCAMstrives to center queer, anti-racist,
+                criticism and theory. CCAM strives to center queer, anti-racist,
                 and decolonial perspectives in art and art technology.
             </p>
             <figure class="text-center flex flex-col gap-2 py-16">
@@ -41,8 +49,10 @@ const organizers = await getCollection('about');
                     class="mx-auto"
                     widths={[400, 600, 1200, Workshop.width]}
                 />
-                <figcaption class="text-textColor/50 text-sm">Participants at a multichannel sound workshop in November 2023 listening carefully.</figcaption>
-     
+                <figcaption class="text-textColor/50 text-sm">
+                    Participants at a multichannel sound workshop in November
+                    2023 listening carefully.
+                </figcaption>
             </figure>
             <p>
                 CCAM serves artists in our community by offering donation-based
@@ -67,9 +77,7 @@ const organizers = await getCollection('about');
                 {
                     organizers.map((organizer) => (
                         <OrganizerCard
-                            name={organizer.data.name}
-                            description={organizer.data.description}
-                            image={organizer.data.image}
+                            data={organizer.data}
                             slug={organizer.slug}
                         />
                     ))
@@ -84,7 +92,10 @@ const organizers = await getCollection('about');
                 class="mx-auto"
                 widths={[400, 600, 1200, Screening.width]}
             />
-            <figcaption class="text-textColor/50 text-sm">Panelists Seth Brodsky, Kristi McGuire, Doug Rosman, and Garrett Laroy Johnson at a September 2023 screening event.</figcaption>
+            <figcaption class="text-textColor/50 text-sm">
+                Panelists Seth Brodsky, Kristi McGuire, Doug Rosman, and Garrett
+                Laroy Johnson at a September 2023 screening event.
+            </figcaption>
         </figure>
     </div>
 </Base>

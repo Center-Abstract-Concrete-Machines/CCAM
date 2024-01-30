@@ -1,9 +1,14 @@
 ---
-name: Kim Nucci
-description: Artist, composer, technologist
-image:
-    url: './images/kim.jpg'
-    alt: Image of Kim Nucci
+name: 'Kim Nucci'
+subtitle: Artist, composer, technologist
+description: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
+social:
+    display: 'plzsendpzza'
+    url: ''
+image: '/src/content/people/images/kim.jpg'
+website:
+    display: 'kimnucci.com'
+    url: 'https://kimnucci.com'
 ---
 
 Kim Nucci is an Oakland-based media artist, composer, and technologist. Kim claims to be the Pope of facebook and worships dollar slice pizza as the one true god, while living in the god(pizza)less land of California.

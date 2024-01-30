@@ -1,6 +1,7 @@
 ---
 const { data } = Astro.props.data;
 import { Image, Picture } from 'astro:assets';
+import PersonMetadata from './PersonMetadata.astro';
 
 let image;
 const personCardImages = await import.meta.glob(
@@ -27,27 +28,7 @@ if (!data.image) {
             <h3 class="text-xl font-medium">{data.name}</h3>
             <p class="max-w-xl">{data.description}</p>
         </div>
-        <div class="sm:flex flex-wrap gap-4 font-mono text-xs mt-4">
-            {
-                data.social && (
-                    <>
-                        <p>
-                            <a href={data.social.url}>@{data.social.display}</a>
-                        </p>
-                        <span class="opacity-30 hidden sm:inline">|</span>
-                    </>
-                )
-            }
-            {
-                data.website && (
-                    <p>
-                        <a href={data.website.url} target="_blank">
-                            {data.website.display}
-                        </a>
-                    </p>
-                )
-            }
-        </div>
+        <PersonMetadata data={data} />
     </div>
 </div>
 

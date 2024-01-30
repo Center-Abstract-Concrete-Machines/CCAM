@@ -57,8 +57,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
             <TagsList tags={tags} />
             <slot />
         </div>
-
-        {people && <PeopleDisplay people={people}>}
+        {people && <PeopleDisplay people={people} />}
 
         {
             associatedPrograms.length > 0 && (

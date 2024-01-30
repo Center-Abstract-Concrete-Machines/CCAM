@@ -89,10 +89,11 @@ const aboutCollection = defineCollection({
 });
 
 const peopleCollection = defineCollection({
-    type: 'data',
+    type: 'content',
     schema: ({ image }) =>
         z.object({
             name: z.string(),
+            subtitle: z.string().optional(),
             description: z.string().optional(),
             image: image().optional(),
             social: z

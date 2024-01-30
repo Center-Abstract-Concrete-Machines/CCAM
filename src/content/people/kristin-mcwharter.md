@@ -1,3 +1,4 @@
+---
 name: 'Kristin McWharter'
 description: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
 social:
@@ -6,3 +7,4 @@ social:
 website:
     display: 'kristinmcwharter.com/'
     url: 'https://kristinmcwharter.com/'
+---

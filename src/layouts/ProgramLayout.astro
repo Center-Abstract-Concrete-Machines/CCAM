@@ -6,8 +6,8 @@ import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
 import { Image, Picture } from 'astro:assets';
 import DateStatus from '@components/DateStatus.astro';
-import Participants from '@components/Participants.astro';
 import ProgramMetadata from '@components/ProgramMetadata.astro';
+import PeopleDisplay from '@components/PeopleDisplay.astro';
 
 const {
     title,
@@ -20,7 +20,7 @@ const {
     location,
     endDate,
     type,
-    participants,
+    people,
 } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 ---
@@ -66,18 +66,18 @@ const { slug } = Astro.props;
                     <DateStatus date={endDate} />
                 </div>
                 <TagsList tags={tags} />
-                <!-- {participants && <Participants participants={participants} />} -->
             </div>
             <slot />
         </div>
-    </div>
+        {people && <PeopleDisplay people={people} />}
 
-    {
-        gallery && (
-            <>
-                <HorizontalSpacer class="mx-4" />
-                <Gallery gallery={gallery} />
-            </>
-        )
-    }
+        {
+            gallery && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+                    <Gallery gallery={gallery} />
+                </>
+            )
+        }
+    </div>
 </Base>

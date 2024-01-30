@@ -20,7 +20,14 @@ const programsCollection = defineCollection({
             tags: z.array(z.string()),
             gallery: z.string().optional(),
             draft: z.boolean().default(false),
-            participants: z.array(z.string()).optional(),
+            people: z
+                .array(
+                    z.object({
+                        label: z.string(),
+                        list: z.array(z.string()),
+                    })
+                )
+                .optional(),
         }),
 });
 

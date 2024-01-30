@@ -50,23 +50,6 @@ const optimizedImages = await Promise.all(
                 </a>
             ))
     }
-    <!-- {
-        gallery &&
-            galleryImageKeys.map((key) => (
-                // <div>
-                <a href={trimPublic(key)} target="_blank">
-                    <Image
-                        src={allImages[key]()}
-                        alt=""
-                        widths={[400, 600, 1200, 2000]}
-                        sizes="(min-width: 640px) 25vw, 100vw"
-                        class="aspect-[4/3] object-cover object-center"
-                    />
-                </a>
-                // class="aspect-square object-cover object-center"
-                // </div>
-            ))
-    } -->
 </div>
 
 <script>

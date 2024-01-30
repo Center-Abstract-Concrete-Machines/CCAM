@@ -4,7 +4,7 @@ subtitle: an interactive role-playing experiment around machinic intelligence an
 pubDate: 2024-01-01
 endDate: 2024-02-15
 presentationalDates: February 15, 2024
-time: '19:00-22:00'
+time: '19:00-21:00'
 location: TBA [Chicago Loop]
 image:
     url: ./images/leviathon.png
@@ -12,15 +12,18 @@ image:
 type: Event
 featured: true
 tags:
-    - kristin mcwharter
     - artificial intelligence
-    - doug rosman
     - institutional analysis
     - machinic intelligence
-participants:
-    - Kristin McWharter
-    - Garrett Laroy Johnson
-    - Doug Rosman
+    - LARP
+    - speculative design
+people:
+    - label: leads
+      list: 
+       - kristin-mcwharter
+       - doug-rosman 
+       - garrett-laroy-johnson 
+    
 ---
 
 The president of the ASIC, the Art School of the Illinois City, is stepping down, leaving in their wake a budgetary crisis, faculty labor organizing, and an impending "demographic cliff". CCAM believes it is time to take higher ed administration into the 21st century. That's why we're designing an AI to step in as president of ASIC, and we want you to join us.

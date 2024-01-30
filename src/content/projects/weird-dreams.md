@@ -9,9 +9,10 @@ tags:
     - weird dreams
 projectId: weird dreams
 people:
-    - label: Microresidents
+    - label: conveners
       list:
           - garrett-laroy-johnson
+          - phillip-thurtle
     - label: Participants
       list:
           - fake-person

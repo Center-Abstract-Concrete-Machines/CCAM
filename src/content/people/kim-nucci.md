@@ -1,7 +1,7 @@
 ---
 name: 'Kim Nucci'
 subtitle: Artist, composer, technologist
-description: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
+cardBlurb: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
 social:
     display: 'plzsendpzza'
     url: ''

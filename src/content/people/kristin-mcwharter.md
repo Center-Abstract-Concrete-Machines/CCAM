@@ -1,6 +1,6 @@
 ---
 name: 'Kristin McWharter'
-description: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
+cardBlurb: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
 social:
     display: 'kristinmcwharter'
     url: ''

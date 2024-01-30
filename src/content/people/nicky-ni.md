@@ -1,6 +1,6 @@
 ---
 name: 'Nicky Ni'
-description: 'Nicky Ni is a curator and writer living in Chicago. She is currently the Development and Operations Assistant at the Arts Alliance Illinois.'
+cardBlurb: 'Nicky Ni is a curator and writer living in Chicago. She is currently the Development and Operations Assistant at the Arts Alliance Illinois.'
 social:
     url: 'mllecolettex'
     display: 'mllecolettex'

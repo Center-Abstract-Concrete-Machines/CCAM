@@ -75,18 +75,18 @@ const projectsCollection = defineCollection({
         }),
 });
 
-const aboutCollection = defineCollection({
-    type: 'content',
-    schema: ({ image }) =>
-        z.object({
-            name: z.string(),
-            description: z.string(),
-            image: z.object({
-                url: image(),
-                alt: z.string(),
-            }),
-        }),
-});
+// const aboutCollection = defineCollection({
+//     type: 'content',
+//     schema: ({ image }) =>
+//         z.object({
+//             name: z.string(),
+//             description: z.string(),
+//             image: z.object({
+//                 url: image(),
+//                 alt: z.string(),
+//             }),
+//         }),
+// });
 
 const peopleCollection = defineCollection({
     type: 'content',
@@ -94,7 +94,7 @@ const peopleCollection = defineCollection({
         z.object({
             name: z.string(),
             subtitle: z.string().optional(),
-            description: z.string().optional(),
+            cardBlurb: z.string().optional(),
             image: image().optional(),
             social: z
                 .object({
@@ -115,6 +115,6 @@ export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
-    about: aboutCollection,
+    // about: aboutCollection,
     people: peopleCollection,
 };

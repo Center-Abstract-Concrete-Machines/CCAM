@@ -4,9 +4,7 @@ import { Image, Picture } from 'astro:assets';
 import PersonMetadata from './PersonMetadata.astro';
 
 let image;
-const personCardImages = await import.meta.glob(
-    'src/images/person-cards/*.png'
-);
+const personCardImages = import.meta.glob('src/images/person-cards/*.png');
 if (!data.image) {
     const keys = Object.keys(personCardImages);
     const randomKey = keys[Math.floor(Math.random() * keys.length)];

@@ -86,11 +86,20 @@ const peopleCollection = defineCollection({
     schema: ({ image }) =>
         z.object({
             name: z.string(),
-            description: z.string(),
+            description: z.string().optional(),
             image: image().optional(),
-            email: z.string().email(),
-            social: z.string(),
-            website: z.string(),
+            social: z
+                .object({
+                    display: z.string(),
+                    url: z.string(),
+                })
+                .optional(),
+            website: z
+                .object({
+                    display: z.string(),
+                    url: z.string(),
+                })
+                .optional(),
         }),
 });
 

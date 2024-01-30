@@ -1,6 +1,10 @@
-name: "Garrett Laroy Johnson"
-description: "Garrett Laroy Johnson is a sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of subjectivity, computation and materialism, and post-psychoanalysis."
-image: "/src/content/about/images/garrett.png"
-email: "garrett.laroy.johnson@gmail.com"
-social: "@diagrammatic.media"
-website: "garrettlaroyjohnson.com"
+name: 'Garrett Laroy Johnson'
+description: 'Garrett Laroy Johnson is a sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of subjectivity, computation and materialism, and post-psychoanalysis.'
+image: '/src/content/about/images/garrett.png'
+email: 'garrett.laroy.johnson@gmail.com'
+social:
+    display: 'diagrammatic.media'
+    url: ''
+website:
+    display: garrettlaroyjohnson.com
+    url: https://garrettlaroyjohnson.com

@@ -13,10 +13,6 @@ people:
       list:
           - garrett-laroy-johnson
           - phillip-thurtle
-    - label: Participants
-      list:
-          - fake-person
-          - fake-person
 ---
 
 We’ve been having weird dreams.

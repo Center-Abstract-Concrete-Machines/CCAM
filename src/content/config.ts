@@ -28,6 +28,7 @@ const programsCollection = defineCollection({
                     })
                 )
                 .optional(),
+            assProjectId: z.string().optional(),
         }),
 });
 

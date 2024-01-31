@@ -8,6 +8,7 @@ import { Image, Picture } from 'astro:assets';
 import DateStatus from '@components/DateStatus.astro';
 import ProgramMetadata from '@components/ProgramMetadata.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
+import { getCollection } from 'astro:content';
 
 const {
     title,
@@ -21,8 +22,14 @@ const {
     endDate,
     type,
     people,
+    assProjectId,
 } = Astro.props.frontmatter;
 const { slug } = Astro.props;
+
+const [assProject] = await getCollection(
+    'projects',
+    ({ data }) => data.projectId === assProjectId
+);
 ---
 
 <Base title={title}>
@@ -65,6 +72,17 @@ const { slug } = Astro.props;
                     <Tag tag={type} />
                     <DateStatus date={endDate} />
                 </div>
+                {
+                    assProjectId && (
+                        <p class="font-mono text-sm">
+                            <span>Part of the </span>
+                            <a href={`/projects/${assProject.slug}`}>
+                                {assProject.data.title}
+                            </a>
+                            <span> project</span>
+                        </p>
+                    )
+                }
                 <TagsList tags={tags} />
             </div>
             <slot />

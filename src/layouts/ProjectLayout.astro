@@ -15,7 +15,7 @@ const { slug } = Astro.props;
 
 const associatedPrograms = (
     await getCollection('programs', ({ data }) => {
-        return data.tags.includes(projectId);
+        return data.tags.includes(projectId) || data.assProjectId === projectId;
     })
 ).sort(sortByPubDate);
 

@@ -17,7 +17,7 @@ const programsCollection = defineCollection({
             }),
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
-            tags: z.array(z.string()),
+            tags: z.array(z.string().trim()),
             gallery: z.string().optional(),
             draft: z.boolean().default(false),
             people: z
@@ -47,7 +47,7 @@ const resourcesCollection = defineCollection({
                 })
                 .optional(),
             dateAdded: z.date(),
-            tags: z.array(z.string()),
+            tags: z.array(z.string().trim()),
             url: z.string().optional(),
         }),
 });
@@ -63,7 +63,7 @@ const projectsCollection = defineCollection({
                 alt: z.string(),
             }),
             dateAdded: z.date(),
-            tags: z.array(z.string()),
+            tags: z.array(z.string().trim()),
             projectId: z.string(),
             people: z
                 .array(
@@ -75,19 +75,6 @@ const projectsCollection = defineCollection({
                 .optional(),
         }),
 });
-
-// const aboutCollection = defineCollection({
-//     type: 'content',
-//     schema: ({ image }) =>
-//         z.object({
-//             name: z.string(),
-//             description: z.string(),
-//             image: z.object({
-//                 url: image(),
-//                 alt: z.string(),
-//             }),
-//         }),
-// });
 
 const peopleCollection = defineCollection({
     type: 'content',
@@ -116,6 +103,5 @@ export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
-    // about: aboutCollection,
     people: peopleCollection,
 };

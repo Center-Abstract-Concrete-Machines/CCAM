@@ -27,7 +27,6 @@ Work in progress
 Tags
 
 -   Every Program, Project, and Resource requires a tag
--   Tags must not have trailing or leading whitespace
 
 Frontmatter
 

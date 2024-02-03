@@ -3,7 +3,7 @@ import SearchLayout from '@layouts/SearchLayout.astro';
 import { getCollection } from 'astro:content';
 import { filterDraftsAndPubDate } from 'src/utils/programFilters';
 
-import SearchResultCard from '@components/SearchResultCard.astro';
+import ResourceCard from '@components/ResourceCard.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 
 export async function getStaticPaths() {
@@ -71,7 +71,7 @@ const { allResults } = Astro.props;
             allResults.map((result) => (
                 <>
                     <div class="search-result relative">
-                        <SearchResultCard
+                        <ResourceCard
                             metadata={result.data}
                             slug={result.slug}
                             metaType={result.metaType}

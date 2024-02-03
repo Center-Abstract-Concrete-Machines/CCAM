@@ -6,7 +6,7 @@ import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { sortByPubDate } from 'src/utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
-import SearchResultCard from '@components/SearchResultCard.astro';
+import ResourceCard from '@components/ResourceCard.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
 
 const { title, subtitle, image, tags, projectId, people } =
@@ -95,7 +95,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
                     <HorizontalSpacer class="my-4" />
                     {associatedResources.map((resource) => (
                         <>
-                            <SearchResultCard
+                            <ResourceCard
                                 metadata={resource.data}
                                 slug={resource.slug}
                                 metaSlug="resources"

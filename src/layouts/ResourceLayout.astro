@@ -1,5 +1,6 @@
 ---
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import LinkButton from '@components/LinkButton.astro';
 import ResourceType from '@components/ResourceType.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
@@ -49,16 +50,8 @@ const { slug } = Astro.props;
             </div>
         </div>
         <div class="prose dark:prose-invert mx-auto max-w-2xl py-4">
-            <TagsList tags={tags} />
-            <!-- {
-                url && (
-                    <p class="break-words">
-                        <a href={url} class="break">
-                            {url}
-                        </a>
-                    </p>
-                )
-            } -->
+            <TagsList tags={tags} class="mb-4" />
+            <!-- { url && <LinkButton href={url} text="Click here to navigate to a new URL please">} -->
             <slot />
         </div>
     </div>

@@ -1,0 +1,22 @@
+---
+title: > 
+  Proud to be Flesh:  A Mute Magazine Anthology of Cultural Politics after the Ne
+type: Book
+author: Josephine Berry Slater and Pauline van Mourik Broekman, eds.
+year: 2009
+image:
+    url: ./images/proud-to-be-flesh.jpg
+    alt: photo of the Proud to be Flesh book
+dateAdded: 2024-02-01
+url: https://monoskop.org/images/a/a2/Proud_to_be_Flesh_A_Mute_Magazine_Anthology_of_Cultural_Politics_after_the_Net_2009.pdf
+tags:
+    - Mute Magazine
+    - Autonomedia
+    - web art 
+    - Josephine Berry Slater
+    - Pauline van Maurik Broekman
+    - organization studies
+    - Californian Ideology
+    - digital art
+    - immaterial labor
+---

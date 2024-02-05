@@ -4,7 +4,7 @@ const { slug } = Astro.props;
 const { image, title, description } = Astro.props.metadata;
 ---
 
-<div class="mx-auto flex flex-col gap-4 max-w-2xl pb-16">
+<div class="mx-auto flex flex-col gap-4 max-w-2xl">
     <a href=`/projects/${slug}`>
         <div transition:name=`image-${slug}`>
             <Picture

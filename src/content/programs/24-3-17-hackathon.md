@@ -15,6 +15,13 @@ tags:
     - SynthDIY
     - hackathon
     - collaboration
+people:
+    - label: leads
+      list: 
+       - joseph-kramer
+       - robb-drinkwater
+       - kim-nucci
+       - garrett-laroy-johnson 
 ---
 
 In collaboration with the Performance Technology Research Group (PTRG) at SAIC, CCAM will sponsor and host entries into Synthux Academy's international synth hackathon. Over four days, teams of 2-3 will work together and with a mentor to develop and document a synth "from scratch" that speaks to this year's theme (TBA). Previous entries span different areas of making and research, including responsive environments, circuit-bending, app development, installation, performance, biomusicology, DJ practices, and more. Check out last year's website for [inspiration](https://www.synthux.academy/events/hackathon-2023).

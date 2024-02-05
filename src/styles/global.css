@@ -171,7 +171,6 @@ img {
 .card-grid {
     display: grid;
     gap: 2rem;
-    padding: 1rem;
 }
 
 .card-grid > * {

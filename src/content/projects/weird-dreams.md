@@ -7,7 +7,12 @@ image:
 dateAdded: 2023-12-14
 tags:
     - weird dreams
-projectId: weird-dreams
+projectId: weird dreams
+people:
+    - label: conveners
+      list:
+          - garrett-laroy-johnson
+          - phillip-thurtle
 ---
 
 We’ve been having weird dreams.

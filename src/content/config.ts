@@ -17,11 +17,18 @@ const programsCollection = defineCollection({
             }),
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
-            tags: z.array(z.string()),
-            assProjectId: z.string().optional(),
+            tags: z.array(z.string().trim().toLowerCase()),
             gallery: z.string().optional(),
             draft: z.boolean().default(false),
-            participants: z.array(z.string()).optional(),
+            people: z
+                .array(
+                    z.object({
+                        label: z.string(),
+                        list: z.array(z.string()),
+                    })
+                )
+                .optional(),
+            assProjectId: z.string().optional(),
         }),
 });
 
@@ -40,7 +47,7 @@ const resourcesCollection = defineCollection({
                 })
                 .optional(),
             dateAdded: z.date(),
-            tags: z.array(z.string()),
+            tags: z.array(z.string().trim().toLowerCase()),
             url: z.string().optional(),
         }),
 });
@@ -56,21 +63,39 @@ const projectsCollection = defineCollection({
                 alt: z.string(),
             }),
             dateAdded: z.date(),
-            tags: z.array(z.string()),
+            tags: z.array(z.string().trim().toLowerCase()),
             projectId: z.string(),
+            people: z
+                .array(
+                    z.object({
+                        label: z.string(),
+                        list: z.array(z.string()),
+                    })
+                )
+                .optional(),
         }),
 });
 
-const aboutCollection = defineCollection({
+const peopleCollection = defineCollection({
     type: 'content',
     schema: ({ image }) =>
         z.object({
             name: z.string(),
-            description: z.string(),
-            image: z.object({
-                url: image(),
-                alt: z.string(),
-            }),
+            subtitle: z.string().optional(),
+            cardBlurb: z.string().optional(),
+            image: image().optional(),
+            social: z
+                .object({
+                    display: z.string(),
+                    url: z.string(),
+                })
+                .optional(),
+            website: z
+                .object({
+                    display: z.string(),
+                    url: z.string(),
+                })
+                .optional(),
         }),
 });
 
@@ -78,5 +103,5 @@ export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
-    about: aboutCollection,
+    people: peopleCollection,
 };

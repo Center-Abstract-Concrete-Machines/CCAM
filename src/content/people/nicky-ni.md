@@ -1,0 +1,10 @@
+---
+name: 'Nicky Ni'
+cardBlurb: 'Nicky Ni is a curator and writer living in Chicago. She is currently the Development and Operations Assistant at the Arts Alliance Illinois.'
+social:
+    url: 'mllecolettex'
+    display: 'mllecolettex'
+website:
+    display: 'lithium.gallery/'
+    url: 'https://lithium.gallery/'
+---

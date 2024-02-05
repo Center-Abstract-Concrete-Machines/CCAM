@@ -1,0 +1,11 @@
+---
+name: 'Paige Naylor'
+cardBlurb: 'Paige Naylor is a Chicago-based artist and educator working within the realms of sound, light, performance, installation, technology, acoustic ecology, listening practices and writing. Her work aims to bend time, transform space, and create new social and emotional realities for/with others. She constructs environments that are vulnerable, direct and interpersonal to make space for others in which to feel and heal.'
+email: 'email@email.edu'
+social:
+    display: 'paigealicenaylor'
+    url: ''
+website:
+    display: 'paigenaylor.art'
+    url: 'https://www.paigenaylor.art'
+---

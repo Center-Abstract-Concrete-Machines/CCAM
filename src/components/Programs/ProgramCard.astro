@@ -19,21 +19,11 @@ const {
     image,
     type,
 } = Astro.props.frontmatter;
-
-// function returnDateStatus(endDate) {
-//     if (endDate === 'ongoing') {
-//         return 'Ongoing';
-//     } else if (Date.now() < endDate.getTime()) {
-//         return 'Upcoming';
-//     } else {
-//         return 'Past';
-//     }
-// }
 ---
 
 <div class=`flex flex-col items-start ${className}`>
-    <a href={`/programs/${slug}`}>
-        <div transition:name=`image-${slug}`>
+    <a href={`/programs/${slug}`} class="w-full">
+        <div transition:name=`image-${slug}` class="mx-auto">
             <Picture
                 src={image.url}
                 alt={image.alt}

@@ -17,9 +17,14 @@ tags:
     - experimental
     - the neu lithium
     - onion city film festival
-    - anna johnson
-    - paige naylor
-    - nicky ni
+people:
+    - label: curators
+      list: 
+        - paige-naylor
+        - nicky-ni
+        - anna-johnson
+        - kim-nucci
+        - garrett-laroy-johnson
 ---
 
 More details forthcoming.

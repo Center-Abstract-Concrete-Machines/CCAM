@@ -1,4 +1,3 @@
-import { p5 } from '/src/utils/p5wrapper.js';
 import getContainerDimensions from './getContainerDimensions';
 import Particle from './particle';
 
@@ -15,7 +14,7 @@ export function setupSketch() {
         const refreshParticles = () => {
             points = [];
             particles = [];
-            for (let i = 0; i < 3000; i++) {
+            for (let i = 0; i < p.width * 2.5; i++) {
                 let u = {
                     x: p.random(p.width),
                     y: p.random(p.height),
@@ -53,8 +52,9 @@ export function setupSketch() {
 
 // Use Intersection Observer API to load sketch once it is visible
 function callback(entries, observer) {
-    entries.forEach((entry) => {
+    entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
+            await import('/src/utils/p5wrapper.js');
             sketchEl = setupSketch();
             observer.disconnect();
         }
@@ -63,7 +63,7 @@ function callback(entries, observer) {
 
 function setupObserver() {
     const sketchObserver = new IntersectionObserver(callback, {
-        threshold: 0.5,
+        threshold: 0.3,
     });
     sketchObserver.observe(document.querySelector('#sketch'));
 }

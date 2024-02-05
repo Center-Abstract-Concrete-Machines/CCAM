@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 
-// import ResourceCard from './ResourceCard.astro';
-import SearchResultCard from '@components/SearchResultCard.astro';
+import ResourceCard from '@components/ResourceCard.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 
 const { displayCount } = Astro.props;
@@ -19,9 +18,8 @@ if (displayCount) {
 <div class="pt-4">
     {
         resources.map((resource) => (
-            // <ResourceCard metadata={resource.data} slug={resource.slug} />
             <>
-                <SearchResultCard
+                <ResourceCard
                     metadata={resource.data}
                     slug={resource.slug}
                     metaSlug="resources"

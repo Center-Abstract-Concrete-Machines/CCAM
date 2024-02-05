@@ -1,5 +1,6 @@
 ---
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import LinkButton from '@components/LinkButton.astro';
 import ResourceType from '@components/ResourceType.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
@@ -11,19 +12,25 @@ const { slug } = Astro.props;
 
 <Base title={title}>
     <div class="p-4">
-    <div class="mx-auto max-w-2xl">
-            {image && (
-
-                <div transition:name=`image-${slug}` class="mb-4 mx-auto w-fit">
-                    <Picture
-                        src={image.url}
-                        alt={image.alt}
-                        widths={[400, 600, 1200, image.url.width]}
-                        class="max-w-full"
-                    />
-                </div>
-                <HorizontalSpacer />
-            )}
+        <div class="mx-auto max-w-2xl">
+            {
+                image && (
+                    <>
+                        <div
+                            class="mb-4 mx-auto w-fit"
+                            transition:name={`image-${slug}`}
+                        >
+                            <Picture
+                                src={image.url}
+                                alt={image.alt}
+                                widths={[400, 600, 1200, image.url.width]}
+                                class="max-w-full"
+                            />
+                        </div>
+                        <HorizontalSpacer />
+                    </>
+                )
+            }
             <div>
                 <h1 class="text-xl font-medium">{title}</h1>
                 <div
@@ -43,8 +50,8 @@ const { slug } = Astro.props;
             </div>
         </div>
         <div class="prose dark:prose-invert mx-auto max-w-2xl py-4">
-            <TagsList tags={tags} />
-            { url && <p><a href={url}>{url}</a></p>}
+            <TagsList tags={tags} class="mb-4" />
+            <!-- { url && <LinkButton href={url} text="Click here to navigate to a new URL please">} -->
             <slot />
         </div>
     </div>

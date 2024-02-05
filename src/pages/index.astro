@@ -56,19 +56,19 @@ const featuredPrograms = (await getCollection('programs'))
             >
                 <a href="/programs" class="flex grow">
                     <button
-                        class="font-mono border border-dashed border-borderColor hover:bg-backgroundHover/5 grow"
+                        class="font-mono border border-dashed border-borderColor/30 hover:bg-backgroundHover/5 grow"
                         >Program Calendar</button
                     ></a
                 >
                 <a href="/projects" class="flex grow">
                     <button
-                        class="font-mono border border-dashed border-borderColor hover:bg-backgroundHover/5 grow"
+                        class="font-mono border border-dashed border-borderColor/30 hover:bg-backgroundHover/5 grow"
                         >Research Projects</button
                     ></a
                 >
                 <a href="/about" class="flex grow">
                     <button
-                        class="font-mono border border-dashed border-borderColor hover:bg-backgroundHover/5 grow"
+                        class="font-mono border border-dashed border-borderColor/30 hover:bg-backgroundHover/5 grow"
                         >About Us</button
                     ></a
                 >
@@ -85,7 +85,7 @@ const featuredPrograms = (await getCollection('programs'))
                 <button class="button font-mono">View All</button>
             </a>
         </div>
-        <div class="card-grid double">
+        <div class="card-grid double p-4">
             {
                 featuredPrograms.map((program) => (
                     <div>
@@ -100,9 +100,9 @@ const featuredPrograms = (await getCollection('programs'))
     </section>
 
     <!-- About -->
-    <section class="px-4 pt-4">
-        <HorizontalSpacer />
-        <div class="grid place-items-center mx-4 mt-4">
+    <section class="px-4">
+        <HorizontalSpacer class="mb-4" />
+        <div class="grid place-items-center mx-4">
             <div class="grid grid-cols-1 md:grid-cols-2 md:w-10/12 py-20 gap-8">
                 <div
                     class="flex flex-col justify-between items-start order-2 md:order-1"

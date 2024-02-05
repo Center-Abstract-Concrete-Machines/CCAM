@@ -12,12 +12,12 @@ image:
 type: Event
 featured: false
 tags:
-    - Seth Brodsky
-    - Kristi McGuire
-    - Doug Rosman
-    - The Neu Lithium
-    - Nicky Ni
-    - Drone-Ambient-Noise
+    - seth brodsky
+    - kristi mcguire
+    - doug rosman
+    - the neu lithium
+    - nicky ni
+    - drone-ambient-noise
 gallery: all-watched-over
 ---
 

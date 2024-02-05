@@ -6,15 +6,22 @@ import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { sortByPubDate } from 'src/utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
+import ResourceCard from '@components/ResourceCard.astro';
+import PeopleDisplay from '@components/PeopleDisplay.astro';
 
-const { title, subtitle, image, tags, projectId } = Astro.props.frontmatter;
+const { title, subtitle, image, tags, projectId, people } =
+    Astro.props.frontmatter;
 const { slug } = Astro.props;
 
 const associatedPrograms = (
     await getCollection('programs', ({ data }) => {
-        return data.assProjectId === projectId;
+        return data.tags.includes(projectId) || data.assProjectId === projectId;
     })
 ).sort(sortByPubDate);
+
+const associatedResources = await getCollection('resources', ({ data }) =>
+    data.tags.includes(projectId)
+);
 ---
 
 <Base title={title}>
@@ -50,14 +57,23 @@ const associatedPrograms = (
             <TagsList tags={tags} />
             <slot />
         </div>
+        {people && <PeopleDisplay people={people} />}
+
         {
-            associatedPrograms && (
+            associatedPrograms.length > 0 && (
                 <>
                     <HorizontalSpacer class="my-4" />
-                    <h2 class="text-3xl font-medium text-center">
+                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
                         Associated Programs
                     </h2>
-                    <div class="card-grid double">
+                    <HorizontalSpacer class="my-4" />
+                    <div
+                        class={
+                            associatedPrograms.length === 1
+                                ? 'max-w-lg mx-auto'
+                                : 'card-grid double p-4'
+                        }
+                    >
                         {associatedPrograms.map((program) => (
                             <ProgramCard
                                 headingSize="text-xl"
@@ -69,5 +85,34 @@ const associatedPrograms = (
                 </>
             )
         }
+        {
+            associatedResources.length > 0 && (
+                <div>
+                    <HorizontalSpacer class="my-4" />
+                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-8">
+                        Associated Resources
+                    </h2>
+                    <HorizontalSpacer class="my-4" />
+                    {associatedResources.map((resource) => (
+                        <>
+                            <ResourceCard
+                                metadata={resource.data}
+                                slug={resource.slug}
+                                metaSlug="resources"
+                            />
+                            <div class="spacer">
+                                <HorizontalSpacer />
+                            </div>
+                        </>
+                    ))}
+                </div>
+            )
+        }
     </div>
 </Base>
+
+<style>
+    .spacer:last-of-type {
+        display: none;
+    }
+</style>

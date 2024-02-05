@@ -13,5 +13,5 @@ type: Event
 featured: true
 tags:
     - future rhythm
-assProjectId: future-rhythm
+assProjectId: future rhythm
 ---

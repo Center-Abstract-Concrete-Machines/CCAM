@@ -1,7 +1,8 @@
 ---
 import { Image, Picture } from 'astro:assets';
-import HorizontalSpacer from '@components/HorizontalSpacer.astro';
-import placeholder from 'src/content/resources/images/placeholder.png';
+
+import type { ImageMetadata } from 'astro';
+
 import ResourceType from '@components/ResourceType.astro';
 import TagsList from './TagsList.astro';
 
@@ -9,6 +10,19 @@ const { image, title, type, tags } = Astro.props.metadata;
 const { slug, metaType, metaSlug } = Astro.props;
 
 const typeProp = type ? type : metaType;
+
+const personCardImages = import.meta.glob<{ default: ImageMetadata }>(
+    'src/images/person-cards/*.png'
+);
+let imageSrc;
+if (!image) {
+    const keys = Object.keys(personCardImages);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    const thing = await personCardImages[randomKey]();
+    imageSrc = thing.default;
+} else {
+    imageSrc = image.url;
+}
 ---
 
 <div class="hover:bg-backgroundHover/5">
@@ -16,23 +30,13 @@ const typeProp = type ? type : metaType;
     <div class="resource-grid grid gap-4 p-4">
         <div transition:name=`image-${slug}`>
             <a href=`/${metaSlug}/${slug}`>
-                {
-                    image ? (
-                        <Picture
-                            src={image.url}
-                            alt={image.alt}
-                            class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
-                            widths={[400, 600, 1200, image.url.width]}
-                        />
-                    ) : (
-                        <Picture
-                            src={placeholder}
-                            alt="Placeholder image"
-                            class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
-                            widths={[400, 600, 1200, placeholder.width]}
-                        />
-                    )
-                }
+                <Picture
+                    src={imageSrc}
+                    alt={image ? image.alt : ''}
+                    class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
+                    widths={[200, 400, 800]}
+                    sizes="5rem"
+                />
             </a>
         </div>
         <div>
@@ -45,7 +49,7 @@ const typeProp = type ? type : metaType;
                 <div class="shrink-0 self-start">
                     <ResourceType type={typeProp} />
                 </div>
-                <TagsList tags={tags} />
+                <TagsList tags={tags} size="text-xs" />
             </div>
         </div>
     </div>

@@ -6,8 +6,9 @@ import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
 import { Image, Picture } from 'astro:assets';
 import DateStatus from '@components/DateStatus.astro';
-import Participants from '@components/Participants.astro';
 import ProgramMetadata from '@components/ProgramMetadata.astro';
+import PeopleDisplay from '@components/PeopleDisplay.astro';
+import { getCollection } from 'astro:content';
 
 const {
     title,
@@ -20,9 +21,15 @@ const {
     location,
     endDate,
     type,
-    participants,
+    people,
+    assProjectId,
 } = Astro.props.frontmatter;
 const { slug } = Astro.props;
+
+const [assProject] = await getCollection(
+    'projects',
+    ({ data }) => data.projectId === assProjectId
+);
 ---
 
 <Base title={title}>
@@ -65,19 +72,30 @@ const { slug } = Astro.props;
                     <Tag tag={type} />
                     <DateStatus date={endDate} />
                 </div>
+                {
+                    assProjectId && (
+                        <p class="font-mono text-sm">
+                            <span>Part of the </span>
+                            <a href={`/projects/${assProject.slug}`}>
+                                {assProject.data.title}
+                            </a>
+                            <span> project</span>
+                        </p>
+                    )
+                }
                 <TagsList tags={tags} />
-                <!-- {participants && <Participants participants={participants} />} -->
             </div>
             <slot />
         </div>
-    </div>
+        {people && <PeopleDisplay people={people} />}
 
-    {
-        gallery && (
-            <>
-                <HorizontalSpacer class="mx-4" />
-                <Gallery gallery={gallery} />
-            </>
-        )
-    }
+        {
+            gallery && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+                    <Gallery gallery={gallery} />
+                </>
+            )
+        }
+    </div>
 </Base>

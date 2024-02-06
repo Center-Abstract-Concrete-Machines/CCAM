@@ -1,6 +1,8 @@
 const metadata = {
     siteTitle: 'CCAM',
     subtitle: 'Center for Concrete and Abstract Machines',
+    description:
+        'Nomadically based in Chicago, CCAM is an artist-run platform at the nexus of art, technology, and contemporary thought.',
     navLinks: [
         {
             name: 'Programs',

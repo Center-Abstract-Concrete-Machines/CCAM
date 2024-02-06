@@ -1,0 +1,21 @@
+---
+# title: string (required)
+# author: string (optional)
+# type: string (required) book, website, image, video, codebase, article, magazine, periodical, organization, link
+# year: number (optional)
+# dateAdded: date (required)
+# tags: array of strings
+#     -
+# image: object (optional)
+#     url: file path
+#     alt: description of image
+---
+import LinkButton from '@components/LinkButton.astro'
+
+Text on page
+
+Include a [link](https://www.ccam.world) if wanted.
+
+or a link button:
+
+<LinkButton text="display text" url="https://www.ccam.world" />

@@ -3,11 +3,13 @@ dialog {
 }
 
 ::backdrop {
-    background: linear-gradient(
+    /* background: linear-gradient(
         0.5turn,
         hsl(235deg 79% 70% / 1),
         hsl(235deg 79% 70% / 0.5)
-    );
+    ); */
+    background: hsl(0 0% 0% / 0.8);
+    backdrop-filter: blur(4px);
 
     /* animation: backdrop-fade-in 300ms forwards; */
 }

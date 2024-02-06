@@ -60,7 +60,8 @@
     --textColor: var(--Black);
     --linkColor: var(--Black);
     --borders: var(--Black);
-    --meta-background: hsl(var(--Purple));
+    --meta-background: hsl(var(--backgroundColor));
+    --outline: var(--Purple);
 }
 
 :root.dark {
@@ -70,7 +71,8 @@
     --textColor: var(--White);
     --link: var(--White);
     --borders: var(--White);
-    --meta-background: hsl(var(--Purple));
+    --meta-background: hsl(var(--backgroundColor));
+    --outline: var(--Green);
 }
 
 * {
@@ -83,7 +85,7 @@ html {
 
 /* Scrollbar colors */
 html {
-    scrollbar-color: hsl(var(--Green)) hsl(var(--backgroundColor));
+    scrollbar-color: hsl(var(--outline)) hsl(var(--backgroundColor));
 }
 /* Safari scrollbar  */
 /* *::-webkit-scrollbar {
@@ -99,7 +101,7 @@ input {
 }
 
 :focus {
-    outline: hsl(var(--Green)) 2px solid;
+    outline: hsl(var(--outline)) 2px solid;
 }
 
 ::selection {

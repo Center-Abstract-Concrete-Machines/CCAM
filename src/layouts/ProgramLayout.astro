@@ -9,6 +9,7 @@ import DateStatus from '@components/DateStatus.astro';
 import ProgramMetadata from '@components/ProgramMetadata.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
 import { getCollection } from 'astro:content';
+import AssProjectLink from '@components/AssProjectLink.astro';
 
 const {
     title,
@@ -72,17 +73,7 @@ const [assProject] = await getCollection(
                     <Tag tag={type} />
                     <DateStatus date={endDate} />
                 </div>
-                {
-                    assProjectId && (
-                        <p class="font-mono text-sm">
-                            <span>Part of the </span>
-                            <a href={`/projects/${assProject.slug}`}>
-                                {assProject.data.title}
-                            </a>
-                            <span> project</span>
-                        </p>
-                    )
-                }
+                {assProjectId && <AssProjectLink assProject={assProject} />}
                 <TagsList tags={tags} />
             </div>
             <slot />

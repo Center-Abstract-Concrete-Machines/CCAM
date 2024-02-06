@@ -24,9 +24,13 @@
 
 Work in progress
 
-[Dev branch staging site](https://ccam-staging.netlify.app/)
+[Staging site (dev branch)](https://ccam-staging.netlify.app/)
 
 [Public facing site (main branch)](https://abstractconcrete.center/)
+
+Templates
+
+-   Each content type (people, programs, projects, resources) has an associated _template.mdx file. Duplicate this file, edit the data, and rename the file (making sure to remove the leading underscore _). Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.
 
 Tags
 

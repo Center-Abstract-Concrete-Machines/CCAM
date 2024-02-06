@@ -19,7 +19,7 @@ const uniqueTags = Array.from(
 const { tag } = Astro.props;
 ---
 
-<Base title={tag}>
+<Base title={tag ? tag : 'Search'}>
     <div class="my-4 grid w-full grid-cols-1 sm:grid-cols-6">
         <div class="sm:col-span-4 mx-4 mb-4">
             <slot />

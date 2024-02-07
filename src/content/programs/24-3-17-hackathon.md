@@ -28,4 +28,6 @@ In collaboration with the Performance Technology Research Group (PTRG) at SAIC, 
 
 Participants will have dedicated space in Chicago and provided microcontrollers, tools, and other relevant components. "Prizes" from Arturia are distributed randomly by Synthux to participants who submit a completed project.
 
-Participation is open to all regardless of skill level. DM on instagram or email to get involved.
+Participation is open to all regardless of skill level, although spots are limited.
+
+[Apply Now!](https://forms.gle/TAw18DUgLdc92zGP8)

@@ -32,7 +32,7 @@ Work in progress
 
 -   Each content type (people, programs, projects, resources) has an associated _template.mdx file. Duplicate this file, edit the data, and rename the file (making sure to remove the leading underscore _). Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.
 
-## Using LinkButton component
+## Using LinkButton component in mdx files
 
 <!-- prettier-ignore-start -->
 ```mdx

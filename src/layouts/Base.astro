@@ -23,16 +23,26 @@ if (title) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
 
+        <link rel="canonical" href={Astro.site.origin + Astro.url.pathname} />
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={tabTitle} />
-        <meta property="og:url" content={Astro.url} />
+        <meta
+            property="og:url"
+            content={Astro.site.origin + Astro.url.pathname}
+        />
         <meta property="og:description" content={metadata.description} />
-        <meta property="og:image" content=`${Astro.site}ccam-social.png` />
+        <meta
+            property="og:image"
+            content=`${Astro.site.origin}/ccam-social.png`
+        />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:description" content={metadata.description} />
         <meta name="twitter:title" content={tabTitle} />
-        <meta name="twitter:image" content=`${Astro.site}ccam-social.png` />
+        <meta
+            name="twitter:image"
+            content=`${Astro.site.origin}/ccam-social.png`
+        />
 
         <link rel="icon" type="image/png" href="/favicon-light.png" />
         <link

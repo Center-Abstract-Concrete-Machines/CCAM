@@ -23,16 +23,26 @@ if (title) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
 
+        <link rel="canonical" href={Astro.site.origin + Astro.url.pathname} />
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={tabTitle} />
-        <meta property="og:url" content={Astro.url} />
+        <meta
+            property="og:url"
+            content={Astro.site.origin + Astro.url.pathname}
+        />
         <meta property="og:description" content={metadata.description} />
-        <meta property="og:image" content=`${Astro.site}ccam-social.png` />
+        <meta
+            property="og:image"
+            content=`${Astro.site.origin}/ccam-social.png`
+        />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:description" content={metadata.description} />
         <meta name="twitter:title" content={tabTitle} />
-        <meta name="twitter:image" content=`${Astro.site}ccam-social.png` />
+        <meta
+            name="twitter:image"
+            content=`${Astro.site.origin}/ccam-social.png`
+        />
 
         <link rel="icon" type="image/png" href="/favicon-light.png" />
         <link
@@ -61,5 +71,29 @@ if (title) {
             </div>
         </div>
         <ContactDialog />
+        <script is:inline>
+            document.addEventListener('astro:page-load', () => {
+                const allPictures = document.querySelectorAll('img');
+
+                allPictures.forEach((image) => {
+                    image.style.opacity = 0;
+                });
+
+                allPictures.forEach((image) =>
+                    image.addEventListener('load', (event) => {
+                        event.target.style.transition = 'opacity 1s';
+                        event.target.style.opacity = '1';
+                    })
+                );
+
+                // Backup if image is loaded from the cache;
+                allPictures.forEach((image) => {
+                    if (image.complete) {
+                        image.style.transition = 'opacity 1s';
+                        image.style.opacity = '1';
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

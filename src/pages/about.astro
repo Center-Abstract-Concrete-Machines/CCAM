@@ -5,13 +5,11 @@ import { getCollection } from 'astro:content';
 import Base from '@layouts/Base.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import OrganizerCard from '@components/About/OrganizerCard.astro';
+import ContactInfo from '@components/ContactInfo.astro';
 
 import Screening from 'src/images/screening.jpg';
 import Workshop from 'src/images/workshop.jpg';
-import ContactInfo from '@components/ContactInfo.astro';
 
-// const organizers = await getCollection('about');
-// const organizers = await getCollection('people');
 const organizers = await getCollection(
     'people',
     (person) =>
@@ -43,9 +41,9 @@ const organizers = await getCollection(
                 and decolonial perspectives in art and art technology.
             </p>
             <figure class="text-center flex flex-col gap-2 py-16">
-                <Image
+                <Picture
                     src={Workshop}
-                    alt="CCAM Artist Space"
+                    alt="Participants at a multichannel sound workshop in November 2023 listening carefully."
                     class="mx-auto"
                     widths={[400, 600, 1200, Workshop.width]}
                 />
@@ -86,9 +84,9 @@ const organizers = await getCollection(
         </section>
         <HorizontalSpacer class="pb-4" />
         <figure class="text-center flex flex-col gap-2">
-            <Image
+            <Picture
                 src={Screening}
-                alt="CCAM Artist Space"
+                alt="Panelists Seth Brodsky, Kristi McGuire, Doug Rosman, and Garrett Laroy Johnson at a September 2023 screening event."
                 class="mx-auto"
                 widths={[400, 600, 1200, Screening.width]}
             />

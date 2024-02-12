@@ -1,7 +1,7 @@
 ---
 name: 'Kim Nucci'
 subtitle: Artist, composer, technologist
-cardBlurb: 'Multidisciplinary artist exploring the boundaries between intimacy and competition.'
+cardBlurb: 'Kim Nucci is an Oakland-based media artist, composer, and technologist. As a musician, they perform on electronics, modular synthesizer, and saxophone and create interactive installations using architectural interventions, sculpture, arduino and other microcontrollers as a visual and sound artist.'
 social:
     display: 'plzsendpzza'
     url: ''

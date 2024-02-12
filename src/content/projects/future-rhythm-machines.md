@@ -7,6 +7,8 @@ image:
 dateAdded: 2023-12-14
 tags:
     - future rhythm
+    - Chicago
+    - house music
 projectId: future rhythm
 people:
     - label: Conveners

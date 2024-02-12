@@ -6,13 +6,14 @@ year: 2009
 dateAdded: 2023-12-02
 url:  https://archive.org/details/deleuze-and-politics
 tags:
-    - deleuze
-    - guattari 
+    - Deleuze
+    - Guattari 
+    - Daniel W. Smith
     - systems theory
     - more-than-human
     - politics
-    - daniel w. smith
+    - Daniel W. Smith
     - lectures
     - psychoanalysis
-    - a thousand plateaus
+    - A Thousand Plateaus
 ---

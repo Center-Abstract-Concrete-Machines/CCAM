@@ -64,7 +64,7 @@ const { title, text, class: className } = Astro.props;
     }
 
     document.addEventListener('astro:page-load', () => {
-        const heading = document.querySelector('.mightymorpher');
+        const heading = document.querySelector('.mightymorpher') as HTMLElement;
         if (heading) {
             heading.innerHTML = addMorphClasses(heading.innerText);
         }

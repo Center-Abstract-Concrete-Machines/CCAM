@@ -5,31 +5,34 @@ const { title, text, class: className } = Astro.props;
 <div class=`grid place-content-center py-24 ${className}`>
     <div class="max-w-lg text-center flex flex-col gap-4">
         <h1
-            class="text-5xl sm:text-6xl uppercase font-semibold leading-tight tracking-tight mightymorpher"
+            class="text-5xl sm:text-6xl uppercase font-semibold leading-tight tracking-tight mightymorpher text-balance"
         >
             {title}
         </h1>
-        {text && <p>{text}</p>}
+        {text && <p class="text-balance">{text}</p>}
     </div>
 </div>
-
-<style>
-    p {
-        text-wrap: balance;
-    }
-</style>
 
 <script>
     function addMorphClasses(string) {
         const stringArray = string.split('');
 
+        const validIndexes = [...stringArray].reduce((acc, char, index) => {
+            if (/[0-9a-zA-Z]/g.test(char)) {
+                acc.push(index);
+            }
+            return acc;
+        }, []);
         let indexes = new Set();
-        const length = string.length;
+        const length = validIndexes.length;
         // Add to first half of title
-        indexes.add(Math.floor(Math.random() * (length / 2)));
+        indexes.add(validIndexes[Math.floor(Math.random() * (length / 2))]);
         // Add to second half of title
         indexes.add(
-            Math.floor(Math.random() * (length / 2)) + Math.floor(length / 2)
+            validIndexes[
+                Math.floor(Math.random() * (length / 2)) +
+                    Math.floor(length / 2)
+            ]
         );
         function spanify(index) {
             const letter = stringArray[index];
@@ -38,6 +41,7 @@ const { title, text, class: className } = Astro.props;
         indexes.forEach((index) => spanify(index));
         return stringArray.join('');
     }
+
     function addStylesAttrToElement(element) {
         const colors = [
             'text-Blue',

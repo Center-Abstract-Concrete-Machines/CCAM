@@ -2,8 +2,7 @@
 const { text, url, class: className } = Astro.props;
 ---
 
-<div
-    class=`text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/30 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words ${className}`
+<a
+    class=`text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words ${className} block my-4`
+    href={url}>{text}</a
 >
-    <a href={url}>{text}</a>
-</div>

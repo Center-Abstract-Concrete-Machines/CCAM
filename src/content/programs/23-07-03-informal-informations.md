@@ -78,4 +78,4 @@ challenges and problematics of art and research organizing in a new light.
 
 ## Thanks
 
-Special thanks to NEW INC and Dakota Gearhart!
+Special thanks to NEW INC and Dakota Gearhart.

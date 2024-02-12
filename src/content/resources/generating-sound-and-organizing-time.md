@@ -6,11 +6,11 @@ year: 2022
 tags:
     - generative sound
     - gen~ working group
-    - gregory taylor
-    - graham wakefield
+    - Gregory Taylor
+    - Graham Wakefield
     - modular synthesis
-    - daisy
-    - max/msp
+    - Daisy
+    - Max/MSP
 url: https://cycling74.com/books/go
 image:
     url: ./images/go.png

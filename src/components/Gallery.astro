@@ -31,9 +31,18 @@ const optimizedImages = await Promise.all(
             await getImage({ src: allImages[path](), format: 'webp' })
     )
 );
+
+let galleryWidth;
+if (optimizedImages.length <= 2) {
+    galleryWidth = 'double';
+} else if (optimizedImages.length === 3) {
+    galleryWidth = 'triple';
+} else {
+    galleryWidth = 'quad';
+}
 ---
 
-<div id="lightgallery" class="card-grid quad">
+<div id="lightgallery" class=`card-grid ${galleryWidth}`>
     {
         gallery &&
             optimizedImages.map((obj) => (

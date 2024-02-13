@@ -73,7 +73,8 @@ if (title) {
         <ContactDialog />
         <script is:inline>
             document.addEventListener('astro:page-load', () => {
-                const allPictures = document.querySelectorAll('img');
+                const allPictures =
+                    document.querySelectorAll('img:not(.no-fade)');
 
                 allPictures.forEach((image) => {
                     image.style.opacity = 0;

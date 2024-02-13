@@ -1,0 +1,15 @@
+---
+import Base from '@layouts/Base.astro';
+import TitleCard from '@components/TitleCard.astro'
+---
+
+<Base title="404: Not Found">
+    <div class="mx-auto w-full grid place-items-center h-full">
+        <div class="flex flex-col items-center justify-center">
+            <TitleCard
+                title="404: Not found"
+                class="px-4"
+            />
+            <button onclick="history.back()" class="button">Go Back</button>
+        </div>
+</Base>

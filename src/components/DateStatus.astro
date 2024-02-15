@@ -1,6 +1,17 @@
 ---
-import { returnDateStatus } from 'src/utils/returnDateStatus';
+import { isDateUpcoming } from 'src/utils/programFilters';
+
 const { date } = Astro.props;
+
+function returnDateStatus(endDate) {
+    if (endDate === 'ongoing') {
+        return 'Ongoing';
+    } else if (isDateUpcoming(endDate)) {
+        return 'Upcoming';
+    } else {
+        return 'Past';
+    }
+}
 ---
 
 <div

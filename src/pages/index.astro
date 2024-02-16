@@ -11,10 +11,14 @@ import squareSpace from 'src/images/space-square.jpg';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
-import { filterDraftsAndPubDate } from 'src/utils/programFilters';
+import {
+    filterDraftsAndPubDate,
+    isEventUpcoming,
+} from 'src/utils/programFilters';
 
 const featuredPrograms = (await getCollection('programs'))
     .filter(filterDraftsAndPubDate)
+    .filter(({ data }) => isEventUpcoming(data))
     .filter(({ data }) => data.featured === true)
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
     .slice(0, 2);

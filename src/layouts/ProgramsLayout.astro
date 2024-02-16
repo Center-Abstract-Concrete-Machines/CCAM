@@ -5,9 +5,9 @@ import ProgramCard from '@components/Programs/ProgramCard.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import FilterBar from '@components/Programs/FilterBar.astro';
 import {
-    isEventUpcoming,
     sortByPubDate,
     filterDraftsAndPubDate,
+    isEventUpcoming,
 } from 'src/utils/programFilters';
 
 const { events, subtitle, description, filter } = Astro.props;

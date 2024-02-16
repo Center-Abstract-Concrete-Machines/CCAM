@@ -1,6 +1,21 @@
+import dayjs from "dayjs";
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(isSameOrBefore);
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export function isDateUpcoming(date) {
+    const today = dayjs(new Date());
+    const eventDate = dayjs.utc(date).tz('America/Chicago', true).endOf('day')
+    return today.isSameOrBefore(eventDate, 'date');
+}
+
 export function isEventUpcoming(eventData) {
     if (eventData.endDate instanceof Date) {
-        return Date.now() < eventData.endDate.getTime();
+        return isDateUpcoming(eventData.endDate)
     } else return true; // Such as if endDate is string 'ongoing'
 }
 

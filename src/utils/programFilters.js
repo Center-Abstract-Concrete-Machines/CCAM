@@ -11,8 +11,12 @@ dayjs.extend(timezone);
 
 export function isDateUpcoming(date) {
     const today = dayjs(new Date());
+    console.log('today', today.format());
+    // const eventDate = dayjs.utc(date).tz('America/Chicago', true).endOf('day');
     const eventDate = dayjs.utc(date).tz('America/Chicago', true).endOf('day');
-    return today.isSameOrBefore(eventDate, 'date');
+    // console.log('eventDate', eventDate.format());
+    // console.log('test', today.isSameOrBefore(eventDate));
+    return today.isSameOrBefore(eventDate);
 }
 
 export function isEventUpcoming(eventData) {
@@ -23,8 +27,11 @@ export function isEventUpcoming(eventData) {
 
 export function isAfterPubDate(eventData) {
     const today = dayjs(new Date());
+    // console.log('today', today.format());
     const pubDate = dayjs.utc(eventData.pubDate).tz('America/Chicago', true);
-    return today.isSameOrAfter(pubDate, 'date');
+    // console.log('pubDate', pubDate.format());
+    // console.log('test', today.isSameOrAfter(pubDate, 'day'));
+    return today.isSameOrAfter(pubDate);
 }
 
 export function sortByPubDate(a, b) {

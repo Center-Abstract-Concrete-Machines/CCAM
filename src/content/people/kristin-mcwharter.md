@@ -6,8 +6,8 @@ cardBlurb: >
 image: '/src/content/people/images/mcwharter.png'
 email: 'email@email.com'
 social:
-    display: 'kristinmcwharter'
-    url: ''
+    display: '@kristinmcwharter'
+    url: 'https://www.instagram.com/kristinmcwharter/'
 website:
     display: www.kristinmcwharter.com
     url: https://kristinmcwharter.com/

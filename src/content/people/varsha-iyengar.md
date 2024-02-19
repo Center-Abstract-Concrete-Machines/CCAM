@@ -1,6 +1,6 @@
 ---
 name: Varsha Iyengar
 website: 
-    display: www.dakotagearhart.com/
+    display: https://varshaiyengar.com/
     url: https://varshaiyengar.com/
 ---

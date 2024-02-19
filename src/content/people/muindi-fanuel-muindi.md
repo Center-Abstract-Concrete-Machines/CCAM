@@ -5,7 +5,7 @@ cardBlurb: 'Muindi Fanuel Muindi is a performance artist, philosopher, and poet,
 image: '/src/content/people/images/muindi.jpg'
 social:
     display: 'solutionsforpostmodernliving'
-    url: ''
+    url: 'https://www.instagram.com/solutionsforpostmodernliving/'
 website:
     display: 'solutionsforpostmodernliving.org'
     url: 'https://solutionsforpostmodernliving.org'

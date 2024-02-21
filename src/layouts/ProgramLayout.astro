@@ -39,11 +39,10 @@ const [assProject] = await getCollection(
             <h1
                 class="text-4xl uppercase font-semibold leading-tight tracking-tight text-center py-24"
             >
-                {title}
+                {subtitle ? title+":" : title}
                 {
                     subtitle && (
                         <span>
-                            : <br />
                             {subtitle}
                         </span>
                     )
@@ -86,7 +85,7 @@ const [assProject] = await getCollection(
                 <>
                     <HorizontalSpacer class="my-4" />
                     <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
-                        Documentation
+                        Gallery
                     </h2>
                     <HorizontalSpacer class="my-4" />
                     <div id="gallery-target">

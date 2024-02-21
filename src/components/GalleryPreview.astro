@@ -1,0 +1,90 @@
+---
+const { gallery, slug } = Astro.props;
+
+import { Image, getImage, Picture } from 'astro:assets';
+
+function sortByFileName(stringA, stringB) {
+    const [nameA, nameB] = [
+        stringA.split('/').at(-1).split('.').at(0),
+        stringB.split('/').at(-1).split('.').at(0),
+    ];
+    return nameA - nameB;
+}
+
+const allImages = await import.meta.glob<{ default: ImageMetadata }>(
+    '/src/content/programs/images/*/*'
+);
+
+let galleryImageKeys: string[];
+if (gallery) {
+    galleryImageKeys = Object.keys(allImages)
+        .filter((key) => key.includes(gallery))
+        .sort(sortByFileName);
+}
+
+const optimizedImages = await Promise.all(
+    galleryImageKeys.map(
+        async (path) =>
+            await getImage({
+                src: allImages[path](),
+                format: 'webp',
+                width: 1600,
+            })
+    )
+);
+
+let galleryWidth;
+if (optimizedImages.length <= 2) {
+    galleryWidth = 'double';
+} else if (optimizedImages.length === 3) {
+    galleryWidth = 'triple';
+} else {
+    galleryWidth = 'quad';
+}
+---
+
+<a href={`${slug}-gallery#gallery-target`} target="htmz">
+    <div id="lightgallery" class=`card-grid ${galleryWidth} gallery-preview`>
+        {
+            gallery &&
+                optimizedImages.slice(0, 4).map((obj) => (
+                    // <a href={obj.src} target="_blank">
+                    <Picture
+                        src={obj.src}
+                        alt=""
+                        width={obj.attributes.width}
+                        height={obj.attributes.height}
+                        widths={[400, 600, 1200, 1600]}
+                        sizes="(min-width: 640px) 25vw, 100vw"
+                        class="aspect-[4/3] object-cover object-center opacity-50 no-fade"
+                    />
+                    // </a>
+                ))
+        }
+    </div>
+</a>
+<a
+    href={`${slug}-gallery#gallery-target`}
+    target="htmz"
+    class="mx-auto text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words block my-4"
+>
+    Click to see full gallery
+</a>
+
+<!-- <script>
+    import lightGallery from 'lightgallery';
+    import lgThumbnail from 'lightgallery/plugins/thumbnail';
+    import 'lightgallery/css/lightgallery.css';
+    import 'lightgallery/css/lg-thumbnail.css';
+
+    document.addEventListener('astro:page-load', () => {
+        lightGallery(document.getElementById('lightgallery'), {
+            plugins: [lgThumbnail],
+            licenseKey: '0000-0000-000-0000',
+            speed: 200,
+            download: false,
+            hideControlOnEnd: true,
+            loop: false,
+        });
+    });
+</script> -->

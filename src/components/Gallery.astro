@@ -28,7 +28,11 @@ if (gallery) {
 const optimizedImages = await Promise.all(
     galleryImageKeys.map(
         async (path) =>
-            await getImage({ src: allImages[path](), format: 'webp' })
+            await getImage({
+                src: allImages[path](),
+                format: 'webp',
+                width: 1600,
+            })
     )
 );
 
@@ -52,7 +56,7 @@ if (optimizedImages.length <= 2) {
                         alt=""
                         width={obj.attributes.width}
                         height={obj.attributes.height}
-                        widths={[400, 600, 1200, 2000]}
+                        widths={[400, 600, 1200, 1600]}
                         sizes="(min-width: 640px) 25vw, 100vw"
                         class="aspect-[4/3] object-cover object-center"
                     />

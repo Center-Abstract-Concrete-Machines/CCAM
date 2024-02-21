@@ -2,7 +2,7 @@
 name: Dakota Gearhardt
 image: '/src/content/people/images/dakota.jpg'
 social: 
-    display: "@_dakotagearhart"
+    display: "_dakotagearhart"
     url: "https://www.instagram.com/_dakotagearhart/" 
 website: 
     display: www.dakotagearhart.com/

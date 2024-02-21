@@ -1,6 +1,8 @@
 ---
 import Base from '@layouts/Base.astro';
 import Gallery from '@components/Gallery.astro';
+import GalleryPreview from '@components/GalleryPreview.astro'
+import LinkButton from '@components/LinkButton.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
@@ -89,9 +91,44 @@ const [assProject] = await getCollection(
                         Documentation
                     </h2>
                     <HorizontalSpacer class="my-4" />
-                    <Gallery gallery={gallery} />
-                </>
+                    <div id="gallery-target">
+                        <GalleryPreview gallery={gallery} slug={slug} />
+                    </div>
+                        <iframe hidden name=htmz onload="document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes);
+                            const galleryLoadedEvent = new CustomEvent('gallery-loaded');
+                            document.dispatchEvent(galleryLoadedEvent);"></iframe>
+                    </>
+                    )
+                }
+
+        <!-- {
+            gallery && (
+            <>
+            <HorizontalSpacer class="my-4" />
+            <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
+                Documentation
+            </h2>
+            <HorizontalSpacer class="my-4" />
+            <Gallery gallery={gallery} />
+            </>
             )
-        }
+        } -->
     </div>
 </Base>
+
+<script>
+    import lightGallery from 'lightgallery';
+    import lgThumbnail from 'lightgallery/plugins/thumbnail';
+    import 'lightgallery/css/lightgallery.css';
+    import 'lightgallery/css/lg-thumbnail.css';
+    document.addEventListener('gallery-loaded', () => {
+        lightGallery(document.getElementById('lightgallery'), {
+            plugins: [lgThumbnail],
+            licenseKey: '0000-0000-000-0000',
+            speed: 200,
+            download: false,
+            hideControlOnEnd: true,
+            loop: false,
+        });
+    })    
+</script>

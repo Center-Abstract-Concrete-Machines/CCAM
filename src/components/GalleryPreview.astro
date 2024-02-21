@@ -41,30 +41,32 @@ if (optimizedImages.length <= 2) {
 } else {
     galleryWidth = 'quad';
 }
+
+const linkToLoadGallery = `/programs/${slug}-gallery#gallery-target`;
 ---
 
-<a href={`${slug}-gallery#gallery-target`} target="htmz">
+<a href={linkToLoadGallery} target="htmz">
     <div id="lightgallery" class=`card-grid ${galleryWidth} gallery-preview`>
         {
             gallery &&
-                optimizedImages.slice(0, 4).map((obj) => (
-                    // <a href={obj.src} target="_blank">
-                    <Picture
-                        src={obj.src}
-                        alt=""
-                        width={obj.attributes.width}
-                        height={obj.attributes.height}
-                        widths={[400, 600, 1200, 1600]}
-                        sizes="(min-width: 640px) 25vw, 100vw"
-                        class="aspect-[4/3] object-cover object-center opacity-50 no-fade"
-                    />
-                    // </a>
-                ))
+                optimizedImages
+                    .slice(0, 4)
+                    .map((obj) => (
+                        <Picture
+                            src={obj.src}
+                            alt=""
+                            width={obj.attributes.width}
+                            height={obj.attributes.height}
+                            widths={[400, 600, 1200, 1600]}
+                            sizes="(min-width: 640px) 25vw, 100vw"
+                            class="aspect-[4/3] object-cover object-center opacity-50 no-fade"
+                        />
+                    ))
         }
     </div>
 </a>
 <a
-    href={`/programs/${slug}-gallery#gallery-target`}
+    href={linkToLoadGallery}
     target="htmz"
     class="mx-auto text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words block my-4"
 >

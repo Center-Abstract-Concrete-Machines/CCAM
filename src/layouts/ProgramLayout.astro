@@ -91,9 +91,9 @@ const [assProject] = await getCollection(
                     <div id="gallery-target">
                         <GalleryPreview gallery={gallery} slug={slug} />
                     </div>
-                        <iframe hidden name=htmz onload="document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes);
+                        <iframe hidden name=htmz onload="setTimeout(()=>{document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes);
                             const galleryLoadedEvent = new CustomEvent('gallery-loaded');
-                            document.dispatchEvent(galleryLoadedEvent);"></iframe>
+                            document.dispatchEvent(galleryLoadedEvent);})"></iframe>
                     </>
                     )
                 }

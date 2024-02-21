@@ -4,7 +4,7 @@ cardBlurb: 'Doug Rosman (b. Santa Monica, 1991) is an artist and programmer work
 image: '/src/content/people/images/doug-rosman.jpg'
 social:
     display: 'thedougrosmanstory'
-    url: ''
+    url: 'https://www.instagram.com/thedougrosmanstory/'
 website:
     display: 'dougrosman.com/'
     url: 'https://dougrosman.com/'

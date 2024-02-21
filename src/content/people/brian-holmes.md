@@ -4,7 +4,7 @@ cardBlurb: 'Brian Holmes is a polyglot essayist, artist and researcher. After wo
 image: '/src/content/people/images/brian-holmes.jpg'
 social:
     display: 'watershed.art.and.ecology'
-    url: ''
+    url: 'https://www.instagram.com/watershed.art.and.ecology/'
 website:
     display: 'brianholmes.wordpress.com/'
     url: 'https://brianholmes.wordpress.com/'

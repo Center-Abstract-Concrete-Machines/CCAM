@@ -6,7 +6,7 @@ image: '/src/content/people/images/garrett.png'
 email: 'garrett.laroy.johnson@gmail.com'
 social:
     display: 'diagrammatic.media'
-    url: ''
+    url: 'https://www.instagram.com/diagrammatic.media/'
 website:
     display: garrettlaroyjohnson.com
     url: https://garrettlaroyjohnson.com

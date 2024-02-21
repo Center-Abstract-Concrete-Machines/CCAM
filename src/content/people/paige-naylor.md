@@ -5,7 +5,7 @@ cardBlurb: >
 email: 'email@email.edu'
 social:
     display: 'paigealicenaylor'
-    url: ''
+    url: 'https://www.instagram.com/paigealicenaylor/'
 image: '/src/content/people/images/paige.jpeg'
 website:
     display: 'paigenaylor.art'

@@ -4,7 +4,7 @@ cardBlurb: 'Anna Johnson is an experimental artist working at intersections of p
 image: '/src/content/people/images/anna-johnson.jpg'
 social:
     display: '_ovovi_'
-    url: ''
+    url: 'https://www.instagram.com/_ovovi_/'
 website:
     display: 'annajohnsonart.com'
     url: 'https://annajohnsonart.com'

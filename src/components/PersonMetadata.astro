@@ -4,7 +4,7 @@ const { data } = Astro.props;
 
 <div class="flex flex-col sm:flex-row flex-wrap gap-4 font-mono text-xs mt-4">
     {
-        data.social && (
+        data.social?.display && data.social?.url && (
             <>
                 <span>
                     <a href={data.social.url}>@{data.social.display}</a>
@@ -14,7 +14,7 @@ const { data } = Astro.props;
         )
     }
     {
-        data.website && (
+        data.website?.display && data.website?.url && (
             <span>
                 <a href={data.website.url} target="_blank">
                     {data.website.display}

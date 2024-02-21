@@ -1,8 +1,6 @@
 ---
 import Base from '@layouts/Base.astro';
-import Gallery from '@components/Gallery.astro';
 import GalleryPreview from '@components/GalleryPreview.astro'
-import LinkButton from '@components/LinkButton.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
@@ -100,19 +98,6 @@ const [assProject] = await getCollection(
                     </>
                     )
                 }
-
-        <!-- {
-            gallery && (
-            <>
-            <HorizontalSpacer class="my-4" />
-            <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
-                Documentation
-            </h2>
-            <HorizontalSpacer class="my-4" />
-            <Gallery gallery={gallery} />
-            </>
-            )
-        } -->
     </div>
 </Base>
 

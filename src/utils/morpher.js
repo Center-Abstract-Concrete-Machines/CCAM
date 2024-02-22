@@ -10,7 +10,10 @@ let timers = [];
 
 document.addEventListener('astro:page-load', () => {
     for (let i = 0; i < elements.length; i++) {
-        classify(i);
+        const timeoutId = setTimeout(() => {
+            classify(i);
+        }, 500 + Math.random() * 1500);
+        timers.push(timeoutId);
     }
 });
 

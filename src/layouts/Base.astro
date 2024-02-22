@@ -57,6 +57,12 @@ if (title) {
         <title>
             {tabTitle}
         </title>
+        <script
+            defer
+            src="https://plausible.parkerdavis.dev/js/script.js"
+            onload="this.setAttribute('data-domain',window.location.host)"
+        ></script>
+
         <ViewTransitions fallback="swap" />
     </head>
     <body>

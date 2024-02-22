@@ -1,0 +1,21 @@
+---
+import Gallery from '@components/Gallery.astro';
+import { getCollection } from 'astro:content';
+import 'src/styles/global.css';
+
+export async function getStaticPaths() {
+    const programs = await getCollection(
+        'programs',
+        ({ data }) => data.gallery
+    );
+    return programs.map((program) => ({
+        params: { gallery: `${program.slug}-gallery` },
+        props: { program },
+    }));
+}
+
+const { program } = Astro.props;
+// const { Content } = await program.render();
+---
+
+<Gallery gallery={program.data.gallery} />

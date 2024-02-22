@@ -11,7 +11,7 @@ dayjs.extend(timezone);
 
 export function isDateUpcoming(date) {
     const today = dayjs(new Date());
-    console.log('today', today.format());
+    // console.log('today', today.format());
     // const eventDate = dayjs.utc(date).tz('America/Chicago', true).endOf('day');
     const eventDate = dayjs.utc(date).tz('America/Chicago', true).endOf('day');
     // console.log('eventDate', eventDate.format());

@@ -187,6 +187,11 @@ img {
     @apply border-t border-borderColor/30 border-dashed;
 }
 
+.card-grid.gallery-preview > *:nth-child(3),
+.card-grid.gallery-preview > *:nth-child(4) {
+    display: none;
+}
+
 @media (min-width: 640px) {
     .card-grid.double {
         grid-template-columns: 1fr 1fr;
@@ -256,5 +261,10 @@ img {
         left: -1rem;
         height: 100%;
         border-left: 1px hsl(var(--borders) / 30%) dashed;
+    }
+
+    .card-grid.gallery-preview > *:nth-child(3),
+    .card-grid.gallery-preview > *:nth-child(4) {
+        all: unset;
     }
 }

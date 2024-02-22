@@ -41,7 +41,7 @@ export default function EmailSignup() {
                     autoComplete="email"
                     required
                 />
-                <input type="text" name="trap" className="hidden" />
+                <input type="text" name="name" className="hidden" />
                 <button type="submit" className="button" disabled={disabled}>
                     Submit
                 </button>

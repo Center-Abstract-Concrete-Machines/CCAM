@@ -17,6 +17,7 @@ const {
     location,
     image,
     type,
+    gallery,
 } = Astro.props.frontmatter;
 ---
 
@@ -47,5 +48,12 @@ const {
     <div class="flex gap-2 mt-4 grow-0 flex-wrap text-sm">
         <DateStatus date={endDate} />
         <Tag tag={type} />
+        {
+            gallery && (
+                <div class="text-Black whitespace-nowrap px-4 py-2 bg-Yellow">
+                    Gallery
+                </div>
+            )
+        }
     </div>
 </div>

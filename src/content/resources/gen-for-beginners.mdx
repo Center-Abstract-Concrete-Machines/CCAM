@@ -15,10 +15,7 @@ tags:
 ---
 
 import { YouTube } from '@astro-community/astro-embed-youtube';
-import LinkButton from '@components/LinkButton.astro'
-
-{/* <LinkButton src="https://github.com/electro-smith/oopsy" text="Oopsy Github" /> */}
 
 <YouTube id="https://www.youtube.com/embed/fbd1CASqUmI?si=QshdAxI5Nnb-9zry" />
 
-{/* <LinkButton src="https://cycling74.com/tutorials/gen~-for-beginners-part-1-a-place-to-start" text="gen~ for Beginners" /> */}
+<a href={frontmatter.url}>Link</a>

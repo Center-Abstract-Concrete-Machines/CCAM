@@ -48,6 +48,7 @@ const resourcesCollection = defineCollection({
                 .optional(),
             dateAdded: z.date(),
             tags: z.array(z.string().trim().toLowerCase()),
+            url: z.string().url().optional(),
         }),
 });
 

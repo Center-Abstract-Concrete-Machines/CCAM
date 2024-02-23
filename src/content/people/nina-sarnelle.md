@@ -8,7 +8,7 @@
      display: 'ninasarnelle' 
      url: https://www.instagram.com/ninasarnelle/ 
  website: 
-      display: www.ninasarnelle.com
+      display: ninasarnelle.com
       url: http://www.ninasarnelle.com
 ---
 

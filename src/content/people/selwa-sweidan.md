@@ -8,7 +8,7 @@
 #     display: string for link text
 #     url: actual url 
  website: 
-      display: www.selwasweidan.com
+      display: selwasweidan.com
       url: https://www.selwasweidan.com
 ---
 

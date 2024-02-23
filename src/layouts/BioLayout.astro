@@ -2,24 +2,33 @@
 import PersonMetadata from '@components/PersonMetadata.astro';
 import BasicMarkdownLayout from './BasicMarkdownLayout.astro';
 import { Image, Picture } from 'astro:assets';
+import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
 
-const { name, subtitle, description, image } = Astro.props.frontmatter;
+// const { name, subtitle, description, image } = Astro.props.frontmatter;
 const { slug, frontmatter } = Astro.props;
-const data = frontmatter;
+// const data = frontmatter;
+// let image;
+// if (!frontmatter.image) {
+//     image = getRandomPlaceholderImage();
+// } else {
+//     image = frontmatter.image;
+// }
 ---
 
-<BasicMarkdownLayout frontmatter={{ title: name }}>
-    <div transition:name=`image-${slug}`>
-        <Picture
-            src={image}
-            alt=""
-            class="mx-auto"
-            widths={[400, 600, 1200]}
-            width="1200"
-        />
-    </div>
-    <h1 class="text-center">{name}</h1>
-    <h2 class="">{subtitle}</h2>
+<BasicMarkdownLayout frontmatter={{ title: frontmatter.name }}>
+    { frontmatter.image && (
+        <div transition:name=`image-${slug}`>
+            <Picture
+                src={frontmatter.image}
+                alt=""
+                class="mx-auto"
+                widths={[400, 600, 1200]}
+                width="1200"
+            />
+        </div>
+    )}
+    <h1 class="text-center">{frontmatter.name}</h1>
+    <h2 class="">{frontmatter.subtitle}</h2>
     <PersonMetadata data={frontmatter} />
     <slot />
 </BasicMarkdownLayout>

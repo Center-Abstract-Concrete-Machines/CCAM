@@ -25,7 +25,7 @@ Futurhythm Machines: House (FRM:House) reflects on social forms, expressive tech
 
 In the workshop, participants will use inexpensive microcontrollers to create their own modular Chicago house rhythm machines.
 
-Muindi Fanuel Muindi will lead a panel FRM’s themes.
+Muindi Fanuel Muindi will lead a panel on FRM’s themes.
 
 The FRM publication will include a transcription of the panel, DIY synth instructions, and writings on Chicago House Music’s legacy in black music, technology, and sociality by invited authors.
 

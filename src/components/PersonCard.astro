@@ -1,14 +1,12 @@
 ---
 const { data } = Astro.props.data;
 import { Image, Picture } from 'astro:assets';
-import PersonMetadata from './PersonMetadata.astro';
+import PersonMetadata from '@components/PersonMetadata.astro';
+import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
 
 let image;
-const personCardImages = import.meta.glob('src/images/person-cards/*.png');
 if (!data.image) {
-    const keys = Object.keys(personCardImages);
-    const randomKey = keys[Math.floor(Math.random() * keys.length)];
-    image = personCardImages[randomKey]();
+    image = getRandomPlaceholderImage();
 } else {
     image = data.image;
 }

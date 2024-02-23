@@ -36,4 +36,19 @@ const metadata = {
     ],
 };
 
+export const organizerList = [
+    'garrett-laroy-johnson',
+    'kim-nucci',
+    'muindi-fanuel-muindi',
+];
+
+export const boardOfDirectorsList = [
+    'brian-holmes',
+    'teoma-naccarato',
+    'dakota-gearhardt',
+    'varsha-iyengar',
+    'jon-maccallum',
+    'jon-bratt',
+];
+
 export default metadata;

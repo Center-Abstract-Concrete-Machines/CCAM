@@ -2,7 +2,7 @@
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Base from '@layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { filterDraftsAndPubDate } from 'src/utils/programFilters';
+import { filterDraftsAndPubDate } from '@utils/programFilters';
 
 const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
 const allResources = await getCollection('resources');

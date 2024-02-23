@@ -1,6 +1,6 @@
 ---
 name: Varsha Iyengar
-website: 
-    display: https://varshaiyengar.com/
+website:
+    display: varshaiyengar.com/
     url: https://varshaiyengar.com/
 ---

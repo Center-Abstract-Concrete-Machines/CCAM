@@ -1,16 +1,9 @@
-import getContainerDimensions from './getContainerDimensions';
+// import getContainerDimensions from './getContainerDimensions';
+import {
+    getContainerDimensions,
+    getStartingParticleBounds,
+} from '@utils/sketchHelpers';
 import Particle from './particle';
-
-function getStartingParticleBounds() {
-    const logoLocation = document
-        .querySelector('#headerLogo')
-        .getBoundingClientRect();
-    const x_low = logoLocation.left;
-    const x_high = logoLocation.left + logoLocation.width;
-    const y_low = logoLocation.top;
-    const y_high = logoLocation.top + logoLocation.height;
-    return { x_low, x_high, y_low, y_high };
-}
 
 export function setupSketch() {
     return new p5((p) => {
@@ -24,7 +17,7 @@ export function setupSketch() {
 
         const refreshParticles = () => {
             const { x_low, x_high, y_low, y_high } =
-                getStartingParticleBounds();
+                getStartingParticleBounds('#headerLogo');
             points = [];
             particles = [];
             for (let i = 0; i < 100 * 2.5; i++) {
@@ -84,7 +77,7 @@ function callback(entries, observer) {
 
 function setupObserver() {
     const sketchObserver = new IntersectionObserver(callback, {
-        threshold: 0.9,
+        threshold: 1,
     });
     sketchObserver.observe(document.querySelector('#headerLogo'));
 }
@@ -96,6 +89,7 @@ let sketchEl;
 // }
 
 // This is all to prevent memory leaks when using page transitions
+
 document.addEventListener('astro:page-load', () => {
     if (!sketchEl) {
         setupObserver();

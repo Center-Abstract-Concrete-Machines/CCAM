@@ -1,4 +1,7 @@
-import getContainerDimensions from './getContainerDimensions';
+import {
+    getContainerDimensions,
+    getStartingParticleBounds,
+} from '@utils/sketchHelpers';
 import Particle from './particle';
 
 export function setupSketch() {
@@ -11,13 +14,28 @@ export function setupSketch() {
             colors: ['#fffbf1', '#2d2d2a', '#eee5e9'],
         };
 
+        function getStartingParticleBoundsFooter(selector) {
+            const logoLocation = document
+                .querySelector(selector)
+                .getBoundingClientRect();
+            const x_low = logoLocation.left;
+            const x_high = logoLocation.left + logoLocation.width;
+            const y_low =
+                p.height - 396 + 320 / 2 + 16 + logoLocation.height / 2;
+            const y_high =
+                p.height - 396 + 320 / 2 + 16 - logoLocation.height / 2;
+            return { x_low, x_high, y_low, y_high };
+        }
+
         const refreshParticles = () => {
+            const { x_low, x_high, y_low, y_high } =
+                getStartingParticleBoundsFooter('#footerLogo');
             points = [];
             particles = [];
             for (let i = 0; i < p.width * 1; i++) {
                 let u = {
-                    x: p.random(p.width),
-                    y: p.random(p.height),
+                    x: p.random(x_low, x_high),
+                    y: p.random(y_low, y_high),
                 };
                 points.push(u);
             }
@@ -63,7 +81,7 @@ function callback(entries, observer) {
 
 function setupObserver() {
     const sketchObserver = new IntersectionObserver(callback, {
-        threshold: 0.3,
+        threshold: 0.9,
     });
     sketchObserver.observe(document.querySelector('#footerLogo'));
 }

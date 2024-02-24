@@ -52,7 +52,11 @@ export function setupSketch() {
 
         p.draw = () => {
             for (let o of particles) {
-                o.move();
+                if (p.width >= 680) {
+                    o.moveright();
+                } else {
+                    o.move();
+                }
                 o.display();
             }
         };

@@ -36,6 +36,27 @@ export default class Particle {
         this.dir.mult(this.speed);
         this.pos.add(this.dir);
     }
+    moveright() {
+        this.noise =
+            500 *
+            this.p.map(
+                this.p.noise(
+                    this.pos.x * this.noiseScale,
+                    this.pos.y * this.noiseScale
+                ),
+                0.2,
+                0.8,
+                -1,
+                1
+            );
+        this.dir = this.p.createVector(
+            this.p.cos(this.noise),
+            this.p.sin(this.noise)
+        );
+        this.dir.mult(this.speed);
+        this.dir.add(0.25, 0);
+        this.pos.add(this.dir);
+    }
 
     display() {
         let col = this.p.lerpColor(this.col1, this.col2, this.noise);

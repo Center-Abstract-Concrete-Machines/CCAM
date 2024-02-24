@@ -84,9 +84,9 @@ function callback(entries, observer) {
 
 function setupObserver() {
     const sketchObserver = new IntersectionObserver(callback, {
-        threshold: 0.3,
+        threshold: 0.9,
     });
-    sketchObserver.observe(document.querySelector('#headerSketch'));
+    sketchObserver.observe(document.querySelector('#headerLogo'));
 }
 
 let sketchEl;

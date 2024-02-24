@@ -14,7 +14,7 @@ export function setupSketch() {
         const refreshParticles = () => {
             points = [];
             particles = [];
-            for (let i = 0; i < p.width * 2.5; i++) {
+            for (let i = 0; i < p.width * 1; i++) {
                 let u = {
                     x: p.random(p.width),
                     y: p.random(p.height),
@@ -65,7 +65,7 @@ function setupObserver() {
     const sketchObserver = new IntersectionObserver(callback, {
         threshold: 0.3,
     });
-    sketchObserver.observe(document.querySelector('#sketch'));
+    sketchObserver.observe(document.querySelector('#footerLogo'));
 }
 
 let sketchEl;

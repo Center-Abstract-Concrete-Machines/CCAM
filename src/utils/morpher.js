@@ -12,7 +12,7 @@ document.addEventListener('astro:page-load', () => {
     for (let i = 0; i < elements.length; i++) {
         const timeoutId = setTimeout(() => {
             classify(i);
-        }, 500 + Math.random() * 1500);
+        }, 1000 + Math.random() * 3000);
         timers.push(timeoutId);
     }
 });

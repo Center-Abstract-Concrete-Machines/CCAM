@@ -22,7 +22,9 @@ import Logo from '/src/svg/logo.svg';
 
 <div class="pt-4">
     <!-- Image/Sketch -->
-    <div class="ccam-container grid place-items-center min-h-80 relative">
+    <div
+        class="ccam-container grid place-items-center min-h-80 relative border-t border-b border-dashed border-borderColor/30"
+    >
         <div class="absolute w-full h-full -z-10" id="sketch"></div>
         <svg
             viewBox="0 0 204 58"
@@ -42,7 +44,9 @@ import Logo from '/src/svg/logo.svg';
     </div>
 
     <!-- Footer -->
-    <div class="flex items-center py-2 text-xs gap-x-4">
+    <div
+        class="flex items-center py-2 text-xs gap-x-4 border-b border-dashed border-borderColor/30"
+    >
         <div
             class="flex justify-between gap-4 items-center flex-wrap w-full pl-2"
         >
@@ -61,7 +65,10 @@ import Logo from '/src/svg/logo.svg';
 </div>
 
 <script>
-    import './sketch/footerSketch.js';
+    import { prefersReduced } from '@utils/prefersReducedMotion';
+    if (!prefersReduced) {
+        await import('./sketch/footerSketch.js');
+    }
 </script>
 <!-- <script src="/p5/p5.min.js" is:inline defer></script> -->
 <!-- <script src="/p5/footerSketch.js" is:inline defer></script> -->

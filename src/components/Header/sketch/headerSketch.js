@@ -1,18 +1,11 @@
-import getContainerDimensions from './getContainerDimensions';
+// import getContainerDimensions from './getContainerDimensions';
+import {
+    getContainerDimensions,
+    getStartingParticleBounds,
+} from '@utils/sketchHelpers';
 import Particle from './particle';
 
-function getStartingParticleBounds() {
-    const logoLocation = document
-        .querySelector('#headerLogo')
-        .getBoundingClientRect();
-    const x_low = logoLocation.left;
-    const x_high = logoLocation.left + logoLocation.width;
-    const y_low = logoLocation.top;
-    const y_high = logoLocation.top + logoLocation.height;
-    return { x_low, x_high, y_low, y_high };
-}
-
-export function setupSketch() {
+export function setupHeaderSketch() {
     return new p5((p) => {
         let particles = [];
         let points = [];
@@ -24,7 +17,7 @@ export function setupSketch() {
 
         const refreshParticles = () => {
             const { x_low, x_high, y_low, y_high } =
-                getStartingParticleBounds();
+                getStartingParticleBounds('#headerLogo');
             points = [];
             particles = [];
             for (let i = 0; i < 100 * 2.5; i++) {
@@ -52,7 +45,11 @@ export function setupSketch() {
 
         p.draw = () => {
             for (let o of particles) {
-                o.move();
+                if (p.width >= 680) {
+                    o.moveright();
+                } else {
+                    o.move();
+                }
                 o.display();
             }
         };
@@ -68,39 +65,40 @@ export function setupSketch() {
 }
 
 // Use Intersection Observer API to load sketch once it is visible
-function callback(entries, observer) {
+function headerCallback(entries, observer) {
     entries.forEach(async (entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !headerSketchEl) {
             await import('/src/utils/p5wrapper.js');
-            sketchEl = setupSketch();
+            headerSketchEl = setupHeaderSketch();
             observer.disconnect();
         }
     });
 }
 
-function setupObserver() {
-    const sketchObserver = new IntersectionObserver(callback, {
-        threshold: 0.3,
+function setupHeaderObserver() {
+    const sketchObserver = new IntersectionObserver(headerCallback, {
+        threshold: 1,
     });
-    sketchObserver.observe(document.querySelector('#headerSketch'));
+    sketchObserver.observe(document.querySelector('#headerLogo'));
 }
 
-let sketchEl;
-// if (!sketchEl) {
+let headerSketchEl;
+// if (!headerSketchEl) {
 //     console.log('setting up observer');
-//     setupObserver();
+//     setupHeaderObserver();
 // }
 
 // This is all to prevent memory leaks when using page transitions
+
 document.addEventListener('astro:page-load', () => {
-    if (!sketchEl) {
-        setupObserver();
+    if (!headerSketchEl) {
+        setupHeaderObserver();
     }
 });
 
 document.addEventListener('astro:before-swap', () => {
-    if (sketchEl) {
-        sketchEl.remove();
-        sketchEl = null;
+    if (headerSketchEl) {
+        headerSketchEl.remove();
+        headerSketchEl = null;
     }
 });

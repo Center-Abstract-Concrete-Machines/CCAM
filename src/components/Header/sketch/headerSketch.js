@@ -5,7 +5,7 @@ import {
 } from '@utils/sketchHelpers';
 import Particle from './particle';
 
-export function setupSketch() {
+export function setupHeaderSketch() {
     return new p5((p) => {
         let particles = [];
         let points = [];
@@ -65,40 +65,40 @@ export function setupSketch() {
 }
 
 // Use Intersection Observer API to load sketch once it is visible
-function callback(entries, observer) {
+function headerCallback(entries, observer) {
     entries.forEach(async (entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !headerSketchEl) {
             await import('/src/utils/p5wrapper.js');
-            sketchEl = setupSketch();
+            headerSketchEl = setupHeaderSketch();
             observer.disconnect();
         }
     });
 }
 
-function setupObserver() {
-    const sketchObserver = new IntersectionObserver(callback, {
+function setupHeaderObserver() {
+    const sketchObserver = new IntersectionObserver(headerCallback, {
         threshold: 1,
     });
     sketchObserver.observe(document.querySelector('#headerLogo'));
 }
 
-let sketchEl;
-// if (!sketchEl) {
+let headerSketchEl;
+// if (!headerSketchEl) {
 //     console.log('setting up observer');
-//     setupObserver();
+//     setupHeaderObserver();
 // }
 
 // This is all to prevent memory leaks when using page transitions
 
 document.addEventListener('astro:page-load', () => {
-    if (!sketchEl) {
-        setupObserver();
+    if (!headerSketchEl) {
+        setupHeaderObserver();
     }
 });
 
 document.addEventListener('astro:before-swap', () => {
-    if (sketchEl) {
-        sketchEl.remove();
-        sketchEl = null;
+    if (headerSketchEl) {
+        headerSketchEl.remove();
+        headerSketchEl = null;
     }
 });

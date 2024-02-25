@@ -48,5 +48,8 @@ const pathname = Astro.url.pathname;
 </div>
 
 <script>
-    import './sketch/headerSketch.js';
+    import { prefersReduced } from '@utils/prefersReducedMotion';
+    if (!prefersReduced) {
+        await import('./sketch/headerSketch.js');
+    }
 </script>

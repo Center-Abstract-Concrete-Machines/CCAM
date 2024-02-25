@@ -12,7 +12,12 @@
     </h1>
 </div>
 
-<script src="/src/utils/morpher.js"></script>
+<script>
+    import { prefersReduced } from '@utils/prefersReducedMotion';
+    if (!prefersReduced) {
+        await import('src/utils/morpher');
+    }
+</script>
 
 <style>
     .title-container {

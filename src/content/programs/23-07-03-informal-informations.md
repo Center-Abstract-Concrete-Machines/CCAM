@@ -19,7 +19,7 @@ tags:
     - lee tusman
     - newinc
     - phillip thurtle
-    - dakota gearhardt
+    - Dakota Gearhart
 ---
 
 ### Attendees

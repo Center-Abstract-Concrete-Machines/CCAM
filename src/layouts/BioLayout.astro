@@ -2,17 +2,11 @@
 import PersonMetadata from '@components/PersonMetadata.astro';
 import BasicMarkdownLayout from './BasicMarkdownLayout.astro';
 import { Image, Picture } from 'astro:assets';
-import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
+import { hasAssociatedMaterials } from '@utils/personResources';
 
-// const { name, subtitle, description, image } = Astro.props.frontmatter;
 const { slug, frontmatter } = Astro.props;
-// const data = frontmatter;
-// let image;
-// if (!frontmatter.image) {
-//     image = getRandomPlaceholderImage();
-// } else {
-//     image = frontmatter.image;
-// }
+
+const assMaterial = hasAssociatedMaterials(slug)
 ---
 
 <BasicMarkdownLayout frontmatter={{ title: frontmatter.name }}>
@@ -29,6 +23,11 @@ const { slug, frontmatter } = Astro.props;
     )}
     <h1 class="text-center">{frontmatter.name}</h1>
     <h2 class="">{frontmatter.subtitle}</h2>
-    <PersonMetadata data={frontmatter} />
+    <PersonMetadata data={frontmatter} slug={slug}/>
     <slot />
+    { assMaterial && (
+        <p>
+            <a href={`/search/${slug}`}>See related materials for #{slug}</a>
+        </p>
+    )}
 </BasicMarkdownLayout>

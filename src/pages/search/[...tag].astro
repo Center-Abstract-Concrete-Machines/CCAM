@@ -37,6 +37,7 @@ export async function getStaticPaths() {
                     program.data.tags.includes(tag) ||
                     personSlugInEvent(program, tag)
             )
+            .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
             .map((obj) => ({
                 ...obj,
                 metaType: 'Program',
@@ -54,6 +55,10 @@ export async function getStaticPaths() {
                 (project) =>
                     project.data.tags.includes(tag) ||
                     personSlugInEvent(project, tag)
+            )
+            .sort(
+                (a, b) =>
+                    b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
             )
             .map((obj) => ({
                 ...obj,

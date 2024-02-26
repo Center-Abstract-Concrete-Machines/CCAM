@@ -65,10 +65,7 @@ import Logo from '/src/svg/logo.svg';
 </div>
 
 <script>
-    import { prefersReduced } from '@utils/prefersReducedMotion';
-    if (!prefersReduced) {
-        await import('./sketch/footerSketch.js');
-    }
+    import './sketch/footerSketch';
 </script>
 <!-- <script src="/p5/p5.min.js" is:inline defer></script> -->
 <!-- <script src="/p5/footerSketch.js" is:inline defer></script> -->

@@ -13,10 +13,7 @@
 </div>
 
 <script>
-    import { prefersReduced } from '@utils/prefersReducedMotion';
-    if (!prefersReduced) {
-        await import('src/utils/morpher');
-    }
+    import '@utils/morpher';
 </script>
 
 <style>

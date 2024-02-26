@@ -1,6 +1,6 @@
 ---
 import NavLink from './NavLink.astro';
-import metadata from '/src/metadata.js';
+import metadata from 'src/metadata.js';
 import Logo from '/src/svg/logo.svg';
 import { Image, Picture } from 'astro:assets';
 
@@ -48,8 +48,5 @@ const pathname = Astro.url.pathname;
 </div>
 
 <script>
-    import { prefersReduced } from '@utils/prefersReducedMotion';
-    if (!prefersReduced) {
-        await import('./sketch/headerSketch.js');
-    }
+    import './sketch/headerSketch';
 </script>

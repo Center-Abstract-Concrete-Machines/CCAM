@@ -1,6 +1,6 @@
 ---
 name: 'John Maccallum'
-website: 
-      display: john-maccallum.com
-      url: https://john-maccallum.com/
+website:
+    display: john-maccallum.com
+    url: https://john-maccallum.com/
 ---

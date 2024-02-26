@@ -1,7 +1,7 @@
 ---
 name: 'Paige Naylor'
-cardBlurb: > 
-  "Paige is a Chicago-based audiovisual and media arts curator, sound artist, musician, and technologist. She is currently a curator for the Elastro Series at Elastic Arts, the program director for the Midwest Society for Acoustic Ecology's Summer Soundwalk Series, and co-founder of Chicago Sonic Commons."
+cardBlurb: >
+    "Paige is a Chicago-based audiovisual and media arts curator, sound artist, musician, and technologist. She is currently a curator for the Elastro Series at Elastic Arts, the program director for the Midwest Society for Acoustic Ecology's Summer Soundwalk Series, and co-founder of Chicago Sonic Commons."
 email: 'email@email.edu'
 social:
     display: 'paigealicenaylor'

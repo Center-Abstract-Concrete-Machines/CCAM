@@ -1,4 +1,5 @@
 import { z, defineCollection } from 'astro:content';
+import { slug } from 'github-slugger';
 
 const programsCollection = defineCollection({
     type: 'content',
@@ -17,7 +18,13 @@ const programsCollection = defineCollection({
             }),
             type: z.enum(['Event', 'Workshop', 'Study']),
             featured: z.boolean().optional(),
-            tags: z.array(z.string().trim().toLowerCase()),
+            tags: z.array(
+                z
+                    .string()
+                    .trim()
+                    .toLowerCase()
+                    .transform((tag) => slug(tag))
+            ),
             gallery: z.string().optional(),
             draft: z.boolean().default(false),
             people: z
@@ -47,7 +54,13 @@ const resourcesCollection = defineCollection({
                 })
                 .optional(),
             dateAdded: z.date(),
-            tags: z.array(z.string().trim().toLowerCase()),
+            tags: z.array(
+                z
+                    .string()
+                    .trim()
+                    .toLowerCase()
+                    .transform((tag) => slug(tag))
+            ),
             url: z.string().url().optional(),
         }),
 });
@@ -63,7 +76,13 @@ const projectsCollection = defineCollection({
                 alt: z.string(),
             }),
             dateAdded: z.date(),
-            tags: z.array(z.string().trim().toLowerCase()),
+            tags: z.array(
+                z
+                    .string()
+                    .trim()
+                    .toLowerCase()
+                    .transform((tag) => slug(tag))
+            ),
             projectId: z.string(),
             people: z
                 .array(

@@ -1,5 +1,5 @@
 ---
-name: Dakota Gearhardt
+name: Dakota Gearhart
 image: '/src/content/people/images/dakota.jpg'
 social:
     display: '_dakotagearhart'

@@ -3,6 +3,7 @@ import {
     getStartingParticleBounds,
 } from '@utils/sketchHelpers';
 import Particle from './particle';
+import { prefersReduced } from '@utils/prefersReducedMotion';
 
 export function setupSketch() {
     return new p5((p) => {
@@ -32,7 +33,7 @@ export function setupSketch() {
             //     getStartingParticleBoundsFooter('#footerLogo');
             points = [];
             particles = [];
-            for (let i = 0; i < p.width * 1; i++) {
+            for (let i = 0; i < p.width * 2; i++) {
                 let u = {
                     x: p.random(p.width),
                     y: p.random(p.height),
@@ -88,16 +89,18 @@ function setupObserver() {
 
 let sketchEl;
 
-// This is all to prevent memory leaks when using page transitions
-document.addEventListener('astro:page-load', () => {
-    if (!sketchEl) {
-        setupObserver();
-    }
-});
+if (!prefersReduced) {
+    // This is all to prevent memory leaks when using page transitions
+    document.addEventListener('astro:page-load', () => {
+        if (!sketchEl) {
+            setupObserver();
+        }
+    });
 
-document.addEventListener('astro:before-swap', () => {
-    if (sketchEl) {
-        sketchEl.remove();
-        sketchEl = null;
-    }
-});
+    document.addEventListener('astro:before-swap', () => {
+        if (sketchEl) {
+            sketchEl.remove();
+            sketchEl = null;
+        }
+    });
+}

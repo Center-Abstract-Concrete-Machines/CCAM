@@ -3,16 +3,22 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Base from '@layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { filterDraftsAndPubDate } from '@utils/programFilters';
+import { hasAssociatedMaterials } from '@utils/personResources';
 
 const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
 const allResources = await getCollection('resources');
 const allProjects = await getCollection('projects');
+const allPeople = await getCollection('people');
 
 const uniqueTags = Array.from(
     new Set([
         ...allProjects.map((project) => project.data.tags).flat(),
         ...allPrograms.map((program) => program.data.tags).flat(),
         ...allResources.map((resource) => resource.data.tags).flat(),
+        ...allPeople
+            .map((person) => person.slug)
+            .flat()
+            .filter((personSlug) => hasAssociatedMaterials(personSlug)),
     ])
 ).sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
 

@@ -10,18 +10,34 @@ export async function getStaticPaths() {
     const allPrograms = await getCollection('programs', filterDraftsAndPubDate);
     const allResources = await getCollection('resources');
     const allProjects = await getCollection('projects');
+    const allPeople = await getCollection('people');
 
     const uniqueTags = Array.from(
         new Set([
             ...allProjects.map((project) => project.data.tags).flat(),
             ...allPrograms.map((program) => program.data.tags).flat(),
             ...allResources.map((resource) => resource.data.tags).flat(),
+            ...allPeople.map((person) => person.slug).flat(),
         ])
     ).sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
 
+    function personSlugInEvent(event, personSlug) {
+        const categoryArray = event.data.people;
+        if (!categoryArray) return false;
+        const [bool] = categoryArray.map((category) =>
+            category.list.includes(personSlug)
+        );
+        return bool;
+    }
+
     return uniqueTags.map((tag) => {
         const filteredPrograms = allPrograms
-            .filter((program) => program.data.tags.includes(tag))
+            .filter(
+                (program) =>
+                    program.data.tags.includes(tag) ||
+                    personSlugInEvent(program, tag)
+            )
+            .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
             .map((obj) => ({
                 ...obj,
                 metaType: 'Program',
@@ -35,7 +51,15 @@ export async function getStaticPaths() {
                 metaSlug: 'resources',
             }));
         const filteredProjects = allProjects
-            .filter((project) => project.data.tags.includes(tag))
+            .filter(
+                (project) =>
+                    project.data.tags.includes(tag) ||
+                    personSlugInEvent(project, tag)
+            )
+            .sort(
+                (a, b) =>
+                    b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
+            )
             .map((obj) => ({
                 ...obj,
                 metaType: 'Project',

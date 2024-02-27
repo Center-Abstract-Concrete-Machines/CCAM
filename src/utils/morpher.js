@@ -1,3 +1,4 @@
+import { prefersReduced } from './prefersReducedMotion';
 const colors = ['#747fef', '#a5f91d', '#ffd500'];
 const classes = [
     ['font-sans', 'font-medium'],
@@ -8,14 +9,24 @@ const elements = document.getElementsByClassName('morpher');
 let classState = [];
 let timers = [];
 
-document.addEventListener('astro:page-load', () => {
-    for (let i = 0; i < elements.length; i++) {
-        const timeoutId = setTimeout(() => {
-            classify(i);
-        }, 500 + Math.random() * 1500);
-        timers.push(timeoutId);
-    }
-});
+if (!prefersReduced) {
+    document.addEventListener('astro:page-load', () => {
+        for (let i = 0; i < elements.length; i++) {
+            const timeoutId = setTimeout(
+                () => {
+                    classify(i);
+                },
+                1000 + Math.random() * 3000
+            );
+            timers.push(timeoutId);
+        }
+    });
+
+    document.addEventListener('astro:before-preparation', () => {
+        timers.forEach((id) => clearTimeout(id));
+        timers = [];
+    });
+}
 
 function classify(i) {
     let newClasses = classes[Math.floor(Math.random() * classes.length)];
@@ -40,8 +51,3 @@ function declassify(i) {
     }
     classify(i);
 }
-
-document.addEventListener('astro:before-preparation', () => {
-    timers.forEach((id) => clearTimeout(id));
-    timers = [];
-});

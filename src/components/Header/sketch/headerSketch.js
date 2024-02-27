@@ -4,6 +4,7 @@ import {
     getStartingParticleBounds,
 } from '@utils/sketchHelpers';
 import Particle from './particle';
+import { prefersReduced } from '@utils/prefersReducedMotion';
 
 export function setupHeaderSketch() {
     return new p5((p) => {
@@ -88,17 +89,18 @@ let headerSketchEl;
 //     setupHeaderObserver();
 // }
 
-// This is all to prevent memory leaks when using page transitions
+if (!prefersReduced) {
+    // This is all to prevent memory leaks when using page transitions
+    document.addEventListener('astro:page-load', () => {
+        if (!headerSketchEl) {
+            setupHeaderObserver();
+        }
+    });
 
-document.addEventListener('astro:page-load', () => {
-    if (!headerSketchEl) {
-        setupHeaderObserver();
-    }
-});
-
-document.addEventListener('astro:before-swap', () => {
-    if (headerSketchEl) {
-        headerSketchEl.remove();
-        headerSketchEl = null;
-    }
-});
+    document.addEventListener('astro:before-swap', () => {
+        if (headerSketchEl) {
+            headerSketchEl.remove();
+            headerSketchEl = null;
+        }
+    });
+}

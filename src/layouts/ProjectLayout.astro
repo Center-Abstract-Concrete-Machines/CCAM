@@ -4,7 +4,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { sortByPubDate } from '@utils/programFilters';
+import { sortDescByEndDate } from '@utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import ResourceCard from '@components/ResourceCard.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
@@ -17,7 +17,7 @@ const associatedPrograms = (
     await getCollection('programs', ({ data }) => {
         return data.tags.includes(projectId) || data.assProjectId === projectId;
     })
-).sort(sortByPubDate);
+).sort(sortDescByEndDate);
 
 const associatedResources = await getCollection('resources', ({ data }) =>
     data.tags.includes(projectId)

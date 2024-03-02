@@ -5,9 +5,10 @@ import ProgramCard from '@components/Programs/ProgramCard.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import FilterBar from '@components/Programs/FilterBar.astro';
 import {
-    sortByPubDate,
     filterDraftsAndPubDate,
     isEventUpcoming,
+    sortDescByEndDate,
+    sortAscByEndDate,
 } from '@utils/programFilters';
 
 const { events, subtitle, description, filter } = Astro.props;
@@ -19,15 +20,15 @@ const heading = {
         : 'Our school supports interdisciplinary study in art, code, hardware and critical theory through events, classes, and workshops.',
 };
 
-const sortedEvents = events.sort(sortByPubDate);
-
-const upcomingPrograms = sortedEvents
+const upcomingPrograms = events
     .filter(filterDraftsAndPubDate)
-    .filter(({ data }) => isEventUpcoming(data));
+    .filter(({ data }) => isEventUpcoming(data))
+    .sort(sortAscByEndDate);
 
-const pastPrograms = sortedEvents
+const pastPrograms = events
     .filter(filterDraftsAndPubDate)
-    .filter(({ data }) => !isEventUpcoming(data));
+    .filter(({ data }) => !isEventUpcoming(data))
+    .sort(sortDescByEndDate);
 ---
 
 <Base title={heading.title}>

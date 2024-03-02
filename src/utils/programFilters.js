@@ -34,8 +34,43 @@ export function isAfterPubDate(eventData) {
     return today.isSameOrAfter(pubDate);
 }
 
-export function sortByPubDate(a, b) {
-    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+export function sortDescByEndDate(a, b) {
+    const aDate = a.data.endDate;
+    const bDate = b.data.endDate;
+    // console.log('aDate', aDate);
+    // console.log('bDate', bDate);
+    if (aDate instanceof Date && bDate instanceof Date) {
+        // console.log('sorting...');
+        return bDate.getTime() - aDate.getTime();
+    } else if (typeof aDate === 'string' && typeof bDate === 'string') {
+        // console.log('both string');
+        return 0;
+    } else if (typeof aDate === 'string') {
+        // console.log('a string');
+        return -1;
+    } else if (typeof bDate === 'string') {
+        // console.log('b string');
+        return 1;
+    }
+}
+export function sortAscByEndDate(a, b) {
+    const aDate = a.data.endDate;
+    const bDate = b.data.endDate;
+    // console.log('aDate', aDate);
+    // console.log('bDate', bDate);
+    if (aDate instanceof Date && bDate instanceof Date) {
+        // console.log('sorting...');
+        return aDate.getTime() - bDate.getTime();
+    } else if (typeof aDate === 'string' && typeof bDate === 'string') {
+        // console.log('both string');
+        return 0;
+    } else if (typeof aDate === 'string') {
+        // console.log('a string');
+        return 1;
+    } else if (typeof bDate === 'string') {
+        // console.log('b string');
+        return -1;
+    }
 }
 
 export function filterDraftsAndPubDate({ data }) {

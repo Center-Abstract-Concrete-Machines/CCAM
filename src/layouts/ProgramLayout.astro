@@ -10,6 +10,7 @@ import ProgramMetadata from '@components/ProgramMetadata.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
 import { getCollection } from 'astro:content';
 import AssProjectLink from '@components/AssProjectLink.astro';
+import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
 
 const {
     title,
@@ -24,6 +25,7 @@ const {
     type,
     people,
     assProjectId,
+    displayResources
 } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 
@@ -78,6 +80,15 @@ const [assProject] = await getCollection(
             </div>
             <slot />
         </div>
+        {displayResources && (
+            <HorizontalSpacer class="my-4" />
+            <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
+                Resources
+            </h2>
+            <HorizontalSpacer class="my-4" />
+            <ResourcesDisplay tag={displayResources} />
+        )}
+
         {people && <PeopleDisplay people={people} />}
 
         {

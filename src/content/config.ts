@@ -36,6 +36,7 @@ const programsCollection = defineCollection({
                 )
                 .optional(),
             assProjectId: z.string().optional(),
+            displayResources: z.string().optional(),
         }),
 });
 

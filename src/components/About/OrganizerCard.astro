@@ -11,7 +11,9 @@ if (!data.image) {
 }
 ---
 
-<div class="flex flex-col gap-2 items-center text-center hover:underline">
+<div
+    class="flex flex-col gap-2 items-center text-center hover:underline sm:max-w-[213.33px]"
+>
     <a href=`/about/${slug}`>
         <div transition:name=`image-${slug}`>
             <Picture
@@ -20,6 +22,7 @@ if (!data.image) {
                 widths={[400, 600, 1200, 1600]}
                 width="1000"
                 sizes="(min-width: 640px) 33vw, 100vw"
+                class="aspect-square object-cover object-center overflow-hidden max-w-full"
             />
         </div>
         <p class="text-lg font-medium">{data.name}</p>

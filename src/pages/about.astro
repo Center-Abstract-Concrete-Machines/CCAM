@@ -10,7 +10,7 @@ import ContactInfo from '@components/ContactInfo.astro';
 import Screening from 'src/images/screening.jpg';
 import Workshop from 'src/images/workshop.jpg';
 
-import { organizerList, boardOfDirectorsList } from 'src/metadata';
+import { organizerList, boardOfDirectorsList, websiteList } from 'src/metadata';
 
 const organizers = await getCollection('people', (person) =>
     organizerList.includes(person.slug)
@@ -19,6 +19,13 @@ const organizers = await getCollection('people', (person) =>
 const boardOfDirectors = await getCollection('people', (person) =>
     boardOfDirectorsList.includes(person.slug)
 );
+
+const website = await getCollection('people', (person) =>
+    websiteList.includes(person.slug)
+);
+const sortedWebsite = website.sort((a, b) => {
+    if (a.slug === 'parker-davis') return -1;
+});
 ---
 
 <Base title="About">
@@ -29,7 +36,9 @@ const boardOfDirectors = await getCollection('people', (person) =>
             CCAM is an artist-run platform at the nexus of art, technology, and
             contemporary thought.
         </h1>
+
         <HorizontalSpacer class="mb-4" />
+
         <section class="max-w-2xl mx-auto pt-12 pb-16">
             <p>
                 CCAM’s primary goal is building an accessible community for the
@@ -70,19 +79,28 @@ const boardOfDirectors = await getCollection('people', (person) =>
                 bleeding-edge toolkits as well as DIY and open-source platforms
                 for sound and video instrument composition.
             </p>
-            
-            <br>
-            <p>We regularly partner with organizations and artist-run platforms in Chicago and beyond. Some of them include: TriTriangle, Dispersion Lab, NewINC, The Neu Lithium, Drone/Ambient/Noise, Watershed Art and Ecology, Public Works, Onion City Film Festival, and the Performance Technology Research Group at SAIC.</p>
-            
-            <br>
-            <p>CCAM is supported by the Hyde Park Arts Center Artist Run Chicago (ARC) program and the Terra Foundation's Art Design Chicago program.</p>
-            
-        
+
+            <br />
+            <p>
+                We regularly partner with organizations and artist-run platforms
+                in Chicago and beyond. Some of them include: TriTriangle,
+                Dispersion Lab, NewINC, The Neu Lithium, Drone/Ambient/Noise,
+                Watershed Art and Ecology, Public Works, Onion City Film
+                Festival, and the Performance Technology Research Group at SAIC.
+            </p>
+
+            <br />
+            <p>
+                CCAM is supported by the Hyde Park Arts Center Artist Run
+                Chicago (ARC) program and the Terra Foundation's Art Design
+                Chicago program.
+            </p>
             <div class="mt-12">
                 <ContactInfo />
             </div>
-           
         </section>
+
+        <!-- ---ORGANIZERS--- -->
         <HorizontalSpacer />
         <section class="max-w-2xl mx-auto py-16">
             <h3 class="text-center text-Purple font-light font-mono">
@@ -99,12 +117,14 @@ const boardOfDirectors = await getCollection('people', (person) =>
                 }
             </div>
         </section>
+
+        <!-- ---BOARD OF DIRECTORS--- -->
         <HorizontalSpacer />
         <section class="max-w-2xl mx-auto py-16">
             <h3 class="text-center text-Purple font-light font-mono">
                 Board of Directors
             </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
                 {
                     boardOfDirectors.map((organizer) => (
                         <OrganizerCard
@@ -115,6 +135,27 @@ const boardOfDirectors = await getCollection('people', (person) =>
                 }
             </div>
         </section>
+
+        <!-- ---WEBSITE--- -->
+        <HorizontalSpacer />
+        <section class="max-w-2xl mx-auto py-16">
+            <h3 class="text-center text-Purple font-light font-mono">
+                Website
+            </h3>
+            <div
+                class="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-4 justify-items-center w-fit mx-auto"
+            >
+                {
+                    website.map((organizer) => (
+                        <OrganizerCard
+                            data={organizer.data}
+                            slug={organizer.slug}
+                        />
+                    ))
+                }
+            </div>
+        </section>
+
         <HorizontalSpacer class="pb-4" />
         <figure class="text-center flex flex-col gap-2">
             <Picture

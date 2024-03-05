@@ -1,5 +1,5 @@
 ---
-title: Pr_Ot_Ea_N Study
+title: Pr.Ot.Ea.N Study
 subtitle: Polyrhythmic Ontotechnic Ethicoaesthetics Now
 description: 'Summer 2024 study group around poiesis, technics, and subjectivity.'
 image:
@@ -8,7 +8,7 @@ image:
 dateAdded: 2024-03-02
 tags:
     - protean
-projectId: protean
+projectId: protean-study
 draft: true
 people:
     - label: participants

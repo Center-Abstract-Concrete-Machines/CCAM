@@ -33,6 +33,8 @@ const [assProject] = await getCollection(
     'projects',
     ({ data }) => data.projectId === assProjectId
 );
+
+const assResources = await getCollection('resources', ({ data }) => data.tags.includes(displayResources))
 ---
 
 <Base title={title}>
@@ -80,7 +82,7 @@ const [assProject] = await getCollection(
             </div>
             <slot />
         </div>
-        {displayResources && (
+        {assResources.length > 0 && (
             <HorizontalSpacer class="my-4" />
             <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
                 Resources

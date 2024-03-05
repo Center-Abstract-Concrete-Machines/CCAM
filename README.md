@@ -24,9 +24,14 @@
 
 Work in progress
 
-[Staging site (dev branch)](https://dev--ccamworldlive.netlify.app/)
+Staging site (dev branch)
+[https://dev--ccamworldlive.netlify.app/](https://dev--ccamworldlive.netlify.app/)
 
-[Public facing site (main branch)](https://abstractconcrete.center/)
+Public facing site (main branch)
+[https://ccamworldlive.netlify.app/](https://ccamworldlive.netlify.app/)
+
+Actual domain
+[https://ccam.world/](https://ccam.world/)
 
 ## Templates
 
@@ -69,8 +74,9 @@ Hello register below!
 
 ## Resources
 
-### Adding resources 
-- create an .mdx file at `src/content/resources`.
-- if an image file is to be associated with the resource, add that the `src/content/resources/images`
-- see `src/content/resources/_resource-template.mdx` for reference. frontmatter is enclosed between the triple lines (e.g. `---`) and is rendered appropriately.
-- please reviews tags that already exist and grab those that are relevant before adding new tags (but don't be afraid to make new tags as needed). 
+### Adding resources
+
+-   create an .mdx file at `src/content/resources`.
+-   if an image file is to be associated with the resource, add that the `src/content/resources/images`
+-   see `src/content/resources/_resource-template.mdx` for reference. frontmatter is enclosed between the triple lines (e.g. `---`) and is rendered appropriately.
+-   please reviews tags that already exist and grab those that are relevant before adding new tags (but don't be afraid to make new tags as needed).

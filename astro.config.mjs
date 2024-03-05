@@ -6,6 +6,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://abstractconcrete.center',
+    site: 'https://ccam.world',
     integrations: [tailwind(), preact(), mdx(), sitemap()],
 });

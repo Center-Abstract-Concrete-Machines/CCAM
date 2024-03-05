@@ -51,4 +51,6 @@ export const boardOfDirectorsList = [
     'jon-bratt',
 ];
 
+export const websiteList = ['parker-davis', 'ioan-butiu'];
+
 export default metadata;

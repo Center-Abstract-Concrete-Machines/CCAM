@@ -24,10 +24,10 @@ export async function getStaticPaths() {
     function personSlugInEvent(event, personSlug) {
         const categoryArray = event.data.people;
         if (!categoryArray) return false;
-        const [bool] = categoryArray.map((category) =>
+        const boolArray = categoryArray.map((category) =>
             category.list.includes(personSlug)
         );
-        return bool;
+        return boolArray.includes(true);
     }
 
     return uniqueTags.map((tag) => {

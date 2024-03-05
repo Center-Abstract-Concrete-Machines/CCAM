@@ -2,14 +2,15 @@
 import BioLayout from '../../layouts/BioLayout.astro';
 import { getCollection } from 'astro:content';
 
-import { organizerList, boardOfDirectorsList } from 'src/metadata';
+import { organizerList, boardOfDirectorsList, websiteList } from 'src/metadata';
 
 export async function getStaticPaths() {
     const organizers = await getCollection(
         'people',
         (person) =>
             organizerList.includes(person.slug) ||
-            boardOfDirectorsList.includes(person.slug)
+            boardOfDirectorsList.includes(person.slug) ||
+            websiteList.includes(person.slug)
     );
     return organizers.map((organizer) => ({
         params: { slug: organizer.slug },

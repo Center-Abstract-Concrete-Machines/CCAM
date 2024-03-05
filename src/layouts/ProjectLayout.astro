@@ -4,7 +4,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { sortByPubDate } from '@utils/programFilters';
+import { sortDescByEndDate } from '@utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import ResourceCard from '@components/ResourceCard.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
@@ -17,7 +17,7 @@ const associatedPrograms = (
     await getCollection('programs', ({ data }) => {
         return data.tags.includes(projectId) || data.assProjectId === projectId;
     })
-).sort(sortByPubDate);
+).sort(sortDescByEndDate);
 
 const associatedResources = await getCollection('resources', ({ data }) =>
     data.tags.includes(projectId)
@@ -54,7 +54,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
             </div>
         </div>
         <HorizontalSpacer />
-        <div class="prose dark:prose-invert mx-auto my-4">
+        <div class="prose dark:prose-invert mx-auto my-4 mb-12">
             <TagsList tags={tags} />
             <slot />
         </div>
@@ -90,8 +90,8 @@ const associatedResources = await getCollection('resources', ({ data }) =>
             associatedResources.length > 0 && (
                 <div>
                     <HorizontalSpacer class="my-4" />
-                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-8">
-                        Associated Resources
+                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
+                        Resources
                     </h2>
                     <HorizontalSpacer class="my-4" />
                     {associatedResources.map((resource) => (

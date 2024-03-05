@@ -3,33 +3,3 @@ command = "npm run noIndex"
 
 [context.branch-deploy]
 command = "npm run noIndex"
-
-[[redirects]]
-from = "https://abstractconcrete.center/*"
-to = "https://ccam.world/:splat"
-status = 301
-
-[[redirects]]
-from = "http://abstractconcrete.center/*"
-to = "https://ccam.world/:splat"
-status = 301
-
-[[redirects]]
-from = "https://www.abstractconcrete.center/*"
-to = "https://ccam.world/:splat"
-status = 301
-
-[[redirects]]
-from = "http://www.abstractconcrete.center/*"
-to = "https://ccam.world/:splat"
-status = 301
-
-[[redirects]]
-from = "https://www.ccam.world/*"
-to = "https://ccam.world/:splat"
-status = 301
-
-[[redirects]]
-from = "http://www.ccam.world/*"
-to = "https://ccam.world/:splat"
-status = 301

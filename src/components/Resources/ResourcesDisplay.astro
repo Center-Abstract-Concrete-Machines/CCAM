@@ -4,20 +4,29 @@ import { getCollection } from 'astro:content';
 import ResourceCard from '@components/ResourceCard.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 
-const { displayCount, tag, type } = Astro.props;
+const { displayCount, tag, type, sort } = Astro.props;
 
-let resources = (
-    await getCollection('resources', ({ data }) => {
-        if (tag) {
-            return data.tags.includes(tag);
-        } else if (type) {
-            return data.type === type;
-        } else return true;
-    })
-).sort(
+function sortResources(array, sort) {
+    // Alphabetic
+    if (sort === 'alpha') {
+        return array.sort((a, b) => a.data.title.localeCompare(b.data.title));
+    }
     // Most recent on top
-    (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
-);
+    else
+        return array.sort(
+            (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
+        );
+}
+
+let resources = await getCollection('resources', ({ data }) => {
+    if (tag) {
+        return data.tags.includes(tag);
+    } else if (type) {
+        return data.type === type;
+    } else return true;
+});
+
+sortResources(resources, sort);
 
 if (displayCount) {
     resources = resources.slice(0, displayCount);

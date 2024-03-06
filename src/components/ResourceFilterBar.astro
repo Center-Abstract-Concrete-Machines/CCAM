@@ -74,14 +74,14 @@ function resourceIsActive(type) {
                 resourceCards,
                 selectEl.value as SortOrder
             );
-
-            // Hide last spacer
-            Array.from(
-                document.querySelectorAll(
-                    '.spacer-container'
-                ) as NodeListOf<HTMLDivElement>
-            ).at(-1).style.display = 'none';
         }
+
+        // Hide last spacer
+        Array.from(
+            document.querySelectorAll(
+                '.spacer-container'
+            ) as NodeListOf<HTMLDivElement>
+        ).at(-1).style.display = 'none';
 
         selectEl.addEventListener('change', () => {
             // Undo previous hiding spacer

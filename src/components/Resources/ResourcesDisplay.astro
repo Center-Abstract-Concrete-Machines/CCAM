@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 
 import ResourceCard from '@components/ResourceCard.astro';
-import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 
 const { displayCount, tag, type, sort } = Astro.props;
 
@@ -46,3 +45,14 @@ if (displayCount) {
         ))
     }
 </div>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        // Hide last spacer
+        Array.from(
+            document.querySelectorAll(
+                '.spacer-container'
+            ) as NodeListOf<HTMLDivElement>
+        ).at(-1).style.display = 'none';
+    });
+</script>

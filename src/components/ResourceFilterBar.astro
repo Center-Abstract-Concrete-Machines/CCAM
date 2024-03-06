@@ -29,10 +29,10 @@ function resourceIsActive(type) {
         class="bg-backgroundColor border border-dashed border-borderColor/30 px-4 py-2 font-mono text-xs"
     >
         <option value="" disabled selected>Sort</option>
-        <option value="alphaAsc">Alphabetic (asc.)</option>
-        <option value="alphaDesc">Alphabetic (desc.)</option>
-        <option value="dateAsc">Date added (asc.)</option>
-        <option value="dateDesc">Date added (desc.)</option>
+        <option value="alphaAsc">Title</option>
+        <!-- <option value="alphaDesc">Alphabetic (desc.)</option> -->
+        <!-- <option value="dateAsc">Date added (asc.)</option> -->
+        <option value="dateDesc">Most Recent</option>
     </select>
     <div class="flex gap-4 flex-wrap">
         {
@@ -64,6 +64,13 @@ function resourceIsActive(type) {
         const selectEl = document.getElementById(
             'sortResources'
         ) as HTMLSelectElement;
+
+        // Undo previous hiding spacer
+        Array.from(
+            document.querySelectorAll(
+                '.spacer-container'
+            ) as NodeListOf<HTMLDivElement>
+        ).at(-1).style.display = 'block';
 
         const preference = sessionStorage.getItem('sortResources');
 

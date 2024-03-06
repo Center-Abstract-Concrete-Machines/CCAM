@@ -49,10 +49,13 @@ if (displayCount) {
 <script>
     document.addEventListener('astro:page-load', () => {
         // Hide last spacer
-        Array.from(
+        const spacers = Array.from(
             document.querySelectorAll(
                 '.spacer-container'
             ) as NodeListOf<HTMLDivElement>
-        ).at(-1).style.display = 'none';
+        );
+        if (spacers.length > 0) {
+            spacers.at(-1).style.display = 'none';
+        }
     });
 </script>

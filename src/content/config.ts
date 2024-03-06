@@ -46,7 +46,7 @@ const resourcesCollection = defineCollection({
         z.object({
             title: z.string(),
             author: z.string().optional(),
-            type: z.string(),
+            type: z.string().toLowerCase(),
             year: z.number().optional(),
             image: z
                 .object({

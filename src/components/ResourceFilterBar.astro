@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import ResourceType from '@components/ResourceType.astro';
+
+const resources = await getCollection('resources');
+const uniqueResourceTypes = Array.from(
+    new Set([
+        'all',
+        ...resources.map((resource) => resource.data.type.toLowerCase()),
+    ])
+);
+
+const { activeType } = Astro.props;
+
+function resourceIsActive(type) {
+    if (activeType === 'all') return true;
+    if (activeType === type) return true;
+    else return false;
+}
+---
+
+<div
+    class="flex justify-between flex-wrap items-center gap-4 font-mono text-xs px-4"
+>
+    <div>Filter</div>
+    <div class="flex gap-4 flex-wrap">
+        {
+            uniqueResourceTypes.map((type) => (
+                <a href={`/resources/${type === 'all' ? '' : type}`}>
+                    <ResourceType type={type} active={resourceIsActive(type)} />
+                </a>
+            ))
+        }
+    </div>
+</div>

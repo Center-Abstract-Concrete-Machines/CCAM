@@ -1,7 +1,8 @@
 ---
-const { type } = Astro.props;
+const { type, active } = Astro.props;
 
 const colorMap = new Map([
+    ['all', 'bg-backgoundColor text-textColor border border-textColor'],
     ['book', 'bg-Orange text-Black'],
     ['website', 'bg-Green text-Black'],
     ['image', 'bg-Yellow text-Black'],
@@ -23,10 +24,17 @@ const colorMap = new Map([
 function colorFromType(type: string) {
     return colorMap.get(type.toLowerCase());
 }
+
+function colorFromActivity(type: string) {
+    if (active) return colorFromType(type);
+    if (active === undefined) return colorFromType(type);
+    if (active === false)
+        return 'bg-backgoundColor text-textColor border border-textColor';
+}
 ---
 
 <div
-    class=`capitalize flex justify-center items-center px-4 py-2 whitespace-nowrap ${colorFromType(type)}`
+    class=`capitalize flex w-fit justify-center items-center px-4 py-2 whitespace-nowrap ${colorFromActivity(type)}`
 >
     {type}
 </div>

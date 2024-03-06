@@ -4,18 +4,21 @@ import { getCollection } from 'astro:content';
 import ResourceCard from '@components/ResourceCard.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 
-const { displayCount, tag } = Astro.props;
+const { displayCount, tag, type } = Astro.props;
 
 let resources = (
     await getCollection('resources', ({ data }) => {
         if (tag) {
             return data.tags.includes(tag);
+        } else if (type) {
+            return data.type === type;
         } else return true;
     })
 ).sort(
     // Most recent on top
     (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
 );
+
 if (displayCount) {
     resources = resources.slice(0, displayCount);
 }

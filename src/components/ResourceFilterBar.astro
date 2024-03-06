@@ -65,6 +65,13 @@ function resourceIsActive(type) {
             'sortResources'
         ) as HTMLSelectElement;
 
+        // Undo previous hiding spacer
+        Array.from(
+            document.querySelectorAll(
+                '.spacer-container'
+            ) as NodeListOf<HTMLDivElement>
+        ).at(-1).style.display = 'block';
+
         const preference = sessionStorage.getItem('sortResources');
 
         if (preference) {

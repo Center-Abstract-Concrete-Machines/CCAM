@@ -10,8 +10,8 @@ const peopleCollection = await getCollection('people');
 
 {
     people.map((category) => (
-        <div>
-            <HorizontalSpacer class="my-4" />
+        <div class="mb-4">
+            <HorizontalSpacer />
             <h2 class="text-2xl sm:text-3xl font-medium text-center my-12 capitalize">
                 {category.label}
             </h2>

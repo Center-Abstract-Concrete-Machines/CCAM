@@ -1,0 +1,108 @@
+---
+import { getCollection } from 'astro:content';
+import ResourceType from '@components/ResourceType.astro';
+import HorizontalSpacer from './HorizontalSpacer.astro';
+
+const resources = await getCollection('resources');
+const uniqueResourceTypes = Array.from(
+    new Set([
+        'all',
+        ...resources.map((resource) => resource.data.type.toLowerCase()),
+    ])
+);
+
+const { activeType } = Astro.props;
+
+function resourceIsActive(type) {
+    if (activeType === 'all') return true;
+    if (activeType === type) return true;
+    else return false;
+}
+---
+
+<div
+    class="flex justify-between flex-wrap items-center gap-4 font-mono text-xs px-4"
+>
+    <select
+        name="sortResources"
+        id="sortResources"
+        class="bg-backgroundColor border border-dashed border-borderColor/30 px-4 py-2 font-mono text-xs"
+    >
+        <option value="" disabled selected>Sort</option>
+        <option value="alphaAsc">Alphabetic (asc.)</option>
+        <option value="alphaDesc">Alphabetic (desc.)</option>
+        <option value="dateAsc">Date added (asc.)</option>
+        <option value="dateDesc">Date added (desc.)</option>
+    </select>
+    <div class="flex gap-4 flex-wrap">
+        {
+            uniqueResourceTypes.map((type) => (
+                <a href={`/resources/${type === 'all' ? '' : type}`}>
+                    <ResourceType type={type} active={resourceIsActive(type)} />
+                </a>
+            ))
+        }
+    </div>
+</div>
+<HorizontalSpacer class="mt-4" />
+
+<style>
+    select {
+        border-radius: 0;
+        -webkit-appearance: none;
+    }
+</style>
+
+<script>
+    import { doSorts, type SortOrder } from 'src/utils/sortHTMLElements.ts';
+
+    document.addEventListener('astro:page-load', () => {
+        const resourceCards: NodeListOf<HTMLDivElement> =
+            document.querySelectorAll('.resource-card');
+        const parentContainer = resourceCards[0].parentElement;
+
+        const selectEl = document.getElementById(
+            'sortResources'
+        ) as HTMLSelectElement;
+
+        const preference = sessionStorage.getItem('sortResources');
+
+        if (preference) {
+            selectEl.value = preference;
+            doSorts(
+                parentContainer,
+                resourceCards,
+                selectEl.value as SortOrder
+            );
+        }
+
+        // Hide last spacer
+        Array.from(
+            document.querySelectorAll(
+                '.spacer-container'
+            ) as NodeListOf<HTMLDivElement>
+        ).at(-1).style.display = 'none';
+
+        selectEl.addEventListener('change', () => {
+            // Undo previous hiding spacer
+            Array.from(
+                document.querySelectorAll(
+                    '.spacer-container'
+                ) as NodeListOf<HTMLDivElement>
+            ).at(-1).style.display = 'block';
+
+            doSorts(
+                parentContainer,
+                resourceCards,
+                selectEl.value as SortOrder
+            );
+
+            // Hide new last spacer
+            Array.from(
+                document.querySelectorAll(
+                    '.spacer-container'
+                ) as NodeListOf<HTMLDivElement>
+            ).at(-1).style.display = 'none';
+        });
+    });
+</script>

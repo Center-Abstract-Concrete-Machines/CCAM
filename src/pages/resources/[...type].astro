@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+
+import Base from '@layouts/Base.astro';
+import TitleCard from '@components/TitleCard.astro';
+import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
+import ResourceFilterBar from '@components/ResourceFilterBar.astro';
+
+const heading = {
+    title: 'Resources',
+    description:
+        'CCAM collects resources related to projects and programming, including texts, art pieces, schematics, codebases, and more.',
+};
+
+export async function getStaticPaths() {
+    const resources = await getCollection('resources');
+    const uniqueResourceTypes = Array.from(
+        new Set([
+            ...resources.map((resource) => resource.data.type.toLowerCase()),
+        ])
+    );
+    console.log('uniqueResourceTypes', uniqueResourceTypes);
+    return uniqueResourceTypes.map((type) => ({
+        params: { type: type },
+        props: { type },
+    }));
+}
+
+const { type } = Astro.props;
+console.log('type', type);
+---
+
+<Base title="Resources">
+    <div class="mx-auto px-4">
+        <TitleCard title={heading.title} text={heading.description} />
+        <ResourceFilterBar activeType={type} />
+        <ResourcesDisplay type={type} sort="alpha" />
+    </div>
+</Base>

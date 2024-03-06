@@ -2,6 +2,8 @@
 import Base from '@layouts/Base.astro';
 import TitleCard from '@components/TitleCard.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
+import ResourceType from '@components/ResourceType.astro';
+import ResourceFilterBar from '@components/ResourceFilterBar.astro';
 
 const heading = {
     title: 'Resources',
@@ -13,6 +15,7 @@ const heading = {
 <Base title="Resources">
     <div class="mx-auto px-4">
         <TitleCard title={heading.title} text={heading.description} />
-        <ResourcesDisplay />
+        <ResourceFilterBar activeType="all" />
+        <ResourcesDisplay sort="alpha" />
     </div>
 </Base>

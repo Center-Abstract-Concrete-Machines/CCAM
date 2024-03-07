@@ -20,7 +20,7 @@ export default function turkey() {
 
     function turkeyAdjust() {
         const pixelsPerSecond = 30;
-        const width = window.innerWidth;
+        const width = turkeyContainer.current.clientWidth;
         const seconds = width / pixelsPerSecond + 's';
         document.documentElement.style.setProperty(
             '--animation-duration',

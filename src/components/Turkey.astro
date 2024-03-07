@@ -2,21 +2,19 @@
 import Turkey from '@components/Turkey.jsx';
 ---
 
-<Turkey client:load />
+<Turkey client:visible />
 
 <style is:global>
     :root {
         --turkey-width: 75px;
-        --animation-duration: 20s;
+        --animation-duration: 30s;
     }
 
     .turkey-container {
-        /* border: red 1px solid; */
-        position: absolute;
-        left: 0;
-        right: 0;
+        position: relative;
         height: var(--turkey-width);
         overflow: hidden;
+        border-bottom: 1px dashed #00000033;
     }
 
     .turkey {
@@ -45,7 +43,13 @@ import Turkey from '@components/Turkey.jsx';
             left: calc(-2 * var(--turkey-width));
         }
         100% {
-            left: 100vw;
+            left: 100%;
+        }
+    }
+
+    @media (prefers-reduced-motion) {
+        .turkey {
+            animation: none;
         }
     }
 </style>

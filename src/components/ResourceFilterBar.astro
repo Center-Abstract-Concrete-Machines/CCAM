@@ -34,6 +34,13 @@ function resourceIsActive(type) {
         <!-- <option value="dateAsc">Date added (asc.)</option> -->
         <option value="dateDesc">Most Recent</option>
     </select>
+    <noscript>
+        <style>
+            #sortResources {
+                display: none;
+            }
+        </style>
+    </noscript>
     <div class="flex gap-4 flex-wrap">
         {
             uniqueResourceTypes.map((type) => (
@@ -96,7 +103,6 @@ function resourceIsActive(type) {
         if (lastSpacer.length > 0) lastSpacer.at(-1).style.display = 'none';
         if (selectEl) {
             selectEl.addEventListener('change', () => {
-                console.log('In selectEL conditional');
                 let lastSpacer;
                 // Undo previous hiding spacer
                 lastSpacer = Array.from(

@@ -1,0 +1,55 @@
+---
+import Turkey from '@components/Turkey.jsx';
+---
+
+<Turkey client:visible />
+
+<style is:global>
+    :root {
+        --turkey-width: 75px;
+        --animation-duration: 30s;
+    }
+
+    .turkey-container {
+        position: relative;
+        height: var(--turkey-width);
+        overflow: hidden;
+        border-bottom: 1px dashed #00000033;
+    }
+
+    .turkey {
+        background-image: url('/assets/turkey/turkey.png');
+        height: var(--turkey-width);
+        width: var(--turkey-width);
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        bottom: 0;
+        left: calc(-1 * var(--turkey-width));
+        animation-name: trot;
+        animation-duration: var(--animation-duration);
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .turkey:hover {
+        cursor: pointer;
+    }
+
+    @keyframes trot {
+        0% {
+            left: calc(-2 * var(--turkey-width));
+        }
+        100% {
+            left: 100%;
+        }
+    }
+
+    @media (prefers-reduced-motion) {
+        .turkey {
+            animation: none;
+        }
+    }
+</style>

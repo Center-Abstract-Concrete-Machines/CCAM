@@ -30,10 +30,15 @@ function resourceIsActive(type) {
     >
         <option value="" disabled selected>Sort</option>
         <option value="alphaAsc">Title</option>
-        <!-- <option value="alphaDesc">Alphabetic (desc.)</option> -->
-        <!-- <option value="dateAsc">Date added (asc.)</option> -->
         <option value="dateDesc">Most Recent</option>
     </select>
+    <noscript>
+        <style>
+            #sortResources {
+                display: none;
+            }
+        </style>
+    </noscript>
     <div class="flex gap-4 flex-wrap">
         {
             uniqueResourceTypes.map((type) => (
@@ -59,22 +64,26 @@ function resourceIsActive(type) {
     document.addEventListener('astro:page-load', () => {
         const resourceCards: NodeListOf<HTMLDivElement> =
             document.querySelectorAll('.resource-card');
-        const parentContainer = resourceCards[0].parentElement;
+        let parentContainer;
+        if (resourceCards.length > 0)
+            parentContainer = resourceCards[0].parentElement;
 
         const selectEl = document.getElementById(
             'sortResources'
         ) as HTMLSelectElement;
 
+        let lastSpacer;
         // Undo previous hiding spacer
-        Array.from(
+        lastSpacer = Array.from(
             document.querySelectorAll(
                 '.spacer-container'
             ) as NodeListOf<HTMLDivElement>
-        ).at(-1).style.display = 'block';
+        );
+        if (lastSpacer.length > 0) lastSpacer.at(-1).style.display = 'block';
 
         const preference = sessionStorage.getItem('sortResources');
 
-        if (preference) {
+        if (preference && selectEl) {
             selectEl.value = preference;
             doSorts(
                 parentContainer,
@@ -84,32 +93,39 @@ function resourceIsActive(type) {
         }
 
         // Hide last spacer
-        Array.from(
+        lastSpacer = Array.from(
             document.querySelectorAll(
                 '.spacer-container'
             ) as NodeListOf<HTMLDivElement>
-        ).at(-1).style.display = 'none';
+        );
+        if (lastSpacer.length > 0) lastSpacer.at(-1).style.display = 'none';
+        if (selectEl) {
+            selectEl.addEventListener('change', () => {
+                let lastSpacer;
+                // Undo previous hiding spacer
+                lastSpacer = Array.from(
+                    document.querySelectorAll(
+                        '.spacer-container'
+                    ) as NodeListOf<HTMLDivElement>
+                );
+                if (lastSpacer.length > 0)
+                    lastSpacer.at(-1).style.display = 'block';
 
-        selectEl.addEventListener('change', () => {
-            // Undo previous hiding spacer
-            Array.from(
-                document.querySelectorAll(
-                    '.spacer-container'
-                ) as NodeListOf<HTMLDivElement>
-            ).at(-1).style.display = 'block';
+                doSorts(
+                    parentContainer,
+                    resourceCards,
+                    selectEl.value as SortOrder
+                );
 
-            doSorts(
-                parentContainer,
-                resourceCards,
-                selectEl.value as SortOrder
-            );
-
-            // Hide new last spacer
-            Array.from(
-                document.querySelectorAll(
-                    '.spacer-container'
-                ) as NodeListOf<HTMLDivElement>
-            ).at(-1).style.display = 'none';
-        });
+                // Hide new last spacer
+                lastSpacer = Array.from(
+                    document.querySelectorAll(
+                        '.spacer-container'
+                    ) as NodeListOf<HTMLDivElement>
+                );
+                if (lastSpacer.length > 0)
+                    lastSpacer.at(-1).style.display = 'none';
+            });
+        }
     });
 </script>

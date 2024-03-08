@@ -18,14 +18,17 @@
         "@astro-community/astro-embed-youtube": "^0.4.4",
         "@astrojs/mdx": "^2.1.1",
         "@astrojs/preact": "^3.1.0",
+        "@astrojs/rss": "^4.0.5",
         "@astrojs/sitemap": "^3.1.1",
         "@astrojs/tailwind": "^5.1.0",
         "astro": "^4.4.2",
         "dayjs": "^1.11.10",
         "dialog-polyfill": "^0.5.6",
         "lightgallery": "^2.7.2",
+        "markdown-it": "^14.0.0",
         "p5js-wrapper": "^1.2.3",
         "preact": "^10.19.6",
+        "sanitize-html": "^2.12.1",
         "tailwindcss": "^3.4.1"
     },
     "devDependencies": {

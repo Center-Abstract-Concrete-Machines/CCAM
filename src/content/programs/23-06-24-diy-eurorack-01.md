@@ -5,7 +5,7 @@ pubDate: 2023-06-24
 endDate: 2023-06-24
 presentationalDates: June 24, 2023
 time: 10-1400 CT
-location: CCAM Headquarters
+location: MANA Contemporary, 2233 S Throop St, Chicago IL 60608
 image:
     url: ./images/diy-eurorack.png
     alt: alt

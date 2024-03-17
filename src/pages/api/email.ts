@@ -5,10 +5,10 @@ import mailchimp from '@mailchimp/mailchimp_marketing';
 import { z } from 'astro/zod';
 
 mailchimp.setConfig({
-    apiKey: 'b9f0eace4daee6725d71dcca908617e2-us21',
-    server: 'us21',
+    apiKey: import.meta.env.MAILCHIMP_API_KEY,
+    server: import.meta.env.MAILCHIMP_SERVER,
 });
-const listId = '35064a930b';
+const listId = import.meta.env.MAILCHIMP_LISTID;
 
 export const GET: APIRoute = async () => {
     return new Response(`What are you doing here? (${new Date().getTime()})`);

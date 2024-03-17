@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import type { APIRoute } from 'astro';
 import mailchimp from '@mailchimp/mailchimp_marketing';
 import { z } from 'astro/zod';

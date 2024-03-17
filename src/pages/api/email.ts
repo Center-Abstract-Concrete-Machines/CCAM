@@ -10,6 +10,10 @@ mailchimp.setConfig({
 });
 const listId = '35064a930b';
 
+export const GET: APIRoute = async () => {
+    return new Response('What are you doing here?');
+};
+
 export const POST: APIRoute = async ({ request }) => {
     const data = await request.formData();
     // Validation

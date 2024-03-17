@@ -1,6 +1,7 @@
 import { useRef, useState } from 'preact/hooks';
 
-const endpoint = 'https://parkerdavis-subscribeForm.web.val.run';
+// const endpoint = 'https://parkerdavis-subscribeForm.web.val.run';
+const endpoint = '/api/email';
 
 export default function EmailSignup() {
     const [responseMessage, setResponseMessage] = useState('');
@@ -12,6 +13,9 @@ export default function EmailSignup() {
         setDisabled(true);
         e.preventDefault();
         const formData = new FormData(e.target);
+        const nameHoneypot = formData.get('name');
+        if (nameHoneypot) return;
+
         const response = await fetch(endpoint, {
             method: 'POST',
             body: formData,

@@ -14,7 +14,7 @@ export default function EmailSignup() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const nameHoneypot = formData.get('name');
-        if (nameHoneypot) return;
+        if (nameHoneypot) return; // If bot inputted name in hidden input, do nothing
 
         const response = await fetch(endpoint, {
             method: 'POST',

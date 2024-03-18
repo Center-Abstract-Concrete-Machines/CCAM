@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         await mailchimp.lists.addListMember(listId, {
             email_address: email,
-            status: 'subscribed',
+            status: 'pending',
         });
     } catch (e) {
         // Already subscribed
@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Success!
     return new Response(
         JSON.stringify({
-            message: `${email} successfully subscribed!`,
+            message: `Check your email at ${email} to confirm subscription`,
         }),
         { status: 200 }
     );

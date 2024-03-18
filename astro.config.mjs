@@ -3,9 +3,12 @@ import tailwind from '@astrojs/tailwind';
 import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
     site: 'https://ccam.world',
     integrations: [tailwind(), preact(), mdx(), sitemap()],
+    output: 'hybrid',
+    adapter: netlify(),
 });

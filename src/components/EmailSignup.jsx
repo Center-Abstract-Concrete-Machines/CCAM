@@ -52,7 +52,7 @@ export default function EmailSignup() {
             </div>
             <div className="flex items-center justify-center pt-2 ">
                 {showMessage && responseMessage && (
-                    <span class="text-sm text-textColor/80">
+                    <span class="text-sm text-textColor/80 text-balance">
                         {responseMessage}
                     </span>
                 )}

@@ -6,7 +6,7 @@ const { data, slug } = Astro.props;
     {
         data.social?.display && data.social?.url && (
             <>
-                <span>
+                <span class="break-all">
                     <a href={data.social.url}>@{data.social.display}</a>
                 </span>
                 <span class="opacity-30 hidden sm:inline">|</span>
@@ -15,7 +15,7 @@ const { data, slug } = Astro.props;
     }
     {
         data.website?.display && data.website?.url && (
-            <span>
+            <span class="break-all">
                 <a href={data.website.url} target="_blank">
                     {data.website.display}
                 </a>

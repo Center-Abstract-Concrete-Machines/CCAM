@@ -1,8 +1,8 @@
 ---
-name: 'Onion City Film Festival'
+name: 'Chicago Filmmakers'
 subtitle: ''
 cardBlurb: >
-    "Chicago Filmmakers is a not-for-profit media arts organization that fosters the creation, appreciation, and understanding of film and video as media for artistic and personal expression. Their  organization is a catalyst for media of important social and community impact."
+    Chicago Filmmakers is a not-for-profit media arts organization that fosters the creation, appreciation, and understanding of film and video as media for artistic and personal expression. Their  organization is a catalyst for media of important social and community impact.
 image: '/src/content/people/images/chicago-filmmakers.png'
 social:
     display: chicagofilmmakers

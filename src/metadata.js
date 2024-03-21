@@ -51,6 +51,16 @@ export const boardOfDirectorsList = [
     'jon-bratt',
 ];
 
+export const affiliatesList = [
+    'anna-johnson',
+    'paige-naylor',
+    'nicky-ni',
+    'kristin-mcwharter',
+    'doug-rosman',
+    'lee-tusman',
+    'phillip-thurtle',
+];
+
 export const websiteList = ['parker-davis', 'ioan-butiu'];
 
 export default metadata;

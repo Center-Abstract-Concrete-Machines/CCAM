@@ -1,7 +1,7 @@
 ---
 name: 'Garrett Laroy Johnson'
 subtitle: Sound and media artist, researcher, and theorist
-cardBlurb: 'Garrett Laroy Johnson is a sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of subjectivity, computation and materialism, and post-psychoanalysis.'
+cardBlurb: 'Garrett Laroy Johnson is a Chicago-based sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of subjectivity, computation and materialism, and post-psychoanalysis.'
 image: '/src/content/people/images/garrett.png'
 email: 'garrett.laroy.johnson@gmail.com'
 social:

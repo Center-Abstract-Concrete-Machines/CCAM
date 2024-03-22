@@ -28,11 +28,16 @@ const metadata = {
             name: 'Search',
             url: '/search',
         },
-        // {
-        //     name: 'Follow',
-        //     url: 'https://www.instagram.com/ccam_chicago/',
-        //     new_window: true,
-        // },
+        {
+            name: 'Donate',
+            url: 'https://app.autobooks.co/pay/center-for-concrete-and-abstract-machines',
+            new_window: true,
+        },
+        {
+            name: 'Follow',
+            url: 'https://www.instagram.com/ccam_chicago/',
+            new_window: true,
+        },
     ],
 };
 

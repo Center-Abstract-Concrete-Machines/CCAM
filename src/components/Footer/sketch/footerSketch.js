@@ -33,7 +33,7 @@ export function setupSketch() {
             //     getStartingParticleBoundsFooter('#footerLogo');
             points = [];
             particles = [];
-            for (let i = 0; i < p.width * 2; i++) {
+            for (let i = 0; i < p.width; i++) {
                 let u = {
                     x: p.random(p.width),
                     y: p.random(p.height),

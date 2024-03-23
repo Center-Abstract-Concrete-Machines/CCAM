@@ -4,6 +4,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import ThemeToggle from '@components/ThemeToggle.astro';
 import Brackets from '@components/Brackets.astro';
 import EmailSignup from '@components/EmailSignup.jsx';
+import AnimationToggle from '@components/AnimationToggle.astro';
 import Logo from '/src/svg/logo.svg';
 ---
 
@@ -51,16 +52,16 @@ import Logo from '/src/svg/logo.svg';
             class="flex justify-between gap-4 items-center flex-wrap w-full pl-2"
         >
             <p>&copy; Center for Concrete and Abstract Machines</p>
-            <a
+            <!-- <a
                 href="https://www.instagram.com/ccam_chicago/"
                 target="_blank"
                 class="hidden sm:inline">Instagram</a
-            >
+            > -->
         </div>
-
-        <div class="theme-toggle grid place-content-center">
-            <ThemeToggle />
-        </div>
+        <AnimationToggle />
+        <!-- <div class="theme-toggle grid place-content-center"> -->
+        <ThemeToggle />
+        <!-- </div> -->
     </div>
 </div>
 

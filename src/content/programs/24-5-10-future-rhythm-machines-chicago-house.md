@@ -27,6 +27,9 @@ people:
     - label: panelists
       list:
           - thomas-defrantz
+    - label: Futurhythm Machines Synthesis Team
+      list:
+          - juan-flores
 ---
 
 Futurhythm Machines: House (FRM:House) reflects on social forms, expressive technics, and musical experience through Chicago House Music. FRM is a daylong public event (May 2024 at Watershed) featuring a DIY synthesizer workshop, a panel discussion, a diysynth performance + reception.

@@ -19,6 +19,9 @@ people:
       list:
           - watershed-art-and-ecology
           - lee-tusman
+    - label: Futurhythm Machines Synthesis Team
+      list:
+          - juan-flores
     - label: Affiliates
       list:
           - thomas-defrantz

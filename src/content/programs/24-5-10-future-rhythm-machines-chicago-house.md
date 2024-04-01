@@ -23,13 +23,14 @@ people:
       list:
           - muindi-fanuel-muindi
           - garrett-laroy-johnson
-          - kim-nucci
     - label: panelists
       list:
           - thomas-defrantz
+          - duane-powell
     - label: Futurhythm Machines Synthesis Team
       list:
           - juan-flores
+          - kim-nucci
 ---
 
 Futurhythm Machines: House (FRM:House) reflects on social forms, expressive technics, and musical experience through Chicago House Music. FRM is a daylong public event (May 2024 at Watershed) featuring a DIY synthesizer workshop, a panel discussion, a diysynth performance + reception.
@@ -48,9 +49,7 @@ In the workshop, participants will use inexpensive microcontrollers to create th
 
 ## Panel
 
-Muindi Fanuel Muindi will lead a panel on FRM’s themes.
-
-Panelists include Dr. Thomas Defrantz of Slippage and Northwestern University and another to be announced.
+Muindi Fanuel Muindi will lead a panel on FRM’s themes including Dr. Thomas Defrantz, professor and practitioner in black social dance and technology, and Duane Powell, music historian, promoter and DJ.
 
 ## Publication
 

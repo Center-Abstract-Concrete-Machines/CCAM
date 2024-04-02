@@ -1,0 +1,44 @@
+media: src
+content:
+    - name: people
+      label: People
+      type: collection
+      path: src/content/people
+      fields:
+          - name: name
+            label: Name
+            type: string
+          - name: subtitle
+            label: Subtitle
+            description: Subtitles currently only display for "Organizers"
+            type: string
+          - name: cardBlurb
+            label: Card Blurb
+            type: text
+            description: Shows up on People cards on Program/Project pages
+          - name: image
+            label: Image Path
+            type: image
+            options:
+              path: src/content/people/media
+              categories: image
+          - name: social
+            label: Social Handle
+            type: object
+            fields:
+              - name: display
+                type: string
+              - name: url
+                type: string
+          - name: website
+            type: object
+            fields:
+              - name: display
+                type: string
+              - name: url
+                type: string
+          - name: body
+            label: Body
+            description: Only visible for people with "About" pages
+            type: rich-text
+      format: yaml-frontmatter

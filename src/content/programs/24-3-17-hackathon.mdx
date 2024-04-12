@@ -10,13 +10,29 @@ image:
     url: ./images/synth-hackathon.png
     alt: computationally generated line drawing of an ai president
 type: Workshop
+gallery: hackathon
 featured: false
 tags:
     - diysynth
     - hackathon
     - collaboration
 people:
-    - label: leads
+    - label: Tension Controllers
+      list:
+          - grace-papineau-couture
+          - john-shin
+    - label: Symphony of a Mass
+      list:
+          - zio
+          - emily-zhang
+          - rose-ansari
+    - label: Firefly
+      list:
+          - patrick-glennon
+          - ian-kang
+          - misha-khoklo
+          - max-luebbers
+    - label: mentors
       list:
           - joseph-kramer
           - robb-drinkwater
@@ -25,13 +41,16 @@ people:
 displayResources: hackathon
 ---
 
+import { YouTube } from '@astro-community/astro-embed-youtube';
 import LinkButton from '@components/LinkButton.astro';
 
-In collaboration with the Performance Technology Research Group (PTRG) at SAIC, CCAM will sponsor and host entries into Synthux Academy's international synth hackathon. Over four days, teams of 2-3 will work together and with a mentor to develop and document a synth "from scratch" that speaks to this year's theme (TBA). Previous entries span different areas of making and research, including responsive environments, circuit-bending, app development, installation, performance, biomusicology, DJ practices, and more. Check out last year's website for [inspiration](https://www.synthux.academy/events/hackathon-2023).
+# Application
 
-Participants will have dedicated space in Chicago and provided microcontrollers, tools, and other relevant components. "Prizes" from Arturia are distributed randomly by Synthux to participants who submit a completed project.
+In collaboration with the Performance Technology Research Group (PTRG) at SAIC, CCAM sponsored and hosted entries into Synthux Academy's international synth hackathon. Over four days, teams of 2-4 woredk together and with a mentor to develop and document a synth "from scratch" that speaks to this year's theme of Humanity. Previous entries span different areas of making and research, including responsive environments, circuit-bending, app development, installation, performance, biomusicology, DJ practices, and more. Check out last year's website for [inspiration](https://www.synthux.academy/events/hackathon-2023).
 
-Participation is open to all regardless of skill level, although spots are limited.
+Participants worked over four days at dedicated space in downtown Chicago and provided microcontrollers, tools, and other relevant components. "Prizes" from Arturia are distributed randomly by Synthux to participants who submit a completed project.
+
+Participation was open to all regardless of skill level, although spots are limited.
 
 <LinkButton text="APPLY HERE" url="https://forms.gle/TAw18DUgLdc92zGP8" />
 
@@ -43,3 +62,37 @@ Participation is open to all regardless of skill level, although spots are limit
 | February 22       | Call for Proposals Closes   |
 | March 1           | Notification of Acceptances |
 | March 14th - 17th | Hackathon                   |
+
+# Projects
+
+## Tension Controllers
+
+### Grace Papineau-Couture and John Shin
+
+<YouTube id="ORxC623UK8c" />
+
+The Tension Controllers explore harmony and dissonance through physicality. Two players work together to find the harmony and dissonance contained in the waveforms each instrument generates thereby entering a conversation with one another through resistance and touch.
+
+Our Tension Controllers use a conductive rubber cord as a voltage divider interfaced with a teensy arduino board. One Tension Controller consists of a conductive rubber cord used to control an oscillator in teensy as 3 copper tape touch sensors modulate the frequency. Each plate acts as a gate for the oscillators and when the conductive rubber cord is pulled, it modulates the frequency of the waveforms.
+The second Tension Controller is also used to control an oscillator that is modulated when the conductive rubber cord is pulled. The cord rests on a bridge that has a piezo disc underneath that is activated when the cord snaps against the bridge or when the board is knocked.
+
+<YouTube id="M0Y1O_3hVC8" />
+
+## Symphony of a Mass
+
+### Rose Ansari, Zio, and Emily Zhang
+
+<YouTube id="EWgSrJ0cHwM" />
+
+In a lonely, posthuman void, the beat of one’s heart invokes our humanity. [Symphony of a Mass] is an entity fueled by human pulse. At times it becomes uncontrollable, roaring into the abyss, and is subdued at others. [Synthpathizer] translates pulse into music, creating a chaotic soundscape as it increases. The slowing of one’s heartbeat tones down the chain reaction present in the work- a slow in one’s pulse signals the fan to turn slower, finally calming down the main body of the work, the photocell synthesizer.
+
+Creating [Symphony of a Mass], we connected a pulse sensor to an Arduino Uno, where readings of pulse waves are scaled to the speed of a DC motor, which drives a fan. Serial readings are also sent to MaxMSP, creating a MIDI interface that communicates with Ableton to create sound. The physical installation consists of five photocell synthesizers hung on a ceiling, along with the pulse-controlled fan in front of a spotlight. The oscillations from the photocell synthesizers are sent to Ableton, and then sent to multichannel speakers. As pulse readings control the fan motor speed, light is blocked from the photocell synthesizers. Played beside the sounds from pulse readings, the oscillations continuously fluctuate, harmonize, and clash.
+
+<YouTube id="SbOIfHiYDPI" />
+
+## Firefly Synth
+
+### Patrick Glennon, Ian Kang, Mischa Khoklo, and Max Luebbers
+
+<YouTube id="RsCfO1ctLNQ" />
+<YouTube id="N7YIYImRMYk" />

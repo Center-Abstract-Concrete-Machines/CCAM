@@ -115,12 +115,9 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
 
 <script>
     import lightGallery from 'lightgallery';
-    import lgThumbnail from 'lightgallery/plugins/thumbnail';
     import 'lightgallery/css/lightgallery.css';
-    import 'lightgallery/css/lg-thumbnail.css';
     document.addEventListener('gallery-loaded', () => {
         lightGallery(document.getElementById('lightgallery'), {
-            plugins: [lgThumbnail],
             licenseKey: '0000-0000-000-0000',
             speed: 200,
             download: false,

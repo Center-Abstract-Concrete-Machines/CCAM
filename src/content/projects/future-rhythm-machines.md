@@ -17,7 +17,6 @@ people:
           - garrett-laroy-johnson
     - label: Partners
       list:
-          - watershed-art-and-ecology
           - lee-tusman
     - label: Futurhythm Machines Synthesis Team
       list:
@@ -25,10 +24,18 @@ people:
     - label: Affiliates
       list:
           - thomas-defrantz
+          - duane-powell
     - label: Sponsors
       list:
           - art-design-chicago
+          - watershed-art-and-ecology
 ---
+
+> The music of Alice Coltrane and Sun Ra, of Underground Resistance and George Russell, of Tricky and Martina, comes from the Outer Side. It alienates itself from the human; it arrives from the future. Alien Music is a synthetic recombinator, an applied art technology for amplifying the rates of becoming alien. Optimize the ratios of excentricity. Synthesize yourself.
+> <cite> - Kodwo Eshun, _More Brilliant Than the Sun_ (1998)</cite>
+
+> Futurhythmachines turn the extended capability of machines into super sensory powers.
+> <cite> - Kodwo Eshun, _More Brilliant Than the Sun_ (1998)</cite>
 
 Contemporary discourse around historical electronic music forms such as Chicago house or Detroit techno correctly flag the whitewashing of these musical forms’ black and queer genealogies. By misattributing the origins of house music to white Europeans like David Guetta, we indeed cheat musicians’ like Derrick Carter, Frankie Knuckles, and Ron Hardy of their due credit while flattening the historical, material, social, and racial contexts. The repercussions of this anti-black and anti-queer erasure not only acts upon our historical recounting of the past, but our ability to conceive of musical gatherings’ future potential for radical rupture. In the era of the billion-dollar-a-year EDM festival industry, Chicago House cannot be re-imagined as a “humble beginning” but rather a model for contemporary collectivities to come.
 

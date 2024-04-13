@@ -2,7 +2,7 @@
 title: Future Rhythm Machines
 description: What can the history of Chicago House teach us about Future Rhythm Machines? In both workshop and panel we focus on the material, social, and technical particularities of Chicago house (the synthesizers and drum machines of the time and place, the spaces that hosted the parties and transportation modes, the music industry in that historical moment) to draw together a musical map for the future.
 image:
-    url: ./images/future-rhythm-machines.png
+    url: ./images/future-rhythm-machines1.png
     alt: Future rhythm Machines
 dateAdded: 2023-12-14
 tags:

@@ -29,6 +29,7 @@ people:
       list:
           - art-design-chicago
           - watershed-art-and-ecology
+          - electrosmith
 ---
 
 > The music of Alice Coltrane and Sun Ra, of Underground Resistance and George Russell, of Tricky and Martina, comes from the Outer Side. It alienates itself from the human; it arrives from the future. Alien Music is a synthetic recombinator, an applied art technology for amplifying the rates of becoming alien. Optimize the ratios of excentricity. Synthesize yourself.

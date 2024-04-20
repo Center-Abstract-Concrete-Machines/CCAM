@@ -7,6 +7,6 @@ social:
     display: rose_ansarii
     url: https://instagram.com/rose_ansarii
 website:
-    display: https://sites.google.com/view/roseansari/home?authuser=0
-    url: https://sites.google.com/view/roseansari/home?authuser=0
+    display: sites.google.com/view/roseansari/home
+    url: https://sites.google.com/view/roseansari/home
 ---

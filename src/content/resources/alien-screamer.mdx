@@ -1,0 +1,52 @@
+---
+title: Alien Screamer
+author: Garrett Laroy Johnson
+type: website
+year: 2024
+dateAdded: 2024-04-21
+location: Temple University Charles Library 1900 N. 13th St, Philadelphia
+tags:
+    - diysynth
+    - ray-wilson
+    - alien-screamer
+    - philadelphia
+    - electronics-faire
+image:
+    url: ./images/alien-screamer.png
+    alt: description of image
+---
+
+import { YouTube } from '@astro-community/astro-embed-youtube';
+
+import LinkButton from '@components/LinkButton.astro';
+
+# Alien Screamer
+
+## Overview
+
+The Alien Screamer is a small, classic desktop synth developed by Ray Wilson in the 1990s. Along the way, we will touch on various topics: “open-source” hardware, DIY synth economy and ethics, PCB layout design and fabrication, soldering technique, and analog synthesis concepts.
+
+Wilson, who passed away in 2016, was a stalwart of the DIY synth community. He published a book on designing analog synthesizers (Make / Analog Synthesizers: A Modern Approach to Old-School Sound Synthesis, published by Make Magazine). His website Music from Outer Space features dozens of schematics for synth voices and utilities which can be developed into hardware by both amateur and professional synth builders. While Wilson sold his own PCBs and kits for some of these devices, like the Alien Screamer, he made them freely accessible to all, catalyzing informal technical learning across the world. Thanks to an agreement with his family, the website is operated today by the supplier SynthCube.
+
+The Alien Screamer noise box as described by Wilson:
+
+> “This is a great project for beginning your synth-diy journey or if you're already building sound gear this is a great project to make for that imaginative young person in your life. It's a great introduction to synth-diy (the oscillator is a ramp core driven by an exponential V to I convertor). Don't expect to play this as a traditional instrument (although it does a decent imitation of a theremin in the right hands) but do expect to have a lot of creative, imaginative sound making fun. From star trek communicators to birds tweeting you'll find a wealth of coolness. “
+
+We will build a version of the Alien Screamer which I have designed based on Wilson’s schematic. The small desktop form factor makes it ideal for performing on the go. My version, developed for this and future CCAM workshops, features algorithmically generated artwork based around Wilson’s Alien Screamer motif.
+
+<LinkButton
+    text="Ray Wilson's Schematic, Circuit Description, and Media Samples"
+    url="https://musicfromouterspace.com/analogsynth_new/ALIENSCREAMER/ALIENSCREAMER.php"
+/>
+You can see Wilson demonstrate this device below:
+
+<YouTube id="HiQfAWynVTY" />
+
+## Build Materials
+
+<LinkButton
+    text="Alien Screamer Interactive Build of Materials"
+    url="/assets/interactive-bom/alien-screamer-bom.html"
+/>
+
+<LinkButton text="Soldering Guide" url="./soldering101" />

@@ -14,7 +14,7 @@ featured: true
 tags:
     - future rhythm
     - chicago house music
-    - diy synth
+    - diysynth
     - daisy
     - publication
 assProjectId: future rhythm

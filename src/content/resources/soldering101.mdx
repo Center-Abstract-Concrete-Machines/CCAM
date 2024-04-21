@@ -1,0 +1,89 @@
+---
+title: Soldering 101
+# author: string (optional)
+type: website
+# year: number (optional)
+dateAdded: 2024-04-21
+tags:
+    - diysynth
+image:
+    url: ./images/soldering.png
+    alt: AI-generated image of a PCB
+---
+
+import LinkButton from '@components/LinkButton.astro';
+
+## Welcome
+
+Welcome to soldering 101. Soldering is an essential activity for any electronics hobbyist.
+
+Solder is an alloy designed to melt at low temperatures. Because it is conductive, it is used to lock electric components into place and complete circuits. Soldering irons are handheld devices which reach temperatures of 400-900F. By heating the component and the copper pad of a PCB, soldering irons create the conditions for solder to melt and flow into the joint.
+
+## Important Tips
+
+#### Soldering a single joint should take less than four seconds.
+
+If it's taking longer, don't overdo it. Soldering irons are very hot; prolonged exposure to this kind of heat can wreck certain components. If your solder is taking longer than a second, revisit the other tips below to see if something else is up.
+
+#### Order of operations
+
+You will have limited success soldering willy nilly. Try to follow this algorithm:
+
+1. Heat _both_ the copper pad on the PCB and the component for < 0.5 seconds.
+2. With your other hand, feed the solder into the joint, then retract. Try to use as little solder as necessary to saturate the joint.
+3. Keep the soldering iron on the joint for the next half a second. The solder should _flow into the joint_. Remove the soldering iron.
+4. Visually inspect the joint. Is the pad completely covered? Is the solder equally distributed around the component?
+5. Touch up the joint. I rarely find I need to add more solder. There is usually enough solder on the tip to complete this; the heat and chemistry of the joint will pull it from the tip. This usually takes about two seconds.
+
+#### Take care of your tools
+
+Soldering irons require maintenance that ensure heat is evenly distributed throughout the tip. Search for "tinning the tip" on the web for more info.
+
+#### Make sure you have the right tools
+
+-   Certain soldering irons are for plumbing and won't work for electronics.
+-   Get flux- or resin-core solder.
+-   Make sure your soldering iron has the correct tip installed (usually the default tip is ideal)
+
+#### Check twice, solder once
+
+Soldering is 10x easier than de-soldering. De-soldering is its own skill; if you're new to it, it's easy to brutalize your PCB and potentially ruin your project.
+
+Avoid it at all costs! Double check the direction of polarized components like diodes, LEDs, transistors, and aluminum capacitors, as well as the value of resistors.
+
+#### The Solder Must Flow
+
+If you're totally new to soldering, then try to find a prototyping board or a spare busted PCB for soldering practice. Be patient with yourself; it's a fine motor skill and takes practice! While frustrating at first, soldering can be a calming and meditative activity over time.
+
+## PCB Soldering Guide
+
+note: This guide assumes you are soldering through-hole components. If you have a surface mount project, check out other resources online. Through-hole components have long metal leads that slot through holes in the PCB board and are friendlier to new builders.
+
+Begin by placing components on the PCB. You may bend the legs on the backside to keep them in place before soldering. When you feel you've done enough placing, flip the board over and solder the legs to the copper pads.
+
+Snip them with [flat cutters](https://www.adafruit.com/product/1368), careful not to cut into the board or the delicate copper pad. Beware that snipped legs can sometimes fly off; eye protection is recommended.
+
+As a rule, you should place components that stand closest to the PCB first. A general order could be:
+
+1. (horizontal) resistors and diodes [double-check polarity]
+2. ceramic capacitors
+3. IC sockets [double-check direction]
+4. aluminum capacitors [double check polarity; taking care to bend them strategically when necessary]
+5. transistors [double-check direction]
+
+You might place each of these component types, then flip the board over to solder. This rhythm is much faster than placing and soldering each component. Don't wait too long to solder components in place; too many component legs can quickly become unwieldy.
+
+Place control and interface components like potentiometers, jacks, and switches last. If the PCB has a panel, then place the components before slotting the panel over the components. This holds components in place and ensures alignment while you solder them up.
+
+## Additional Soldering Resources
+
+<LinkButton
+    text="Adafruit Guide to Excellent Soldering"
+    url="https://learn.adafruit.com/adafruit-guide-excellent-soldering/tools"
+/>
+
+<LinkButton
+    text="Adafruit Common Soldering Problems"
+    url="
+    https://learn.adafruit.com/adafruit-guide-excellent-soldering/common-problems?embeds=allow"
+/>

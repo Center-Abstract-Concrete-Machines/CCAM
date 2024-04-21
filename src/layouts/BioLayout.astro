@@ -27,7 +27,7 @@ const assMaterial = hasAssociatedMaterials(slug)
     <slot />
     { assMaterial && (
         <p>
-            <a href={`/search/${slug}`}>See related materials for #{slug}</a>
+            <a href={`/search/${slug}/`}>See related materials for #{slug}</a>
         </p>
     )}
 </BasicMarkdownLayout>

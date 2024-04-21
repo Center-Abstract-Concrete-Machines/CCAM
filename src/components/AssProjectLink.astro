@@ -2,8 +2,8 @@
 const { assProject } = Astro.props;
 ---
 
-<p class="font-mono text-sm">
+<p class="font-mono">
     Part of the
-    <a href={`/projects/${assProject.slug}`}>{assProject.data.title}</a>{' '}
+    <a href={`/projects/${assProject.slug}/`}>{assProject.data.title}</a>{' '}
     project
 </p>

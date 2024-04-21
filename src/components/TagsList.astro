@@ -4,6 +4,6 @@ const { tags, class: className = '', size = 'text-sm' } = Astro.props;
 
 <div class=`font-mono ${className} ${size}`>
     <span class="flex gap-x-2 flex-wrap">
-        {tags.map((tag) => <a href={`/search/${tag}`}>#{tag}</a>)}
+        {tags.map((tag) => <a href={`/search/${tag}/`}>#{tag}</a>)}
     </span>
 </div>

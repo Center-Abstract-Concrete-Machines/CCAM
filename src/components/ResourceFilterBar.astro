@@ -42,7 +42,7 @@ function resourceIsActive(type) {
     <div class="flex gap-4 flex-wrap">
         {
             uniqueResourceTypes.map((type) => (
-                <a href={`/resources/${type === 'all' ? '' : type}`}>
+                <a href={`/resources/${type === 'all' ? '' : type + '/'}`}>
                     <ResourceType type={type} active={resourceIsActive(type)} />
                 </a>
             ))

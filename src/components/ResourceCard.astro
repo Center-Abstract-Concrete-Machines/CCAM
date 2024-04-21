@@ -36,7 +36,7 @@ const dataDate = dateAdded?.getTime() || pubDate?.getTime();
     <!-- <HorizontalSpacer class="mb-4" /> -->
     <div class="resource-grid grid gap-4 p-4">
         <div transition:name=`image-${slug}`>
-            <a href=`/${metaSlug}/${slug}`>
+            <a href=`/${metaSlug}/${slug}/`>
                 <Picture
                     src={imageSrc}
                     alt={image ? image.alt : ''}
@@ -48,7 +48,7 @@ const dataDate = dateAdded?.getTime() || pubDate?.getTime();
             </a>
         </div>
         <div>
-            <a href=`/${metaSlug}/${slug}`
+            <a href=`/${metaSlug}/${slug}/`
                 ><h3 class="text-xl font-medium">{title}</h3></a
             >
             <div

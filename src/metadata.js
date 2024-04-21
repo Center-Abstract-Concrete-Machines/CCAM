@@ -6,27 +6,27 @@ const metadata = {
     navLinks: [
         {
             name: 'Programs',
-            url: '/programs',
+            url: '/programs/',
         },
         {
             name: 'Projects',
-            url: '/projects',
+            url: '/projects/',
         },
         {
             name: 'Resources',
-            url: '/resources',
+            url: '/resources/',
         },
         {
             name: 'About',
-            url: '/about',
+            url: '/about/',
         },
         {
             name: 'Contact',
-            url: '/contact',
+            url: '/contact/',
         },
         {
             name: 'Search',
-            url: '/search',
+            url: '/search/',
         },
         {
             name: 'Donate',

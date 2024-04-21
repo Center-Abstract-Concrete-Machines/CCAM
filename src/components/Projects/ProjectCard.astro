@@ -5,7 +5,7 @@ const { image, title, description } = Astro.props.metadata;
 ---
 
 <div class="mx-auto flex flex-col gap-4 max-w-2xl">
-    <a href=`/projects/${slug}`>
+    <a href=`/projects/${slug}/`>
         <div transition:name=`image-${slug}`>
             <Picture
                 src={image.url}
@@ -23,7 +23,7 @@ const { image, title, description } = Astro.props.metadata;
         </h2>
         <p class="row-span-2">{description}</p>
         <a
-            href=`/projects/${slug}`
+            href=`/projects/${slug}/`
             class="justify-self-start self-start button font-mono"
         >
             Learn More

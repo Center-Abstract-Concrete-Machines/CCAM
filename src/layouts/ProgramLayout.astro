@@ -77,8 +77,8 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                     <Tag tag={type} />
                     <DateStatus date={endDate} />
                 </div>
-                {assProjectId && <AssProjectLink assProject={assProject} />}
                 <TagsList tags={tags} />
+                {assProjectId && <AssProjectLink assProject={assProject} />}
             </div>
             <slot />
         </div>

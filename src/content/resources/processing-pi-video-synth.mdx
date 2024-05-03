@@ -12,14 +12,20 @@ image:
     alt: photograph of rpi with control voltage hat on it
 ---
 
+import { YouTube } from '@astro-community/astro-embed-youtube';
+
 ## Processing Pi Video Synth
 
 This page documents an internal CCAM R&D project. Loading Processing 4 onto a Raspberry Pi Pro, we intend to make a video synth which is interoperable with 3v3 modular synthesis hardware via control voltage. Using an MCP3008 chip we are able to create 8 ADC channels (or CV ins). Via a MCP 4725 breakout, we equip a 12-bit DAC, or 1-channel cv out.
 
-<img src="/src/content/resources/images/videosynth/1.jpg"></img>
+![overhead shot of Rasperry Pi with custom hat prototype. No knobs fitted, with hdmi and power plugged in](./images/videosynth/1.jpg)
 
-<img src="/src/content/resources/images/videosynth/2.jpg"></img>
+![Side shot of RPi with hat. Blue knobs added atop, with two purple 3.5mm cables going into CV in jacks and a green one coming out the CV out jack](./images/videosynth/2.jpg)
 
-<img src="/src/content/resources/images/videosynth/3.jpg"></img>
+![Same config as above but different angle](./images/videosynth/3.jpg)
 
-<img src="/src/content/resources/images/videosynth/4.jpg"></img>
+![Overhead shot of Rpi with hat, with plug config described above. This time we see it runs to an EARTH synthesizer, a CCAM prototype. This sends audio out to a little amp board with DIY speakers. A small project is seen on the table top, as well as soldering supplies.](./images/videosynth/4.jpg)
+
+Below, a crude "proof of concept" video, showing the custom Pi Hat prototype functioning. Processing is receiving analog signals via the MCP3008 IC as interpreted by the Hardware I/O library.
+
+<YouTube id="W1dB7Z5PwaM" />

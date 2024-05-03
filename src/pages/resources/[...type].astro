@@ -27,13 +27,12 @@ export async function getStaticPaths() {
 }
 
 const { type } = Astro.props;
-console.log('type', type);
 ---
 
 <Base title="Resources">
     <div class="mx-auto px-4">
         <TitleCard title={heading.title} text={heading.description} />
         <ResourceFilterBar activeType={type} />
-        <ResourcesDisplay type={type} sort="alpha" />
+        <ResourcesDisplay type={type} />
     </div>
 </Base>

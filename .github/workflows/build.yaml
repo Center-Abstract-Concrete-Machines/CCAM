@@ -1,0 +1,39 @@
+name: Website can build
+
+on: [push]
+
+# env:
+#     BRANCH_NAME: ${{ github.ref_name }}
+
+jobs:
+    Build-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Respository Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'npm'
+
+            # - name: Install Netlify
+            #   run: npm install netlify-cli@17 -g
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build Project
+              run: npm run build
+
+            # - name: Deploy to Netlify
+            #   id: netlify_deploy
+            #   run: |
+            #     prod_flag=""
+            #     if [ "$BRANCH_NAME" = "main" ]; then prod_flag="--prod"; fi
+            #     netlify deploy \
+            #       --dir dist \
+            #       --site ${{ secrets.NETLIFY_SITE_ID}} \
+            #       --auth ${{ secrets.NETLIFY_API_TOKEN }} \
+            #       $prod_flag

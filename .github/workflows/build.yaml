@@ -1,0 +1,22 @@
+name: Website can build
+
+on: [push]
+
+jobs:
+    Build-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Respository Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build Project
+              run: npm run build

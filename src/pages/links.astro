@@ -1,17 +1,22 @@
 ---
 import Base from '@layouts/Base.astro';
-import BasicMarkdownLayout from '@layouts/BasicMarkdownLayout.astro';
-import PersonCard from '@components/PersonCard.astro';
 import Picture from 'astro/components/Picture.astro';
-import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
-import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TitleCard from '@components/TitleCard.astro';
 
-// Import Images
+// Edit title and description here
+const heading = {
+    title: '🔗🔗🔗',
+    description: null,
+};
+
+// Import Images before using them in links
+// https://docs.astro.build/en/guides/images/#images-in-astro-files
+import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
 import FutureRhythmMachines from 'src/content/programs/images/future-rhythm-machines.png';
 import AltFutureRhythmMachines from 'src/content/projects/images/future-rhythm-machines1.png';
 import EARTH from 'src/images/shop/EARTH.jpg';
 
+// Edit links here
 const links = [
     {
         image: FutureRhythmMachines,
@@ -25,15 +30,23 @@ const links = [
         description: 'Waiting List – 05/11/2024',
         url: 'https://ko-fi.com/s/af51f52264',
     },
+    {
+        image: getRandomPlaceholderImage(),
+        name: 'Placeholder Link',
+        description:
+            "You can delete this object. If you don't have an image to use for a link, you can use the getRandomPlaceholderImage() function to bring in a rando",
+        url: 'https://parkerdavis.dev',
+    },
 ];
 ---
 
 <Base title="LINK IN BIO">
     <div class="p-4">
         <div class="mx-auto max-w-2xl">
-            <TitleCard title="Link in Bio" />
-            <!-- <HorizontalSpacer /> -->
-            <!-- <main class="max-w-2xl mx-auto my-12"> -->
+            <TitleCard
+                title={heading.title}
+                description={heading.description}
+            />
             <main class="my-4">
                 <ul class="flex gap-4 flex-col">
                     {
@@ -68,7 +81,6 @@ const links = [
 
     <style>
         .person-grid {
-            grid-template-columns: minmax(0, 1fr);
             grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
         }
         @media (min-width: 640px) {

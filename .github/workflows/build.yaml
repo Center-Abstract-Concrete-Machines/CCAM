@@ -26,4 +26,3 @@ jobs:
               uses: lycheeverse/lychee-action@v1
               with:
                   fail: true
-                  args: --offline --base ./dist

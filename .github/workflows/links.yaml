@@ -1,4 +1,4 @@
-name: Links
+name: Check Links
 
 on: [push]
 
@@ -11,3 +11,5 @@ jobs:
             - name: Link Checker
               id: lychee
               uses: lycheeverse/lychee-action@v1
+              with:
+                  fail: true

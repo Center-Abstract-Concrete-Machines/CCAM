@@ -1,0 +1,91 @@
+---
+import Base from '@layouts/Base.astro';
+import Picture from 'astro/components/Picture.astro';
+import TitleCard from '@components/TitleCard.astro';
+
+// Edit title and description here
+const heading = {
+    title: '🔗🔗🔗',
+    description: null,
+};
+
+// Import Images before using them in links
+// https://docs.astro.build/en/guides/images/#images-in-astro-files
+import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
+import FutureRhythmMachines from 'src/content/programs/images/future-rhythm-machines.png';
+import AltFutureRhythmMachines from 'src/content/projects/images/future-rhythm-machines1.png';
+import EARTH from 'src/images/shop/EARTH.jpg';
+
+// Edit links here
+const links = [
+    {
+        image: FutureRhythmMachines,
+        name: 'FUTURHYTHMACHINES :: Panel w DeFrantz, McNeal, and Powell',
+        description: 'RSVP – 05/11/2024',
+        url: 'https://forms.gle/SJ7WgNLYuvpEF6GW9',
+    },
+    {
+        image: EARTH,
+        name: 'FUTURHYTHMACHINES :: EARTH Synth DIY Workshop Registration',
+        description: 'Waiting List – 05/11/2024',
+        url: 'https://ko-fi.com/s/af51f52264',
+    },
+    // {
+    //     image: getRandomPlaceholderImage(),
+    //     name: 'Placeholder Link',
+    //     description:
+    //         "You can delete this object. If you don't have an image to use for a link, you can use the getRandomPlaceholderImage() function to bring in a rando",
+    //     url: 'https://parkerdavis.dev',
+    // },
+];
+---
+
+<Base title="LINK IN BIO">
+    <div class="p-4">
+        <div class="mx-auto max-w-2xl">
+            <TitleCard
+                title={heading.title}
+                description={heading.description}
+            />
+            <main class="my-4">
+                <ul class="flex gap-4 flex-col">
+                    {
+                        links.map((link) => (
+                            <a href={link.url}>
+                                <li class="person-grid grid gap-4 border border-dashed border-borderColor/30 p-4 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10">
+                                    <Picture
+                                        src={link.image}
+                                        alt=""
+                                        widths={[400, 800]}
+                                        sizes="10rem"
+                                    />
+                                    <div class="flex flex-col justify-center align-center">
+                                        <div>
+                                            <h3 class="text-xl font-medium">
+                                                {link.name}
+                                            </h3>
+                                            <p class="max-w-xl">
+                                                {link.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </a>
+                        ))
+                    }
+                </ul>
+            </main>
+        </div>
+    </div>
+
+    <style>
+        .person-grid {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+        }
+        @media (min-width: 640px) {
+            .person-grid {
+                grid-template-columns: 10rem repeat(1, minmax(0, 1fr));
+            }
+        }
+    </style>
+</Base>

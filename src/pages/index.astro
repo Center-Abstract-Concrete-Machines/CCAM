@@ -14,6 +14,7 @@ import workshop from 'src/images/workshop.jpg';
 import squareSpace from 'src/images/space-square.jpg';
 import synthdiy from 'src/content/programs/images/electronics-faire/4_26_24_Temple_Electronics_Fair_125_A.jpg';
 import wdk from 'src/content/programs/images/wdky/RubyQue_Projector.jpg';
+import moon from 'src/content/programs/images/wdky/RubyQue_Screen_4.jpg';
 
 import {
     filterDraftsAndPubDate,
@@ -112,9 +113,9 @@ const featuredPrograms = (await getCollection('programs'))
     <section class="px-4">
         <HorizontalSpacer class="mb-4" />
         <div class="grid place-items-center mx-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 md:w-10/12 py-20 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 lg:w-10/12 py-20 gap-8">
                 <div
-                    class="flex flex-col justify-between items-start order-2 md:order-1"
+                    class="flex flex-col justify-between items-start order-2 lg:order-1"
                 >
                     <p class="text-xl">
                         Nomadically based in Chicago, CCAM is an artist-run
@@ -130,13 +131,22 @@ const featuredPrograms = (await getCollection('programs'))
                         ></a
                     >
                 </div>
-                <div class="mx-auto order-1 md:order-2 self-center">
+                <div
+                    class="mx-auto order-1 lg:order-2 self-center justify-self-center"
+                >
+                    <Image
+                        src={moon}
+                        alt="Abstract images including the moon projected in front of an audience."
+                        widths={[400, 600, 1200, moon.width]}
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        class="object-cover aspect-video object-bottom moon-image"
+                    />
                     <Image
                         src={workshop}
                         alt="Participants at a multichannel sound workshop in November 2023 listening carefully."
-                        widths={[400, 600, 1200]}
-                        sizes="(min-width: 640px) 50vw, 100vw"
-                        class="object-cover aspect-video"
+                        widths={[400, 600, 1200, workshop.width]}
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        class="object-cover aspect-video object-bottom workshop-image"
                     />
                 </div>
             </div>
@@ -157,3 +167,21 @@ const featuredPrograms = (await getCollection('programs'))
         </div>
     </section>
 </Base>
+
+<style is:global>
+    /* Swap out moon and workshop image in dark mode */
+    :root.dark .moon-image {
+        display: block;
+    }
+    :root.dark .workshop-image {
+        display: none;
+    }
+
+    :root .workshop-image {
+        display: block;
+    }
+
+    :root .moon-image {
+        display: none;
+    }
+</style>

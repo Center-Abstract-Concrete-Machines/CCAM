@@ -1,16 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image, Picture } from 'astro:assets';
+
 import Base from '@layouts/Base.astro';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
 import GridSpacer from '@components/GridSpacer.astro';
-
-import workshop from 'src/images/workshop.jpg';
-import squareSpace from 'src/images/space-square.jpg';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
+
+import workshop from 'src/images/workshop.jpg';
+import squareSpace from 'src/images/space-square.jpg';
+import synthdiy from 'src/content/programs/images/electronics-faire/4_26_24_Temple_Electronics_Fair_125_A.jpg';
+import wdk from 'src/content/programs/images/wdky/RubyQue_Projector.jpg';
+
 import {
     filterDraftsAndPubDate,
     isEventUpcoming,
@@ -30,8 +34,8 @@ const featuredPrograms = (await getCollection('programs'))
     <section class="px-4 pt-4">
         <div class="thirds-container grid gap-4 justify-items-center">
             <IndexGlitchTitle />
-            <GridSpacer />
-            <div class="w-full">
+            <GridSpacer class="hidden sm:block" />
+            <div class="w-full hidden sm:block">
                 <Picture
                     src={squareSpace}
                     alt="Studio Space"
@@ -49,7 +53,7 @@ const featuredPrograms = (await getCollection('programs'))
         <HorizontalSpacer class="pb-4" />
         <div class="grid thirds-container gap-4">
             <Brackets>
-                <p class="max-w-[60%] mx-auto text-xl">
+                <p class="max-w-[60%] mx-auto text-lg sm:text-xl text-balance">
                     Center for Concrete and Abstract Machines is an artist-run
                     platform at the nexus of art, technology, and contemporary
                     thought.
@@ -126,12 +130,13 @@ const featuredPrograms = (await getCollection('programs'))
                         ></a
                     >
                 </div>
-                <div class="mt-8 sm:mt-0 mx-auto order-1 md:order-2">
+                <div class="mx-auto order-1 md:order-2 self-center">
                     <Image
                         src={workshop}
-                        alt="Image of workshop space"
-                        widths={[400, 600, 1200, workshop.width]}
+                        alt="Participants at a multichannel sound workshop in November 2023 listening carefully."
+                        widths={[400, 600, 1200]}
                         sizes="(min-width: 640px) 50vw, 100vw"
+                        class="object-cover aspect-video"
                     />
                 </div>
             </div>

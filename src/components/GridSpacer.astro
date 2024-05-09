@@ -1,5 +1,9 @@
+---
+const { class: className } = Astro.props;
+---
+
 <div
-    class="spacer border-t sm:border-r sm:border-t-0 border-dashed border-borderColor/30 justify-self-stretch align-self self-stretch"
+    class=`spacer border-t sm:border-r sm:border-t-0 border-dashed border-borderColor/30 justify-self-stretch align-self self-stretch ${className}`
 >
 </div>
 

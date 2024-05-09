@@ -16,6 +16,7 @@ import FutureRhythmMachines from 'src/content/programs/images/future-rhythm-mach
 import AltFutureRhythmMachines from 'src/content/projects/images/future-rhythm-machines1.png';
 import EARTH from 'src/images/shop/EARTH.jpg';
 import BADS from 'src/content/programs/images/black-art.png';
+import LinkCard from '@components/LinkCard.astro';
 
 // Edit links here
 const links = [
@@ -56,43 +57,9 @@ const links = [
             />
             <main class="my-4">
                 <ul class="flex gap-4 flex-col">
-                    {
-                        links.map((link) => (
-                            <a href={link.url}>
-                                <li class="person-grid grid gap-4 border border-dashed border-borderColor/30 p-4 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10">
-                                    <Picture
-                                        src={link.image}
-                                        alt=""
-                                        widths={[400, 800]}
-                                        sizes="10rem"
-                                    />
-                                    <div class="flex flex-col justify-center align-center">
-                                        <div>
-                                            <h3 class="text-xl font-medium">
-                                                {link.name}
-                                            </h3>
-                                            <p class="max-w-xl">
-                                                {link.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </a>
-                        ))
-                    }
+                    {links.map((link) => <LinkCard link={link} />)}
                 </ul>
             </main>
         </div>
     </div>
-
-    <style>
-        .person-grid {
-            grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
-        }
-        @media (min-width: 640px) {
-            .person-grid {
-                grid-template-columns: 10rem repeat(1, minmax(0, 1fr));
-            }
-        }
-    </style>
 </Base>

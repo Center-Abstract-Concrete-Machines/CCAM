@@ -10,7 +10,12 @@ import ContactInfo from '@components/ContactInfo.astro';
 import Screening from 'src/images/screening.jpg';
 import Workshop from 'src/images/workshop.jpg';
 
-import { organizerList, boardOfDirectorsList, affiliatesList, websiteList } from 'src/metadata';
+import {
+    organizerList,
+    boardOfDirectorsList,
+    affiliatesList,
+    websiteList,
+} from 'src/metadata';
 
 const organizers = await getCollection('people', (person) =>
     organizerList.includes(person.slug)
@@ -37,8 +42,8 @@ const sortedWebsite = website.sort((a, b) => {
         <h1
             class="text-center text-4xl font-semibold py-16 max-w-2xl mx-auto font-sans"
         >
-            CCAM is an artist-run platform programming, performing, and producing at the nexus of art, technology, and
-            contemporary thought.
+            CCAM is an artist-run platform programming, performing, and
+            producing at the nexus of art, technology, and contemporary thought.
         </h1>
 
         <HorizontalSpacer class="mb-4" />
@@ -53,8 +58,7 @@ const sortedWebsite = website.sort((a, b) => {
                 drawing on and inviting in queer, anti-racist, and decolonial
                 perspectives. By intentionally developing this community outside
                 of the academy, CCAM seeks to break down barriers to access for
-                engaging in art, technology, and surrounding
-                critical theory. 
+                engaging in art, technology, and surrounding critical theory.
             </p>
             <figure class="text-center flex flex-col gap-2 py-16">
                 <Picture
@@ -86,10 +90,11 @@ const sortedWebsite = website.sort((a, b) => {
             <br />
             <p>
                 We regularly partner with organizations and artist-run platforms
-                in Chicago and beyond. Some of them include: TriTriangle, The Fythyr Institute,
-                Dispersion Lab, NewINC, The Neu Lithium, Drone/Ambient/Noise,
-                Watershed Art and Ecology, Public Works, Onion City Film
-                Festival, and the Performance Technology Research Group at SAIC.
+                in Chicago and beyond. Some of them include: TriTriangle, The
+                Fythyr Institute, Dispersion Lab, NewINC, The Neu Lithium,
+                Drone/Ambient/Noise, Watershed Art and Ecology, Public Works,
+                Onion City Film Festival, and the Performance Technology
+                Research Group at SAIC.
             </p>
 
             <br />
@@ -139,24 +144,23 @@ const sortedWebsite = website.sort((a, b) => {
             </div>
         </section>
 
-
-            <!-- ---Affiliates--- -->
-            <!-- <HorizontalSpacer />
-            <section class="max-w-2xl mx-auto py-16">
-                <h3 class="text-center text-Purple font-light font-mono">
-                    Affiliate Artists, Researchers, and Organizers
-                </h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-                    {
-                        affiliates.map((organizer) => (
-                            <OrganizerCard
-                                data={organizer.data}
-                                slug={organizer.slug}
-                            />
-                        ))
-                    }
-                </div>
-            </section> -->
+        <!-- ---Affiliates--- -->
+        <!-- <HorizontalSpacer />
+        <section class="max-w-2xl mx-auto py-16">
+            <h3 class="text-center text-Purple font-light font-mono">
+                Affiliate Artists, Researchers, and Organizers
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
+                {
+                    affiliates.map((organizer) => (
+                        <OrganizerCard
+                            data={organizer.data}
+                            slug={organizer.slug}
+                        />
+                    ))
+                }
+            </div>
+        </section> -->
 
         <!-- ---WEBSITE--- -->
         <HorizontalSpacer />

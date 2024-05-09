@@ -139,14 +139,14 @@ const featuredPrograms = (await getCollection('programs'))
                         alt="Abstract images including the moon projected in front of an audience."
                         widths={[400, 600, 1200, moon.width]}
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        class="object-cover aspect-video object-bottom moon-image"
+                        class="object-cover aspect-video object-bottom dark-image"
                     />
                     <Image
                         src={workshop}
                         alt="Participants at a multichannel sound workshop in November 2023 listening carefully."
                         widths={[400, 600, 1200, workshop.width]}
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        class="object-cover aspect-video object-bottom workshop-image"
+                        class="object-cover aspect-video object-bottom light-image"
                     />
                 </div>
             </div>
@@ -170,18 +170,18 @@ const featuredPrograms = (await getCollection('programs'))
 
 <style is:global>
     /* Swap out moon and workshop image in dark mode */
-    :root.dark .moon-image {
+    :root.dark .dark-image {
         display: block;
     }
-    :root.dark .workshop-image {
+    :root.dark .light-image {
         display: none;
     }
 
-    :root .workshop-image {
+    :root .light-image {
         display: block;
     }
 
-    :root .moon-image {
+    :root .dark-image {
         display: none;
     }
 </style>

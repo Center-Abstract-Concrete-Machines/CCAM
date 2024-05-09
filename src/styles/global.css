@@ -268,10 +268,3 @@ img {
         all: unset;
     }
 }
-
-:root.dark .moon-image {
-    display: block;
-}
-:root .moon-image {
-    display: none;
-}

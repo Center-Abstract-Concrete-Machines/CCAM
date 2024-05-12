@@ -5,13 +5,13 @@ const { date } = Astro.props;
 
 let colorClasses = 'text-neutral-50 bg-neutral-900 dark:bg-neutral-800';
 
-// if (returnDateStatus(date) === 'Ongoing') {
-//     colorClasses = 'text-Black bg-Sand border border-Black dark:border-0';
-// } else if (returnDateStatus(date) === 'Upcoming') {
-//     colorClasses = 'text-Black bg-Sand border border-Black dark:border-0';
-// } else {
-//     colorClasses = 'text-neutral-50 bg-neutral-900 dark:bg-neutral-800';
-// }
+if (returnDateStatus(date) === 'Ongoing') {
+    colorClasses = 'text-Black bg-Sand border border-Black dark:border-0';
+} else if (returnDateStatus(date) === 'Upcoming') {
+    colorClasses = 'text-Black bg-Sand border border-Black dark:border-0';
+} else {
+    colorClasses = 'text-neutral-50 bg-neutral-900 dark:bg-neutral-800';
+}
 
 function returnDateStatus(endDate) {
     if (endDate === 'ongoing') {

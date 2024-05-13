@@ -20,14 +20,31 @@ import {
     filterDraftsAndPubDate,
     isEventUpcoming,
     sortAscByEndDate,
+    sortDescByEndDate,
 } from '@utils/programFilters';
 
-const featuredPrograms = (await getCollection('programs'))
+const allPrograms = await getCollection('programs');
+
+let featuredPrograms = allPrograms
     .filter(filterDraftsAndPubDate)
     .filter(({ data }) => isEventUpcoming(data))
     .filter(({ data }) => data.featured === true)
     .sort(sortAscByEndDate)
     .slice(0, 2);
+
+// If there aren't two upcoming events, add the most recent events
+if (featuredPrograms.length < 2) {
+    const lastestTwoFeaturedPrograms = allPrograms
+        .filter(filterDraftsAndPubDate)
+        .filter(({ data }) => data.featured === true)
+        .sort(sortDescByEndDate)
+        .slice(0, 2);
+    if (featuredPrograms.length === 1) {
+        featuredPrograms.push(lastestTwoFeaturedPrograms[1]);
+    } else if (featuredPrograms.length === 0) {
+        featuredPrograms.push(...lastestTwoFeaturedPrograms);
+    }
+}
 ---
 
 <Base>

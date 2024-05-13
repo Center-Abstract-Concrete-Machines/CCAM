@@ -34,9 +34,7 @@ const pathname = Astro.url.pathname;
         <div
             class="navigation w-full lg:justify-self-stretch sm:col-span-3 lg:col-span-2"
         >
-            <div
-                class="grid grid-cols-2 grid-rows-3 gap-x-4 w-full max-w-lg mx-auto"
-            >
+            <div class="grid grid-cols-2 grid-rows-3 gap-x-4 w-full mx-auto">
                 {
                     metadata.navLinks.map((nav) => (
                         <NavLink nav={nav} pathname={pathname} />

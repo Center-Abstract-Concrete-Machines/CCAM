@@ -1,28 +1,50 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image, Picture } from 'astro:assets';
+
 import Base from '@layouts/Base.astro';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
 import GridSpacer from '@components/GridSpacer.astro';
-
-import workshop from 'src/images/workshop.jpg';
-import squareSpace from 'src/images/space-square.jpg';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
+
+import workshop from 'src/images/workshop.jpg';
+import squareSpace from 'src/images/space-square.jpg';
+import synthdiy from 'src/content/programs/images/electronics-faire/4_26_24_Temple_Electronics_Fair_125_A.jpg';
+import wdk from 'src/content/programs/images/wdky/RubyQue_Projector.jpg';
+import moon from 'src/content/programs/images/wdky/RubyQue_Screen_4.jpg';
+
 import {
     filterDraftsAndPubDate,
     isEventUpcoming,
     sortAscByEndDate,
+    sortDescByEndDate,
 } from '@utils/programFilters';
 
-const featuredPrograms = (await getCollection('programs'))
+const allPrograms = await getCollection('programs');
+
+let featuredPrograms = allPrograms
     .filter(filterDraftsAndPubDate)
     .filter(({ data }) => isEventUpcoming(data))
     .filter(({ data }) => data.featured === true)
     .sort(sortAscByEndDate)
     .slice(0, 2);
+
+// If there aren't two upcoming events, add the most recent events
+if (featuredPrograms.length < 2) {
+    const lastestTwoFeaturedPrograms = allPrograms
+        .filter(filterDraftsAndPubDate)
+        .filter(({ data }) => data.featured === true)
+        .sort(sortDescByEndDate)
+        .slice(0, 2);
+    if (featuredPrograms.length === 1) {
+        featuredPrograms.push(lastestTwoFeaturedPrograms[1]);
+    } else if (featuredPrograms.length === 0) {
+        featuredPrograms.push(...lastestTwoFeaturedPrograms);
+    }
+}
 ---
 
 <Base>
@@ -30,8 +52,8 @@ const featuredPrograms = (await getCollection('programs'))
     <section class="px-4 pt-4">
         <div class="thirds-container grid gap-4 justify-items-center">
             <IndexGlitchTitle />
-            <GridSpacer />
-            <div class="w-full">
+            <GridSpacer class="hidden sm:block" />
+            <div class="w-full hidden sm:block">
                 <Picture
                     src={squareSpace}
                     alt="Studio Space"
@@ -49,7 +71,7 @@ const featuredPrograms = (await getCollection('programs'))
         <HorizontalSpacer class="pb-4" />
         <div class="grid thirds-container gap-4">
             <Brackets>
-                <p class="max-w-[60%] mx-auto text-xl">
+                <p class="max-w-[60%] mx-auto text-lg sm:text-xl text-balance">
                     Center for Concrete and Abstract Machines is an artist-run
                     platform at the nexus of art, technology, and contemporary
                     thought.
@@ -108,9 +130,9 @@ const featuredPrograms = (await getCollection('programs'))
     <section class="px-4">
         <HorizontalSpacer class="mb-4" />
         <div class="grid place-items-center mx-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 md:w-10/12 py-20 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 lg:w-10/12 py-20 gap-8">
                 <div
-                    class="flex flex-col justify-between items-start order-2 md:order-1"
+                    class="flex flex-col justify-between items-start order-2 lg:order-1"
                 >
                     <p class="text-xl">
                         Nomadically based in Chicago, CCAM is an artist-run
@@ -126,12 +148,22 @@ const featuredPrograms = (await getCollection('programs'))
                         ></a
                     >
                 </div>
-                <div class="mt-8 sm:mt-0 mx-auto order-1 md:order-2">
+                <div
+                    class="mx-auto order-1 lg:order-2 self-center justify-self-center"
+                >
+                    <Image
+                        src={moon}
+                        alt="Abstract images including the moon projected in front of an audience."
+                        widths={[400, 600, 1200, moon.width]}
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        class="object-cover aspect-video object-bottom dark-image"
+                    />
                     <Image
                         src={workshop}
-                        alt="Image of workshop space"
+                        alt="Participants at a multichannel sound workshop in November 2023 listening carefully."
                         widths={[400, 600, 1200, workshop.width]}
-                        sizes="(min-width: 640px) 50vw, 100vw"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        class="object-cover aspect-video object-bottom light-image"
                     />
                 </div>
             </div>
@@ -152,3 +184,21 @@ const featuredPrograms = (await getCollection('programs'))
         </div>
     </section>
 </Base>
+
+<style is:global>
+    /* Swap out moon and workshop image in dark mode */
+    :root.dark .dark-image {
+        display: block;
+    }
+    :root.dark .light-image {
+        display: none;
+    }
+
+    :root .light-image {
+        display: block;
+    }
+
+    :root .dark-image {
+        display: none;
+    }
+</style>

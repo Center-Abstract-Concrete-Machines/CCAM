@@ -1,0 +1,124 @@
+import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
+import mime from 'mime-types';
+import yaml from 'js-yaml';
+
+const maxWidth = 2000;
+
+async function processImage(parentDir, file) {
+    const filePath = path.join(parentDir, file);
+
+    try {
+        const metadata = await sharp(filePath).metadata();
+
+        if (metadata.width > maxWidth) {
+            const newFilePath = path.join(
+                parentDir,
+                `${path.basename(file, path.extname(file))}-resized${path.extname(file)}`
+            );
+            await sharp(filePath)
+                .resize({ width: maxWidth })
+                .toFile(newFilePath);
+            console.log(`Resized ${file} to ${maxWidth}px wide`);
+            // Delete original image
+            await fs.promises.unlink(filePath);
+            // Rename resized image to original image name
+            await fs.promises.rename(newFilePath, filePath);
+        } else {
+            console.log(`Skipped ${file}, width is ${metadata.width}px`);
+        }
+    } catch (error) {
+        console.error(`Error processing image ${filePath}: \n`, error);
+    }
+}
+
+async function processDirectory(directoryName) {
+    const rootDirectory = path.join('src', 'content', 'programs', 'images');
+
+    const localDirPath = path.join(rootDirectory, directoryName);
+
+    try {
+        const files = await fs.promises.readdir(localDirPath);
+        const fullPathFileList = files
+            .sort((a, b) => a.localeCompare(b, 'en-us', { numeric: true }))
+            .map((filename) => path.join(localDirPath, filename));
+
+        await createGalleryTemplate(directoryName, fullPathFileList);
+
+        for (const file of files) {
+            const filePath = path.join(localDirPath, file);
+            if (isAnImage(filePath)) {
+                await processImage(localDirPath, file);
+            }
+        }
+    } catch (error) {
+        console.error('Unable to scan directory', error);
+    }
+}
+
+function getGalleryNames() {
+    try {
+        const galleriesPath = path.join('src', 'content', 'programs', 'images');
+        const files = fs.readdirSync(galleriesPath, { withFileTypes: true });
+        const galleries = files
+            .filter((file) => file.isDirectory())
+            .map((file) => file.name);
+        return galleries;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function createGalleryTemplate(galleryName, fileList) {
+    const galleryTemplatePath = path.join(
+        'src',
+        'content',
+        'gallery',
+        `${galleryName}.md`
+    );
+
+    // If template exists, leave it
+    if (fs.existsSync(galleryTemplatePath)) return;
+
+    // If it doesn't, create it
+    try {
+        let data = {
+            images: [],
+        };
+        // Add all files to the images array
+        for (let file of fileList) {
+            if (isAnImage(file)) {
+                data.images.push({
+                    image: file,
+                    caption: null,
+                    credit: null,
+                    includeInAssProject: false,
+                });
+            }
+        }
+        // Convert to yaml
+        const yamlString = yaml.dump(data, { lineWidth: -1 });
+        // Add to markdown frontmatter
+        const content = '---\n' + yamlString + '---\n';
+        // Write to file
+        await fs.promises.writeFile(galleryTemplatePath, content);
+    } catch (error) {
+        console.error(`Error creating template file for ${galleryName}`, error);
+    }
+}
+
+async function isAnImage(file) {
+    const stat = await fs.promises.lstat(file);
+    if (!stat.isDirectory()) {
+        const mimeType = mime.lookup(file);
+        if (mimeType && mimeType.startsWith('image')) return true;
+    }
+    return false;
+}
+
+// Testing it out
+const galleries = getGalleryNames();
+for (let gallery of galleries) {
+    processDirectory(gallery);
+}

@@ -68,7 +68,8 @@ Hello register below!
 
 ## Images
 
--   Images must have lowercase file extensions [(issue 20)](https://github.com/parkerdavis1/CCAM/issues/20)
+<!-- -   Images must have lowercase file extensions [(issue 20)](https://github.com/parkerdavis1/CCAM/issues/20) -->
+
 -   Program Gallery images can be placed in `src/content/programs/images/*` in a folder name of your choosing. Link the gallery images to your program's frontmatter with the `gallery` key (eg. `gallery: weird-dreams-slsa`)
     -   Previously they had to be in the `/public` folder but that is no longer true
 

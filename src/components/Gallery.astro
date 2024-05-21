@@ -53,8 +53,9 @@ if (optimizedImages.length <= 2) {
                                 <p class="text-sm font-mono whitespace-nowrap overflow-hidden text-ellipsis">
                                     {obj.caption}
                                 </p>
+                                {/* fix missing caption */}
                                 {obj.credit && (
-                                    <p class="text-textColor/50 text-xs font-mono whitespace-nowrap overflow-hidden text-ellipsis">
+                                    <p class="opacity-50 text-xs font-mono whitespace-nowrap overflow-hidden text-ellipsis">
                                         Photo: {obj.credit}
                                     </p>
                                 )}

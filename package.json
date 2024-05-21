@@ -27,6 +27,7 @@
         "dayjs": "^1.11.11",
         "lightgallery": "^2.7.2",
         "markdown-it": "^14.1.0",
+        "p5js-wrapper": "^1.2.3",
         "sanitize-html": "^2.13.0",
         "svelte": "^4.2.17",
         "tailwindcss": "^3.4.3",

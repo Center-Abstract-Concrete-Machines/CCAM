@@ -22,8 +22,6 @@
         \::/    /                \::/    /                \::/    /                \::/    /        
          \/____/                  \/____/                  \/____/                  \/____/     </pre>
 
-Work in progress
-
 Staging site (dev branch)
 [https://dev--ccamworldlive.netlify.app/](https://dev--ccamworldlive.netlify.app/)
 
@@ -35,7 +33,7 @@ Actual domain
 
 ## Templates
 
--   Each content type (people, programs, projects, resources) has an associated _template.mdx file. Duplicate this file, edit the data, and rename the file (making sure to remove the leading underscore _). Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.
+-   Each content type (people, programs, projects, resources) has an associated _template.mdx file in each content folder. Duplicate this file, edit the data, and rename the file (making sure to remove the leading underscore _). Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.
 
 ## Using LinkButton component in mdx files
 
@@ -44,8 +42,6 @@ Actual domain
 ---
 // frontmatter
 ---
-import LinkButton from '@components/LinkButton.astro'
-
 # Heading
 
 Hello register below!
@@ -54,30 +50,12 @@ Hello register below!
 ```
 <!-- prettier-ignore-end -->
 
--   the file needs to be .mdx to import the component
--   the import statement must happen in the first lines after the frontmatter (the component can be instantiated anywhere you want though)
+-   Files needs to be .mdx to use custom components
+-   **You no longer need to import the LinkButton or YouTube components, they are automatically made available in resources, programs, and projects.**
 
-## Tags
+## Create a program gallery
 
--   Every Program, Project, and Resource requires a tag
-
-## Frontmatter
-
--   Keys that are not defined in the `src/content/config.ts` will be ignored
--   Keys that are not handled in the layout for the page type will not be displayed
-
-## Images
-
-<!-- -   Images must have lowercase file extensions [(issue 20)](https://github.com/parkerdavis1/CCAM/issues/20) -->
-
--   Program Gallery images can be placed in `src/content/programs/images/*` in a folder name of your choosing. Link the gallery images to your program's frontmatter with the `gallery` key (eg. `gallery: weird-dreams-slsa`)
-    -   Previously they had to be in the `/public` folder but that is no longer true
-
-## Resources
-
-### Adding resources
-
--   create an .mdx file at `src/content/resources`.
--   if an image file is to be associated with the resource, add that the `src/content/resources/images`
--   see `src/content/resources/_resource-template.mdx` for reference. frontmatter is enclosed between the triple lines (e.g. `---`) and is rendered appropriately.
--   please reviews tags that already exist and grab those that are relevant before adding new tags (but don't be afraid to make new tags as needed).
+-   To create a new program photo gallery, put all the gallery images in a folder in `src/content/programs/images/*`. The name of this folder will serve as the gallery ID.
+-   Run `npm run gallery` in the terminal. This will scaffold a gallery content file in `/src/content/galleries/`.
+-   To add captions or attributions, open the gallery content file and add relevant metadata for individual photos as needed.
+-   Add the gallery ID to your programs frontmatter with the `gallery` key (eg `gallery: weird-dreams-slsa`)

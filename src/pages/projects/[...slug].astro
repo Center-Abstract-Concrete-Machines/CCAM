@@ -1,4 +1,6 @@
 ---
+import { YouTube } from 'astro-embed';
+import LinkButton from '@components/LinkButton.astro';
 import ProjectLayout from '@layouts/ProjectLayout.astro';
 import { getCollection } from 'astro:content';
 
@@ -15,5 +17,5 @@ const { Content } = await project.render();
 ---
 
 <ProjectLayout frontmatter={project.data}>
-    <Content />
+    <Content components={{ LinkButton, YouTube }} />
 </ProjectLayout>

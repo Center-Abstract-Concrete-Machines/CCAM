@@ -50,10 +50,11 @@ if (optimizedImages.length <= 2) {
                                 class="aspect-[4/3] object-cover object-center"
                             />
                             <div class="caption">
-                                <p class="text-sm font-mono whitespace-nowrap overflow-hidden text-ellipsis">
-                                    {obj.caption}
-                                </p>
-                                {/* fix missing caption */}
+                                {obj.caption && (
+                                    <p class="text-sm font-mono whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {obj.caption}
+                                    </p>
+                                )}
                                 {obj.credit && (
                                     <p class="opacity-50 text-xs font-mono whitespace-nowrap overflow-hidden text-ellipsis">
                                         Photo: {obj.credit}

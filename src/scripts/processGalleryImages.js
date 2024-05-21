@@ -18,22 +18,26 @@ function getGalleryNames() {
 }
 
 async function processDirectory(directoryName) {
-    const rootDirectory = path.join('src', 'content', 'programs', 'images');
-
-    const localDirPath = path.join(rootDirectory, directoryName);
+    const directoryPath = path.join(
+        'src',
+        'content',
+        'programs',
+        'images',
+        directoryName
+    );
 
     try {
-        const files = await fs.promises.readdir(localDirPath);
+        const files = await fs.promises.readdir(directoryPath);
         const fullPathFileList = files
             .sort((a, b) => a.localeCompare(b, 'en-us', { numeric: true }))
-            .map((filename) => path.join(localDirPath, filename));
+            .map((filename) => path.join(directoryPath, filename));
 
         await createGalleryTemplate(directoryName, fullPathFileList);
 
         for (const file of files) {
-            const filePath = path.join(localDirPath, file);
+            const filePath = path.join(directoryPath, file);
             if (await isAnImage(filePath)) {
-                await processImage(localDirPath, file);
+                await processImage(directoryPath, file);
             }
         }
     } catch (error) {
@@ -57,15 +61,15 @@ async function createGalleryTemplate(galleryName, fileList) {
         `${galleryName}.md`
     );
 
-    // If galleries directory doesn't exist, create it
-    if (!fs.existsSync(galleryDirectory)) {
-        fs.mkdirSync(galleryDirectory);
-    }
-    // If template exists, leave it
-    if (fs.existsSync(galleryTemplatePath)) return;
-
-    // If it doesn't, create it
     try {
+        // If galleries directory doesn't exist, create it
+        if (!fs.existsSync(galleryDirectory)) {
+            fs.mkdirSync(galleryDirectory);
+        }
+        // If template exists, leave it
+        if (fs.existsSync(galleryTemplatePath)) return;
+
+        // If it doesn't, create it
         let data = {
             images: [],
         };
@@ -120,7 +124,16 @@ async function processImage(parentDir, file) {
 }
 
 // Run the scripts!
-const galleries = getGalleryNames();
-for (let gallery of galleries) {
-    processDirectory(gallery);
+async function runScript() {
+    try {
+        const galleries = getGalleryNames();
+        for (let gallery of galleries) {
+            await processDirectory(gallery);
+        }
+        console.log('Completed gallery processing');
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+runScript();

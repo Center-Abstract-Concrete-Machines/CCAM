@@ -1,37 +1,10 @@
 ---
 const { gallery, slug } = Astro.props;
 
-import { Image, getImage, Picture } from 'astro:assets';
+import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
+import { Picture } from 'astro:assets';
 
-function sortByFileName(stringA, stringB) {
-    const [nameA, nameB] = [
-        stringA.split('/').at(-1).split('.').at(0),
-        stringB.split('/').at(-1).split('.').at(0),
-    ];
-    return nameA - nameB;
-}
-
-const allImages = await import.meta.glob<{ default: ImageMetadata }>(
-    '/src/content/programs/images/*/*'
-);
-
-let galleryImageKeys: string[];
-if (gallery) {
-    galleryImageKeys = Object.keys(allImages)
-        .filter((key) => key.includes(gallery))
-        .sort(sortByFileName);
-}
-
-const optimizedImages = await Promise.all(
-    galleryImageKeys.map(
-        async (path) =>
-            await getImage({
-                src: allImages[path](),
-                format: 'webp',
-                width: 1600,
-            })
-    )
-);
+const optimizedImages = await getOptimizedImagesForGallery(gallery);
 
 let galleryWidth;
 if (optimizedImages.length <= 2) {
@@ -51,12 +24,12 @@ const linkToLoadGallery = `/programs/${slug}-gallery#gallery-target`;
             gallery &&
                 optimizedImages
                     .slice(0, 4)
-                    .map((obj) => (
+                    .map(({ optimized }) => (
                         <Picture
-                            src={obj.src}
+                            src={optimized.src}
                             alt=""
-                            width={obj.attributes.width}
-                            height={obj.attributes.height}
+                            width={optimized.attributes.width}
+                            height={optimized.attributes.height}
                             widths={[400, 600, 1200, 1600]}
                             sizes="(min-width: 640px) 25vw, 100vw"
                             class="aspect-[4/3] object-cover object-center opacity-50 no-fade"

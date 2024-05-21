@@ -119,9 +119,25 @@ const peopleCollection = defineCollection({
         }),
 });
 
+const galleryCollection = defineCollection({
+    type: 'content',
+    schema: ({ image }) =>
+        z.object({
+            images: z.array(
+                z.object({
+                    image: image(),
+                    caption: z.string().nullable(),
+                    credit: z.string().nullable(),
+                    includeInAssProject: z.boolean(),
+                })
+            ),
+        }),
+});
+
 export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
     people: peopleCollection,
+    galleries: galleryCollection,
 };

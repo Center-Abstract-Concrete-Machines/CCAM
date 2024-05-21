@@ -10,7 +10,8 @@
         "preview": "astro preview",
         "astro": "astro",
         "test": "vitest",
-        "pretty": "prettier --write \"./**/*.{js,jsx,md,mdx}\""
+        "pretty": "prettier --write \"./**/*.{js,jsx,md,mdx}\"",
+        "gallery": "node src/scripts/processGalleryImages.js"
     },
     "dependencies": {
         "@astro-community/astro-embed-utils": "^0.1.2",

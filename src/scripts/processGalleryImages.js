@@ -4,32 +4,16 @@ import sharp from 'sharp';
 import mime from 'mime-types';
 import yaml from 'js-yaml';
 
-const maxWidth = 2000;
-
-async function processImage(parentDir, file) {
-    const filePath = path.join(parentDir, file);
-
+function getGalleryNames() {
     try {
-        const metadata = await sharp(filePath).metadata();
-
-        if (metadata.width > maxWidth) {
-            const newFilePath = path.join(
-                parentDir,
-                `${path.basename(file, path.extname(file))}-resized${path.extname(file)}`
-            );
-            await sharp(filePath)
-                .resize({ width: maxWidth })
-                .toFile(newFilePath);
-            console.log(`Resized ${file} to ${maxWidth}px wide`);
-            // Delete original image
-            await fs.promises.unlink(filePath);
-            // Rename resized image to original image name
-            await fs.promises.rename(newFilePath, filePath);
-        } else {
-            console.log(`Skipped ${file}, width is ${metadata.width}px`);
-        }
+        const galleriesPath = path.join('src', 'content', 'programs', 'images');
+        const files = fs.readdirSync(galleriesPath, { withFileTypes: true });
+        const galleries = files
+            .filter((file) => file.isDirectory())
+            .map((file) => file.name);
+        return galleries;
     } catch (error) {
-        console.error(`Error processing image ${filePath}: \n`, error);
+        console.error(error);
     }
 }
 
@@ -48,7 +32,7 @@ async function processDirectory(directoryName) {
 
         for (const file of files) {
             const filePath = path.join(localDirPath, file);
-            if (isAnImage(filePath)) {
+            if (await isAnImage(filePath)) {
                 await processImage(localDirPath, file);
             }
         }
@@ -57,27 +41,26 @@ async function processDirectory(directoryName) {
     }
 }
 
-function getGalleryNames() {
-    try {
-        const galleriesPath = path.join('src', 'content', 'programs', 'images');
-        const files = fs.readdirSync(galleriesPath, { withFileTypes: true });
-        const galleries = files
-            .filter((file) => file.isDirectory())
-            .map((file) => file.name);
-        return galleries;
-    } catch (error) {
-        console.error(error);
+async function isAnImage(filePath) {
+    const stat = await fs.promises.lstat(filePath);
+    if (!stat.isDirectory()) {
+        const mimeType = mime.lookup(filePath);
+        if (mimeType && mimeType.startsWith('image')) return true;
     }
+    return false;
 }
 
 async function createGalleryTemplate(galleryName, fileList) {
+    const galleryDirectory = path.join('src', 'content', 'galleries');
     const galleryTemplatePath = path.join(
-        'src',
-        'content',
-        'gallery',
+        galleryDirectory,
         `${galleryName}.md`
     );
 
+    // If galleries directory doesn't exist, create it
+    if (!fs.existsSync(galleryDirectory)) {
+        fs.mkdirSync(galleryDirectory);
+    }
     // If template exists, leave it
     if (fs.existsSync(galleryTemplatePath)) return;
 
@@ -88,7 +71,7 @@ async function createGalleryTemplate(galleryName, fileList) {
         };
         // Add all files to the images array
         for (let file of fileList) {
-            if (isAnImage(file)) {
+            if (await isAnImage(file)) {
                 data.images.push({
                     image: file,
                     caption: null,
@@ -108,16 +91,35 @@ async function createGalleryTemplate(galleryName, fileList) {
     }
 }
 
-async function isAnImage(file) {
-    const stat = await fs.promises.lstat(file);
-    if (!stat.isDirectory()) {
-        const mimeType = mime.lookup(file);
-        if (mimeType && mimeType.startsWith('image')) return true;
+async function processImage(parentDir, file) {
+    // MAX WIDTH OPTION
+    const maxWidth = 2000;
+
+    const filePath = path.join(parentDir, file);
+
+    try {
+        const metadata = await sharp(filePath).metadata();
+
+        if (metadata.width > maxWidth) {
+            const newFilePath = path.join(
+                parentDir,
+                `${path.basename(file, path.extname(file))}-resized${path.extname(file)}`
+            );
+            await sharp(filePath)
+                .resize({ width: maxWidth })
+                .toFile(newFilePath);
+            console.log(`Resized ${file} to ${maxWidth}px wide`);
+            // Delete original image
+            await fs.promises.unlink(filePath);
+            // Rename resized image to original image name
+            await fs.promises.rename(newFilePath, filePath);
+        }
+    } catch (error) {
+        console.error(`Error processing image ${filePath}: \n`, error);
     }
-    return false;
 }
 
-// Testing it out
+// Run the scripts!
 const galleries = getGalleryNames();
 for (let gallery of galleries) {
     processDirectory(gallery);

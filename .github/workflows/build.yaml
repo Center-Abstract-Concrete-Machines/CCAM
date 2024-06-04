@@ -25,7 +25,7 @@ jobs:
               id: lychee
               uses: lycheeverse/lychee-action@v1
               with:
-                  args: ./dist
+                  args: ./dist --exclude https://lithium.gallery
 
             - name: Create Issue From File
               if: env.lychee_exit_code != 0

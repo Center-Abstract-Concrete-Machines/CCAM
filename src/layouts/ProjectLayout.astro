@@ -55,8 +55,8 @@ const associatedResources = await getCollection('resources', ({ data }) =>
         </div>
         <HorizontalSpacer />
         <div class="prose dark:prose-invert mx-auto my-4 mb-12">
-            <TagsList tags={tags} />
             <slot />
+            <TagsList tags={tags} class="my-12 mb-16" />
         </div>
         {people && <PeopleDisplay people={people} />}
 

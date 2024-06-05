@@ -54,7 +54,7 @@ Iterations of this project will include the following:
 
 -   Futurhythm Machines: The Origins of the Soundsystem (Kingston)
 -   Futurhythm Machines: From Hip-Hop to Electrofunk (New York)
--   Futurhythm Machines: House (Chicago)
+-   [Futurhythm Machines: House (Chicago)](/programs/24-5-10-future-rhythm-machines-chicago-house/)
 -   Futurhythm Machines: Techno (Detroit)
 -   Futurhythm Machines: Jungle (Bristol/London)
 -   Futurhythm Machines: Baile Funk (Rio de Janeiro)

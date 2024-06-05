@@ -4,7 +4,7 @@ import GalleryPreview from '@components/GalleryPreview.astro'
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
-import { Image, Picture } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import DateStatus from '@components/DateStatus.astro';
 import ProgramMetadata from '@components/ProgramMetadata.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
@@ -44,8 +44,7 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                 class="text-4xl uppercase font-semibold leading-tight tracking-tight text-center py-24"
             >
                 {subtitle ? title+":" : title}
-                {
-                    subtitle && (
+                {subtitle && (
                         <span>
                             {subtitle}
                         </span>
@@ -77,10 +76,12 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                     <Tag tag={type} />
                     <DateStatus date={endDate} />
                 </div>
-                <TagsList tags={tags} />
                 {assProjectId && <AssProjectLink assProject={assProject} />}
             </div>
-            <slot />
+            <div class="mt-8">
+                <slot />
+            </div>
+            <TagsList tags={tags} class="mt-12 mb-16"/>
         </div>
         {assResources.length > 0 && (
             <HorizontalSpacer class="my-4" />
@@ -107,10 +108,11 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                         <iframe hidden name=htmz onload="setTimeout(()=>{document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes);
                             const galleryLoadedEvent = new CustomEvent('gallery-loaded');
                             document.dispatchEvent(galleryLoadedEvent);})"></iframe>
-                    </>
-                    )
-                }
+                </>
+            )
+        }
     </div>
+
 </Base>
 
 <script>

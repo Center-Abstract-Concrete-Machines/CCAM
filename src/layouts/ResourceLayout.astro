@@ -1,6 +1,5 @@
 ---
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
-import LinkButton from '@components/LinkButton.astro';
 import ResourceType from '@components/ResourceType.astro';
 import TagsList from '@components/TagsList.astro';
 import Base from '@layouts/Base.astro';
@@ -32,7 +31,9 @@ const { slug } = Astro.props;
                 )
             }
             <div>
-                <h1 class="text-xl font-medium">{title}</h1>
+                <h1 class="text-2xl md:text-3xl font-semibold text-balance">
+                    {title}
+                </h1>
                 <div
                     class="flex flex-wrap justify-start items-center gap-2 pt-2 font-mono text-xs"
                 >
@@ -49,9 +50,11 @@ const { slug } = Astro.props;
                 </div>
             </div>
         </div>
-        <div class="prose dark:prose-invert mx-auto max-w-2xl py-4">
-            <TagsList tags={tags} class="mb-4" />
+        <div
+            class="prose dark:prose-invert prose-headings:font-semibold mx-auto max-w-2xl py-4"
+        >
             <slot />
+            <TagsList tags={tags} class="my-12" />
         </div>
     </div>
 </Base>

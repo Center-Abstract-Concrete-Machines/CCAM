@@ -10,35 +10,34 @@
         "preview": "astro preview",
         "astro": "astro",
         "test": "vitest",
-        "pretty": "prettier --write \"./**/*.{js,jsx,md,mdx}\""
+        "pretty": "prettier --write \"./**/*.{js,jsx,md,mdx}\"",
+        "gallery": "node src/scripts/processGalleryImages.js"
     },
     "dependencies": {
-        "@astro-community/astro-embed-utils": "^0.1.2",
-        "@astro-community/astro-embed-vimeo": "^0.3.7",
-        "@astro-community/astro-embed-youtube": "^0.5.2",
         "@astrojs/mdx": "^2.3.1",
         "@astrojs/netlify": "^5.2.1",
-        "@astrojs/preact": "^3.2.0",
-        "@astrojs/rss": "^4.0.5",
-        "@astrojs/svelte": "^5.4.0",
+        "@astrojs/rss": "^4.0.6",
         "@astrojs/sitemap": "^3.1.4",
+        "@astrojs/svelte": "^5.4.0",
         "@astrojs/tailwind": "^5.1.0",
         "@mailchimp/mailchimp_marketing": "^3.0.80",
-        "astro": "^4.7.1",
+        "astro": "^4.8.6",
+        "astro-embed": "^0.7.2",
         "dayjs": "^1.11.11",
-        "dialog-polyfill": "^0.5.6",
         "lightgallery": "^2.7.2",
         "markdown-it": "^14.1.0",
         "p5js-wrapper": "^1.2.3",
-        "svelte": "^4.2.16",
-        "typescript": "^5.4.5",
-        "preact": "^10.21.0",
         "sanitize-html": "^2.13.0",
-        "tailwindcss": "^3.4.3"
+        "svelte": "^4.2.17",
+        "tailwindcss": "^3.4.3",
+        "typescript": "^5.4.5"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.13",
+        "js-yaml": "^4.1.0",
+        "mime-types": "^2.1.35",
         "prettier": "^3.2.5",
+        "sharp": "^0.33.4",
         "vitest": "^1.6.0"
     }
 }

@@ -54,9 +54,11 @@ const associatedResources = await getCollection('resources', ({ data }) =>
             </div>
         </div>
         <HorizontalSpacer />
-        <div class="prose dark:prose-invert mx-auto my-4 mb-12">
-            <TagsList tags={tags} />
+        <div
+            class="prose dark:prose-invert prose-headings:font-semibold mx-auto my-4 mb-12"
+        >
             <slot />
+            <TagsList tags={tags} class="my-12 mb-16" />
         </div>
         {people && <PeopleDisplay people={people} />}
 
@@ -64,7 +66,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
             associatedPrograms.length > 0 && (
                 <>
                     <HorizontalSpacer class="my-4" />
-                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
                         Associated Programs
                     </h2>
                     <HorizontalSpacer class="my-4" />
@@ -90,7 +92,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
             associatedResources.length > 0 && (
                 <div>
                     <HorizontalSpacer class="my-4" />
-                    <h2 class="text-2xl sm:text-3xl font-medium text-center my-12">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
                         Resources
                     </h2>
                     <HorizontalSpacer />

@@ -1,6 +1,6 @@
 ---
 title: 'Rhythm and Time Toolkit'
-type: Link
+type: Video
 author: Philip Meyer
 year: 2023
 url: https://www.youtube.com/watch?v=F_CQEaXhyew
@@ -18,8 +18,7 @@ tags:
     - max/msp
 ---
 
-import { YouTube } from '@astro-community/astro-embed-youtube';
 
 <YouTube id="https://www.youtube.com/embed/F_CQEaXhyew?si=8O6sS6YaySOAceEe" />
 
-<a href={frontmatter.url}>Link</a>
+<LinkButton text="YouTube Video" url={frontmatter.url} />

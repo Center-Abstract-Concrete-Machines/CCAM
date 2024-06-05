@@ -1,7 +1,8 @@
 ---
 const { gallery } = Astro.props;
 
-import { Image, getImage, Picture } from 'astro:assets';
+import { Picture } from 'astro:assets';
+import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
 
 function sortByFileName(stringA, stringB) {
     const [nameA, nameB] = [
@@ -11,30 +12,7 @@ function sortByFileName(stringA, stringB) {
     return nameA - nameB;
 }
 
-const allImages = await import.meta.glob<{ default: ImageMetadata }>(
-    '/src/content/programs/images/*/*'
-);
-// const allImages = import.meta.glob<{ default: ImageMetadata }>(
-//     'public/assets/images/*/*'
-// );
-
-let galleryImageKeys: string[];
-if (gallery) {
-    galleryImageKeys = Object.keys(allImages)
-        .filter((key) => key.includes(gallery))
-        .sort(sortByFileName);
-}
-
-const optimizedImages = await Promise.all(
-    galleryImageKeys.map(
-        async (path) =>
-            await getImage({
-                src: allImages[path](),
-                format: 'webp',
-                width: 1600,
-            })
-    )
-);
+const optimizedImages = await getOptimizedImagesForGallery(gallery);
 
 let galleryWidth;
 if (optimizedImages.length <= 2) {
@@ -57,16 +35,32 @@ if (optimizedImages.length <= 2) {
             {
                 gallery &&
                     optimizedImages.map((obj) => (
-                        <a href={obj.src} target="_blank">
+                        <a
+                            href={obj.optimized.src}
+                            target="_blank"
+                            data-sub-html=".caption"
+                        >
                             <Picture
-                                src={obj.src}
+                                src={obj.optimized.src}
                                 alt=""
-                                width={obj.attributes.width}
-                                height={obj.attributes.height}
+                                width={obj.optimized.attributes.width}
+                                height={obj.optimized.attributes.height}
                                 widths={[400, 600, 1200, 1600]}
                                 sizes="(min-width: 640px) 25vw, 100vw"
                                 class="aspect-[4/3] object-cover object-center"
                             />
+                            <div class="caption">
+                                {obj.caption && (
+                                    <p class="text-sm font-mono whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {obj.caption}
+                                    </p>
+                                )}
+                                {obj.credit && (
+                                    <p class="opacity-50 text-xs font-mono whitespace-nowrap overflow-hidden text-ellipsis">
+                                        Photo: {obj.credit}
+                                    </p>
+                                )}
+                            </div>
                         </a>
                     ))
             }

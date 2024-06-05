@@ -1,4 +1,4 @@
-name: Website can build
+name: Website builds, check links
 
 on: [push]
 

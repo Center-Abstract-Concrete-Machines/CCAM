@@ -1,6 +1,8 @@
 ---
 import ProgramLayout from '../../layouts/ProgramLayout.astro';
 import { getCollection } from 'astro:content';
+import { YouTube } from 'astro-embed';
+import LinkButton from '@components/LinkButton.astro';
 
 export async function getStaticPaths() {
     const programs = await getCollection('programs');
@@ -15,5 +17,5 @@ const { Content } = await program.render();
 ---
 
 <ProgramLayout frontmatter={program.data} slug={program.slug}>
-    <Content />
+    <Content components={{ LinkButton, YouTube }} />
 </ProgramLayout>

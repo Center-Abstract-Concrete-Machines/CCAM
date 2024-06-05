@@ -1,6 +1,8 @@
 ---
-import ResourceLayout from '/src/layouts/ResourceLayout.astro';
+import { YouTube } from 'astro-embed';
+import ResourceLayout from '@layouts/ResourceLayout.astro';
 import { getCollection } from 'astro:content';
+import LinkButton from '@components/LinkButton.astro';
 
 export async function getStaticPaths() {
     const resources = await getCollection('resources');
@@ -15,5 +17,5 @@ const { Content } = await resource.render();
 ---
 
 <ResourceLayout frontmatter={resource.data}>
-    <Content />
+    <Content components={{ YouTube, LinkButton }} />
 </ResourceLayout>

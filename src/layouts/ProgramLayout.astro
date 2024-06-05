@@ -125,6 +125,11 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
             download: false,
             hideControlOnEnd: true,
             loop: false,
+            subHtmlSelectorRelative: true,
+            mobileSettings: {
+                showCloseIcon: true,
+                controls: false,
+            }
         });
     })    
 </script>

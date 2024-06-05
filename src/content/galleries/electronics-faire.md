@@ -1,8 +1,8 @@
 ---
 images:
     - image: src/content/programs/images/electronics-faire/4_26_24_Temple_Electronics_Fair_039_A.jpg
-      caption: aoiwnfoaiwfnoaiwnfinoawf aofnaownfoaif ianwfoanwofaoni
-      credit: Parker Davis
+      caption: null
+      credit: null
       includeInAssProject: false
     - image: src/content/programs/images/electronics-faire/4_26_24_Temple_Electronics_Fair_109_A.jpg
       caption: null

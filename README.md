@@ -55,7 +55,7 @@ Hello register below!
 
 ## Create a program gallery
 
--   To create a new program photo gallery, put all the gallery images in a folder in `src/content/programs/images/*`. The name of this folder will serve as the gallery ID.
+-   To create a new program photo gallery, put all the gallery images in a folder in `src/content/galleries/*`. The name of this folder will serve as the gallery ID.
 -   Run `npm run gallery` in the terminal. This will scaffold a gallery content file in `/src/content/galleries/`.
 -   To add captions or attributions, open the gallery content file and add relevant metadata for individual photos as needed.
 -   Add the gallery ID to your programs frontmatter with the `gallery` key (eg `gallery: weird-dreams-slsa`)

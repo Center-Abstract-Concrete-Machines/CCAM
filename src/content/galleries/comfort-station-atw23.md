@@ -1,22 +1,22 @@
 ---
 images:
-  - image: src/content/programs/images/comfort-station-atw23/1.png
+  - image: src/content/galleries/comfort-station-atw23/1.png
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/comfort-station-atw23/2.png
+  - image: src/content/galleries/comfort-station-atw23/2.png
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/comfort-station-atw23/3.png
+  - image: src/content/galleries/comfort-station-atw23/3.png
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/comfort-station-atw23/4.png
+  - image: src/content/galleries/comfort-station-atw23/4.png
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/comfort-station-atw23/5.png
+  - image: src/content/galleries/comfort-station-atw23/5.png
     caption: null
     credit: null
     includeInAssProject: false

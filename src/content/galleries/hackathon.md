@@ -1,90 +1,90 @@
 ---
 images:
-  - image: src/content/programs/images/hackathon/IMG_1758.JPEG
+  - image: src/content/galleries/hackathon/IMG_1758.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1759.JPEG
+  - image: src/content/galleries/hackathon/IMG_1759.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1760.JPEG
+  - image: src/content/galleries/hackathon/IMG_1760.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1761.JPEG
+  - image: src/content/galleries/hackathon/IMG_1761.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1762.JPEG
+  - image: src/content/galleries/hackathon/IMG_1762.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1763.JPEG
+  - image: src/content/galleries/hackathon/IMG_1763.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1768.JPEG
+  - image: src/content/galleries/hackathon/IMG_1768.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1769.JPEG
+  - image: src/content/galleries/hackathon/IMG_1769.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1770.JPEG
+  - image: src/content/galleries/hackathon/IMG_1770.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1779.JPEG
+  - image: src/content/galleries/hackathon/IMG_1779.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1780.JPEG
+  - image: src/content/galleries/hackathon/IMG_1780.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1781.JPEG
+  - image: src/content/galleries/hackathon/IMG_1781.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1782.JPEG
+  - image: src/content/galleries/hackathon/IMG_1782.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1783.JPEG
+  - image: src/content/galleries/hackathon/IMG_1783.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/IMG_1787.JPEG
+  - image: src/content/galleries/hackathon/IMG_1787.JPEG
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/mass1.jpeg
+  - image: src/content/galleries/hackathon/mass1.jpeg
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/mass2.jpeg
+  - image: src/content/galleries/hackathon/mass2.jpeg
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/mass3.jpeg
+  - image: src/content/galleries/hackathon/mass3.jpeg
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/tension1.jpg
+  - image: src/content/galleries/hackathon/tension1.jpg
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/tension2.jpg
+  - image: src/content/galleries/hackathon/tension2.jpg
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/tension3.jpg
+  - image: src/content/galleries/hackathon/tension3.jpg
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/programs/images/hackathon/tension4.png
+  - image: src/content/galleries/hackathon/tension4.png
     caption: null
     credit: null
     includeInAssProject: false

@@ -1,5 +1,16 @@
 import { prefersReduced } from './prefersReducedMotion';
-const colors = ['#747fef', '#a5f91d', '#ffd500'];
+// const colors = ['#747fef', '#a5f91d', '#ffd500'];
+const colors = [
+    'hsl(216deg 100% 73%)',
+    'hsl(216deg 100% 73%)',
+    'hsl(83deg 95% 55%)',
+    'hsl(83deg 95% 55%)',
+    'hsl(25deg 100% 55%)',
+    'hsl(235deg 79% 70%)',
+    'hsl(235deg 79% 70%)',
+    'hsl(50deg 100% 50%)',
+    'currentColor',
+];
 const classes = [
     ['font-sans', 'font-medium'],
     ['font-moonbase', 'mbsq'],

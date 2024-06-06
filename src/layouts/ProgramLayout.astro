@@ -73,8 +73,8 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                     location={location}
                 />
                 <div class="flex gap-2 my-4 grow-0 flex-wrap text-sm">
-                    <Tag tag={type} />
                     <DateStatus date={endDate} />
+                    <Tag tag={type} />
                 </div>
                 {assProjectId && <AssProjectLink assProject={assProject} />}
             </div>

@@ -56,11 +56,12 @@ export function setupHeaderSketch() {
         };
 
         p.windowResized = () => {
+            const savedContent = p.get();
             const { containerWidth, containerHeight } =
                 getContainerDimensions('#headerSketch');
 
-            p.resizeCanvas(containerWidth, containerHeight);
-            refreshParticles();
+            p.resizeCanvas(containerWidth, containerHeight, true);
+            p.image(savedContent, 0, 0);
         };
     });
 }

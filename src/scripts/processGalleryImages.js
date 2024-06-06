@@ -5,8 +5,8 @@ import mime from 'mime-types';
 import yaml from 'js-yaml';
 
 function getGalleryNames() {
+    const galleriesPath = path.join('src', 'content', 'galleries');
     try {
-        const galleriesPath = path.join('src', 'content', 'programs', 'images');
         const files = fs.readdirSync(galleriesPath, { withFileTypes: true });
         const galleries = files
             .filter((file) => file.isDirectory())
@@ -18,13 +18,8 @@ function getGalleryNames() {
 }
 
 async function processDirectory(directoryName) {
-    const directoryPath = path.join(
-        'src',
-        'content',
-        'programs',
-        'images',
-        directoryName
-    );
+    const galleriesPath = path.join('src', 'content', 'galleries');
+    const directoryPath = path.join(galleriesPath, directoryName);
 
     try {
         const files = await fs.promises.readdir(directoryPath);

@@ -45,8 +45,9 @@ export function setupSketch() {
         p.windowResized = () => {
             const { containerWidth, containerHeight } =
                 getContainerDimensions('#sketch');
+            const savedContent = p.get();
             p.resizeCanvas(containerWidth, containerHeight);
-            refreshParticles();
+            p.image(savedContent, 0, 0);
         };
     });
 }

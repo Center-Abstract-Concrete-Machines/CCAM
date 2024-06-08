@@ -5,21 +5,6 @@ import {
 } from '@utils/swirl/sketchHelpers.js';
 import Particle from '@utils/swirl/particle.js';
 
-// const canvasContainerId = '#headerSketch';
-// const startingParticleBoundsId = '#headerLogo';
-// const numOfParticles = 100;
-// const particleConfig = {
-//     noiseScale: 0.003,
-//     noiseMultiplier: 500,
-//     spdRange: [0.5, 2],
-//     // colors: ['#fffbf1', '#2d2d2a', '#eee5e9'],
-//     colors: [
-//         'rgb(255,251,241)', // sand
-//         'rgb(45,45,42)', // dark gray
-//         'rgb(238,229,233', // slate
-//     ],
-// };
-
 export function initSketch(sketchOptions) {
     let particles = [];
     const {
@@ -104,29 +89,36 @@ export function initSketch(sketchOptions) {
     }
 
     function draw() {
-        // context.fillStyle = '#11ee3311';
-        // context.fillRect(0, 0, canvas.width, canvas.height);
         for (let particle of particles) {
             particle.move(Boolean(moveRight));
             particle.display();
         }
-        requestAnimationFrame(draw);
+        animationId = requestAnimationFrame(draw);
     }
 
+    let animationId;
     handleResize();
     refreshParticles();
     draw();
 
+    const timeoutId = setTimeout(
+        () => {
+            cancelAnimationFrame(animationId);
+        },
+        1000 * 60 * 1 // stop animation after 2 minutes
+    );
+
     window.addEventListener('resize', handleResize);
 
     function dismantle() {
+        clearTimeout(timeoutId); // cancel timeout
         window.removeEventListener('resize', handleResize);
         canvas.remove();
         bufferCanvas.remove();
     }
 
     return {
-        canvas: canvas,
+        canvas,
         dismantle,
     };
 }

@@ -61,8 +61,7 @@ export default class Particle {
             this.color2,
             Math.abs(this.noise / this.noiseMultiplier)
         );
-        // console.log('reduced noise', Math.abs(this.noise / 500));
-        col = col.slice(0, -1) + ' / 40)';
+        col = col.slice(0, -1) + ' / 40)'; // add 40% alpha
         this.drawPoint(this.pos.x, this.pos.y, col);
     }
 }

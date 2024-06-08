@@ -17,7 +17,7 @@ export class Sprite {
         // Request file
         const response = await fetch(this.src);
         if (!response.ok) {
-            console.log(`${response.url} ${response.statusText}`);
+            // console.log(`${response.url} ${response.statusText}`);
             throw new Error(`${response.url} ${response.statusText}`);
         }
         const arrayBuffer = await response.arrayBuffer();

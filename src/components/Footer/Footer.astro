@@ -61,5 +61,59 @@ import Logo from '/src/svg/logo.svg';
 </div>
 
 <script>
-    import './sketch/footerSketch';
+    import { initSketch } from '@utils/swirl/sketch';
+    import { prefersReduced } from '@utils/prefersReducedMotion';
+
+    const sketchOptions = {
+        canvasContainerId: '#sketch',
+        startingParticleBoundsId: '#sketch',
+        numOfParticles: 200,
+        particleConfig: {
+            noiseScale: 0.003,
+            noiseMultiplier: 500,
+            spdRange: [0.5, 2],
+            // colors: ['#fffbf1', '#2d2d2a', '#eee5e9'],
+            colors: [
+                'rgb(255,251,241)', // sand
+                'rgb(45,45,42)', // dark gray
+                'rgb(238,229,233', // slate
+            ],
+        },
+        isFooter: true,
+    };
+
+    let sketchEl;
+
+    // Use Intersection Observer API to load sketch once it is visible
+    function callback(entries, observer) {
+        entries.forEach(async (entry) => {
+            if (entry.isIntersecting) {
+                sketchEl = initSketch(sketchOptions);
+                observer.disconnect();
+            }
+        });
+    }
+
+    function setupObserver() {
+        const sketchObserver = new IntersectionObserver(callback, {
+            threshold: 0.9,
+        });
+        sketchObserver.observe(document.querySelector('#footerLogo'));
+    }
+
+    if (!prefersReduced) {
+        // This is all to prevent memory leaks when using page transitions
+        document.addEventListener('astro:page-load', () => {
+            if (!sketchEl) {
+                setupObserver();
+            }
+        });
+
+        document.addEventListener('astro:before-swap', () => {
+            if (sketchEl) {
+                sketchEl.dismantle();
+                sketchEl = null;
+            }
+        });
+    }
 </script>

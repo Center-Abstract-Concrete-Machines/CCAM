@@ -2,7 +2,6 @@ import { prefersReduced } from './prefersReducedMotion';
 // const colors = ['#747fef', '#a5f91d', '#ffd500'];
 const colors = [
     'hsl(216deg 100% 73%)',
-    'hsl(216deg 100% 73%)',
     'hsl(83deg 95% 55%)',
     'hsl(83deg 95% 55%)',
     'hsl(25deg 100% 55%)',

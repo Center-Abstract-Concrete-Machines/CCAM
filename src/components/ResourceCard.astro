@@ -39,7 +39,7 @@ const dataDate = dateAdded?.getTime() || pubDate?.getTime();
             <a href=`/${metaSlug}/${slug}/`>
                 <Picture
                     src={imageSrc}
-                    alt={image ? image.alt : ''}
+                    alt={image ? image.alt : title}
                     class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
                     widths={[100, 200, 400]}
                     width="800"

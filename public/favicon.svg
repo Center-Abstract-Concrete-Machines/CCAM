@@ -3,9 +3,9 @@
 <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <style>
         path { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-        path { fill: #EEE; }
-        }
+        @media (prefers-color-scheme: dark) { path { fill: #EEE; } }
+        @keyframes morph { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        #path1 { animation: morph 20s infinite linear; transform-origin: center; }
     </style>
     <path id="Path" fill="currentColor" stroke="none"
         d="M 11.889999 103.139999 L 11.889999 20.880005 L 29.890001 20.880005 L 29.890001 27 L 18.639999 27 L 18.639999 97.019997 L 29.890001 97.019997 L 29.890001 103.139999 L 11.889999 103.139999 Z" />

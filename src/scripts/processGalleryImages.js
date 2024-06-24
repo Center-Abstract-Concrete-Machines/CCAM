@@ -3,6 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 import mime from 'mime-types';
 import yaml from 'js-yaml';
+import heicConvert from 'heic-convert';
 
 function getGalleryNames() {
     const galleriesPath = path.join('src', 'content', 'galleries');
@@ -23,11 +24,6 @@ async function processDirectory(directoryName) {
 
     try {
         const files = await fs.promises.readdir(directoryPath);
-        const fullPathFileList = files
-            .sort((a, b) => a.localeCompare(b, 'en-us', { numeric: true }))
-            .map((filename) => path.join(directoryPath, filename));
-
-        await createGalleryTemplate(directoryName, fullPathFileList);
 
         for (const file of files) {
             const filePath = path.join(directoryPath, file);
@@ -35,6 +31,13 @@ async function processDirectory(directoryName) {
                 await processImage(directoryPath, file);
             }
         }
+
+        const updatedFiles = await fs.promises.readdir(directoryPath);
+        const fullPathFileList = updatedFiles
+            .sort((a, b) => a.localeCompare(b, 'en-us', { numeric: true }))
+            .map((filename) => path.join(directoryPath, filename));
+
+        await createGalleryTemplate(directoryName, fullPathFileList);
     } catch (error) {
         console.error('Unable to scan directory', error);
     }
@@ -99,7 +102,24 @@ async function processImage(parentDir, file) {
     try {
         const metadata = await sharp(filePath).metadata();
 
-        if (metadata.width > maxWidth) {
+        if (metadata.format === 'heif') {
+            const newFileName = `${path.basename(file, path.extname(file))}.jpg`;
+            const newFilePath = path.join(parentDir, newFileName);
+            const inputBuffer = await fs.promises.readFile(filePath);
+            const outputBuffer = await heicConvert({
+                buffer: inputBuffer,
+                format: 'JPEG',
+                quality: 1,
+            });
+            await sharp(outputBuffer)
+                .resize({ width: maxWidth })
+                .toFile(newFilePath);
+            console.log(
+                `Converted ${file} from HEIC to JPG and resized to ${maxWidth}px wide as ${newFileName}`
+            );
+            await fs.promises.unlink(filePath);
+            console.log(`Deleted original file ${filePath}`);
+        } else if (metadata.width > maxWidth) {
             const newFilePath = path.join(
                 parentDir,
                 `${path.basename(file, path.extname(file))}-resized${path.extname(file)}`

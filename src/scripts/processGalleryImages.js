@@ -113,12 +113,15 @@ async function processImage(parentDir, file) {
             });
             await sharp(outputBuffer)
                 .resize({ width: maxWidth })
+                .withMetadata()
                 .toFile(newFilePath);
             console.log(
-                `Converted ${file} from HEIC to JPG and resized to ${maxWidth}px wide as ${newFileName}`
+                `\nConverted ${file} from HEIC to JPG and resized to ${maxWidth}px wide as ${newFileName}`
             );
             await fs.promises.unlink(filePath);
             console.log(`Deleted original file ${filePath}`);
+            //
+            //
         } else if (metadata.width > maxWidth) {
             const newFilePath = path.join(
                 parentDir,
@@ -126,6 +129,7 @@ async function processImage(parentDir, file) {
             );
             await sharp(filePath)
                 .resize({ width: maxWidth })
+                .withMetadata()
                 .toFile(newFilePath);
             console.log(`Resized ${file} to ${maxWidth}px wide`);
             // Delete original image
@@ -145,7 +149,7 @@ async function runScript() {
         for (let gallery of galleries) {
             await processDirectory(gallery);
         }
-        console.log('Completed gallery processing');
+        console.log('\nCompleted gallery processing ✨\n');
     } catch (error) {
         console.error(error);
     }

@@ -6,6 +6,10 @@ export async function getOptimizedImagesForGallery(gallery) {
     const [thisGallery] = allGalleries.filter(
         (galleryEntry) => galleryEntry.slug === gallery
     );
+    if (!thisGallery)
+        throw new Error(
+            'Gallery not found – for new galleries make sure you run `npm run gallery` to scaffold new gallery template files.'
+        );
     const images = thisGallery.data.images;
     const optimizedImages = await Promise.all(
         images.map(async (obj) => ({

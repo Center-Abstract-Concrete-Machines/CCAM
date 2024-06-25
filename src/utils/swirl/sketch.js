@@ -90,7 +90,11 @@ export function initSketch(sketchOptions) {
 
     function draw() {
         for (let particle of particles) {
-            particle.move(Boolean(moveRight));
+            if (canvas.width > 640) {
+                particle.move(Boolean(moveRight));
+            } else {
+                particle.move();
+            }
             particle.display();
         }
         animationId = requestAnimationFrame(draw);

@@ -5,6 +5,8 @@ import mime from 'mime-types';
 import yaml from 'js-yaml';
 import heicConvert from 'heic-convert';
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function getGalleryNames() {
     const galleriesPath = path.join('src', 'content', 'galleries');
     try {
@@ -59,6 +61,12 @@ async function createGalleryTemplate(galleryName, fileList) {
         `${galleryName}.md`
     );
 
+    function convertWinToPOSIX(pathString) {
+        const converted = pathString.replace(/\\/g, '/');
+        const normalized = path.posix.normalize(converted);
+        return normalized;
+    }
+
     try {
         // If galleries directory doesn't exist, create it
         if (!fs.existsSync(galleryDirectory)) {
@@ -75,7 +83,7 @@ async function createGalleryTemplate(galleryName, fileList) {
         for (let file of fileList) {
             if (await isAnImage(file)) {
                 data.images.push({
-                    image: file,
+                    image: convertWinToPOSIX(file),
                     caption: null,
                     credit: null,
                     includeInAssProject: false,
@@ -132,7 +140,11 @@ async function processImage(parentDir, file) {
                 .withMetadata()
                 .toFile(newFilePath);
             console.log(`Resized ${file} to ${maxWidth}px wide`);
+
             // Delete original image
+            await delay(100);
+            // TODO add check for permissions
+            // if (await fs.promises.access())
             await fs.promises.unlink(filePath);
             // Rename resized image to original image name
             await fs.promises.rename(newFilePath, filePath);

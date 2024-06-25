@@ -83,6 +83,23 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
             </div>
             <TagsList tags={tags} class="mt-12 mb-16"/>
         </div>
+        {
+            gallery && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
+                        Gallery
+                    </h2>
+                    <HorizontalSpacer class="my-4" />
+                    <div id="gallery-target" class="mb-12">
+                        <GalleryPreview gallery={gallery} slug={slug} />
+                    </div>
+                        <iframe hidden name=htmz onload="setTimeout(()=>{document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes);
+                            const galleryLoadedEvent = new CustomEvent('gallery-loaded');
+                            document.dispatchEvent(galleryLoadedEvent);})"></iframe>
+                </>
+            )
+        }
         {assResources.length > 0 && (
             <HorizontalSpacer class="my-4" />
             <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
@@ -94,23 +111,7 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
 
         {people && <PeopleDisplay people={people} />}
 
-        {
-            gallery && (
-                <>
-                    <HorizontalSpacer class="my-4" />
-                    <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
-                        Gallery
-                    </h2>
-                    <HorizontalSpacer class="my-4" />
-                    <div id="gallery-target">
-                        <GalleryPreview gallery={gallery} slug={slug} />
-                    </div>
-                        <iframe hidden name=htmz onload="setTimeout(()=>{document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes);
-                            const galleryLoadedEvent = new CustomEvent('gallery-loaded');
-                            document.dispatchEvent(galleryLoadedEvent);})"></iframe>
-                </>
-            )
-        }
+
     </div>
 
 </Base>

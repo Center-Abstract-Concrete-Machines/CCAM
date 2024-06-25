@@ -3,6 +3,7 @@ import { YouTube } from 'astro-embed';
 import LinkButton from '@components/LinkButton.astro';
 import ProjectLayout from '@layouts/ProjectLayout.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
@@ -17,5 +18,5 @@ const { Content } = await project.render();
 ---
 
 <ProjectLayout frontmatter={project.data}>
-    <Content components={{ LinkButton, YouTube }} />
+    <Content components={{ LinkButton, YouTube, Image }} />
 </ProjectLayout>

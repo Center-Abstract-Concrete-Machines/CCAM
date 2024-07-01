@@ -59,3 +59,17 @@ Hello register below!
 -   Run `npm run gallery` in the terminal. This will scaffold a gallery content file in `/src/content/galleries/`.
 -   To add captions or attributions, open the gallery content file and add relevant metadata for individual photos as needed.
 -   Add the gallery ID to your programs frontmatter with the `gallery` key (eg `gallery: weird-dreams-slsa`)
+
+### Ordering photos in a gallery
+
+-   Photos will be ordered by filename when you generate the gallery template file. The easiest way to order gallery photos is to rename the gallery photos before you run the gallery script.
+-   Once the gallery template file is created however, you can manually order photos by reordering the [image objects](#example-image-object) in the gallery template frontmatter. The gallery template file is the source of truth.
+
+#### Example image object:
+
+```md
+-   image: src/content/galleries/2024-05-FRM-Chicago/20240511_105733.jpg
+    caption: null
+    credit: null
+    includeInAssProject: false
+```

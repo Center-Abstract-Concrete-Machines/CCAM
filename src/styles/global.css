@@ -276,6 +276,6 @@ img {
 
     .card-grid.gallery-preview > *:nth-child(3),
     .card-grid.gallery-preview > *:nth-child(4) {
-        all: unset;
+        display: unset;
     }
 }

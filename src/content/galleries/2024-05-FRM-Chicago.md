@@ -112,22 +112,6 @@ images:
       caption: null
       credit: Erin Lynch
       includeInAssProject: false
-    - image: src/content/galleries/2024-05-FRM-Chicago/frm2.jpg
-      caption: null
-      credit: null
-      includeInAssProject: false
-    - image: src/content/galleries/2024-05-FRM-Chicago/frm3.jpg
-      caption: null
-      credit: null
-      includeInAssProject: false
-    - image: src/content/galleries/2024-05-FRM-Chicago/frm4.jpg
-      caption: null
-      credit: null
-      includeInAssProject: false
-    - image: src/content/galleries/2024-05-FRM-Chicago/frm5.jpg
-      caption: null
-      credit: null
-      includeInAssProject: false
     - image: src/content/galleries/2024-05-FRM-Chicago/IMG_1420.JPG
       caption: null
       credit: null

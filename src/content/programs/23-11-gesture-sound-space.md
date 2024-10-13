@@ -13,6 +13,8 @@ type: Workshop
 featured: false
 tags:
     - Kim Nucci
+    - the estuary group
+    - tritriangle
 ---
 
 Multichannel sound workshop run by Oakland/ chicago sound artist, composer, and technologist Kim Nucci.

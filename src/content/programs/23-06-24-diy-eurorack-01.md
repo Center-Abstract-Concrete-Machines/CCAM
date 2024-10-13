@@ -13,6 +13,7 @@ type: Workshop
 featured: false
 tags:
     - diysynth
+    - the estuary group
 ---
 
 ## overview

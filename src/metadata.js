@@ -45,6 +45,7 @@ export const organizerList = [
     'garrett-laroy-johnson',
     'kim-nucci',
     'muindi-fanuel-muindi',
+    'kristin-mcwharter',
 ];
 
 export const boardOfDirectorsList = [
@@ -60,7 +61,6 @@ export const affiliatesList = [
     'anna-johnson',
     'paige-naylor',
     'nicky-ni',
-    'kristin-mcwharter',
     'doug-rosman',
     'lee-tusman',
     'phillip-thurtle',

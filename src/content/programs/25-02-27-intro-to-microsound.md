@@ -1,0 +1,51 @@
+---
+title: Intro to Microsound
+subtitle: Gen~ and Processual Aesthetics
+pubDate: 2025-01-27
+endDate: 2025-03-27
+presentationalDates: 2.27, 3.6, 3.20, 3.27
+time: 6-8
+location: Experimental Sound Studio // Ravenswood, Chicago
+image:
+    url: ./images/microsound.png
+    alt: filler image
+type: Study
+featured: true
+tags:
+    - gen~
+    - max/msp
+    - computer music
+    - sound
+draft: false
+people:
+    - label: instructor
+      list:
+          - garrett-laroy-johnson
+    - label: partner
+      list:
+          - ess
+#assProjectId: associated projectId (optional)
+---
+
+<!--
+<LinkButton text="Register Here" url="" /> -->
+
+> Beneath the level of the note lies the realm of microsound, of sound particles. Microsonic particles remained invisible for centuries. Recent technological advances let us probe and explore the beauties of this formerly unseen world. Microsonic techniques dissolve the rigid bricks of musical architecture – the notes – into a more fluid and supple medium. Sound may coalesce, evaporate, or mutate into other sounds.
+>
+> <cite> - Curtis Roads, Microsound (1990)</cite>
+
+What does a 41000th of a second sound like?
+
+Intro to Microsound is a 4-session course which will introduce students to the Gen~ programming environment inside of MaxMSP. Graham Wakefield, a student of Curtis Roads, created Gen~ to allow for the visually patching and coding of audio at the level of an individual sample of digital signal (i.e. the programs we will write will run more than 41000 times per second).
+
+In the course of 4 weeks, we will go from working with constructing sound one single sample at a time to diffusing dynamic and long-form sonic textures via microsound techniques such as granular and pulsar synthesis. We will also discuss multichannel and hardware applications (e.g. mc.gen~ and OopsyDaisy).
+
+This course will serve as a technical introduction to Gen~ couched in the environment’s conceptual strengths: microsound and processual composition. We welcome both experienced sound programmers as well as brave newcomers; both will walk about with new techniques and new ways of thinking about working with sound.
+
+Students will download a custom code library developed to speed up iteration. It will include examples ahead of time they’re invited to study ahead of class. It will also include some custom operators (you may know this as abstractions or objects in Max/MSP or functions in programming languages).
+
+During class, we’ll rebuild through the examples, giving the opportunity to ask questions about presented materials. Sometimes there may also be ~30 mins of unstructured work time, when you can ask questions of instructors particular to your own explorations.
+
+# INSTRUCTOR
+
+Garrett Laroy Johnson is a sound and media artist, theorist, educator, activist, and programmer. His work leverages the legacies of cybernetic thought in ecology and subjectivity in the design of installations and performance environments. Historically they have performed with cello and electronics, laptop orchestras and performance, created interactive dance pieces, as well as sound and media installations. Garrett has performed, installed, and given talks internationally, including at Goldsmiths, at the Kennedy Center, the National Academy of Sciences, and in Paris, Montreal, Copenhagen, Italy, and across the US. They received a PhD in Media Arts and Sciences in December 2022 from the School of Arts, Media, and Engineering at Arizona State University and a certificate in critical theory. He is the founding lead of an artist-run platform called CCAM, the Center for Concrete and Abstract Machines, which works at the nexus of art, technology, and contemporary thought in Chicago’s Pilsen neighborhood. They currently teach graduate seminars and studios at the School of the Art Institute of Chicago and University of Illinois Chicago.

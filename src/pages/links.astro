@@ -12,22 +12,24 @@ const heading = {
 // Import Images before using them in links
 // https://docs.astro.build/en/guides/images/#images-in-astro-files
 import { getRandomPlaceholderImage } from '@utils/getRandomPlaceholderImage';
-import FutureRhythmMachines from 'src/content/programs/images/future-rhythm-machines.png';
-import JCD from 'src/content/programs/images/JCD1.png';
-import EARTH from 'src/images/shop/EARTH.jpg';
-import BADS from 'src/content/programs/images/black-art.png';
 import LinkCard from '@components/LinkCard.astro';
 import Ludic from 'src/content/galleries/ludicsound/ludic1.png';
+import Microsound from 'src/content/programs/images/microsound.png';
 
 // Edit links here
 const links = [
- 
 {
         image: Ludic,
-        name: 'Ludic Sound Lab with Patrick Glennon', 
-        description: 'Workshop at VGA 2/1/25',
+        name: 'Ludic Sound Lab x VGA', 
+        description: '2/1/25 // Online Game Making Workshop with Patrick Glennon',
         url: '/programs/25-02-01-ludic-sound-lab/',
     },
+    {
+        image: Microsound,
+        name: 'Intro to Microsound x ESS', 
+        description: '2.27-3.27.25 // 4-Part Max/MSP Gen~ Course with Garrett Laroy Johnson',
+        url: 'https://www.eventbrite.com/e/intro-to-microsound-4-part-maxmsp-gen-course-tickets-1225799993779?aff=oddtdtcreator',
+    }
     // {
     //     image: getRandomPlaceholderImage(),
     //     name: 'Placeholder Link',

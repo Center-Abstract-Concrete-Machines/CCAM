@@ -4,8 +4,8 @@ social:
     display: letaru.dralega
     url: https://www.instagram.com/letaru.dralega/
 website:
-    display: www.achasingafterthewind.com/
-    url: https://www.achasingafterthewind.com/
+    display: hydeparkart.org/directory/letaru-dralega
+    url: https://www.hydeparkart.org/directory/letaru-dralega/
 cardBlurb: >
     Letaru Dralega is a Ugandan Jamaican British artist and researcher interested in the material/immaterial dichotomy, particularly in African and Afrodiasporic ontologies. She experiments with collage, painting, installation, and sound to examine themes of memory, belonging, and the postcolonial condition.
 image: '/src/content/people/images/letaru.jpg'

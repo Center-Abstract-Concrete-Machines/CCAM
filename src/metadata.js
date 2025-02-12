@@ -51,7 +51,7 @@ export const organizerList = [
 export const boardOfDirectorsList = [
     'brian-holmes',
     'teoma-naccarato',
-    'dakota-gearhardt',
+    'dakota-gearhart',
     'varsha-iyengar',
     'john-maccallum',
     'jon-bratt',

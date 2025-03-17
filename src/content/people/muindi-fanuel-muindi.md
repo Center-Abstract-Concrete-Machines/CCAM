@@ -1,7 +1,7 @@
 ---
 name: 'Muindi Fanuel Muindi'
 subtitle: Poet, philosopher, theatre-artist
-cardBlurb: 'Muindi Fanuel Muindi is a performance artist, philosopher, and poet, with Lacustrine Bantu roots in the Rift Forests of Eastern Congo and the Mara Wetlands in Tanzania. He is the author of six books of experimental poetry and prose.'
+cardBlurb: 'Muindi Fanuel Muindi is a social practice artist, philosopher, and poet, with Lacustrine Bantu roots in the Rift Forests of Eastern Congo and the Mara Wetlands in Tanzania. As a social practice artist, Muindi coordinates assemblages of administrative statements, technical implements, built environments, and dramatic elements, which function as laboratories in the Black Arts and Decolonial Sciences.'
 image: '/src/content/people/images/muindi.jpg'
 social:
     display: 'solutionsforpostmodernliving'

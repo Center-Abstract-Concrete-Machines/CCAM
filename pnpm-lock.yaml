@@ -38,6 +38,9 @@ importers:
       dayjs:
         specifier: ^1.11.11
         version: 1.11.13
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
       heic-convert:
         specifier: ^2.1.0
         version: 2.1.0

@@ -1,5 +1,5 @@
 [context.deploy-preview]
-command = "npm run noIndex"
+command = "npm run build:noindex"
 
 [context.branch-deploy]
-command = "npm run noIndex"
+command = "npm run build:noindex"

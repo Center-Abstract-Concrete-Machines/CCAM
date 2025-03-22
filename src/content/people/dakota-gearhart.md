@@ -1,6 +1,7 @@
 ---
 name: Dakota Gearhart
 image: '/src/content/people/images/dakota.jpg'
+cardBlurb: 'Dakota Gearhart is a New York-based visual artist born in Arizona, raised in Florida, and educated in the Pacific Northwest. Her interdisciplinary artwork probes tensions between the environment, techno- commercialism, and human desire as climate change intensifies.'
 social:
     display: '_dakotagearhart'
     url: 'https://www.instagram.com/_dakotagearhart/'

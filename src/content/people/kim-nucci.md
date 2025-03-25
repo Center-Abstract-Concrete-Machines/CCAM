@@ -1,7 +1,7 @@
 ---
 name: 'Kim Nucci'
 subtitle: Artist, composer, technologist
-cardBlurb: 'Kim Nucci is a Chicago-based media artist, composer, and technologist. As a musician, they perform on electronics, modular synthesizer, and saxophone and create interactive installations using architectural interventions, sculpture, arduino and other microcontrollers as a visual and sound artist.'
+cardBlurb: 'Kim Nucci is a Chicago-based media artist, composer, and technologist.'
 social:
     display: 'plzsendpzza'
     url: 'https://www.instagram.com/plzsendpzza/'
@@ -11,9 +11,6 @@ website:
     url: 'https://kimnucci.com'
 ---
 
-Kim Nucci is a Chicago-based media artist, composer, and technologist. Kim claims to be the Pope of facebook and worships dollar slice pizza as the one true god, while living in the god(pizza)less land of California.
+Kim Nucci is an Chicago/Oakland-based media artist, composer, improviser, and technologist. They perform on electronics, synthesizer, and saxophones. In their studio practice, they create interactive installations using architectural intervention, light, projection, microcontrollers, temporary sculpture and painting. Nucci's research interests explore the pedestrian cybernetic body, critically examining our relationship with technology/our instruments. Their solo performance practice is invested in ritualism and trance states in improvisation. They hold an MFA in Electronic Music and Recording Media, and MA in Music Composition from Mills College, and BA from Bennington College. They studied with Milford Graves, Roscoe Mitchell, Zeena Parkins, James Fei, Maggi Payne, Fred Frith, Shinichi Iova-Koga, Allen Shawn, Liz Deschenes, and Nick Brooke. They have taught classes at California Jazz Conservatory, and workshops at Oberlin College, Carleton College, ACRE Residency, ESS, Center for Concrete and Abstract Machines (CCAM Chicago), Tritriangle, and Women’s Audio Mission. Previously, they headed ACRE Residency's Sound and AV departments. As Technical Director of Driven Arts Collective (a dance/theatre and media arts performance collective), they compose music and create interactive media for dance/theatre productions. As an Organizer at CCAM, Kim co-produces and leads events, workshops and residencies centering art, technology and its surrounding theories.
 
-As a musician, they perform on electronics, modular synthesizer, and saxophone. As a visual and sound artist, they create interactive installations using architectural interventions, sculpture, arduino and other microcontrollers, idiosyncratic interactive design, painting and projections. They also VJ, and create generative and audio-reactive video art for live musical performance.
-
-Ask me about:
-Max/MSP Jitter, Ableton, Max4Live, Processing, custom microcontrollers for artistic applications, custom midi devices, projection mapping, Syphon, Finale music notation software, Final Cut Pro, network installation for artistic applications and home settings, live sound engineering, studio recording, cats.
+Kim Nucci has performed at SFMOMA, Gray Area, Elastic Arts, CCRMA (Stanford), ODC Theatre, Center for New Music (C4NM), Counterpulse, Dub Club at The Echoplex, BabyCastles, Compound Yellow, and many DIY spaces across California and the US. They have been an artist in residence at Dresher Ensemble’s DEAR Residency, ACRE, Zero1, and Counterpulse. They have made music for/with gabby fluke-mogul, Nava Dunkelman, Sholeh Asgary, Nevin Aladağ’s sculptures, Phillip Greenlief, Marissa Dietz (Sucker Crush), Driven Arts Collective, Alex Cohen, Jordan Glenn, MurderMurder, Mitch Stahlmann, Anastasia Clarke, Madam Data, Brendan Glasson, Rocco Córdova, John McCowen, Sage City Symphony, Gamelan Encinal, Daniel Schmidt, and others. As a sound engineer and theater technician have worked with Jason Moran, Magic Magic Orchestra, Tauba Auerbach/ Glasser, Himali Signh Soin, Spellling, Allen Moore, Keioui Keijaun Thomas, Risa Jaroslow, Honey Mahogany, the Money Witch and others.

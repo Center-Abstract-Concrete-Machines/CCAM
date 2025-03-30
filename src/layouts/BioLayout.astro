@@ -6,28 +6,34 @@ import { hasAssociatedMaterials } from '@utils/personResources';
 
 const { slug, frontmatter } = Astro.props;
 
-const assMaterial = hasAssociatedMaterials(slug)
+const assMaterial = hasAssociatedMaterials(slug);
 ---
 
 <BasicMarkdownLayout frontmatter={{ title: frontmatter.name }}>
-    { frontmatter.image && (
-        <div transition:name=`image-${slug}`>
-            <Picture
-                src={frontmatter.image}
-                alt=""
-                class="mx-auto"
-                widths={[400, 600, 1200]}
-                width="1200"
-            />
-        </div>
-    )}
+    {
+        frontmatter.image && (
+            <div>
+                <Picture
+                    src={frontmatter.image}
+                    alt=""
+                    class="mx-auto"
+                    widths={[400, 600, 1200]}
+                    width="1200"
+                />
+            </div>
+        )
+    }
     <h1 class="text-center">{frontmatter.name}</h1>
     <h2 class="">{frontmatter.subtitle}</h2>
-    <PersonMetadata data={frontmatter} slug={slug}/>
+    <PersonMetadata data={frontmatter} slug={slug} />
     <slot />
-    { assMaterial && (
-        <p>
-            <a href={`/search/${slug}/`}>See related materials for #{slug}</a>
-        </p>
-    )}
+    {
+        assMaterial && (
+            <p>
+                <a href={`/search/${slug}/`}>
+                    See related materials for #{slug}
+                </a>
+            </p>
+        )
+    }
 </BasicMarkdownLayout>

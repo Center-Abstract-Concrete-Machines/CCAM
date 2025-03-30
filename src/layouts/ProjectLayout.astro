@@ -43,7 +43,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
         </div>
         <HorizontalSpacer />
         <div class="mx-auto py-4 max-w-2xl">
-            <div transition:name=`image-${slug}`>
+            <div>
                 <Picture
                     src={image.url}
                     alt={image.alt}

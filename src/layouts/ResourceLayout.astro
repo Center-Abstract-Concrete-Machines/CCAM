@@ -15,10 +15,7 @@ const { slug } = Astro.props;
             {
                 image && (
                     <>
-                        <div
-                            class="mb-4 mx-auto w-fit"
-                            transition:name={`image-${slug}`}
-                        >
+                        <div class="mb-4 mx-auto w-fit">
                             <Picture
                                 src={image.url}
                                 alt={image.alt}

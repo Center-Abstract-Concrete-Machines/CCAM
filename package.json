@@ -14,32 +14,32 @@
         "gallery": "node src/scripts/processGalleryImages.js"
     },
     "dependencies": {
-        "@astrojs/mdx": "^3.1.5",
-        "@astrojs/netlify": "^5.5.1",
-        "@astrojs/rss": "^4.0.7",
-        "@astrojs/sitemap": "^3.1.6",
-        "@astrojs/svelte": "^5.7.0",
-        "@astrojs/tailwind": "^5.1.0",
+        "@astrojs/mdx": "^4.2.2",
+        "@astrojs/netlify": "^6.2.4",
+        "@astrojs/rss": "^4.0.11",
+        "@astrojs/sitemap": "^3.3.0",
+        "@astrojs/svelte": "^7.0.8",
+        "@astrojs/tailwind": "^6.0.2",
         "@mailchimp/mailchimp_marketing": "^3.0.80",
-        "astro": "^4.15.1",
-        "astro-embed": "^0.7.4",
-        "dayjs": "^1.11.11",
+        "astro": "^5.5.5",
+        "astro-embed": "^0.9.0",
+        "dayjs": "^1.11.13",
         "github-slugger": "^2.0.0",
         "heic-convert": "^2.1.0",
-        "lightgallery": "^2.7.2",
+        "lightgallery": "^2.8.3",
         "markdown-it": "^14.1.0",
         "p5js-wrapper": "^1.2.3",
-        "sanitize-html": "^2.13.0",
-        "svelte": "^4.2.18",
+        "sanitize-html": "^2.15.0",
+        "svelte": "^5.25.3",
         "tailwindcss": "^3.4.4",
-        "typescript": "^5.5.2"
+        "typescript": "^5.8.2"
     },
     "devDependencies": {
-        "@tailwindcss/typography": "^0.5.13",
+        "@tailwindcss/typography": "^0.5.16",
         "js-yaml": "^4.1.0",
-        "mime-types": "^2.1.35",
-        "prettier": "^3.3.2",
-        "sharp": "^0.33.4",
-        "vitest": "^1.6.0"
+        "mime-types": "^3.0.1",
+        "prettier": "^3.5.3",
+        "sharp": "^0.33.5",
+        "vitest": "^3.0.9"
     }
 }

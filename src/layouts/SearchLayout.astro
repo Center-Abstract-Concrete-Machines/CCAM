@@ -16,7 +16,7 @@ const uniqueTags = Array.from(
         ...allPrograms.map((program) => program.data.tags).flat(),
         ...allResources.map((resource) => resource.data.tags).flat(),
         ...allPeople
-            .map((person) => person.slug)
+            .map((person) => person.id)
             .flat()
             .filter((personSlug) => hasAssociatedMaterials(personSlug)),
     ])

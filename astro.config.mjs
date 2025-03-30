@@ -9,6 +9,5 @@ import svelte from '@astrojs/svelte';
 export default defineConfig({
     site: 'https://ccam.world',
     integrations: [tailwind(), mdx(), sitemap(), svelte()],
-    output: 'hybrid',
     adapter: netlify(),
 });

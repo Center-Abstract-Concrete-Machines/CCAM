@@ -2,19 +2,19 @@
 import { YouTube } from 'astro-embed';
 import LinkButton from '@components/LinkButton.astro';
 import ProjectLayout from '@layouts/ProjectLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
     return projects.map((project) => ({
-        params: { slug: project.slug },
+        params: { slug: project.id },
         props: { project },
     }));
 }
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 ---
 
 <ProjectLayout frontmatter={project.data}>

@@ -68,7 +68,7 @@ const associatedResources = await getCollection('resources', ({ data }) =>
                         {associatedPrograms.map((program) => (
                             <ProgramCard
                                 headingSize="text-xl"
-                                slug={program.slug}
+                                slug={program.id}
                                 frontmatter={program.data}
                             />
                         ))}

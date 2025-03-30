@@ -34,7 +34,7 @@ Actual domain
 
 ## Templates
 
-- Each content type (people, programs, projects, resources) has an associated _template.mdx file in each content folder. Duplicate this file, edit the data, and rename the file (making sure to remove the leading underscore _). Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.
+- Each content type (people, programs, projects, resources) has an associated `{type}-template.mdx` file in the `/src/content/templates/` folder. Duplicate this file, move it to the proper folder, edit the data, and rename the file. Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.
 
 ## Using LinkButton component in mdx files
 

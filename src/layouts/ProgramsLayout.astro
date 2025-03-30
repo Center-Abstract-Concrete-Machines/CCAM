@@ -48,7 +48,7 @@ const pastPrograms = events
                             {upcomingPrograms.map((program) => (
                                 <div>
                                     <ProgramCard
-                                        slug={program.slug}
+                                        slug={program.id}
                                         frontmatter={program.data}
                                     />
                                 </div>
@@ -74,7 +74,7 @@ const pastPrograms = events
                 pastPrograms.map((program) => (
                     <div>
                         <ProgramCard
-                            slug={program.slug}
+                            slug={program.id}
                             frontmatter={program.data}
                             headingSize="text-xl"
                         />

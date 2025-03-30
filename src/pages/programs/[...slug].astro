@@ -1,6 +1,6 @@
 ---
 import ProgramLayout from '../../layouts/ProgramLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { YouTube } from 'astro-embed';
 import LinkButton from '@components/LinkButton.astro';
 import { Image } from 'astro:assets';
@@ -8,15 +8,15 @@ import { Image } from 'astro:assets';
 export async function getStaticPaths() {
     const programs = await getCollection('programs');
     return programs.map((program) => ({
-        params: { slug: program.slug },
+        params: { slug: program.id },
         props: { program },
     }));
 }
 
 const { program } = Astro.props;
-const { Content } = await program.render();
+const { Content } = await render(program);
 ---
 
-<ProgramLayout frontmatter={program.data} slug={program.slug}>
+<ProgramLayout frontmatter={program.data} slug={program.id}>
     <Content components={{ LinkButton, YouTube, Image }} />
 </ProgramLayout>

@@ -15,19 +15,19 @@ export async function GET(context) {
             pubDate: project.data.dateAdded,
             description: project.data.description,
             // content: sanitizeHtml(parser.render(project.body)),
-            link: `/projects/${project.slug}`,
+            link: `/projects/${project.id}`,
         })),
         ...programs.map((program) => ({
             title: '[PROGRAM] ' + program.data.title,
             pubDate: program.data.pubDate,
             // content: sanitizeHtml(parser.render(program.body)),
-            link: `/programs/${program.slug}`,
+            link: `/programs/${program.id}`,
         })),
         ...resources.map((resource) => ({
             title: '[RESOURCE] ' + resource.data.title,
             pubDate: resource.data.dateAdded,
             // content: sanitizeHtml(parser.render(resource.body)),
-            link: `/resources/${resource.slug}`,
+            link: `/resources/${resource.id}`,
         })),
     ];
 

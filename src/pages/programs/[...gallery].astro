@@ -1,6 +1,6 @@
 ---
 import Gallery from '@components/Gallery.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import 'src/styles/global.css';
 
 export async function getStaticPaths() {
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
         ({ data }) => data.gallery
     );
     return programs.map((program) => ({
-        params: { gallery: `${program.slug}-gallery` },
+        params: { gallery: `${program.id}-gallery` },
         props: { program },
     }));
 }

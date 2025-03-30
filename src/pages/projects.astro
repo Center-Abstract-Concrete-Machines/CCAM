@@ -24,7 +24,7 @@ const projects = (await getCollection('projects')).sort(
         {
             projects.map((project) => (
                 <>
-                    <ProjectCard metadata={project.data} slug={project.slug} />
+                    <ProjectCard metadata={project.data} slug={project.id} />
                     <div class="spacer">
                         <HorizontalSpacer class="my-12" />
                     </div>

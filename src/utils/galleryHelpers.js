@@ -5,7 +5,7 @@ export async function getOptimizedImagesForGallery(gallery) {
     const allGalleries = await getCollection('galleries');
 
     const [thisGallery] = allGalleries.filter(
-        (galleryEntry) => galleryEntry.slug === gallery.toLowerCase() // slugs are always lowercase
+        (galleryEntry) => galleryEntry.id === gallery.toLowerCase() // slugs are always lowercase
     );
     if (!thisGallery) {
         throw new Error(

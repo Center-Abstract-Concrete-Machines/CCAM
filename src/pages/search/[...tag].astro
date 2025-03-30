@@ -17,7 +17,7 @@ export async function getStaticPaths() {
             ...allProjects.map((project) => project.data.tags).flat(),
             ...allPrograms.map((program) => program.data.tags).flat(),
             ...allResources.map((resource) => resource.data.tags).flat(),
-            ...allPeople.map((person) => person.slug).flat(),
+            ...allPeople.map((person) => person.id).flat(),
         ])
     ).sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
 
@@ -94,7 +94,7 @@ const { allResults } = Astro.props;
                     <div class="search-result relative">
                         <ResourceCard
                             metadata={result.data}
-                            slug={result.slug}
+                            slug={result.id}
                             metaType={result.metaType}
                             metaSlug={result.metaSlug}
                         />

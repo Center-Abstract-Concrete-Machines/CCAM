@@ -13,13 +13,14 @@ if (!data.image) {
 ---
 
 <div class="person-grid grid gap-4">
-    <Picture
-        src={image}
-        alt=""
-        width="1200"
-        widths={[400, 600, 1200]}
-        sizes="(min-width: 640px) 10rem, 100vw"
-    />
+    <div class="grid items-center aspect-square">
+        <Picture
+            src={image}
+            alt=""
+            widths={[400, 600]}
+            sizes="(min-width: 640px) 10rem, 10rem"
+        />
+    </div>
     <div class="flex flex-col justify-between">
         <div>
             {

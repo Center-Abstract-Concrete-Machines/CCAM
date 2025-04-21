@@ -4,20 +4,31 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
 import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { sortDescByEndDate } from '@utils/programFilters';
+import {
+    sortAscByEndDate,
+    sortDescByEndDate,
+    isEventUpcoming,
+} from '@utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
+import { partition } from '@std/collections/partition';
 
 const { title, subtitle, image, tags, projectId, people } =
     Astro.props.frontmatter;
 const { slug } = Astro.props;
 
-const associatedPrograms = (
-    await getCollection('programs', ({ data }) => {
-        return data.tags.includes(projectId) || data.assProjectId === projectId;
-    })
-).sort(sortDescByEndDate);
+const associatedPrograms = await getCollection('programs', ({ data }) => {
+    return data.tags.includes(projectId) || data.assProjectId === projectId;
+});
+
+const [upcomingPrograms, pastPrograms] = partition(
+    associatedPrograms,
+    ({ data }) => isEventUpcoming(data)
+);
+
+upcomingPrograms.sort(sortAscByEndDate);
+pastPrograms.sort(sortDescByEndDate);
 
 const associatedResources = await getCollection('resources', ({ data }) =>
     data.tags.includes(projectId)
@@ -55,17 +66,39 @@ const associatedResources = await getCollection('resources', ({ data }) =>
         </div>
 
         {
-            associatedPrograms.length > 0 && (
+            upcomingPrograms.length > 0 && (
                 <>
                     <HorizontalSpacer class="my-4" />
                     <div
                         class={
-                            associatedPrograms.length === 1
+                            upcomingPrograms.length === 1
                                 ? 'max-w-lg mx-auto'
                                 : 'card-grid double p-4'
                         }
                     >
-                        {associatedPrograms.map((program) => (
+                        {upcomingPrograms.map((program) => (
+                            <ProgramCard
+                                headingSize="text-xl"
+                                slug={program.id}
+                                frontmatter={program.data}
+                            />
+                        ))}
+                    </div>
+                </>
+            )
+        }
+        {
+            pastPrograms.length > 0 && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+                    <div
+                        class={
+                            pastPrograms.length === 1
+                                ? 'max-w-lg mx-auto'
+                                : 'card-grid double p-4'
+                        }
+                    >
+                        {pastPrograms.map((program) => (
                             <ProgramCard
                                 headingSize="text-xl"
                                 slug={program.id}

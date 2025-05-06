@@ -1,9 +1,9 @@
 ---
-name: 'Garrett Laroy Johnson'
-subtitle: Sound and media artist, researcher, and theorist
-cardBlurb: 'Garrett Laroy Johnson is a Chicago-based sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of subjectivity, computation and materialism, and post-psychoanalysis.'
-image: '/src/content/people/images/garrett.jpg'
-email: 'garrett.laroy.johnson@gmail.com'
+name: 'grace grace grace'
+subtitle: Sound and media artist, organizer, educator, technician, unionist
+cardBlurb: 'grace grace grace is a Chicago-based sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of collective subjectivity through computational media.'
+image: '/src/content/people/images/grace.JPG'
+email: 'garrett@ccam.world'
 social:
     display: 'diagrammatic.media'
     url: 'https://www.instagram.com/diagrammatic.media/'

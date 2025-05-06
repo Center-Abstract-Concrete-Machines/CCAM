@@ -27,7 +27,7 @@ function colorFromType(type: string) {
 }
 
 function colorFromActivity(type: string) {
-    if (active) return colorFromType(type);
+    if (active) return `border border-borderColor/0 ${colorFromType(type)}`;
     if (active === undefined) return colorFromType(type);
     if (active === false)
         return 'bg-backgoundColor text-textColor border border-textColor/20';

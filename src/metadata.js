@@ -57,13 +57,18 @@ export const boardOfDirectorsList = [
     'jon-bratt',
 ];
 
-export const affiliatesList = [
+export const collaboratorsList = [
     'anna-johnson',
     'paige-naylor',
     'nicky-ni',
     'doug-rosman',
     'lee-tusman',
     'phillip-thurtle',
+    'hannah-tardie',
+    'odette-stout',
+    'alberto-ortega',
+    'eva-davidova',
+    'will-hallett',
 ];
 
 export const websiteList = ['parker-davis', 'ioan-butiu'];

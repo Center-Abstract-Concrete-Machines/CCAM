@@ -2,7 +2,7 @@
 name: 'grace grace grace'
 subtitle: Sound and media artist, organizer, educator, technician, unionist
 cardBlurb: 'grace grace grace is a Chicago-based sound and media artist, researcher, and theorist. His transdisciplinary work engages Guattarian process theory, politics and the production of collective subjectivity through computational media.'
-image: '/src/content/people/images/grace.jpg'
+image: '/src/content/people/images/grace.JPG'
 email: 'garrett@ccam.world'
 social:
     display: 'diagrammatic.media'

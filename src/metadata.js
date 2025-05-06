@@ -69,6 +69,8 @@ export const collaboratorsList = [
     'alberto-ortega',
     'eva-davidova',
     'will-hallett',
+    'hyperion-cacatzin-yvaire',
+    'ylfa-muindi',
 ];
 
 export const websiteList = ['parker-davis', 'ioan-butiu'];

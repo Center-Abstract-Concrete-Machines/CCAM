@@ -6,8 +6,8 @@ social:
     display: 'angeltheoracle'
     url: 'https://www.instagram.com/angeltheoracle/'
 website:
-    display: 
-    url: 
+    display: 'intlanthem.com/artists/angel-bat-dawid'
+    url: 'https://www.intlanthem.com/artists/angel-bat-dawid'
 ---
 
 Angel Bat Dawid is a composer, improviser, clarinetist, pianist, vocalist, educator, and DJ. Her work memorializes, expands, and extends radical Black musical traditions through cosmic soundscapes.

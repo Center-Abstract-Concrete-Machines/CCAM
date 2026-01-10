@@ -14,6 +14,7 @@ featured: false
 tags:
     - diysynth
     - the estuary group
+    - workshop
 ---
 
 ## overview

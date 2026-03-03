@@ -61,6 +61,7 @@ export const collaboratorsList = [
     'anna-johnson',
     'paige-naylor',
     'nicky-ni',
+    'elise-scheierbeek',
     'doug-rosman',
     'lee-tusman',
     'phillip-thurtle',

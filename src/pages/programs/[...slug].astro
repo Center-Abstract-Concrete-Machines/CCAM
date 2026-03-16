@@ -2,6 +2,7 @@
 import ProgramLayout from '../../layouts/ProgramLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { YouTube } from 'astro-embed';
+import ContentRenderError from '@components/ContentRenderError.astro';
 import LinkButton from '@components/LinkButton.astro';
 import { Image } from 'astro:assets';
 
@@ -14,9 +15,32 @@ export async function getStaticPaths() {
 }
 
 const { program } = Astro.props;
-const { Content } = await render(program);
+let renderResult: Awaited<ReturnType<typeof render>> | undefined;
+let contentError: unknown;
+
+try {
+    renderResult = await render(program);
+} catch (error) {
+    contentError = error;
+
+    if (!import.meta.env.DEV) {
+        throw error;
+    }
+}
+
+const Content = renderResult?.Content;
 ---
 
 <ProgramLayout frontmatter={program.data} slug={program.id}>
-    <Content components={{ LinkButton, YouTube, Image }} />
+    {
+        Content ? (
+            <Content components={{ LinkButton, YouTube, Image }} />
+        ) : (
+            <ContentRenderError
+                collection={program.collection}
+                entryId={program.id}
+                error={contentError}
+            />
+        )
+    }
 </ProgramLayout>

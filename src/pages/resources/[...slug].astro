@@ -1,5 +1,6 @@
 ---
 import { YouTube } from 'astro-embed';
+import ContentRenderError from '@components/ContentRenderError.astro';
 import ResourceLayout from '@layouts/ResourceLayout.astro';
 import { getCollection, render } from 'astro:content';
 import LinkButton from '@components/LinkButton.astro';
@@ -14,9 +15,32 @@ export async function getStaticPaths() {
 }
 
 const { resource } = Astro.props;
-const { Content } = await render(resource);
+let renderResult: Awaited<ReturnType<typeof render>> | undefined;
+let contentError: unknown;
+
+try {
+    renderResult = await render(resource);
+} catch (error) {
+    contentError = error;
+
+    if (!import.meta.env.DEV) {
+        throw error;
+    }
+}
+
+const Content = renderResult?.Content;
 ---
 
 <ResourceLayout frontmatter={resource.data}>
-    <Content components={{ YouTube, LinkButton, Image }} />
+    {
+        Content ? (
+            <Content components={{ YouTube, LinkButton, Image }} />
+        ) : (
+            <ContentRenderError
+                collection={resource.collection}
+                entryId={resource.id}
+                error={contentError}
+            />
+        )
+    }
 </ResourceLayout>

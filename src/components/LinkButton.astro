@@ -1,8 +1,47 @@
 ---
-const { text, url, class: className } = Astro.props;
+interface Props {
+    text: string;
+    url: string;
+    class?: string;
+}
+
+const { text, url, class: className = '' } = Astro.props;
+
+const normalizedText = typeof text === 'string' ? text.trim() : '';
+const normalizedUrl = typeof url === 'string' ? url.trim() : '';
+const validationMessages = [];
+
+if (!normalizedText) {
+    validationMessages.push('`text` must be a non-empty string.');
+}
+
+if (!normalizedUrl) {
+    validationMessages.push('`url` must be a non-empty string.');
+}
+
+const errorMessage =
+    validationMessages.length > 0
+        ? `Invalid LinkButton props on ${Astro.url.pathname}: ${validationMessages.join(' ')} Received ${JSON.stringify({ text, url })}.`
+        : undefined;
+
+if (errorMessage) {
+    console.error(errorMessage);
+
+    if (!import.meta.env.DEV) {
+        throw new Error(errorMessage);
+    }
+}
 ---
 
-<a
-    class=`text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words ${className} block my-4`
-    href={url}>{text}</a
->
+{
+    errorMessage ? (
+        <p class="my-4 border border-dashed border-red-700/40 bg-red-100/60 px-4 py-3 font-mono text-xs leading-5 text-red-900">
+            {errorMessage}
+        </p>
+    ) : (
+        <a
+            class=`text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words ${className} block my-4`
+            href={normalizedUrl}>{normalizedText}</a
+        >
+    )
+}

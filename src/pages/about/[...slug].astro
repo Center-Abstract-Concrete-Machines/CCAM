@@ -1,6 +1,7 @@
 ---
 import BioLayout from '../../layouts/BioLayout.astro';
 import { getCollection, render } from 'astro:content';
+import ContentRenderError from '@components/ContentRenderError.astro';
 
 import { organizerList, boardOfDirectorsList, websiteList, collaboratorsList } from 'src/metadata';
 
@@ -20,9 +21,32 @@ export async function getStaticPaths() {
 }
 
 const { organizer } = Astro.props;
-const { Content } = await render(organizer);
+let renderResult: Awaited<ReturnType<typeof render>> | undefined;
+let contentError: unknown;
+
+try {
+    renderResult = await render(organizer);
+} catch (error) {
+    contentError = error;
+
+    if (!import.meta.env.DEV) {
+        throw error;
+    }
+}
+
+const Content = renderResult?.Content;
 ---
 
 <BioLayout frontmatter={organizer.data} slug={organizer.id}>
-    <Content />
+    {
+        Content ? (
+            <Content />
+        ) : (
+            <ContentRenderError
+                collection={organizer.collection}
+                entryId={organizer.id}
+                error={contentError}
+            />
+        )
+    }
 </BioLayout>

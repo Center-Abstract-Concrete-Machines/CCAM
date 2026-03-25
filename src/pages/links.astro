@@ -16,40 +16,39 @@ import LinkCard from '@components/LinkCard.astro';
 import Estuary from 'src/content/programs/images/estuary-play.png';
 import Microsound from 'src/content/programs/images/microsound.png';
 import See from 'src/content/programs/images/how-to-see.png';
-import WDKY from 'src/content/programs/images/wdky2.png';
+import WDKY from 'src/content/programs/images/wdkyIII.png';
+import Processing from 'src/content/programs/images/processing.png';
 import list from 'src/images/list.png';
-
-
 
 // Edit links here
 const links = [
-
-   { image: list,
-        name: 'MAILING LIST SIGN UP', 
+    {
+        image: list,
+        name: 'MAILING LIST SIGN UP',
         description: 'STAY IN THE MIX IN 2026',
         url: 'https://mailchi.mp/e2d83bb967aa/welcome-to-ccam-world',
-    }, 
-    { image: See,
-        name: 'How to See in the Dark - Exhibition - Workshop - Symposium - Performances', 
-        description: 'May 2nd - June 1 @ Co-Prosperity in Bridgeport, Chicago // A month-long exhibition and series of events.',
-        url: '/projects/how-to-see-in-the-dark/',
-    },   
-    { image: WDKY,
-        name: 'We Don\'t Know Yet: What a Cinema Can Do', 
-        description: '04/04/25 // 7-10pm // $20/30 // A Night of Expanded Cinema in Collaboration with Onion City Film Festival and Public Works',
-        url: '/programs/25-04-05-we-dont-know-yet-two/',
-    },        
-        {image: Estuary,
-        name: 'Estuary Eurorack System Workshop ', 
-        description: '3/29/25 // 12-2:30pm // $10 // Workshop and Play Sessions with Estuary Eurorack System',
-        url: '/programs/25-03-29-estuary-group-workshop/',
+    },
+    {
+        image: WDKY,
+        name: "We Don't Know Yet: What a Cinema Can Do |||",
+        description:
+            '04/10/26 // doors @ 7; show @ 8 // $35 / $40 door // A Night of Expanded Cinema in Collaboration with Onion City Film Festival',
+        url: 'https://chicagofilmmakers.org/upcoming-screenings-and-events/we-dont-know-yet-what-a-cinema-can-do',
     },
     {
         image: Microsound,
-        name: 'Intro to Microsound x ESS', 
-        description: '2.27-3.27.25 // 4-Part Max/MSP Gen~ Course with Garrett Laroy Johnson',
-        url: 'https://www.eventbrite.com/e/intro-to-microsound-4-part-maxmsp-gen-course-tickets-1225799993779?aff=oddtdtcreator',
-    }
+        name: 'Intro to Microsound  YouTube Recordings',
+        description:
+            'CCAM x Experimental Sound Studio (ESS) // 4-Part Max/MSP Gen~ Course with Grace Grace Grace',
+        url: 'https://www.youtube.com/playlist?list=PLBxbddARljQ_stWW515ak5JRRTZLoTny4',
+    },
+    {
+        image: Processing,
+        name: 'World Processing Community Day Info Signup',
+        description:
+            "Join us for Chicago' World Processing Community Day October 2026 in collaboration with Peripheral x Study! Sign up to stay in the loop.",
+        url: './programs/26-10-Processing-Day',
+    },
     // {
     //     image: getRandomPlaceholderImage(),
     //     name: 'Placeholder Link',
@@ -57,7 +56,6 @@ const links = [
     //         "You can delete this object. If you don't have an image to use for a link, you can use the getRandomPlaceholderImage() function to bring in a rando",
     //     url: 'https://parkerdavis.dev',
     // },
-
 ];
 ---
 

@@ -55,6 +55,7 @@ const resourcesCollection = defineCollection({
             author: z.string().optional(),
             type: z.string().toLowerCase(),
             year: z.number().optional(),
+            assProjectId: z.string().optional(),
             image: z
                 .object({
                     url: image(),

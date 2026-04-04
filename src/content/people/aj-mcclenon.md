@@ -1,6 +1,6 @@
 ---
 name: AJ McClenon
-image: '/src/content/people/images/aj-mcclennon.jpg'
+image: '/src/content/people/images/aj-mcclenon.jpg'
 cardBlurb: A.J. McClenon was born and raised in D.C. proper in a multigenerational home with grandparents from Trenton and Chester, South Carolina. Currently, A.J. is a Chicago-based interdisciplinary artist and educator whose practice moves through text, repurposed materials, moving and still images, performance, and sound.
 website: 
     display: ajmcclenon.com

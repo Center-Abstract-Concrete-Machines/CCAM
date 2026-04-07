@@ -1,5 +1,5 @@
 --- 
-title: Learning, Gathering, and the Spectre of the LLM 
+title: Creativity and (In-)Computability
 subtitle: Reading Group Sessions 2.1 
 image: 
     url: ./images/school-4.png

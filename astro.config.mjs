@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import netlify from '@astrojs/netlify';
@@ -8,11 +8,9 @@ import svelte from '@astrojs/svelte';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://ccam.world',
-    integrations: [tailwind(), mdx(), sitemap(), svelte()],
-    image: {
-        service: {
-            entrypoint: 'astro/assets/services/sharp',
-        },
+    integrations: [mdx(), sitemap(), svelte()],
+    vite: {
+        plugins: [tailwindcss()],
     },
     adapter: netlify(),
 });

@@ -6,7 +6,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import EmailSignup from '@components/EmailSignup.svelte';
 ---
 
-<dialog class="contact">
+<dialog id="contact">
     <div
         class="dialog-container p-2 max-w-lg bg-backgroundColor flex gap-4 items-center justify-between min-h-min"
     >
@@ -41,9 +41,8 @@ import EmailSignup from '@components/EmailSignup.svelte';
     function addModalListeners() {
         const contactAnchor = document.querySelector('[data-name="Contact"]');
         const contactModal: HTMLDialogElement = document.querySelector(
-            'dialog[class="contact"]'
+            'dialog[id="contact"]'
         );
-        const contactContainer = document.querySelector('.dialog-container');
         const closeButton = document.querySelector('button#close');
 
         if (typeof window.HTMLDialogElement === 'function') {
@@ -56,12 +55,16 @@ import EmailSignup from '@components/EmailSignup.svelte';
                 contactModal.close();
             });
 
-            contactModal.addEventListener('click', () => {
-                contactModal.close();
-            });
-
-            contactContainer.addEventListener('click', (e) => {
-                e.stopPropagation();
+            contactModal.addEventListener('click', (e) => {
+                const rect = contactModal.getBoundingClientRect();
+                if (
+                    e.clientX < rect.left ||
+                    e.clientX > rect.right ||
+                    e.clientY < rect.top ||
+                    e.clientY > rect.bottom
+                ) {
+                    contactModal.close()
+                }
             });
         }
     }

@@ -1,8 +1,37 @@
-/* purgecss start ignore */
-@tailwind base;
-@tailwind components;
-/* purgecss end ignore */
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Class-based dark mode (mirrors v3 darkMode: 'class') */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme: migrated from tailwind.config.mjs */
+@theme {
+    /* Custom colors (static) */
+    --color-Blue: #74acff;
+    --color-Green: #a5f91d;
+    --color-Orange: #ff7a1a;
+    --color-Purple: #747fef;
+    --color-Sand: #fffbf1;
+    --color-Yellow: #ffd400;
+    --color-Black: #121212;
+    --color-Black-30: #1212124d;
+    --color-Black-50: #00000080;
+    --color-White: #e6e6e6;
+
+    /* Custom fonts */
+    --font-sans: 'denim', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-moonbase: 'moonbase', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: 'matter-reg', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Dynamic colors that reference CSS custom properties */
+@theme inline {
+    --color-backgroundColor: hsl(var(--backgroundColor));
+    --color-backgroundHover: hsl(var(--backgroundHover));
+    --color-textColor: hsl(var(--textColor));
+    --color-linkColor: hsl(var(--link));
+    --color-borderColor: hsl(var(--borders));
+}
 
 @font-face {
     font-family: 'matter-reg';
@@ -278,4 +307,17 @@ img {
     .card-grid.gallery-preview > *:nth-child(4) {
         display: unset;
     }
+}
+
+/* Typography plugin overrides (migrated from tailwind.config.mjs) */
+.prose blockquote p:first-of-type::before {
+    content: none;
+}
+.prose blockquote p:first-of-type::after {
+    content: none;
+}
+.prose cite {
+    color: var(--tw-prose-captions);
+    font-size: 0.9em;
+    font-weight: lighter;
 }

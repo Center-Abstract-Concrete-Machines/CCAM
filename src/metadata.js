@@ -17,6 +17,14 @@ const metadata = {
             url: '/resources/',
         },
         {
+            name: 'Estuary',
+            url: '/estuary/',
+        },
+        {
+            name: 'Store',
+            url: '/store/',
+        },
+        {
             name: 'About',
             url: '/about/',
         },

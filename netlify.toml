@@ -3,3 +3,9 @@ command = "npm run build:noindex"
 
 [context.branch-deploy]
 command = "npm run build:noindex"
+
+[[redirects]]
+  from = "https://estuary.ccam.world/*"
+  to = "/estuary/:splat"
+  status = 200
+  force = true

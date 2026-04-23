@@ -1,0 +1,120 @@
+---
+import EstuaryBase from 'src/layouts/EstuaryBase.astro';
+import FirmwareFlasher from '@components/Estuary/FirmwareFlasher.svelte';
+
+const hardware = (Astro.url.searchParams.get('hardware') ?? 'earth') as
+    | 'earth'
+    | 'estuary';
+---
+
+<EstuaryBase title="Flash Firmware">
+    <!-- Page header -->
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
+        <div class="max-w-2xl">
+            <p
+                class="font-mono text-xs uppercase tracking-widest text-textColor/50 mb-2"
+            >
+                <a
+                    href="/estuary/"
+                    class="hover:text-textColor transition-colors">← back</a
+                >
+            </p>
+            <h1 class="font-sans text-5xl sm:text-6xl mb-4">Flash Firmware</h1>
+            <p class="font-mono text-sm text-textColor/70">
+                Load new firmware onto your Estuary hardware directly from the
+                browser. For Windows users, you likely need to install <a
+                    href="https://zadig.akeo.ie/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="underline hover:text-textColor/70 transition-colors"
+                    >Zadig USB driver</a
+                > before your device will be recognized.
+            </p>
+        </div>
+    </section>
+
+    <div class="px-4 py-8 grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-8">
+        <!-- Instructions -->
+        <section>
+            <h2
+                class="font-mono text-xs uppercase tracking-widest text-textColor/50 mb-4"
+            >
+                Before you start
+            </h2>
+            <ol
+                class="font-mono text-sm text-textColor/70 flex flex-col gap-3 list-none"
+            >
+                <li class="flex gap-3">
+                    <span class="text-textColor/30 select-none">01</span>
+                    <span
+                        >Use Chrome or Edge — WebUSB is required and not
+                        available in Firefox or Safari.</span
+                    >
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-textColor/30 select-none">02</span>
+                    <span>
+                        Put your device in bootloader mode: EITHER: hold the <strong
+                            class="text-textColor font-normal">BOOT</strong
+                        > button, then plug in USB. Release the button once connected
+                        OR hold the <strong class="text-textColor font-normal"
+                            >BOOT</strong
+                        > button while pressing the <strong
+                            class="text-textColor font-normal">RESET</strong
+                        > button, then release both buttons.
+                    </span>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-textColor/30 select-none">03</span>
+                    <span
+                        >Select your hardware and firmware below, then click <strong
+                            class="text-textColor font-normal"
+                            >Connect device</strong
+                        >.</span
+                    >
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-textColor/30 select-none">04</span>
+                    <span
+                        >When the browser prompts you to select a USB device,
+                        choose the Daisy device (STM32 BOOTLOADER).</span
+                    >
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-textColor/30 select-none">05</span>
+                    <span
+                        >Click <strong class="text-textColor font-normal"
+                            >Flash</strong
+                        > and wait for it to complete. Do not unplug during flashing.</span
+                    >
+                </li>
+            </ol>
+
+            <div class="mt-8 border border-dashed border-borderColor/30 p-4">
+                <p class="font-mono text-xs text-textColor/50 mb-1">
+                    Firmware source
+                </p>
+                <a
+                    href="https://github.com/Center-Abstract-Concrete-Machines/CCAM-Earth-CPP/releases"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-xs underline hover:text-textColor/70 transition-colors break-all"
+                >
+                    github.com/Center-Abstract-Concrete-Machines/CCAM-Earth-CPP/releases
+                </a>
+            </div>
+        </section>
+
+        <!-- Flasher -->
+        <section>
+            <h2
+                class="font-mono text-xs uppercase tracking-widest text-textColor/50 mb-4"
+            >
+                Flasher
+            </h2>
+            <FirmwareFlasher initialHardware={hardware} client:load />
+        </section>
+    </div>
+</EstuaryBase>

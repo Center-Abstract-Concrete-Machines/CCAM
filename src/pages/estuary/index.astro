@@ -1,0 +1,113 @@
+---
+import EstuaryBase from 'src/layouts/EstuaryBase.astro';
+---
+
+<EstuaryBase>
+    <!-- Hero -->
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
+        <div class="max-w-2xl">
+            <h1 class="font-sans text-6xl sm:text-8xl mb-4">estuary</h1>
+            <p class="font-mono text-lg text-textColor/70">
+                A reprogrammable Eurorack module built on the Daisy Patch SM
+                microcontroller. Swap firmware to transform your hardware into
+                entirely different instruments.
+            </p>
+        </div>
+    </section>
+
+    <!-- Hardware cards -->
+    <section class="px-4 py-8">
+        <h2
+            class="font-mono text-xs uppercase tracking-widest text-textColor/50 mb-6"
+        >
+            Hardware
+        </h2>
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-dashed border-borderColor/30"
+        >
+            <!-- Earth -->
+            <div
+                class="p-6 border-b sm:border-b-0 sm:border-r border-dashed border-borderColor/30 flex flex-col gap-4"
+            >
+                <div>
+                    <h3 class="font-sans text-3xl mb-2">Earth</h3>
+                    <p class="font-mono text-sm text-textColor/70">
+                        A standalone, desktop versatile Daisy Seed-based module
+                        with CV I/O, buttons, LEDs, and knobs. Designed as a
+                        general-purpose programmable voice for modular and
+                        standalone use.
+                    </p>
+                </div>
+                <div class="mt-auto flex flex-col gap-2">
+                    <a
+                        href="https://github.com/Center-Abstract-Concrete-Machines/CCAM-Earth-CPP"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="font-mono text-xs border border-dashed border-borderColor/50 px-3 py-2 hover:border-borderColor transition-colors text-center"
+                    >
+                        Source code →
+                    </a>
+                    <a
+                        href="/estuary/flash?hardware=earth"
+                        class="font-mono text-xs bg-textColor text-backgroundColor px-3 py-2 hover:opacity-80 transition-opacity text-center"
+                    >
+                        Flash firmware
+                    </a>
+                </div>
+            </div>
+
+            <!-- Estuary module -->
+            <div class="p-6 flex flex-col gap-4">
+                <div>
+                    <h3 class="font-sans text-3xl mb-2">Estuary</h3>
+                    <p class="font-mono text-sm text-textColor/70">
+                        A dedicated Daisy-based synthesizer module with an
+                        expanded interface, purpose-built for the Estuary
+                        firmware ecosystem.
+                    </p>
+                </div>
+                <div class="mt-auto flex flex-col gap-2">
+                    <a
+                        href="https://github.com/Center-Abstract-Concrete-Machines/CCAM-Earth-CPP"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="font-mono text-xs border border-dashed border-borderColor/50 px-3 py-2 hover:border-borderColor transition-colors text-center"
+                    >
+                        Source code →
+                    </a>
+                    <a
+                        href="/estuary/flash?hardware=estuary"
+                        class="font-mono text-xs bg-textColor text-backgroundColor px-3 py-2 hover:opacity-80 transition-opacity text-center"
+                    >
+                        Flash firmware
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="px-4 py-8 border-t border-dashed border-borderColor/30">
+        <div class="max-w-xl">
+            <h2
+                class="font-mono text-xs uppercase tracking-widest text-textColor/50 mb-4"
+            >
+                About
+            </h2>
+            <p class="font-mono text-sm text-textColor/70 leading-relaxed">
+                Estuary hardware is designed and built by
+                <a
+                    href="https://ccam.world"
+                    class="underline hover:text-textColor transition-colors"
+                >
+                    Center for Concrete and Abstract Machines (CCAM)
+                </a>. All firmware is open source. Use the in-browser flasher
+                above to load different programs onto your device without any
+                software installation required — just a USB cable and a
+                Chromium-based browser.
+            </p>
+        </div>
+    </section>
+</EstuaryBase>

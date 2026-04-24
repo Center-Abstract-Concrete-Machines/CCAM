@@ -1,0 +1,80 @@
+---
+export const prerender = false;
+
+import Base from 'src/layouts/Base.astro';
+import Stripe from 'stripe';
+import CartClient from '@components/Store/CartClient.svelte';
+
+const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+
+function parseInventoryCount(value: string | undefined) {
+    if (!value) return null;
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
+}
+
+function isProductRecord(
+    value: {
+        productId: string;
+        priceId: string;
+        name: string;
+        image: string;
+        unitAmount: number;
+        currency: string;
+        inventoryCount: number | null;
+    } | null
+): value is {
+    productId: string;
+    priceId: string;
+    name: string;
+    image: string;
+    unitAmount: number;
+    currency: string;
+    inventoryCount: number | null;
+} {
+    return value !== null;
+}
+
+const productsResponse = await stripe.products.list({
+    active: true,
+    expand: ['data.default_price'],
+    limit: 100,
+});
+
+const products = productsResponse.data
+    .map((product) => {
+        const defaultPrice = product.default_price as Stripe.Price | null;
+        if (
+            !defaultPrice ||
+            !defaultPrice.unit_amount ||
+            defaultPrice.type !== 'one_time' ||
+            !product.active
+        ) {
+            return null;
+        }
+
+        return {
+            productId: product.id,
+            priceId: defaultPrice.id,
+            name: product.name,
+            image: product.images[0] ?? '',
+            unitAmount: defaultPrice.unit_amount,
+            currency: defaultPrice.currency,
+            inventoryCount: parseInventoryCount(product.metadata.inventory_count),
+        };
+    })
+    .filter(isProductRecord);
+---
+
+<Base title="Cart">
+    <section class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30">
+        <p class="font-mono text-xs text-textColor/60 uppercase tracking-wider mb-3">
+            <a href="/store">Store</a> / Cart
+        </p>
+        <h1 class="font-sans text-6xl sm:text-8xl mb-4">Cart</h1>
+    </section>
+
+    <section class="px-4 py-10">
+        <CartClient client:load products={products} />
+    </section>
+</Base>

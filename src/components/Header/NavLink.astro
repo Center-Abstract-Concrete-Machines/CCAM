@@ -1,5 +1,8 @@
 ---
 const { nav, pathname } = Astro.props;
+import CartBadge from './CartBadge.svelte';
+
+const isStoreLink = nav.url === '/store/' || nav.url === '/store';
 ---
 
 <a
@@ -9,7 +12,10 @@ const { nav, pathname } = Astro.props;
     target={nav.new_window ? '_blank' : '_self'}
     aria-current={pathname.includes(nav.url) ? 'page' : 'false'}
 >
-    <div class="whitespace-nowrap font-mono">{nav.name}</div>
+    <div class="whitespace-nowrap font-mono flex items-center gap-2">
+        <span>{nav.name}</span>
+        {isStoreLink && <CartBadge client:load />}
+    </div>
     <div aria-hidden="true" class="status-container">
         <span class="bracket bracket-l">
             <svg

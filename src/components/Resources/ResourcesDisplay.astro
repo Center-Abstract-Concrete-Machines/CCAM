@@ -19,7 +19,7 @@ function sortResources(array, sort) {
 
 let resources = await getCollection('resources', ({ data }) => {
     if (tag) {
-        return data.tags.includes(tag);
+        return data.tags.includes(tag) || data.assProjectId === tag;
     } else if (type) {
         return data.type === type;
     } else return true;

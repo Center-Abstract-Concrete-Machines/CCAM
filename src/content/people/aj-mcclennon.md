@@ -1,8 +1,0 @@
----
-name: AJ McClennon
-image: '/src/content/people/images/aj-mcclennon.jpg'
-cardBlurb: Originally from Washington D.C, AJ grew up in "D.C. proper," Baltimore and New York during the Reagan, Clinton and the Bush administrations. A.J's work sets personal narratives alongside empirical data, leveling the hierarchies of truth. AJ holds a Masters in Fine Arts from the School of the Art Institute of Chicago and received a Bachelor of Arts with a minor in creative writing from the University of Maryland College Park. AJ has also studied at Eugene Lang College. AJ has performed and shown work throughout the US, at locations like Steppenwolf, The Promontory, Woman Made Gallery, Echo Park Film Center, Chicago Filmmakers, Terrain Exhibitions, Gallery 400, Compliance Divisions, Fine Art Complex 1101 and Longwood Arts Center. AJ is currently the co-director of Beauty Breaks, an intergenerational beauty and wellness workshop series for black people along the spectrum of femininity. AJ is also a co-founder of F4F, a domestic venue that cultivates a femme community, centers blackness, and expands upon understandings of what domestic space can be.
-website: 
-    display: ajmcclennon.com
-    url: https://ajmcclenon.com/
----

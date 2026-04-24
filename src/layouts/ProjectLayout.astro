@@ -30,9 +30,9 @@ const [upcomingPrograms, pastPrograms] = partition(
 upcomingPrograms.sort(sortAscByEndDate);
 pastPrograms.sort(sortDescByEndDate);
 
-const associatedResources = await getCollection('resources', ({ data }) =>
-    data.tags.includes(projectId)
-);
+const associatedResources = await getCollection('resources', ({ data }) => {
+    return data.tags.includes(projectId) || data.assProjectId === projectId;
+});
 ---
 
 <Base title={title}>

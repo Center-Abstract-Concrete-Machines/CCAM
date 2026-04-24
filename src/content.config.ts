@@ -1,9 +1,10 @@
-import { z, defineCollection } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { slug } from 'github-slugger';
 import { glob } from 'astro/loaders';
 
 const programsCollection = defineCollection({
-    loader: glob({ 
+    loader: glob({
         pattern: '**/*.{md,mdx}',
         base: './src/content/programs',
     }),
@@ -45,7 +46,7 @@ const programsCollection = defineCollection({
 });
 
 const resourcesCollection = defineCollection({
-    loader: glob({ 
+    loader: glob({
         pattern: '**/*.{md,mdx}',
         base: './src/content/resources',
     }),
@@ -55,6 +56,7 @@ const resourcesCollection = defineCollection({
             author: z.string().optional(),
             type: z.string().toLowerCase(),
             year: z.number().optional(),
+            assProjectId: z.string().optional(),
             image: z
                 .object({
                     url: image(),
@@ -74,7 +76,7 @@ const resourcesCollection = defineCollection({
 });
 
 const projectsCollection = defineCollection({
-    loader: glob({ 
+    loader: glob({
         pattern: '**/*.{md,mdx}',
         base: './src/content/projects',
     }),
@@ -107,7 +109,7 @@ const projectsCollection = defineCollection({
 });
 
 const peopleCollection = defineCollection({
-    loader: glob({ 
+    loader: glob({
         pattern: '**/*.{md,mdx}',
         base: './src/content/people',
     }),
@@ -133,7 +135,7 @@ const peopleCollection = defineCollection({
 });
 
 const galleryCollection = defineCollection({
-    loader: glob({ 
+    loader: glob({
         pattern: '**/*.{md,mdx}',
         base: './src/content/galleries',
     }),

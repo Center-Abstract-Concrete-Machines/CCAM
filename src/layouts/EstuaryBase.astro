@@ -1,0 +1,81 @@
+---
+import 'src/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import ThemeProvider from '@components/ThemeProvider.astro';
+import ThemeToggle from '@components/ThemeToggle.astro';
+
+const { title } = Astro.props;
+const tabTitle = title ? `${title} — Estuary` : 'Estuary';
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content="Estuary — a reprogrammable synthesizer built on the Daisy microcontroller by CCAM." />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="" />
+        <title>{tabTitle}</title>
+        <script
+            defer
+            src="https://plausible.parkerdavis.dev/js/script.js"
+            onload="this.setAttribute('data-domain',window.location.host)"
+        ></script>
+        <ClientRouter fallback="swap" />
+    </head>
+    <body>
+        <ThemeProvider />
+
+        <!-- Header -->
+        <div class="w-full mx-auto border-borderColor/30 border-b border-dashed">
+            <div class="container mx-auto p-4 max-w-7xl flex items-center justify-between">
+                <a href="/estuary/" class="font-sans text-3xl tracking-tight hover:opacity-70 transition-opacity">
+                    estuary
+                </a>
+                <a
+                    href="https://ccam.world"
+                    class="text-sm font-mono border border-dashed border-borderColor/50 px-3 py-1 hover:border-borderColor transition-colors"
+                >
+                    ← ccam.world
+                </a>
+            </div>
+        </div>
+
+        <div class="container mx-auto max-w-7xl">
+            <div class="body-border">
+                <div class="min-h-[70svh] h-full bg-backgroundColor/70">
+                    <slot />
+                </div>
+
+                <!-- Minimal Footer -->
+                <div class="border-t border-dashed border-borderColor/30 mt-12">
+                    <div class="flex items-center justify-between py-2 px-4 text-xs">
+                        <p>&copy; Center for Concrete and Abstract Machines</p>
+                        <ThemeToggle />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script is:inline>
+            document.addEventListener('astro:page-load', () => {
+                const allPictures = document.querySelectorAll('img:not(.no-fade)');
+                allPictures.forEach((image) => { image.style.opacity = 0; });
+                allPictures.forEach((image) =>
+                    image.addEventListener('load', (event) => {
+                        event.target.style.transition = 'opacity 1s';
+                        event.target.style.opacity = '1';
+                    })
+                );
+                allPictures.forEach((image) => {
+                    if (image.complete) {
+                        image.style.transition = 'opacity 1s';
+                        image.style.opacity = '1';
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

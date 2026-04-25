@@ -1,8 +1,6 @@
 ---
 import NavLink from './NavLink.astro';
 import metadata from 'src/metadata.js';
-import Logo from '/src/svg/logo.svg';
-import { Image, Picture } from 'astro:assets';
 
 const pathname = Astro.url.pathname;
 ---
@@ -89,21 +87,24 @@ const pathname = Astro.url.pathname;
         });
         sketchObserver.observe(document.querySelector('#headerLogo'));
     }
-
     if (!prefersReduced) {
         // This is all to prevent memory leaks when using page transitions
         document.addEventListener('astro:page-load', () => {
+            const sketchContainer = document.querySelector('#headerSketch');
+            if (!sketchContainer) return;
+            /*
+                If sketchEl exists (it persists via transition:persist),
+                but the sketch container does not contain the specific canvas that sketchEl references,
+                dismantle then in the next if block rebuild the sketch.
+            */
+            if (sketchEl && !sketchContainer.contains(sketchEl.canvas)) {
+                console.log('dismantling')
+                sketchEl.dismantle();
+                sketchEl = null;
+            }
             if (!sketchEl) {
                 setupObserver();
             }
         });
-
-        // No longer need to dismantle sketch with transition:persist
-        // document.addEventListener('astro:before-swap', () => {
-        //     if (sketchEl) {
-        //         sketchEl.dismantle();
-        //         sketchEl = null;
-        //     }
-        // });
     }
 </script>

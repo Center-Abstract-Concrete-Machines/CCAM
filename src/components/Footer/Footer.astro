@@ -95,10 +95,12 @@ import Logo from '/src/svg/logo.svg';
     }
 
     function setupObserver() {
+        const footerLogoEl = document.querySelector('#footerLogo');
+        if (!footerLogoEl) return;
         const sketchObserver = new IntersectionObserver(callback, {
             threshold: 0.9,
         });
-        sketchObserver.observe(document.querySelector('#footerLogo'));
+        sketchObserver.observe(footerLogoEl);
     }
 
     if (!prefersReduced) {

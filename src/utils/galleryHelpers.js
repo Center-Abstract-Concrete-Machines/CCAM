@@ -1,7 +1,16 @@
 import { getCollection } from 'astro:content';
 import { getImage } from 'astro:assets';
 
-export async function getOptimizedImagesForGallery(gallery) {
+function shuffleArray(items) {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+export async function getOptimizedImagesForGallery(gallery, randomize = true) {
     const allGalleries = await getCollection('galleries');
 
     const [thisGallery] = allGalleries.filter(
@@ -12,10 +21,14 @@ export async function getOptimizedImagesForGallery(gallery) {
             'Gallery not found! For new galleries make sure you run `npm run gallery` to scaffold new gallery template files.'
         );
     }
-    const images = thisGallery.data.images;
+    const defaultCredit = thisGallery.data.defaultCredit ?? null;
+    const images = randomize
+        ? shuffleArray(thisGallery.data.images)
+        : thisGallery.data.images;
     const optimizedImages = await Promise.all(
         images.map(async (obj) => ({
             ...obj,
+            credit: obj.credit ?? defaultCredit,
             optimized: await getImage({
                 src: obj.image,
                 format: 'webp',

@@ -2,33 +2,39 @@
 import Base from '@layouts/Base.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import TagsList from '@components/TagsList.astro';
-import { Image, Picture } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import {
-    sortAscByEndDate,
-    sortDescByEndDate,
-    isEventUpcoming,
-} from '@utils/programFilters';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import PeopleDisplay from '@components/PeopleDisplay.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
-import { partition } from '@std/collections/partition';
+import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
 
 const { title, subtitle, image, tags, projectId, people } =
     Astro.props.frontmatter;
-const { slug } = Astro.props;
 
 const associatedPrograms = await getCollection('programs', ({ data }) => {
     return data.tags.includes(projectId) || data.assProjectId === projectId;
 });
 
-const [upcomingPrograms, pastPrograms] = partition(
-    associatedPrograms,
-    ({ data }) => isEventUpcoming(data)
+const orderedPrograms = [...associatedPrograms].sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
 
-upcomingPrograms.sort(sortAscByEndDate);
-pastPrograms.sort(sortDescByEndDate);
+const programsWithGallery = orderedPrograms.filter(
+    (program) => program.data.gallery
+);
+const programsWithoutGallery = orderedPrograms.filter(
+    (program) => !program.data.gallery
+);
+
+const programsWithGalleryPreview = await Promise.all(
+    programsWithGallery.map(async (program) => ({
+        program,
+        previewImages: (
+            await getOptimizedImagesForGallery(program.data.gallery)
+        ).slice(0, 6),
+    }))
+);
 
 const associatedResources = await getCollection('resources', ({ data }) => {
     return data.tags.includes(projectId) || data.assProjectId === projectId;
@@ -65,59 +71,105 @@ const associatedResources = await getCollection('resources', ({ data }) => {
             </div>
         </div>
 
-        {
-            upcomingPrograms.length > 0 && (
-                <>
-                    <HorizontalSpacer class="my-4" />
-                    <div
-                        class={
-                            upcomingPrograms.length === 1
-                                ? 'max-w-lg mx-auto'
-                                : 'card-grid double p-4'
-                        }
-                    >
-                        {upcomingPrograms.map((program) => (
-                            <ProgramCard
-                                headingSize="text-xl"
-                                slug={program.id}
-                                frontmatter={program.data}
-                            />
-                        ))}
-                    </div>
-                </>
-            )
-        }
-        {
-            pastPrograms.length > 0 && (
-                <>
-                    <HorizontalSpacer class="my-4" />
-                    <div
-                        class={
-                            pastPrograms.length === 1
-                                ? 'max-w-lg mx-auto'
-                                : 'card-grid double p-4'
-                        }
-                    >
-                        {pastPrograms.map((program) => (
-                            <ProgramCard
-                                headingSize="text-xl"
-                                slug={program.id}
-                                frontmatter={program.data}
-                            />
-                        ))}
-                    </div>
-                </>
-            )
-        }
-
-        <HorizontalSpacer class="my-4" />
-
         <div
             class="prose dark:prose-invert prose-headings:font-semibold mx-auto my-4 mb-12"
         >
             <slot />
             <TagsList tags={tags} class="my-12 mb-16" />
         </div>
+
+        {
+            programsWithGalleryPreview.length > 0 && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
+                        Events
+                    </h2>
+                    <HorizontalSpacer class="my-4" />
+                    <div class="grid gap-8">
+                        {programsWithGalleryPreview.map(
+                            ({ program, previewImages }) => (
+                                <>
+                                    <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] items-start p-4">
+                                        <ProgramCard
+                                            headingSize="text-xl"
+                                            slug={program.id}
+                                            frontmatter={program.data}
+                                        />
+                                        <div>
+                                            <a
+                                                href={`/programs/${program.id}-gallery`}
+                                                class="no-underline block"
+                                            >
+                                                <div class="grid grid-cols-3 gap-2">
+                                                    {previewImages.map(
+                                                        ({ optimized }) => (
+                                                            <Picture
+                                                                src={
+                                                                    optimized.src
+                                                                }
+                                                                alt=""
+                                                                width={
+                                                                    optimized
+                                                                        .attributes
+                                                                        .width
+                                                                }
+                                                                height={
+                                                                    optimized
+                                                                        .attributes
+                                                                        .height
+                                                                }
+                                                                widths={[
+                                                                    400, 600,
+                                                                    1200, 1600,
+                                                                ]}
+                                                                sizes="(min-width: 1024px) 12vw, 30vw"
+                                                                class="aspect-[4/3] object-cover object-center opacity-60"
+                                                            />
+                                                        )
+                                                    )}
+                                                </div>
+                                            </a>
+                                            <a
+                                                href={`/programs/${program.id}-gallery`}
+                                                class="mx-auto text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 disabled:text-gray-400 disabled:border-borderColor/10 break-words block my-4"
+                                            >
+                                                View gallery
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <HorizontalSpacer class="my-4" />
+                                </>
+                            )
+                        )}
+                    </div>
+                </>
+            )
+        }
+        {
+            programsWithoutGallery.length > 0 && (
+                <>
+                    <HorizontalSpacer class="my-4" />
+
+                    <div class="grid gap-8">
+                        {programsWithoutGallery.map((program) => (
+                            <>
+                                <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] items-start p-4">
+                                    <ProgramCard
+                                        headingSize="text-xl"
+                                        slug={program.id}
+                                        frontmatter={program.data}
+                                    />
+                                    <div class="hidden lg:flex h-full min-h-24 items-center justify-center border border-dashed border-borderColor/20 font-mono text-xs opacity-60"></div>
+                                </div>
+                                <HorizontalSpacer class="my-4" />
+                            </>
+                        ))}
+                    </div>
+                </>
+            )
+        }
+
         {people && <PeopleDisplay people={people} />}
 
         {
@@ -127,7 +179,7 @@ const associatedResources = await getCollection('resources', ({ data }) => {
                     <h2 class="text-2xl sm:text-3xl font-semibold text-center my-12">
                         Resources
                     </h2>
-                    <HorizontalSpacer />
+                    <HorizontalSpacer class="my-4" />
                     <ResourcesDisplay tag={projectId} />
                 </div>
             )

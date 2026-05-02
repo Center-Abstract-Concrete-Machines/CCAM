@@ -4,14 +4,6 @@ const { gallery } = Astro.props;
 import { Picture } from 'astro:assets';
 import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
 
-function sortByFileName(stringA, stringB) {
-    const [nameA, nameB] = [
-        stringA.split('/').at(-1).split('.').at(0),
-        stringB.split('/').at(-1).split('.').at(0),
-    ];
-    return nameA - nameB;
-}
-
 const optimizedImages = await getOptimizedImagesForGallery(gallery);
 
 let galleryWidth;

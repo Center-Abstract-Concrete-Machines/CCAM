@@ -1,5 +1,5 @@
 ---
-const { gallery, slug } = Astro.props;
+const { gallery, slug, galleryPagePath } = Astro.props;
 
 import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
 import { Picture } from 'astro:assets';
@@ -15,7 +15,7 @@ if (optimizedImages.length <= 2) {
     galleryWidth = 'quad';
 }
 
-const linkToLoadGallery = `/programs/${slug}-gallery#gallery-target`;
+const linkToLoadGallery = galleryPagePath ?? `/programs/${slug}-gallery#gallery-target`;
 ---
 
 <a href={linkToLoadGallery} target="htmz">

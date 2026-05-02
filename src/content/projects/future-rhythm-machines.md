@@ -5,6 +5,7 @@ image:
     url: ./images/future-rhythm-machines1.png
     alt: Future rhythm Machines
 dateAdded: 2023-12-14
+status: active
 tags:
     - future rhythm
     - Chicago

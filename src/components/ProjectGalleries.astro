@@ -1,0 +1,101 @@
+---
+/**
+ * ProjectGalleries.astro
+ *
+ * Aggregates and displays galleries from all programs and resources
+ * associated with a given project, each labeled with its source title.
+ */
+
+import { getCollection } from 'astro:content';
+import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
+import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import { Picture } from 'astro:assets';
+
+const { projectId } = Astro.props;
+
+// Gather associated programs and resources that have galleries
+const allPrograms = await getCollection(
+    'programs',
+    ({ data }) =>
+        (data.tags.includes(projectId) || data.assProjectId === projectId) &&
+        !!data.gallery
+);
+
+const allResources = await getCollection(
+    'resources',
+    ({ data }) =>
+        (data.tags.includes(projectId) || data.assProjectId === projectId) &&
+        !!data.gallery
+);
+
+type GallerySource = {
+    id: string;
+    title: string;
+    gallery: string;
+    galleryPagePath: string;
+};
+
+const gallerySources: GallerySource[] = [
+    ...allPrograms.map((p) => ({
+        id: p.id,
+        title: p.data.title,
+        gallery: p.data.gallery!,
+        galleryPagePath: `/programs/${p.id}-gallery`,
+    })),
+    ...allResources.map((r) => ({
+        id: r.id,
+        title: r.data.title,
+        gallery: r.data.gallery!,
+        galleryPagePath: `/resources/${r.id}-gallery`,
+    })),
+];
+
+// Resolve optimized images for each source
+const resolvedGalleries = await Promise.all(
+    gallerySources.map(async (source) => ({
+        ...source,
+        images: await getOptimizedImagesForGallery(source.gallery),
+    }))
+);
+---
+
+{
+    resolvedGalleries.length > 0 && (
+        <>
+            {resolvedGalleries.map((source) => (
+                <>
+                    <h3 class="text-lg font-mono text-center opacity-60 my-6">
+                        {source.title}
+                    </h3>
+                    <div
+                        class={`card-grid ${
+                            source.images.length <= 2
+                                ? 'double'
+                                : source.images.length === 3
+                                  ? 'triple'
+                                  : 'quad'
+                        } gallery-preview`}
+                    >
+                        {source.images.slice(0, 4).map(({ optimized }) => (
+                            <Picture
+                                src={optimized.src}
+                                alt=""
+                                width={optimized.attributes.width}
+                                height={optimized.attributes.height}
+                                widths={[400, 600, 1200, 1600]}
+                                sizes="(min-width: 640px) 25vw, 100vw"
+                                class="aspect-[4/3] object-cover object-center opacity-50 no-fade"
+                            />
+                        ))}
+                    </div>
+                    <a
+                        href={source.galleryPagePath}
+                        class="mx-auto text-textColor w-fit font-mono no-underline border border-dashed border-borderColor/50 px-4 py-2 hover:bg-backgroundHover/5 break-words block my-4"
+                    >
+                        View full gallery &rarr; {source.title}
+                    </a>
+                </>
+            ))}
+        </>
+    )
+}

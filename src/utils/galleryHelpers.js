@@ -26,15 +26,31 @@ export async function getOptimizedImagesForGallery(gallery, randomize = true) {
         ? shuffleArray(thisGallery.data.images)
         : thisGallery.data.images;
     const optimizedImages = await Promise.all(
-        images.map(async (obj) => ({
-            ...obj,
-            credit: obj.credit ?? defaultCredit,
-            optimized: await getImage({
+        images.map(async (obj) => {
+            const optimizedImage = await getImage({
                 src: obj.image,
                 format: 'webp',
                 width: 1600,
-            }),
-        }))
+                quality: 80,
+            });
+            
+            // Get orientation info from the original image
+            const sharp = await import('sharp');
+            let orientation = 1; // Default orientation
+            try {
+                const metadata = await sharp.default(obj.image.src).metadata();
+                orientation = metadata.orientation || 1;
+            } catch (e) {
+                console.warn('Could not read orientation for image:', obj.image.src);
+            }
+
+            return {
+                ...obj,
+                credit: obj.credit ?? defaultCredit,
+                optimized: optimizedImage,
+                orientation: orientation,
+            };
+        })
     );
     return optimizedImages;
 }

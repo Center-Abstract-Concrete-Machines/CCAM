@@ -204,6 +204,7 @@ async function processImage(parentDir, file) {
             });
             await sharp(outputBuffer)
                 .resize({ width: maxWidth })
+                .rotate() // Auto-rotate based on EXIF orientation
                 .withMetadata()
                 .toFile(newFilePath);
             console.log(
@@ -220,6 +221,7 @@ async function processImage(parentDir, file) {
             );
             await sharp(filePath)
                 .resize({ width: maxWidth })
+                .rotate() // Auto-rotate based on EXIF orientation
                 .withMetadata()
                 .toFile(newFilePath);
             console.log(`Resized ${file} to ${maxWidth}px wide`);

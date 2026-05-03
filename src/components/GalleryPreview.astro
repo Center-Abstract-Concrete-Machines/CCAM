@@ -32,7 +32,21 @@ const linkToLoadGallery = galleryPagePath ?? `/programs/${slug}-gallery#gallery-
                             height={optimized.attributes.height}
                             widths={[400, 600, 1200, 1600]}
                             sizes="(min-width: 640px) 25vw, 100vw"
-                            class="aspect-[4/3] object-cover object-center opacity-50 no-fade"
+                            class="aspect-square object-cover object-center opacity-50 no-fade"
+                            style={optimized.orientation ? 
+                                `transform: ${(() => {
+                                    switch (optimized.orientation) {
+                                        case 2: return 'scaleX(-1)';
+                                        case 3: return 'rotate(180deg)';
+                                        case 4: return 'scaleY(-1)';
+                                        case 5: return 'rotate(-90deg) scaleX(-1)';
+                                        case 6: return 'rotate(90deg)';
+                                        case 7: return 'rotate(90deg) scaleX(-1)';
+                                        case 8: return 'rotate(-90deg)';
+                                        default: return 'none';
+                                    }
+                                })()};` : ''
+                            }
                         />
                     ))
         }

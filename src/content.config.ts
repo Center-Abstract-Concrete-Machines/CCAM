@@ -72,6 +72,7 @@ const resourcesCollection = defineCollection({
                     .transform((tag) => slug(tag))
             ),
             url: z.string().url().optional(),
+            gallery: z.string().optional(),
         }),
 });
 
@@ -84,6 +85,7 @@ const projectsCollection = defineCollection({
         z.object({
             title: z.string(),
             description: z.string(),
+            status: z.enum(['active', 'inactive']),
             image: z.object({
                 url: image(),
                 alt: z.string(),
@@ -141,6 +143,7 @@ const galleryCollection = defineCollection({
     }),
     schema: ({ image }) =>
         z.object({
+            defaultCredit: z.string().optional(),
             images: z.array(
                 z.object({
                     image: image(),

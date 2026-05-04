@@ -9,6 +9,7 @@ import GridSpacer from '@components/GridSpacer.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
+import { getAllGalleryImages } from '@utils/randomGalleryImage.js';
 
 import workshop from 'src/images/workshop.jpg';
 import squareSpace from 'src/images/space-square.jpg';
@@ -24,6 +25,7 @@ import {
 } from '@utils/programFilters';
 
 const allPrograms = await getCollection('programs');
+const allGalleryImages = await getAllGalleryImages();
 
 let featuredPrograms = allPrograms
     .filter(filterDraftsAndPubDate)
@@ -54,13 +56,14 @@ if (featuredPrograms.length < 2) {
             <IndexGlitchTitle />
             <GridSpacer class="hidden sm:block" />
             <div class="w-full hidden sm:block">
-                <Picture
-                    src={synth}
-                    alt="Studio Space"
-                    class="max-w-full mx-auto aspect-square"
-                    widths={[400, 600, 1200, synth.width]}
-                    sizes="(min-width: 640px) 33vw, 100vw"
-                />
+                <div id="dynamic-image-container" class="max-w-full mx-auto aspect-square overflow-hidden">
+                    <img
+                        id="dynamic-image"
+                        src={synth.src}
+                        alt="Studio Space"
+                        class="w-full h-full object-cover transition-opacity duration-300"
+                    />
+                </div>
             </div>
         </div>
     </section>
@@ -185,6 +188,42 @@ if (featuredPrograms.length < 2) {
         </div>
     </section>
 </Base>
+
+<script define:vars={{ allGalleryImages }}>
+    function getRandomImage(images) {
+        if (!images || images.length === 0) return null;
+        return images[Math.floor(Math.random() * images.length)];
+    }
+    
+    function changeToRandomImage() {
+        if (!allGalleryImages || allGalleryImages.length === 0) return;
+        
+        const randomImage = getRandomImage(allGalleryImages);
+        const dynamicImage = document.getElementById('dynamic-image');
+        
+        if (randomImage && dynamicImage) {
+            // Fade out
+            dynamicImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                dynamicImage.src = randomImage.src;
+                dynamicImage.alt = randomImage.alt;
+                // Fade in
+                dynamicImage.style.opacity = '1';
+            }, 150);
+        }
+    }
+    
+    // Listen for morpher changes
+    document.addEventListener('astro:page-load', () => {
+        document.addEventListener('morpherChange', changeToRandomImage);
+    });
+    
+    // Clean up event listener
+    document.addEventListener('astro:before-preparation', () => {
+        document.removeEventListener('morpherChange', changeToRandomImage);
+    });
+</script>
 
 <style is:global>
     /* Swap out moon and workshop image in dark mode */

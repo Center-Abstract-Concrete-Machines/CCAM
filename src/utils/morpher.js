@@ -47,6 +47,10 @@ function classify(i) {
     }
     elements[i].style.color = newColor;
 
+    // Trigger image change event
+    const imageChangeEvent = new CustomEvent('morpherChange', { detail: { element: elements[i] } });
+    document.dispatchEvent(imageChangeEvent);
+
     classState[i] = newClasses;
     let duration = 1000 + Math.random() * 20000;
     const timeoutId = setTimeout(() => {

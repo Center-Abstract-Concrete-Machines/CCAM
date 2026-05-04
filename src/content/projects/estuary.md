@@ -6,6 +6,7 @@ image:
     url: ./images/estuary.png
     alt: Future rhythm Machines
 dateAdded: 2024-08-31
+status: active
 tags:
     - gen~
     - diy-synth

@@ -8,7 +8,7 @@ import TagsList from './TagsList.astro';
 import HorizontalSpacer from './HorizontalSpacer.astro';
 
 const { image, title, type, tags, dateAdded, pubDate } = Astro.props.metadata;
-const { slug, metaType, metaSlug } = Astro.props;
+const { slug, metaType, metaSlug, headingSize = 'text-xl', cardStyle = 'default', class: className } = Astro.props;
 
 const typeProp = type ? type : metaType;
 
@@ -33,37 +33,65 @@ const dataDate = dateAdded?.getTime() || pubDate?.getTime();
     data-title={title}
     data-date={dataDate}
 >
-    <!-- <HorizontalSpacer class="mb-4" /> -->
-    <div class="resource-grid grid gap-4 p-4">
-        <div>
-            <a href=`/${metaSlug}/${slug}/`>
-                <Picture
-                    src={imageSrc}
-                    alt={image ? image.alt : title}
-                    class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
-                    widths={[100, 200, 400]}
-                    width="800"
-                    sizes="5rem"
-                />
-            </a>
-        </div>
-        <div>
-            <a href=`/${metaSlug}/${slug}/`
-                ><h3 class="text-xl font-medium">{title}</h3></a
-            >
-            <div
-                class="flex justify-start items-center gap-2 pt-2 font-mono text-xs"
-            >
-                <div class="shrink-0 self-start">
-                    <ResourceType type={typeProp} />
+    {cardStyle === 'project' ? (
+        <div class={`flex flex-col items-start h-full ${className ? className : ''}`}>
+            <a href={`/${metaSlug}/${slug}/`} class="w-full">
+                <div class="mx-auto">
+                    <Picture
+                        src={imageSrc}
+                        alt={image ? image.alt : title}
+                        class="aspect-[1.5] object-cover object-center w-full overflow-hidden max-w-full"
+                        width="1200"
+                        widths={[400, 600, 1200]}
+                        sizes="(max-width: 640px) 50vw, 100vw"
+                    />
                 </div>
+                <h2
+                    class={`${headingSize} font-medium leading-none tracking-tight w-full mt-6`}
+                >
+                    {title}
+                </h2>
+            </a>
+            <div class="flex gap-2 mt-6 grow-0 flex-wrap text-sm">
+                <ResourceType type={typeProp} />
                 <TagsList tags={tags} size="text-xs" />
             </div>
         </div>
-    </div>
-    <div class="spacer-container">
-        <HorizontalSpacer />
-    </div>
+    ) : (
+        <>
+            <!-- <HorizontalSpacer class="mb-4" /> -->
+            <div class="resource-grid grid gap-4 p-4">
+                <div>
+                    <a href={`/${metaSlug}/${slug}/`}>
+                        <Picture
+                            src={imageSrc}
+                            alt={image ? image.alt : title}
+                            class="aspect-square object-cover object-center overflow-hidden max-w-full w-20 h-20"
+                            widths={[100, 200, 400]}
+                            width="800"
+                            sizes="5rem"
+                        />
+                    </a>
+                </div>
+                <div>
+                    <a href={`/${metaSlug}/${slug}/`}>
+                        <h3 class={`${headingSize} font-medium`}>{title}</h3>
+                    </a>
+                    <div
+                        class="flex justify-start items-center gap-2 pt-2 font-mono text-xs"
+                    >
+                        <div class="shrink-0 self-start">
+                            <ResourceType type={typeProp} />
+                        </div>
+                        <TagsList tags={tags} size="text-xs" />
+                    </div>
+                </div>
+            </div>
+            <div class="spacer-container">
+                <HorizontalSpacer />
+            </div>
+        </>
+    )}
 </div>
 
 <style>

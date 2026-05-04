@@ -5,6 +5,7 @@ import { Image, Picture } from 'astro:assets';
 import Base from '@layouts/Base.astro';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
 import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
+import ResourceCard from '@components/ResourceCard.astro';
 import GridSpacer from '@components/GridSpacer.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
@@ -27,6 +28,18 @@ import {
 const allPrograms = await getCollection('programs');
 const allGalleryImages = await getAllGalleryImages();
 const initialRandomImage = getRandomImage(allGalleryImages);
+
+// Get random resources for display
+const allResources = await getCollection('resources');
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+const randomResources = shuffleArray(allResources).slice(0, 5);
 
 let featuredPrograms = allPrograms
     .filter(filterDraftsAndPubDate)
@@ -122,7 +135,7 @@ if (featuredPrograms.length < 2) {
     <section class="pt-4">
         <HorizontalSpacer class="mx-4" />
         <div class="header flex justify-between items-center px-4 pt-4">
-            <h2 class="text-3xl font-medium">Programs</h2>
+            <h2 class="text-3xl font-medium">Upcoming + Recent Programs</h2>
             <a href="/programs/">
                 <div class="button font-mono">View All</div>
             </a>
@@ -194,7 +207,13 @@ if (featuredPrograms.length < 2) {
             </a>
         </div>
         <div class="pt-4">
-            <ResourcesDisplay displayCount={5} />
+            {randomResources.map((resource) => (
+                <ResourceCard
+                    metadata={resource.data}
+                    slug={resource.id}
+                    metaSlug="resources"
+                />
+            ))}
         </div>
     </section>
 </Base>

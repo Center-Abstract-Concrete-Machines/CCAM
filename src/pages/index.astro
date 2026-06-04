@@ -82,7 +82,7 @@ if (featuredPrograms.length < 2) {
                             id="dynamic-image"
                             src={initialRandomImage?.src || synth.src}
                             alt={initialRandomImage?.alt || 'Studio Space'}
-                            class="w-full h-full object-cover transition-opacity duration-300"
+                            class="w-full h-full object-cover"
                         />
                     </a>
                 </div>
@@ -188,7 +188,7 @@ if (featuredPrograms.length < 2) {
                                 id="secondary-image"
                                 src={initialRandomImage?.src || moon.src}
                                 alt={initialRandomImage?.alt || 'Gallery image'}
-                                class="w-full h-full object-cover object-bottom transition-opacity duration-500"
+                                class="w-full h-full object-cover object-bottom"
                             />
                         </a>
                     </div>
@@ -232,33 +232,25 @@ if (featuredPrograms.length < 2) {
         const dynamicLink = document.getElementById('dynamic-image-link');
         
         if (randomImage && dynamicImage && dynamicLink) {
-            // Fade out
-            dynamicImage.style.opacity = '0';
+            dynamicImage.src = randomImage.src;
+            dynamicImage.alt = randomImage.alt;
             
-            setTimeout(() => {
-                dynamicImage.src = randomImage.src;
-                dynamicImage.alt = randomImage.alt;
-                
-                // Update link - if no associated link, disable clicking
-                if (randomImage.link) {
-                    dynamicLink.href = randomImage.link;
-                    dynamicLink.style.cursor = 'pointer';
-                    dynamicLink.title = `View ${randomImage.type}: ${randomImage.title}`;
-                    dynamicLink.onclick = null; // Remove any previous click handler
-                } else {
-                    dynamicLink.href = '#';
-                    dynamicLink.style.cursor = 'default';
-                    dynamicLink.title = randomImage.alt;
-                    // Prevent navigation if no link
-                    dynamicLink.onclick = (e) => {
-                        e.preventDefault();
-                        return false;
-                    };
-                }
-                
-                // Fade in
-                dynamicImage.style.opacity = '1';
-            }, 150);
+            // Update link - if no associated link, disable clicking
+            if (randomImage.link) {
+                dynamicLink.href = randomImage.link;
+                dynamicLink.style.cursor = 'pointer';
+                dynamicLink.title = `View ${randomImage.type}: ${randomImage.title}`;
+                dynamicLink.onclick = null; // Remove any previous click handler
+            } else {
+                dynamicLink.href = '#';
+                dynamicLink.style.cursor = 'default';
+                dynamicLink.title = randomImage.alt;
+                // Prevent navigation if no link
+                dynamicLink.onclick = (e) => {
+                    e.preventDefault();
+                    return false;
+                };
+            }
         }
     }
     
@@ -270,32 +262,24 @@ if (featuredPrograms.length < 2) {
         const secondaryLink = document.getElementById('secondary-image-link');
         
         if (randomImage && secondaryImage && secondaryLink) {
-            // Fade out
-            secondaryImage.style.opacity = '0';
+            secondaryImage.src = randomImage.src;
+            secondaryImage.alt = randomImage.alt;
             
-            setTimeout(() => {
-                secondaryImage.src = randomImage.src;
-                secondaryImage.alt = randomImage.alt;
-                
-                // Update link
-                if (randomImage.link) {
-                    secondaryLink.href = randomImage.link;
-                    secondaryLink.style.cursor = 'pointer';
-                    secondaryLink.title = `View ${randomImage.type}: ${randomImage.title}`;
-                    secondaryLink.onclick = null;
-                } else {
-                    secondaryLink.href = '#';
-                    secondaryLink.style.cursor = 'default';
-                    secondaryLink.title = randomImage.alt;
-                    secondaryLink.onclick = (e) => {
-                        e.preventDefault();
-                        return false;
-                    };
-                }
-                
-                // Fade in
-                secondaryImage.style.opacity = '1';
-            }, 250);
+            // Update link
+            if (randomImage.link) {
+                secondaryLink.href = randomImage.link;
+                secondaryLink.style.cursor = 'pointer';
+                secondaryLink.title = `View ${randomImage.type}: ${randomImage.title}`;
+                secondaryLink.onclick = null;
+            } else {
+                secondaryLink.href = '#';
+                secondaryLink.style.cursor = 'default';
+                secondaryLink.title = randomImage.alt;
+                secondaryLink.onclick = (e) => {
+                    e.preventDefault();
+                    return false;
+                };
+            }
         }
     }
     

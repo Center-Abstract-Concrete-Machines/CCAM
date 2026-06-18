@@ -3,9 +3,12 @@ import Stripe from 'stripe';
 
 interface Props {
     stripeProductId: string;
+    endDate?: Date | 'ongoing';
 }
 
-const { stripeProductId } = Astro.props;
+const { stripeProductId, endDate } = Astro.props;
+
+const isClosed = endDate && endDate !== 'ongoing' && new Date() > endDate;
 
 const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
 
@@ -53,7 +56,7 @@ const priceId = price.id;
             </p>
             <p class="font-sans text-2xl">{priceDisplay}</p>
             {
-                typeof inventoryCount === 'number' && (
+                typeof inventoryCount === 'number' && !isClosed && (
                     <p class="font-mono text-xs text-textColor/50">
                         {isFullyBooked
                             ? 'Fully booked'
@@ -64,7 +67,11 @@ const priceId = price.id;
         </div>
 
         {
-            isFullyBooked ? (
+            isClosed ? (
+                <button class="button opacity-50 cursor-not-allowed" disabled>
+                    Registration Closed
+                </button>
+            ) : isFullyBooked ? (
                 <button class="button opacity-50 cursor-not-allowed" disabled>
                     Fully Booked
                 </button>

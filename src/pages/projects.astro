@@ -8,28 +8,57 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 const heading = {
     title: 'Projects',
     description:
-        'CCAM Projects are longitudinal streams of programming, research, production, and development.',
+        'CCAM Projects are streams of programming, research, production, and development that hold together various events and initiatives.',
 };
 
-const projects = (await getCollection('projects')).sort(
-    // More recent on top
-    (a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime()
-);
+const projects = await getCollection('projects');
+
+const activeProjects = projects
+    .filter((project) => project.data.status === 'active')
+    .sort((a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime());
+
+const inactiveProjects = projects
+    .filter((project) => project.data.status === 'inactive')
+    .sort((a, b) => b.data.dateAdded.getTime() - a.data.dateAdded.getTime());
 ---
 
 <Base title="Projects">
     <div class="mx-auto p-4">
         <TitleCard title={heading.title} text={heading.description} />
         <HorizontalSpacer class="my-4" />
+        <div class="card-grid double p-4">
+            {
+                activeProjects.map((project) => (
+                    <div>
+                        <ProjectCard
+                            metadata={project.data}
+                            slug={project.id}
+                        />
+                    </div>
+                ))
+            }
+        </div>
+
         {
-            projects.map((project) => (
+            inactiveProjects.length > 0 && (
                 <>
-                    <ProjectCard metadata={project.data} slug={project.id} />
-                    <div class="spacer">
-                        <HorizontalSpacer class="my-12" />
+                    <HorizontalSpacer class="mx-4" />
+                    <h2 class="text-center py-16 font-semibold leading-tight tracking-tight text-3xl">
+                        Previous Projects
+                    </h2>
+                    <HorizontalSpacer class="mx-4" />
+                    <div class="card-grid triple p-4">
+                        {inactiveProjects.map((project) => (
+                            <div>
+                                <ProjectCard
+                                    metadata={project.data}
+                                    slug={project.id}
+                                />
+                            </div>
+                        ))}
                     </div>
                 </>
-            ))
+            )
         }
     </div>
 </Base>

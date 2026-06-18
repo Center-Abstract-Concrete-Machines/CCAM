@@ -45,6 +45,8 @@ import EmailSignup from '@components/EmailSignup.svelte';
         );
         const closeButton = document.querySelector('button#close');
 
+        if (!contactAnchor || !contactModal) return;
+
         if (typeof window.HTMLDialogElement === 'function') {
             contactAnchor.addEventListener('click', (e) => {
                 e.preventDefault();

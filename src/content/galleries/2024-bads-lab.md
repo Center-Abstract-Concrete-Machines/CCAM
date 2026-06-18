@@ -56,19 +56,11 @@ images:
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240513_124729.jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/20240513_125109.jpg
     caption: null
     credit: null
     includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/20240513_132452.jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240513_133452.jpg
     caption: null
     credit: null
     includeInAssProject: false
@@ -172,27 +164,7 @@ images:
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240518_180336.jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240518_180342.jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240518_180342(0).jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/20240518_180420.jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240518_180421.jpg
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/20240518_180539.jpg
     caption: null
     credit: null
     includeInAssProject: false
@@ -532,10 +504,6 @@ images:
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1638.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/IMG_1640.JPG
     caption: null
     credit: null
@@ -549,18 +517,6 @@ images:
     credit: null
     includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/IMG_1657.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1659.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1660.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1661.JPG
     caption: null
     credit: null
     includeInAssProject: false
@@ -593,38 +549,6 @@ images:
     credit: null
     includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/IMG_1694.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1704.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1723.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1725.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1738.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1744.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1757.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1761.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1764.JPG
     caption: null
     credit: null
     includeInAssProject: false
@@ -668,35 +592,7 @@ images:
     caption: null
     credit: null
     includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1814.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1819.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1822.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1825.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
   - image: src/content/galleries/2024-bads-lab/IMG_1827.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1828.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1830.JPG
-    caption: null
-    credit: null
-    includeInAssProject: false
-  - image: src/content/galleries/2024-bads-lab/IMG_1832.JPG
     caption: null
     credit: null
     includeInAssProject: false

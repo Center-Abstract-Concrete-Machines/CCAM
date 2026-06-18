@@ -25,21 +25,72 @@ async function processDirectory(directoryName) {
     const directoryPath = path.join(galleriesPath, directoryName);
 
     try {
-        const files = await fs.promises.readdir(directoryPath);
+        const entries = await fs.promises.readdir(directoryPath, { withFileTypes: true });
 
-        for (const file of files) {
-            const filePath = path.join(directoryPath, file);
-            if (await isAnImage(filePath)) {
-                await processImage(directoryPath, file);
+        // Process flat images (no photographer folder)
+        for (const entry of entries) {
+            if (entry.isFile()) {
+                const filePath = path.join(directoryPath, entry.name);
+                if (await isAnImage(filePath)) {
+                    await processImage(directoryPath, entry.name);
+                }
             }
         }
 
-        const updatedFiles = await fs.promises.readdir(directoryPath);
-        const fullPathFileList = updatedFiles
-            .sort((a, b) => a.localeCompare(b, 'en-us', { numeric: true }))
-            .map((filename) => path.join(directoryPath, filename));
+        // Process photographer subfolders — folder name becomes the credit
+        for (const entry of entries) {
+            if (entry.isDirectory()) {
+                const subDirPath = path.join(directoryPath, entry.name);
+                const subFiles = await fs.promises.readdir(subDirPath);
+                for (const file of subFiles) {
+                    const filePath = path.join(subDirPath, file);
+                    if (await isAnImage(filePath)) {
+                        await processImage(subDirPath, file);
+                    }
+                }
+            }
+        }
 
-        await createGalleryTemplate(directoryName, fullPathFileList);
+        // Build ordered image entry list: flat images first, then per-photographer subfolder images
+        const imageEntries = [];
+
+        const updatedEntries = await fs.promises.readdir(directoryPath, { withFileTypes: true });
+
+        const flatFiles = updatedEntries
+            .filter((e) => e.isFile())
+            .sort((a, b) => a.name.localeCompare(b.name, 'en-us', { numeric: true }));
+
+        for (const entry of flatFiles) {
+            const filePath = path.join(directoryPath, entry.name);
+            if (await isAnImage(filePath)) {
+                imageEntries.push({ file: filePath, credit: null });
+            }
+        }
+
+        const subDirs = updatedEntries
+            .filter((e) => e.isDirectory())
+            .sort((a, b) => a.name.localeCompare(b.name, 'en-us', { numeric: true }));
+
+        for (const subDir of subDirs) {
+            const subDirPath = path.join(directoryPath, subDir.name);
+            // Convert folder name from kebab-case or snake_case to Title Case for use as credit
+            const photographerCredit = subDir.name
+                .replace(/[-_]/g, ' ')
+                .replace(/\b\w/g, (c) => c.toUpperCase());
+            const subFiles = await fs.promises.readdir(subDirPath);
+            const sortedSubFiles = subFiles.sort((a, b) =>
+                a.localeCompare(b, 'en-us', { numeric: true })
+            );
+            for (const file of sortedSubFiles) {
+                const filePath = path.join(subDirPath, file);
+                if (await isAnImage(filePath)) {
+                    imageEntries.push({ file: filePath, credit: photographerCredit });
+                }
+            }
+        }
+
+        console.log(`\nSyncing ${directoryName}...`);
+        await syncGalleryTemplate(directoryName, imageEntries);
     } catch (error) {
         console.error('Unable to scan directory', error);
     }
@@ -54,7 +105,7 @@ async function isAnImage(filePath) {
     return false;
 }
 
-async function createGalleryTemplate(galleryName, fileList) {
+async function syncGalleryTemplate(galleryName, imageEntries) {
     const galleryDirectory = path.join('src', 'content', 'galleries');
     const galleryTemplatePath = path.join(
         galleryDirectory,
@@ -72,32 +123,64 @@ async function createGalleryTemplate(galleryName, fileList) {
         if (!fs.existsSync(galleryDirectory)) {
             fs.mkdirSync(galleryDirectory);
         }
-        // If template exists, leave it
-        if (fs.existsSync(galleryTemplatePath)) return;
 
-        // If it doesn't, create it
-        let data = {
-            images: [],
-        };
-        // Add all files to the images array
-        for (let file of fileList) {
-            if (await isAnImage(file)) {
-                data.images.push({
-                    image: convertWinToPOSIX(file),
-                    caption: null,
-                    credit: null,
-                    includeInAssProject: false,
-                });
+        // Build the canonical set of POSIX paths from disk
+        const diskEntries = imageEntries.map(({ file, credit }) => ({
+            posix: convertWinToPOSIX(file),
+            credit,
+        }));
+
+        let existingImages = {};
+        let topLevelData = {};
+
+        if (fs.existsSync(galleryTemplatePath)) {
+            // Parse existing file, preserving all top-level fields and per-image metadata
+            const raw = await fs.promises.readFile(galleryTemplatePath, 'utf8');
+            const match = raw.match(/^---\n([\s\S]*?)\n---/);
+            if (match) {
+                const parsed = yaml.load(match[1]) ?? {};
+                const { images: parsedImages, ...rest } = parsed;
+                topLevelData = rest;
+                for (const entry of parsedImages ?? []) {
+                    existingImages[convertWinToPOSIX(entry.image)] = entry;
+                }
             }
         }
-        // Convert to yaml
+
+        // Detect removals and additions for logging
+        const diskPaths = new Set(diskEntries.map((e) => e.posix));
+        const existingPaths = new Set(Object.keys(existingImages));
+
+        for (const removed of existingPaths) {
+            if (!diskPaths.has(removed)) {
+                console.log(`  [removed] ${removed}`);
+            }
+        }
+        for (const { posix } of diskEntries) {
+            if (!existingPaths.has(posix)) {
+                console.log(`  [added]   ${posix}`);
+            }
+        }
+
+        // Build synced images array: disk order, existing metadata preserved, new files get defaults
+        const syncedImages = diskEntries.map(({ posix, credit }) => {
+            if (existingImages[posix]) {
+                return existingImages[posix];
+            }
+            return {
+                image: posix,
+                caption: null,
+                credit: credit,
+                includeInAssProject: false,
+            };
+        });
+
+        const data = { ...topLevelData, images: syncedImages };
         const yamlString = yaml.dump(data, { lineWidth: -1 });
-        // Add to markdown frontmatter
         const content = '---\n' + yamlString + '---\n';
-        // Write to file
         await fs.promises.writeFile(galleryTemplatePath, content);
     } catch (error) {
-        console.error(`Error creating template file for ${galleryName}`, error);
+        console.error(`Error syncing template file for ${galleryName}`, error);
     }
 }
 
@@ -121,6 +204,7 @@ async function processImage(parentDir, file) {
             });
             await sharp(outputBuffer)
                 .resize({ width: maxWidth })
+                .rotate() // Auto-rotate based on EXIF orientation
                 .withMetadata()
                 .toFile(newFilePath);
             console.log(
@@ -137,6 +221,7 @@ async function processImage(parentDir, file) {
             );
             await sharp(filePath)
                 .resize({ width: maxWidth })
+                .rotate() // Auto-rotate based on EXIF orientation
                 .withMetadata()
                 .toFile(newFilePath);
             console.log(`Resized ${file} to ${maxWidth}px wide`);
@@ -161,7 +246,7 @@ async function runScript() {
         for (let gallery of galleries) {
             await processDirectory(gallery);
         }
-        console.log('\nCompleted gallery processing ✨\n');
+        console.log('\nCompleted gallery sync ✨\n');
     } catch (error) {
         console.error(error);
     }

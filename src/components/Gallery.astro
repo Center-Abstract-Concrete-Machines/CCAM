@@ -4,14 +4,6 @@ const { gallery } = Astro.props;
 import { Picture } from 'astro:assets';
 import { getOptimizedImagesForGallery } from '@utils/galleryHelpers';
 
-function sortByFileName(stringA, stringB) {
-    const [nameA, nameB] = [
-        stringA.split('/').at(-1).split('.').at(0),
-        stringB.split('/').at(-1).split('.').at(0),
-    ];
-    return nameA - nameB;
-}
-
 const optimizedImages = await getOptimizedImagesForGallery(gallery);
 
 let galleryWidth;
@@ -21,6 +13,20 @@ if (optimizedImages.length <= 2) {
     galleryWidth = 'triple';
 } else {
     galleryWidth = 'quad';
+}
+
+// Function to get CSS transform based on EXIF orientation
+function getOrientationTransform(orientation) {
+    switch (orientation) {
+        case 2: return 'scaleX(-1)'; // flip horizontal
+        case 3: return 'rotate(180deg)'; // rotate 180°
+        case 4: return 'scaleY(-1)'; // flip vertical  
+        case 5: return 'rotate(-90deg) scaleX(-1)'; // rotate 90° CCW + flip horizontal
+        case 6: return 'rotate(90deg)'; // rotate 90° CW
+        case 7: return 'rotate(90deg) scaleX(-1)'; // rotate 90° CW + flip horizontal
+        case 8: return 'rotate(-90deg)'; // rotate 90° CCW
+        default: return 'none'; // orientation 1 or unknown
+    }
 }
 ---
 
@@ -47,7 +53,8 @@ if (optimizedImages.length <= 2) {
                                 height={obj.optimized.attributes.height}
                                 widths={[400, 600, 1200, 1600]}
                                 sizes="(min-width: 640px) 25vw, 100vw"
-                                class="aspect-[4/3] object-cover object-center"
+                                class="aspect-square object-cover object-center"
+                                style={`transform: ${getOrientationTransform(obj.orientation || 1)};`}
                             />
                             <div class="caption">
                                 {obj.caption && (
@@ -65,5 +72,20 @@ if (optimizedImages.length <= 2) {
                     ))
             }
         </div>
+        
+        <script>
+            import lightGallery from 'lightgallery';
+            import 'lightgallery/css/lightgallery.css';
+            
+            document.addEventListener('astro:page-load', () => {
+                const el = document.getElementById('lightgallery');
+                if (el) {
+                    lightGallery(el, {
+                        plugins: [],
+                        speed: 200,
+                    });
+                }
+            });
+        </script>
     </body>
 </html>

@@ -1,0 +1,265 @@
+---
+export const prerender = false;
+
+import Base from 'src/layouts/Base.astro';
+import Stripe from 'stripe';
+import { getCollection, getEntry, render } from 'astro:content';
+
+const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const { workshopId } = Astro.params;
+
+if (!workshopId) return Astro.redirect('/');
+
+// Content file is optional
+const storeContentEntries = await getCollection('storeProducts');
+const contentEntry =
+    storeContentEntries.find(
+        (e) => e.id === workshopId && e.data.workshopRegistration
+    ) ??
+    storeContentEntries.find(
+        (e) => e.id.startsWith(workshopId + '/') && e.data.workshopRegistration
+    ) ??
+    storeContentEntries.find(
+        (e) =>
+            e.data.stripeProductId === workshopId && e.data.workshopRegistration
+    );
+
+// If a programId is linked, pull the program's details
+const linkedProgram = contentEntry?.data.programId
+    ? await getEntry('programs', contentEntry.data.programId)
+    : null;
+
+const stripeProductId = contentEntry?.data.stripeProductId ?? workshopId;
+
+let product: Stripe.Product;
+let price: Stripe.Price;
+try {
+    product = await stripe.products.retrieve(stripeProductId, {
+        expand: ['default_price'],
+    });
+    price = product.default_price as Stripe.Price;
+} catch {
+    return new Response('Not found', { status: 404 });
+}
+
+if (!product.active || !price)
+    return new Response('Not found', { status: 404 });
+
+const isRegistration =
+    product.metadata.registration === 'true' ||
+    Boolean(contentEntry?.data.workshopRegistration);
+if (!isRegistration) return new Response('Not found', { status: 404 });
+
+function parseInventoryCount(value: string | undefined) {
+    if (!value) return null;
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
+}
+
+const inventoryCount = parseInventoryCount(product.metadata.inventory_count);
+const isFree = !price.unit_amount || price.unit_amount === 0;
+const isFullyBooked = typeof inventoryCount === 'number' && inventoryCount <= 0;
+
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: (price.currency ?? 'usd').toUpperCase(),
+});
+const priceDisplay = isFree
+    ? 'Free'
+    : formatter.format((price.unit_amount ?? 0) / 100);
+
+// Prefer program data, fall back to content entry, fall back to Stripe product
+const title =
+    linkedProgram?.data.title ?? contentEntry?.data.title ?? product.name;
+const subtitle = linkedProgram?.data.subtitle;
+const eventDate = linkedProgram?.data.presentationalDates;
+const eventTime = linkedProgram?.data.time;
+const eventLocation = linkedProgram?.data.location;
+const heroImage = contentEntry?.data.heroImage ?? linkedProgram?.data.image;
+const heroImageAlt =
+    contentEntry?.data.heroImageAlt ?? linkedProgram?.data.image.alt ?? title;
+const description = contentEntry?.data.excerpt ?? product.description ?? '';
+const programHref = linkedProgram ? `/programs/${linkedProgram.id}` : null;
+
+const renderedContent = contentEntry ? await render(contentEntry) : null;
+const Content = renderedContent?.Content;
+---
+
+<Base title={`Register — ${title}`}>
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
+        <p
+            class="font-mono text-xs uppercase tracking-wider text-textColor/50 mb-3"
+        >
+            Workshop Registration
+        </p>
+        <h1 class="font-sans text-5xl sm:text-7xl mb-2">{title}</h1>
+        {
+            subtitle && (
+                <p class="font-sans text-2xl text-textColor/70 mb-2">
+                    {subtitle}
+                </p>
+            )
+        }
+        <p class="font-mono text-lg text-textColor/70">{priceDisplay}</p>
+    </section>
+
+    <section
+        class="px-4 py-10 grid gap-10 lg:grid-cols-[1fr_320px] items-start"
+    >
+        <div>
+            {
+                heroImage && (
+                    <img
+                        src={
+                            'src' in heroImage
+                                ? heroImage.src
+                                : heroImage.url.src
+                        }
+                        alt={heroImageAlt}
+                        class="w-full mb-8 border border-dashed border-borderColor/30"
+                    />
+                )
+            }
+
+            <div class="prose prose-sm max-w-none font-mono">
+                {Content ? <Content /> : <p>{description}</p>}
+            </div>
+
+            {
+                programHref && (
+                    <p class="mt-8 font-mono text-sm">
+                        <a
+                            href={programHref}
+                            class="underline text-textColor/60 hover:text-textColor"
+                        >
+                            ← Full program details
+                        </a>
+                    </p>
+                )
+            }
+        </div>
+
+        <aside
+            class="border border-dashed border-borderColor/30 p-6 space-y-4 lg:sticky lg:top-6"
+        >
+            <div class="space-y-1">
+                <p class="font-sans text-2xl">{priceDisplay}</p>
+                {
+                    eventDate && (
+                        <p class="font-mono text-sm text-textColor/70">
+                            {eventDate}
+                        </p>
+                    )
+                }
+                {
+                    eventTime && (
+                        <p class="font-mono text-sm text-textColor/70">
+                            {eventTime}
+                        </p>
+                    )
+                }
+                {
+                    eventLocation && (
+                        <p class="font-mono text-sm text-textColor/70">
+                            {eventLocation}
+                        </p>
+                    )
+                }
+                {
+                    typeof inventoryCount === 'number' && (
+                        <p class="font-mono text-xs text-textColor/50 uppercase tracking-wider mt-2">
+                            {isFullyBooked
+                                ? 'Fully booked'
+                                : `${inventoryCount} spot${inventoryCount === 1 ? '' : 's'} remaining`}
+                        </p>
+                    )
+                }
+            </div>
+
+            {
+                isFullyBooked ? (
+                    <button
+                        class="button w-full opacity-50 cursor-not-allowed"
+                        disabled
+                    >
+                        Fully Booked
+                    </button>
+                ) : (
+                    <form
+                        id="registration-form"
+                        data-price-id={price.id}
+                        class="space-y-4"
+                    >
+                        <button
+                            type="submit"
+                            id="register-btn"
+                            class="button w-full"
+                        >
+                            {isFree
+                                ? 'Register — Free'
+                                : `Register — ${priceDisplay}`}
+                        </button>
+                        <p
+                            id="reg-error"
+                            class="text-Orange text-xs font-mono hidden"
+                        />
+                    </form>
+                )
+            }
+
+            <p class="font-mono text-xs text-textColor/40">
+                You'll receive a confirmation email after registering.
+            </p>
+        </aside>
+    </section>
+</Base>
+
+<script>
+    const form = document.getElementById(
+        'registration-form'
+    ) as HTMLFormElement | null;
+    const btn = document.getElementById(
+        'register-btn'
+    ) as HTMLButtonElement | null;
+    const errorEl = document.getElementById(
+        'reg-error'
+    ) as HTMLParagraphElement | null;
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!btn || !form) return;
+
+        btn.disabled = true;
+        btn.textContent = 'Redirecting…';
+        if (errorEl) errorEl.classList.add('hidden');
+
+        const priceId = form.dataset.priceId;
+
+        try {
+            const res = await fetch('/api/store/create-registration-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ priceId, quantity: 1 }),
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error ?? 'Registration failed');
+            window.location.assign(data.url);
+        } catch (err) {
+            if (errorEl) {
+                errorEl.textContent =
+                    err instanceof Error ? err.message : 'Registration failed';
+                errorEl.classList.remove('hidden');
+            }
+            if (btn) {
+                btn.disabled = false;
+                btn.textContent =
+                    form.dataset.isFree === 'true'
+                        ? 'Register — Free'
+                        : 'Register';
+            }
+        }
+    });
+</script>

@@ -42,6 +42,7 @@ const programsCollection = defineCollection({
                 .optional(),
             assProjectId: z.string().optional(),
             displayResources: z.string().optional(),
+            stripeRegistrationId: z.string().startsWith('prod_').optional(),
         }),
 });
 
@@ -155,10 +156,69 @@ const galleryCollection = defineCollection({
         }),
 });
 
+const storeProductsCollection = defineCollection({
+    loader: glob({
+        pattern: '**/*.{md,mdx}',
+        base: './src/content/store',
+    }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string().optional(),
+            stripeProductId: z.string().startsWith('prod_'),
+            stripePriceId: z.string().startsWith('price_').optional(),
+            excerpt: z.string().optional(),
+            heroImage: image().optional(),
+            heroImageAlt: z.string().optional(),
+            galleryImages: z
+                .array(
+                    z.object({
+                        image: image(),
+                        alt: z.string(),
+                        caption: z.string().optional(),
+                    })
+                )
+                .optional(),
+            videoEmbedUrl: z.string().url().optional(),
+            specs: z
+                .array(
+                    z.object({
+                        label: z.string(),
+                        value: z.string(),
+                    })
+                )
+                .optional(),
+            featured: z.boolean().optional(),
+            category: z
+                .enum(['synth', 'printed-matter', 'apparel', 'accessory', 'other'])
+                .optional(),
+            tags: z
+                .array(
+                    z
+                        .string()
+                        .trim()
+                        .toLowerCase()
+                        .transform((tag) => slug(tag))
+                )
+                .optional(),
+            sizeVariants: z
+                .array(
+                    z.object({
+                        size: z.string().trim(),
+                        label: z.string().trim().optional(),
+                        stripePriceId: z.string().startsWith('price_'),
+                    })
+                )
+                .optional(),
+            workshopRegistration: z.boolean().optional(),
+            programId: z.string().optional(),
+        }),
+});
+
 export const collections = {
     programs: programsCollection,
     resources: resourcesCollection,
     projects: projectsCollection,
     people: peopleCollection,
     galleries: galleryCollection,
+    storeProducts: storeProductsCollection,
 };

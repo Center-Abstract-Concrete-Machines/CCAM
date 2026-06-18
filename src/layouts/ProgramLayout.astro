@@ -80,7 +80,7 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                 </div>
                 {assProjectId && <AssProjectLink assProject={assProject} />}
             </div>
-            {stripeRegistrationId && <RegistrationBlock stripeProductId={stripeRegistrationId} />}
+            {stripeRegistrationId && <RegistrationBlock stripeProductId={stripeRegistrationId} endDate={endDate} />}
             <div class="mt-8">
                 <slot />
             </div>

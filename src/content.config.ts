@@ -42,6 +42,7 @@ const programsCollection = defineCollection({
                 .optional(),
             assProjectId: z.string().optional(),
             displayResources: z.string().optional(),
+            stripeRegistrationId: z.string().startsWith('prod_').optional(),
         }),
 });
 
@@ -205,6 +206,8 @@ const storeProductsCollection = defineCollection({
                     })
                 )
                 .optional(),
+            workshopRegistration: z.boolean().optional(),
+            programId: z.string().optional(),
         }),
 });
 

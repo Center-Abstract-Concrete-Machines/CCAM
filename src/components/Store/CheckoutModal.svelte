@@ -11,7 +11,7 @@
     interface Props {
         priceId: string;
         productName: string;
-        unitAmount: number;   // in cents
+        unitAmount: number; // in cents
         currency: string;
         publishableKey: string;
         returnUrl: string;
@@ -37,13 +37,17 @@
     }: Props = $props();
 
     let quantity = $state(1);
-    let step = $state<'idle' | 'loading' | 'form' | 'submitting' | 'error'>('idle');
+    let step = $state<'idle' | 'loading' | 'form' | 'submitting' | 'error'>(
+        'idle'
+    );
     let errorMessage = $state('');
-    let stripe = $state<Stripe | null>(null);
-    let elements = $state<StripeElements | null>(null);
-    let addressElement = $state<StripeAddressElement | null>(null);
-    let paymentElement = $state<StripePaymentElement | null>(null);
+    let stripe: Stripe | null = null;
+    let elements: StripeElements | null = null;
+    let addressElement: StripeAddressElement | null = null;
+    let paymentElement: StripePaymentElement | null = null;
     let dialog: HTMLDialogElement;
+    let addressContainer = $state<HTMLDivElement | null>(null);
+    let paymentContainer = $state<HTMLDivElement | null>(null);
     let selectedSize = $state('');
 
     const selectedSizeOption = $derived(
@@ -54,7 +58,9 @@
 
     const hasSizeOptions = $derived(sizeOptions.length > 0);
     const activePriceId = $derived(selectedSizeOption?.priceId ?? priceId);
-    const activeUnitAmount = $derived(selectedSizeOption?.unitAmount ?? unitAmount);
+    const activeUnitAmount = $derived(
+        selectedSizeOption?.unitAmount ?? unitAmount
+    );
     const activeInventoryCount = $derived(
         selectedSizeOption?.inventoryCount ?? inventoryCount
     );
@@ -66,8 +72,12 @@
         })
     );
 
-    const total = $derived(formatter.format((activeUnitAmount * quantity) / 100));
-    const hasTrackedInventory = $derived(typeof activeInventoryCount === 'number');
+    const total = $derived(
+        formatter.format((activeUnitAmount * quantity) / 100)
+    );
+    const hasTrackedInventory = $derived(
+        typeof activeInventoryCount === 'number'
+    );
     const isOutOfStock = $derived(
         typeof activeInventoryCount === 'number' && activeInventoryCount <= 0
     );
@@ -83,7 +93,9 @@
             return;
         }
 
-        const stillExists = sizeOptions.some((option) => option.size === selectedSize);
+        const stillExists = sizeOptions.some(
+            (option) => option.size === selectedSize
+        );
         if (!stillExists) {
             selectedSize = sizeOptions[0].size;
         }
@@ -130,17 +142,34 @@
             addressElement?.unmount();
             paymentElement?.unmount();
 
+            const isDark = document.documentElement.classList.contains('dark');
+            const bgColor = isDark ? '#1e1e1e' : '#ffffff';
+            const textColor = isDark ? '#e6e6e6' : '#121212';
+            const borderColor = isDark
+                ? 'rgba(230,230,230,0.4)'
+                : 'rgba(18,18,18,0.4)';
+
             elements = stripe!.elements({
                 clientSecret,
                 appearance: {
                     theme: 'flat',
                     variables: {
-                        colorBackground: 'hsl(43deg 100% 97%)',
-                        colorText: 'hsl(0deg 0% 7%)',
+                        colorBackground: bgColor,
+                        colorText: textColor,
                         colorDanger: '#ff7a1a',
                         fontFamily: 'ui-sans-serif, system-ui, sans-serif',
                         borderRadius: '0px',
                         spacingUnit: '4px',
+                    },
+                    rules: {
+                        '.Input': {
+                            border: `1px dashed ${borderColor}`,
+                            backgroundColor: bgColor,
+                            color: textColor,
+                        },
+                        '.Label': {
+                            color: textColor,
+                        },
                     },
                 },
             });
@@ -151,12 +180,13 @@
             // Render form containers before Stripe mounts into them
             await tick();
 
-            addressElement.mount('#stripe-address');
-            paymentElement.mount('#stripe-payment');
+            addressElement.mount(addressContainer!);
+            paymentElement.mount(paymentContainer!);
 
             step = 'form';
         } catch (err) {
-            errorMessage = err instanceof Error ? err.message : 'Something went wrong';
+            errorMessage =
+                err instanceof Error ? err.message : 'Something went wrong';
             step = 'error';
         }
     }
@@ -209,17 +239,35 @@
 </button>
 
 <dialog bind:this={dialog} class="checkout-dialog">
-    <div class="checkout-container bg-backgroundColor text-textColor font-mono p-6 max-w-lg w-full relative">
-
+    <div
+        class="checkout-container bg-backgroundColor text-textColor font-mono p-6 max-w-lg w-full relative"
+    >
         <!-- Header -->
-        <div class="flex items-start justify-between mb-6 border-b border-dashed border-borderColor/30 pb-4">
+        <div
+            class="flex items-start justify-between mb-6 border-b border-dashed border-borderColor/30 pb-4"
+        >
             <div>
                 <h2 class="font-sans text-2xl font-medium">{productName}</h2>
                 <p class="text-textColor/50 text-sm mt-1">Checkout</p>
             </div>
-            <button onclick={close} aria-label="Close" class="text-textColor/50 hover:text-textColor transition-colors mt-1">
-                <svg viewBox="0 0 24 24" class="h-4 w-4" stroke="currentColor" stroke-width="2px" stroke-linecap="butt">
-                    <line x1="2" y1="2" x2="22" y2="22" /><line x1="22" y1="2" x2="2" y2="22" />
+            <button
+                onclick={close}
+                aria-label="Close"
+                class="text-textColor/50 hover:text-textColor transition-colors mt-1"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    class="h-4 w-4"
+                    stroke="currentColor"
+                    stroke-width="2px"
+                    stroke-linecap="butt"
+                >
+                    <line x1="2" y1="2" x2="22" y2="22" /><line
+                        x1="22"
+                        y1="2"
+                        x2="2"
+                        y2="22"
+                    />
                 </svg>
             </button>
         </div>
@@ -229,18 +277,24 @@
         {:else}
             <form onsubmit={submitPayment}>
                 {#if step === 'loading'}
-                    <p class="text-textColor/50 text-sm mb-5">Loading checkout…</p>
+                    <p class="text-textColor/50 text-sm mb-5">
+                        Loading checkout…
+                    </p>
                 {/if}
 
                 <!-- Quantity -->
                 <div class="mb-5">
                     {#if hasSizeOptions}
-                        <label class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider" for="size-select">Size</label>
+                        <label
+                            class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider"
+                            for="size-select">Size</label
+                        >
                         <select
                             id="size-select"
                             class="w-full border border-dashed border-borderColor/50 bg-backgroundColor text-textColor p-2 text-sm mb-4"
                             bind:value={selectedSize}
-                            disabled={step === 'loading' || step === 'submitting'}
+                            disabled={step === 'loading' ||
+                                step === 'submitting'}
                         >
                             {#each sizeOptions as option}
                                 <option value={option.size}>
@@ -255,14 +309,21 @@
                         </select>
                     {/if}
 
-                    <p class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider">Quantity</p>
+                    <p
+                        class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider"
+                    >
+                        Quantity
+                    </p>
                     <div class="flex items-center gap-3">
                         <button
                             type="button"
                             class="border border-dashed border-borderColor/50 w-8 h-8 flex items-center justify-center hover:bg-backgroundHover hover:text-backgroundColor transition-colors"
-                            onclick={() => { if (quantity > 1) quantity--; }}
-                            disabled={step === 'loading' || step === 'submitting'}
-                        >−</button>
+                            onclick={() => {
+                                if (quantity > 1) quantity--;
+                            }}
+                            disabled={step === 'loading' ||
+                                step === 'submitting'}>−</button
+                        >
                         <span class="w-6 text-center">{quantity}</span>
                         <button
                             type="button"
@@ -270,13 +331,13 @@
                             onclick={() => {
                                 if (quantity < maxQuantity) quantity++;
                             }}
-                            disabled={
-                                step === 'loading' ||
+                            disabled={step === 'loading' ||
                                 step === 'submitting' ||
-                                quantity >= maxQuantity
-                            }
-                        >+</button>
-                        <span class="ml-auto text-sm text-textColor/60">{total}</span>
+                                quantity >= maxQuantity}>+</button
+                        >
+                        <span class="ml-auto text-sm text-textColor/60"
+                            >{total}</span
+                        >
                     </div>
                     {#if hasTrackedInventory}
                         <p class="mt-2 text-xs text-textColor/60">
@@ -287,14 +348,22 @@
 
                 <!-- Stripe Address Element -->
                 <div class="mb-5">
-                    <p class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider">Shipping Address</p>
-                    <div id="stripe-address"></div>
+                    <p
+                        class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider"
+                    >
+                        Shipping Address
+                    </p>
+                    <div bind:this={addressContainer}></div>
                 </div>
 
                 <!-- Stripe Payment Element -->
                 <div class="mb-6">
-                    <p class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider">Payment</p>
-                    <div id="stripe-payment"></div>
+                    <p
+                        class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider"
+                    >
+                        Payment
+                    </p>
+                    <div bind:this={paymentContainer}></div>
                 </div>
 
                 {#if errorMessage}
@@ -328,14 +397,14 @@
     }
 
     @keyframes fade-in {
-        from { opacity: 0; transform: translateY(40px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Stripe Element containers need a min height while mounting */
-    #stripe-address,
-    #stripe-payment {
-        min-height: 40px;
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     #size-select {

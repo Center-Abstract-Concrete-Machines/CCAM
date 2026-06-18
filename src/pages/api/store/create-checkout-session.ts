@@ -67,6 +67,8 @@ export const POST: APIRoute = async ({ request, url }) => {
     }
 
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+    // Track fulfillment modes across all cart items
+    const fulfillmentModes = new Set<string>();
 
     for (const item of quantityByPriceAndSize.values()) {
         const price = await stripe.prices.retrieve(item.priceId, {
@@ -122,30 +124,54 @@ export const POST: APIRoute = async ({ request, url }) => {
             price_data: {
                 currency: price.currency,
                 unit_amount: price.unit_amount,
-                metadata: {
-                    sourcePriceId: price.id,
-                    sourceProductId: product.id,
-                    variantSize: resolvedVariantSize ?? '',
-                    variantLabel: resolvedVariantLabel ?? '',
-                    inventoryLevel: price.metadata.inventory_count ? 'price' : 'product',
-                },
                 product_data: {
                     name: displayName,
+                    metadata: {
+                        sourcePriceId: price.id,
+                        sourceProductId: product.id,
+                        variantSize: resolvedVariantSize ?? '',
+                        variantLabel: resolvedVariantLabel ?? '',
+                        inventoryLevel: price.metadata.inventory_count ? 'price' : 'product',
+                    },
                 },
             },
         });
+
+        fulfillmentModes.add(product.metadata.fulfillment ?? 'ship');
     }
 
     const origin = url.origin;
+
+    // Determine shipping options based on fulfillment metadata across all items:
+    // - Any pickup_only item → offer pickup + ship (most permissive wins for mixed carts)
+    // - Any ship_or_pickup → offer both
+    // - Default → shipping address only, no explicit rates needed
+    const pickupRateId = import.meta.env.STRIPE_RATE_PICKUP;
+    const shippingRateId = import.meta.env.STRIPE_RATE_SHIPPING;
+    const offerPickup = fulfillmentModes.has('ship_or_pickup') || fulfillmentModes.has('pickup_only');
+    const offerShip = !fulfillmentModes.has('pickup_only') || fulfillmentModes.has('ship_or_pickup') || fulfillmentModes.has('ship');
+
+    let shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] | undefined;
+    let shippingAddressCollection: Stripe.Checkout.SessionCreateParams.ShippingAddressCollection | undefined;
+
+    if (offerPickup && pickupRateId && shippingRateId) {
+        shippingOptions = [
+            ...(offerShip ? [{ shipping_rate: shippingRateId }] : []),
+            { shipping_rate: pickupRateId },
+        ];
+        // Stripe requires shipping_address_collection when using shipping_options
+        shippingAddressCollection = { allowed_countries: ['US', 'CA'] };
+    } else {
+        shippingAddressCollection = { allowed_countries: ['US', 'CA'] };
+    }
 
     const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         line_items: lineItems,
         success_url: `${origin}/store/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${origin}/store/cart`,
-        shipping_address_collection: {
-            allowed_countries: ['US', 'CA'],
-        },
+        ...(shippingOptions ? { shipping_options: shippingOptions } : {}),
+        shipping_address_collection: shippingAddressCollection,
     });
 
     return new Response(JSON.stringify({ sessionId: session.id, url: session.url }), {

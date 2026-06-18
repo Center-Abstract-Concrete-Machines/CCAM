@@ -28,15 +28,21 @@ const storeContentByStripeProductId = new Map(
 const products = productsResponse.data
     .filter((p) => {
         const price = p.default_price as Stripe.Price | null;
-        return price && price.unit_amount && price.type === 'one_time';
+        return price && price.unit_amount !== null && price.type === 'one_time';
+    })
+    .filter((p) => {
+        // Exclude Stripe products flagged as registrations via metadata
+        if (p.metadata.registration === 'true') return false;
+        // Exclude products that have a content entry marked as workshopRegistration
+        const contentEntry = storeContentByStripeProductId.get(p.id);
+        return !contentEntry?.data.workshopRegistration;
     })
     .map((p) => {
         const price = p.default_price as Stripe.Price;
-        const inventoryCount = parseInventoryCount(
-            p.metadata.inventory_count
-        );
+        const inventoryCount = parseInventoryCount(p.metadata.inventory_count);
         const contentEntry = storeContentByStripeProductId.get(p.id);
-        const cardImage = contentEntry?.data.heroImage?.src ?? p.images[0] ?? '';
+        const cardImage =
+            contentEntry?.data.heroImage?.src ?? p.images[0] ?? '';
         const cardDescription =
             contentEntry?.data.excerpt ?? p.description ?? '';
         const detailHref = contentEntry
@@ -64,21 +70,22 @@ const returnUrl = `${Astro.url.origin}/store/success`;
 ---
 
 <Base title="Store">
-    <section class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30">
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
         <h1 class="font-sans text-6xl sm:text-8xl mb-4">Store</h1>
         <a href="/store/cart" class="button">View Cart</a>
     </section>
 
-    {products.length === 0 ? (
-        <section class="px-4 py-16 flex items-center justify-center min-h-64">
-            <p class="font-mono text-lg text-textColor/50">No products available yet.</p>
-        </section>
-    ) : (
-        <StoreGrid
-            client:load
-            {products}
-            {publishableKey}
-            {returnUrl}
-        />
-    )}
+    {
+        products.length === 0 ? (
+            <section class="px-4 py-16 flex items-center justify-center min-h-64">
+                <p class="font-mono text-lg text-textColor/50">
+                    No products available yet.
+                </p>
+            </section>
+        ) : (
+            <StoreGrid client:load {products} {publishableKey} {returnUrl} />
+        )
+    }
 </Base>

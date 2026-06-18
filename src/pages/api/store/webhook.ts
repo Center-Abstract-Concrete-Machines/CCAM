@@ -255,7 +255,6 @@ async function sendOrderConfirmationEmail(paymentIntent: Stripe.PaymentIntent) {
         subject: `Order confirmation: ${lineTitle}`,
         text: `Thanks for your order from CCAM.\n\nProduct: ${lineTitle}\nQuantity: ${quantity}\nTotal: ${total}\n\nWe'll follow up with shipping details soon.`,
     });
-
     await updatePaymentIntentMetadata(paymentIntent.id, {
         confirmationEmailSent: 'true',
     });
@@ -265,7 +264,8 @@ async function sendCartConfirmationEmail(
     recipientEmail: string,
     currency: string,
     totalAmount: number,
-    lineItems: Array<{ name: string; quantity: number }>
+    lineItems: Array<{ name: string; quantity: number }>,
+    shipping: { method: string; address: string | null } | null
 ) {
     if (!canSendOrderEmail || !mailTransport) {
         console.log('Skipping order confirmation email: SMTP not configured');
@@ -281,11 +281,15 @@ async function sendCartConfirmationEmail(
         .map((line) => `- ${line.name} x${line.quantity}`)
         .join('\n');
 
+    const shippingSection = shipping
+        ? `\nFulfillment: ${shipping.method}${shipping.address ? `\nShip to: ${shipping.address}` : ''}\n`
+        : '';
+
     await mailTransport.sendMail({
         from: `${orderFromName} <${orderFromEmail}>`,
         to: recipientEmail,
-        subject: 'Order confirmation',
-        text: `Thanks for your order from CCAM.\n\nItems:\n${lines}\n\nTotal: ${total}\n\nWe'll follow up with shipping details soon.`,
+        subject: 'Order confirmation — CCAM',
+        text: `Thanks for your order from CCAM.\n\nItems:\n${lines}\n\nTotal: ${total}${shippingSection}\nWe'll be in touch soon.`,
     });
 }
 
@@ -349,9 +353,11 @@ export const POST: APIRoute = async ({ request }) => {
             const lineItems =
                 session.line_items?.data.map((lineItem) => {
                     const product = lineItem.price?.product as Stripe.Product | null;
-                    const sourcePriceId = lineItem.price?.metadata.sourcePriceId;
-                    const inventoryLevel = lineItem.price?.metadata.inventoryLevel;
+                    const sourcePriceId = product?.metadata.sourcePriceId ?? lineItem.price?.metadata.sourcePriceId;
+                    const inventoryLevel = product?.metadata.inventoryLevel ?? lineItem.price?.metadata.inventoryLevel;
                     const variantLabel =
+                        product?.metadata.variantLabel ??
+                        product?.metadata.variantSize ??
                         lineItem.price?.metadata.variantLabel ??
                         lineItem.price?.metadata.variantSize ??
                         '';
@@ -375,15 +381,45 @@ export const POST: APIRoute = async ({ request }) => {
 
             const recipientEmail = session.customer_details?.email;
             if (recipientEmail) {
-                await sendCartConfirmationEmail(
-                    recipientEmail,
-                    session.currency ?? 'usd',
-                    session.amount_total ?? 0,
-                    lineItems.map((line) => ({
-                        name: line.name,
-                        quantity: line.quantity,
-                    }))
-                );
+                const isRegistration = session.metadata?.isRegistration === 'true';
+
+                if (isRegistration) {
+                    const workshopName = session.metadata?.workshopName ?? 'Workshop';
+                    await mailTransport?.sendMail({
+                        from: `${orderFromName} <${orderFromEmail}>`,
+                        to: recipientEmail,
+                        subject: `Registration confirmed: ${workshopName}`,
+                        text: `You're registered!\n\n${workshopName}\n\nWe'll follow up with any additional details closer to the event. See you there!\n\n— CCAM`,
+                    });
+                } else {
+                    // Resolve shipping info for the email
+                    const shippingRate = session.shipping_cost?.shipping_rate;
+                    const shippingRateObj = shippingRate
+                        ? (typeof shippingRate === 'string'
+                            ? await stripe.shippingRates.retrieve(shippingRate)
+                            : shippingRate as Stripe.ShippingRate)
+                        : null;
+                    const shippingMethodName = shippingRateObj?.display_name ?? null;
+                    const isPickup = shippingMethodName?.toLowerCase().includes('pickup');
+
+                    const addr = session.shipping_details?.address;
+                    const shippingAddress = addr && !isPickup
+                        ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code, addr.country]
+                            .filter(Boolean).join(', ')
+                        : null;
+
+                    const shippingInfo = shippingMethodName
+                        ? { method: shippingMethodName, address: shippingAddress }
+                        : null;
+
+                    await sendCartConfirmationEmail(
+                        recipientEmail,
+                        session.currency ?? 'usd',
+                        session.amount_total ?? 0,
+                        lineItems.map((line) => ({ name: line.name, quantity: line.quantity })),
+                        shippingInfo
+                    );
+                }
             }
 
             await updatePaymentIntentMetadata(paymentIntentId, {

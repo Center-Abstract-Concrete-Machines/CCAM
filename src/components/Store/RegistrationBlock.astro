@@ -10,21 +10,25 @@ const { stripeProductId, endDate } = Astro.props;
 
 const isClosed = endDate && endDate !== 'ongoing' && new Date() > endDate;
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripeSecretKey = import.meta.env.STRIPE_SECRET_KEY;
+const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;
 
 let product: Stripe.Product | null = null;
 let price: Stripe.Price | null = null;
 
 try {
+    if (!stripe) throw new Error('Missing Stripe secret key');
+
     product = await stripe.products.retrieve(stripeProductId, {
         expand: ['default_price'],
     });
     price = product.default_price as Stripe.Price;
 } catch {
-    // Product not found — render nothing
+    // Product lookup can fail during build if server env vars are unavailable.
+    // Keep rendering the registration CTA so the runtime registration page still works.
 }
 
-if (!product?.active || !price) return;
+const hasStripeProductData = Boolean(product?.active && price);
 
 function parseInventoryCount(value: string | undefined) {
     if (!value) return null;
@@ -32,18 +36,27 @@ function parseInventoryCount(value: string | undefined) {
     return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
 }
 
-const inventoryCount = parseInventoryCount(product.metadata.inventory_count);
-const isFree = !price.unit_amount || price.unit_amount === 0;
-const isFullyBooked = typeof inventoryCount === 'number' && inventoryCount <= 0;
+const inventoryCount = hasStripeProductData
+    ? parseInventoryCount(product?.metadata.inventory_count)
+    : null;
+const isFree = hasStripeProductData
+    ? !price?.unit_amount || price.unit_amount === 0
+    : false;
+const isFullyBooked =
+    hasStripeProductData &&
+    typeof inventoryCount === 'number' &&
+    inventoryCount <= 0;
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: (price.currency ?? 'usd').toUpperCase(),
 });
-const priceDisplay = isFree
-    ? 'Free'
-    : formatter.format((price.unit_amount ?? 0) / 100);
-const priceId = price.id;
+const priceDisplay = hasStripeProductData
+    ? isFree
+        ? 'Free'
+        : formatter.format(((price?.unit_amount ?? 0) as number) / 100)
+    : null;
+const priceId = hasStripeProductData ? price?.id : null;
 ---
 
 <div class="my-8 border border-dashed border-borderColor/30 p-6 space-y-4">
@@ -54,15 +67,17 @@ const priceId = price.id;
             >
                 Registration
             </p>
-            <p class="font-sans text-2xl">{priceDisplay}</p>
+            {priceDisplay && <p class="font-sans text-2xl">{priceDisplay}</p>}
             {
-                typeof inventoryCount === 'number' && !isClosed && (
-                    <p class="font-mono text-xs text-textColor/50">
-                        {isFullyBooked
-                            ? 'Fully booked'
-                            : `${inventoryCount} spot${inventoryCount === 1 ? '' : 's'} remaining`}
-                    </p>
-                )
+                hasStripeProductData &&
+                    typeof inventoryCount === 'number' &&
+                    !isClosed && (
+                        <p class="font-mono text-xs text-textColor/50">
+                            {isFullyBooked
+                                ? 'Fully booked'
+                                : `${inventoryCount} spot${inventoryCount === 1 ? '' : 's'} remaining`}
+                        </p>
+                    )
             }
         </div>
 
@@ -75,6 +90,10 @@ const priceId = price.id;
                 <button class="button opacity-50 cursor-not-allowed" disabled>
                     Fully Booked
                 </button>
+            ) : !hasStripeProductData ? (
+                <a href={`/register/${stripeProductId}`} class="button">
+                    Register
+                </a>
             ) : (
                 <form
                     data-price-id={priceId}

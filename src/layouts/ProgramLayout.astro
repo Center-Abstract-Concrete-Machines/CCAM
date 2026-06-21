@@ -37,6 +37,15 @@ const [assProject] = await getCollection(
 );
 
 const assResources = await getCollection('resources', ({ data }) => data.tags.includes(displayResources))
+
+const [registrationProduct] = await getCollection(
+    'storeProducts',
+    ({ data }) =>
+        data.workshopRegistration === true &&
+        data.programId === slug
+);
+const registrationProductId =
+    stripeRegistrationId ?? registrationProduct?.data.stripeProductId;
 ---
 
 <Base title={title}>
@@ -80,7 +89,14 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                 </div>
                 {assProjectId && <AssProjectLink assProject={assProject} />}
             </div>
-            {stripeRegistrationId && <RegistrationBlock stripeProductId={stripeRegistrationId} endDate={endDate} />}
+            {
+                registrationProductId && (
+                    <RegistrationBlock
+                        stripeProductId={registrationProductId}
+                        endDate={endDate}
+                    />
+                )
+            }
             <div class="mt-8">
                 <slot />
             </div>

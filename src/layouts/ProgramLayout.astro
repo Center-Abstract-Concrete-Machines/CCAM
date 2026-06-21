@@ -2,6 +2,7 @@
 import Base from '@layouts/Base.astro';
 import GalleryPreview from '@components/GalleryPreview.astro'
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
+import RegistrationBlock from '@components/Store/RegistrationBlock.astro';
 import TagsList from '@components/TagsList.astro';
 import Tag from '@components/Programs/Tag.astro';
 import { Picture } from 'astro:assets';
@@ -25,7 +26,8 @@ const {
     type,
     people,
     assProjectId,
-    displayResources
+    displayResources,
+    stripeRegistrationId,
 } = Astro.props.frontmatter;
 const { slug } = Astro.props;
 
@@ -35,6 +37,15 @@ const [assProject] = await getCollection(
 );
 
 const assResources = await getCollection('resources', ({ data }) => data.tags.includes(displayResources))
+
+const [registrationProduct] = await getCollection(
+    'storeProducts',
+    ({ data }) =>
+        data.workshopRegistration === true &&
+        data.programId === slug
+);
+const registrationProductId =
+    stripeRegistrationId ?? registrationProduct?.data.stripeProductId;
 ---
 
 <Base title={title}>
@@ -78,6 +89,14 @@ const assResources = await getCollection('resources', ({ data }) => data.tags.in
                 </div>
                 {assProjectId && <AssProjectLink assProject={assProject} />}
             </div>
+            {
+                registrationProductId && (
+                    <RegistrationBlock
+                        stripeProductId={registrationProductId}
+                        endDate={endDate}
+                    />
+                )
+            }
             <div class="mt-8">
                 <slot />
             </div>

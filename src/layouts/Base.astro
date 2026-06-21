@@ -8,6 +8,8 @@ import ThemeProvider from '@components/ThemeProvider.astro';
 import ContactDialog from '@components/ContactDialog.astro';
 
 const { title } = Astro.props;
+const analyticsScriptSrc = 'https://plausible.parkerdavis.dev/js/script.js';
+const enableAnalytics = import.meta.env.PROD;
 
 let tabTitle;
 if (title) {
@@ -59,11 +61,15 @@ if (title) {
         <title>
             {tabTitle}
         </title>
-        <script
-            defer
-            src="https://plausible.parkerdavis.dev/js/script.js"
-            onload="this.setAttribute('data-domain',window.location.host)"
-        ></script>
+        {
+            enableAnalytics && (
+                <script
+                    defer
+                    src={analyticsScriptSrc}
+                    onload="this.setAttribute('data-domain',window.location.host)"
+                ></script>
+            )
+        }
 
         <ClientRouter fallback="swap" />
     </head>

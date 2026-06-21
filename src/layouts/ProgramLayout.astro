@@ -30,6 +30,12 @@ const {
     stripeRegistrationId,
 } = Astro.props.frontmatter;
 const { slug } = Astro.props;
+const showRegistrationDebug = Astro.url.searchParams.has('regDebug');
+const normalizedSlug = String(slug ?? '').trim().replace(/^\/+|\/+$/g, '');
+const normalizedStripeRegistrationId =
+    typeof stripeRegistrationId === 'string'
+        ? stripeRegistrationId.trim()
+        : undefined;
 
 const [assProject] = await getCollection(
     'projects',
@@ -42,10 +48,22 @@ const [registrationProduct] = await getCollection(
     'storeProducts',
     ({ data }) =>
         data.workshopRegistration === true &&
-        data.programId === slug
+        typeof data.programId === 'string' &&
+        data.programId.trim().replace(/^\/+|\/+$/g, '') === normalizedSlug
 );
 const registrationProductId =
-    stripeRegistrationId ?? registrationProduct?.data.stripeProductId;
+    normalizedStripeRegistrationId ?? registrationProduct?.data.stripeProductId;
+
+if (showRegistrationDebug) {
+    console.info('[registration-debug]', {
+        slug: normalizedSlug,
+        stripeRegistrationId: normalizedStripeRegistrationId ?? null,
+        fallbackStoreProductId: registrationProduct?.id ?? null,
+        fallbackStripeProductId:
+            registrationProduct?.data.stripeProductId ?? null,
+        resolvedRegistrationProductId: registrationProductId ?? null,
+    });
+}
 ---
 
 <Base title={title}>
@@ -83,6 +101,24 @@ const registrationProductId =
                     time={time}
                     location={location}
                 />
+                {
+                    showRegistrationDebug && (
+                        <pre class="my-4 whitespace-pre-wrap border border-dashed border-borderColor/30 p-3 text-xs font-mono bg-backgroundColor/40">
+{JSON.stringify(
+    {
+        slug: normalizedSlug,
+        stripeRegistrationId: normalizedStripeRegistrationId ?? null,
+        fallbackStoreProductId: registrationProduct?.id ?? null,
+        fallbackStripeProductId:
+            registrationProduct?.data.stripeProductId ?? null,
+        resolvedRegistrationProductId: registrationProductId ?? null,
+    },
+    null,
+    2
+)}
+                        </pre>
+                    )
+                }
                 <div class="flex gap-2 my-4 grow-0 flex-wrap text-sm">
                     <DateStatus date={endDate} />
                     <Tag tag={type} />
@@ -139,7 +175,10 @@ const registrationProductId =
     import lightGallery from 'lightgallery';
     import 'lightgallery/css/lightgallery.css';
     document.addEventListener('gallery-loaded', () => {
-        lightGallery(document.getElementById('lightgallery'), {
+        const galleryEl = document.getElementById('lightgallery') as HTMLElement | null;
+        if (!galleryEl) return;
+
+        lightGallery(galleryEl as HTMLElement, {
             licenseKey: '0000-0000-000-0000',
             speed: 200,
             download: false,

@@ -6,6 +6,8 @@ import ThemeToggle from '@components/ThemeToggle.astro';
 
 const { title } = Astro.props;
 const tabTitle = title ? `${title} — Estuary` : 'Estuary';
+const analyticsScriptSrc = 'https://plausible.parkerdavis.dev/js/script.js';
+const enableAnalytics = import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -18,11 +20,15 @@ const tabTitle = title ? `${title} — Estuary` : 'Estuary';
         <meta name="generator" content={Astro.generator} />
         <meta name="theme-color" content="" />
         <title>{tabTitle}</title>
-        <script
-            defer
-            src="https://plausible.parkerdavis.dev/js/script.js"
-            onload="this.setAttribute('data-domain',window.location.host)"
-        ></script>
+        {
+            enableAnalytics && (
+                <script
+                    defer
+                    src={analyticsScriptSrc}
+                    onload="this.setAttribute('data-domain',window.location.host)"
+                ></script>
+            )
+        }
         <ClientRouter fallback="swap" />
     </head>
     <body>

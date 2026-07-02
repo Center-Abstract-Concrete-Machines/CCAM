@@ -10,7 +10,7 @@
         "preview": "astro preview",
         "astro": "astro",
         "test": "vitest",
-        "pretty": "prettier --write \"./**/*.{js,jsx,md,mdx}\"",
+        "pretty": "prettier --write \"./**/*.{js,jsx,md,mdx,svelte}\"",
         "gallery": "node src/scripts/processGalleryImages.js",
         "stock:variants": "node scripts/admin-variant-stock.mjs",
         "registrations": "node scripts/export-registrations.mjs"
@@ -44,6 +44,7 @@
         "js-yaml": "^5.2.0",
         "mime-types": "^3.0.2",
         "prettier": "^3.9.0",
+        "prettier-plugin-svelte": "^4.1.1",
         "sharp": "^0.35.2",
         "vitest": "^4.1.9"
     }

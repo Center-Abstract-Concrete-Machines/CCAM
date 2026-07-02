@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 /* Class-based dark mode (mirrors v3 darkMode: 'class') */
@@ -19,9 +19,15 @@
     --color-White: #e6e6e6;
 
     /* Custom fonts */
-    --font-sans: 'denim', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-moonbase: 'moonbase', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-mono: 'matter-reg', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-sans:
+        'denim', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-moonbase:
+        'moonbase', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono:
+        'matter-reg', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        'Liberation Mono', 'Courier New', monospace;
 }
 
 /* Dynamic colors that reference CSS custom properties */
@@ -306,6 +312,58 @@ img {
     .card-grid.gallery-preview > *:nth-child(3),
     .card-grid.gallery-preview > *:nth-child(4) {
         display: unset;
+    }
+}
+
+/* Responsive card grid: 1 col → 2 col (sm) → 3 col (lg) */
+@media (min-width: 640px) {
+    .card-grid.three-two-one {
+        grid-template-columns: 1fr 1fr;
+    }
+    /* left border on right column */
+    .card-grid.three-two-one > *:nth-child(2n)::before {
+        content: '';
+        position: absolute;
+        left: -1rem;
+        height: 100%;
+        border-left: 1px hsl(var(--borders) / 30%) dashed;
+    }
+    /* top border from 3rd item onwards (2nd row) */
+    .card-grid.three-two-one > *:nth-child(n + 3)::after {
+        content: '';
+        position: absolute;
+        top: -1rem;
+        width: 100%;
+        border-top: 1px hsl(var(--borders) / 30%) dashed;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-grid.three-two-one {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    /* Reset 2-col left borders, then re-apply for columns 2 and 3 only */
+    .card-grid.three-two-one > *:nth-child(2n)::before {
+        all: unset;
+    }
+    .card-grid.three-two-one > *:nth-child(3n + 2)::before,
+    .card-grid.three-two-one > *:nth-child(3n + 3)::before {
+        content: '';
+        position: absolute;
+        left: -1rem;
+        height: 100%;
+        border-left: 1px hsl(var(--borders) / 30%) dashed;
+    }
+    /* Reset 2-col top borders, then re-apply starting at 4th item (2nd row) */
+    .card-grid.three-two-one > *:nth-child(n + 3)::after {
+        all: unset;
+    }
+    .card-grid.three-two-one > *:nth-child(n + 4)::after {
+        content: '';
+        position: absolute;
+        top: -1rem;
+        width: 100%;
+        border-top: 1px hsl(var(--borders) / 30%) dashed;
     }
 }
 

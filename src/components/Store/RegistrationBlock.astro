@@ -8,7 +8,17 @@ interface Props {
 
 const { stripeProductId, endDate } = Astro.props;
 
-const isClosed = endDate && endDate !== 'ongoing' && new Date() > endDate;
+const isClosed = endDate && endDate !== 'ongoing' && (() => {
+    // Convert current time to Chicago timezone
+    const chicagoTime = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' });
+    const now = new Date(chicagoTime);
+    
+    // Set registration deadline to end of day (11:59:59 PM) on the endDate
+    const registrationDeadline = new Date(endDate);
+    registrationDeadline.setHours(23, 59, 59, 999);
+    
+    return now > registrationDeadline;
+})();
 
 const stripeSecretKey = import.meta.env.STRIPE_SECRET_KEY;
 const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;

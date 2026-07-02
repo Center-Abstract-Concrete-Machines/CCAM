@@ -27,17 +27,19 @@
     } = $props();
 
     const CATEGORY_LABELS: Record<string, string> = {
-        'synth': 'Synths',
+        synth: 'Synths',
         'printed-matter': 'Printed Matter',
-        'apparel': 'Apparel',
-        'accessory': 'Accessories',
-        'other': 'Other',
+        apparel: 'Apparel',
+        accessory: 'Accessories',
+        other: 'Other',
     };
 
     const categories = $derived([
         'all',
         ...new Set(
-            products.map((p) => p.category).filter((c): c is string => Boolean(c))
+            products
+                .map((p) => p.category)
+                .filter((c): c is string => Boolean(c))
         ),
     ]);
 
@@ -85,12 +87,15 @@
 
 <!-- Category nav -->
 {#if categories.length > 1}
-    <nav class="px-4 py-4 flex flex-wrap gap-2 border-b border-dashed border-borderColor/30">
+    <nav
+        class="px-4 py-4 flex flex-wrap gap-2 border-b border-dashed border-borderColor/30"
+    >
         {#each categories as cat}
             <button
                 onclick={() => setCategory(cat)}
-                class="font-mono text-xs uppercase tracking-wider px-3 py-1 border border-dashed transition-colors {activeCategory === cat
-                    ? 'border-textColor bg-textColor text-bgColor'
+                class="font-mono text-xs uppercase tracking-wider px-3 py-1 border border-dashed transition-colors {activeCategory ===
+                cat
+                    ? 'border-textColor bg-textColor text-backgroundColor'
                     : 'border-borderColor/50 text-textColor/60 hover:border-textColor hover:text-textColor'}"
             >
                 {formatCategory(cat)}
@@ -101,13 +106,21 @@
 
 <!-- Tag filter -->
 {#if allTags.length > 0}
-    <div class="px-4 py-3 flex flex-wrap gap-2 items-center border-b border-dashed border-borderColor/30">
-        <span class="font-mono text-xs text-textColor/40 uppercase tracking-wider mr-1">Filter:</span>
+    <div
+        class="px-4 py-3 flex flex-wrap gap-2 items-center border-b border-dashed border-borderColor/30"
+    >
+        <span
+            class="font-mono text-xs text-textColor/40 uppercase tracking-wider mr-1"
+        >
+            Filter:
+        </span>
         {#each allTags as tag}
             <button
                 onclick={() => toggleTag(tag)}
-                class="font-mono text-xs px-2 py-0.5 border border-dashed transition-colors {selectedTags.includes(tag)
-                    ? 'border-textColor bg-textColor text-bgColor'
+                class="font-mono text-xs px-2 py-0.5 border border-dashed transition-colors {selectedTags.includes(
+                    tag
+                )
+                    ? 'border-textColor bg-textColor text-backgroundColor'
                     : 'border-borderColor/40 text-textColor/50 hover:border-textColor/70 hover:text-textColor/80'}"
             >
                 #{tag}
@@ -127,13 +140,17 @@
 <!-- Product grid -->
 {#if filteredProducts.length === 0}
     <section class="px-4 py-16 flex items-center justify-center min-h-64">
-        <p class="font-mono text-lg text-textColor/50">No products match the current filter.</p>
+        <p class="font-mono text-lg text-textColor/50">
+            No products match the current filter.
+        </p>
     </section>
 {:else}
-    <section class="px-4 py-12">
-        <ul class="grid gap-px border border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-3">
+    <section>
+        <ul
+            class="grid gap-px border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-3 card-grid three-two-one p-4"
+        >
             {#each filteredProducts as product}
-                <li class="flex flex-col border border-dashed border-borderColor/30 p-6 gap-4">
+                <li class="flex flex-col border-dashed border-borderColor/30">
                     {#if product.cardImage}
                         <a
                             href={product.detailHref}
@@ -152,10 +169,15 @@
                             <a href={product.detailHref}>{product.name}</a>
                         </h2>
                         {#if product.description}
-                            <p class="font-mono text-sm text-textColor/70 grow">{product.description}</p>
+                            <p class="font-mono text-sm text-textColor/70 grow">
+                                {product.description}
+                            </p>
                         {/if}
                         <p class="font-mono text-lg">
-                            {formatCurrency(product.unitAmount, product.currency)}
+                            {formatCurrency(
+                                product.unitAmount,
+                                product.currency
+                            )}
                         </p>
                         {#if typeof product.inventoryCount === 'number'}
                             <p class="font-mono text-xs text-textColor/60">
@@ -179,8 +201,12 @@
                             </ul>
                         {/if}
                     </div>
-                    <div class="flex gap-2 items-center flex-wrap">
-                        <a href={product.detailHref} class="button">View Details</a>
+                    <div class="flex gap-2 flex-wrap flex-row">
+                        <a href={product.detailHref} class="block">
+                            <button class="button w-full">
+                                View Details
+                            </button>
+                        </a>
                         <AddToCartButton
                             product={{
                                 productId: product.id,

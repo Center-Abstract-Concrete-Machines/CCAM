@@ -147,12 +147,10 @@
 {:else}
     <section>
         <ul
-            class="grid gap-px border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-3 card-grid three-two-one"
+            class="grid gap-px border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-3 card-grid three-two-one p-4"
         >
             {#each filteredProducts as product}
-                <li
-                    class="flex flex-col border-dashed border-borderColor/30 p-6 gap-4"
-                >
+                <li class="flex flex-col border-dashed border-borderColor/30">
                     {#if product.cardImage}
                         <a
                             href={product.detailHref}

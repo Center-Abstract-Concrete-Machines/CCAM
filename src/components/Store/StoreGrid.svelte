@@ -147,7 +147,7 @@
 {:else}
     <section>
         <ul
-            class="grid gap-px border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-3 card-grid triple"
+            class="grid gap-px border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-3 card-grid three-two-one"
         >
             {#each filteredProducts as product}
                 <li

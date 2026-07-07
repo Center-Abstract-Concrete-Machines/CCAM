@@ -7,8 +7,7 @@ import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import OrganizerCard from '@components/About/OrganizerCard.astro';
 import ContactInfo from '@components/ContactInfo.astro';
 
-import Screening from 'src/images/screening.jpg';
-import Workshop from 'src/images/workshop.jpg';
+import Workshop from '/src/content/programs/images/infopoiesis_workshop.png';
 
 import {
     organizerList,
@@ -32,8 +31,10 @@ const collaborators = await getCollection('people', (person) =>
 const website = await getCollection('people', (person) =>
     websiteList.includes(person.id)
 );
-const sortedWebsite = website.sort((a, b) => {
+const sortedWebsite = website.sort((a, b): number => {
     if (a.id === 'parker-davis') return -1;
+    if (b.id === 'parker-davis') return 1;
+    return a.id.localeCompare(b.id);
 });
 ---
 
@@ -172,7 +173,7 @@ const sortedWebsite = website.sort((a, b) => {
                 class="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-4 justify-items-center w-fit mx-auto"
             >
                 {
-                    website.map((organizer) => (
+                    sortedWebsite.map((organizer) => (
                         <OrganizerCard
                             data={organizer.data}
                             slug={organizer.id}

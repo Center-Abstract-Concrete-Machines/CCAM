@@ -4,19 +4,15 @@ import { Image, Picture } from 'astro:assets';
 
 import Base from '@layouts/Base.astro';
 import ProgramCard from '@components/Programs/ProgramCard.astro';
-import ResourcesDisplay from '@components/Resources/ResourcesDisplay.astro';
 import ResourceCard from '@components/ResourceCard.astro';
 import GridSpacer from '@components/GridSpacer.astro';
 import HorizontalSpacer from '@components/HorizontalSpacer.astro';
 import Brackets from '@components/Brackets.astro';
 import IndexGlitchTitle from '@components/IndexGlitchTitle.astro';
-import { getAllGalleryImages, getRandomImage } from '@utils/randomGalleryImage.js';
-
-import workshop from 'src/images/workshop.jpg';
-import squareSpace from 'src/images/space-square.jpg';
-import synthdiy from 'src/content/programs/images/electronics-faire/4_26_24_Temple_Electronics_Fair_125_A.jpg';
-import moon from 'src/content/galleries/wdky/RubyQue_Screen_4.jpg';
-import synth from 'src/images/synth-2.jpg';
+import {
+    getAllGalleryImages,
+    getRandomImage,
+} from '@utils/randomGalleryImage.js';
 
 import {
     filterDraftsAndPubDate,
@@ -26,8 +22,16 @@ import {
 } from '@utils/programFilters';
 
 const allPrograms = await getCollection('programs');
-const allGalleryImages = await getAllGalleryImages();
+const allGalleryImages = await getAllGalleryImages({
+    limit: 24,
+    width: 960,
+    quality: 60,
+});
 const initialRandomImage = getRandomImage(allGalleryImages);
+const initialSecondaryImage =
+    allGalleryImages.find((image) => image.src !== initialRandomImage?.src) ||
+    initialRandomImage;
+const fallbackSplashImage = allGalleryImages[0] ?? null;
 
 // Get random resources for display
 const allResources = await getCollection('resources');
@@ -70,18 +74,29 @@ if (featuredPrograms.length < 2) {
             <IndexGlitchTitle />
             <GridSpacer class="hidden sm:block" />
             <div class="w-full hidden sm:block">
-                <div id="dynamic-image-container" class="max-w-full mx-auto aspect-square overflow-hidden">
-                    <a 
-                        id="dynamic-image-link" 
-                        href={initialRandomImage?.link || '#'} 
+                <div
+                    id="dynamic-image-container"
+                    class="max-w-full mx-auto aspect-square overflow-hidden"
+                >
+                    <a
+                        id="dynamic-image-link"
+                        href={initialRandomImage?.link || '#'}
                         class="block w-full h-full"
-                        title={initialRandomImage?.link ? `View ${initialRandomImage.type}: ${initialRandomImage.title}` : (initialRandomImage?.alt || 'Gallery image')}
-                        style={initialRandomImage?.link ? 'cursor: pointer' : 'cursor: default'}
+                        title={initialRandomImage?.link
+                            ? `View ${initialRandomImage.type}: ${initialRandomImage.title}`
+                            : initialRandomImage?.alt || 'Gallery image'}
+                        style={initialRandomImage?.link
+                            ? 'cursor: pointer'
+                            : 'cursor: default'}
                     >
                         <img
                             id="dynamic-image"
-                            src={initialRandomImage?.src || synth.src}
-                            alt={initialRandomImage?.alt || 'Studio Space'}
+                            src={initialRandomImage?.src ||
+                                fallbackSplashImage?.src ||
+                                ''}
+                            alt={initialRandomImage?.alt ||
+                                fallbackSplashImage?.alt ||
+                                'Splash image'}
                             class="w-full h-full object-cover"
                         />
                     </a>
@@ -98,8 +113,7 @@ if (featuredPrograms.length < 2) {
             <Brackets>
                 <p class="max-w-[60%] mx-auto text-lg sm:text-xl text-balance">
                     Center for Concrete and Abstract Machines is an artist-run
-                    platform at the nexus of art, technology, and contemporary
-                    thought.
+                    project at the nexus of art, technology, and philosophy.
                 </p>
             </Brackets>
             <GridSpacer />
@@ -177,17 +191,26 @@ if (featuredPrograms.length < 2) {
                 <div
                     class="mx-auto order-1 lg:order-2 self-center justify-self-center"
                 >
-                    <div id="secondary-image-container" class="aspect-video overflow-hidden">
-                        <a 
-                            id="secondary-image-link" 
-                            href={initialRandomImage?.link || '#'} 
+                    <div
+                        id="secondary-image-container"
+                        class="aspect-video overflow-hidden"
+                    >
+                        <a
+                            id="secondary-image-link"
+                            href={initialSecondaryImage?.link || '#'}
                             class="block w-full h-full"
-                            title={initialRandomImage?.link ? `View ${initialRandomImage.type}: ${initialRandomImage.title}` : (initialRandomImage?.alt || 'Gallery image')}
+                            title={initialSecondaryImage?.link
+                                ? `View ${initialSecondaryImage.type}: ${initialSecondaryImage.title}`
+                                : initialSecondaryImage?.alt || 'Gallery image'}
                         >
                             <img
                                 id="secondary-image"
-                                src={initialRandomImage?.src || moon.src}
-                                alt={initialRandomImage?.alt || 'Gallery image'}
+                                src={initialSecondaryImage?.src ||
+                                    fallbackSplashImage?.src ||
+                                    ''}
+                                alt={initialSecondaryImage?.alt ||
+                                    fallbackSplashImage?.alt ||
+                                    'Splash image'}
                                 class="w-full h-full object-cover object-bottom"
                             />
                         </a>
@@ -207,34 +230,56 @@ if (featuredPrograms.length < 2) {
             </a>
         </div>
         <div class="pt-4">
-            {randomResources.map((resource) => (
-                <ResourceCard
-                    metadata={resource.data}
-                    slug={resource.id}
-                    metaSlug="resources"
-                />
-            ))}
+            {
+                randomResources.map((resource) => (
+                    <ResourceCard
+                        metadata={resource.data}
+                        slug={resource.id}
+                        metaSlug="resources"
+                    />
+                ))
+            }
         </div>
     </section>
 </Base>
 
-<script define:vars={{ allGalleryImages, initialRandomImage }}>
+<script define:vars={{ allGalleryImages, initialRandomImage, initialSecondaryImage }}>
     function getRandomImage(images) {
         if (!images || images.length === 0) return null;
         return images[Math.floor(Math.random() * images.length)];
     }
-    
+
+    function getRandomImageDifferentFrom(images, excludedSrc) {
+        if (!images || images.length === 0) return null;
+
+        if (!excludedSrc) return getRandomImage(images);
+
+        const filteredImages = images.filter((image) => image.src !== excludedSrc);
+
+        if (filteredImages.length === 0) {
+            return getRandomImage(images);
+        }
+
+        return getRandomImage(filteredImages);
+    }
+
+    let currentDynamicImageSrc = initialRandomImage?.src || null;
+    let currentSecondaryImageSrc = initialSecondaryImage?.src || null;
+
     function changeToRandomImage() {
         if (!allGalleryImages || allGalleryImages.length === 0) return;
-        
-        const randomImage = getRandomImage(allGalleryImages);
+
+        const randomImage = getRandomImageDifferentFrom(
+            allGalleryImages,
+            currentSecondaryImageSrc
+        );
         const dynamicImage = document.getElementById('dynamic-image');
         const dynamicLink = document.getElementById('dynamic-image-link');
-        
+
         if (randomImage && dynamicImage && dynamicLink) {
             dynamicImage.src = randomImage.src;
             dynamicImage.alt = randomImage.alt;
-            
+
             // Update link - if no associated link, disable clicking
             if (randomImage.link) {
                 dynamicLink.href = randomImage.link;
@@ -251,20 +296,25 @@ if (featuredPrograms.length < 2) {
                     return false;
                 };
             }
+
+            currentDynamicImageSrc = randomImage.src;
         }
     }
-    
+
     function changeSecondaryImage() {
         if (!allGalleryImages || allGalleryImages.length === 0) return;
-        
-        const randomImage = getRandomImage(allGalleryImages);
+
+        const randomImage = getRandomImageDifferentFrom(
+            allGalleryImages,
+            currentDynamicImageSrc
+        );
         const secondaryImage = document.getElementById('secondary-image');
         const secondaryLink = document.getElementById('secondary-image-link');
-        
+
         if (randomImage && secondaryImage && secondaryLink) {
             secondaryImage.src = randomImage.src;
             secondaryImage.alt = randomImage.alt;
-            
+
             // Update link
             if (randomImage.link) {
                 secondaryLink.href = randomImage.link;
@@ -280,15 +330,17 @@ if (featuredPrograms.length < 2) {
                     return false;
                 };
             }
+
+            currentSecondaryImageSrc = randomImage.src;
         }
     }
-    
+
     let secondaryImageTimer;
-    
+
     // Listen for morpher changes
     document.addEventListener('astro:page-load', () => {
         document.addEventListener('morpherChange', changeToRandomImage);
-        
+
         // Set up initial click handler for the splash image
         const dynamicLink = document.getElementById('dynamic-image-link');
         if (dynamicLink) {
@@ -301,11 +353,11 @@ if (featuredPrograms.length < 2) {
                 };
             }
         }
-        
+
         // Set up initial click handler for the secondary image
         const secondaryLink = document.getElementById('secondary-image-link');
         if (secondaryLink) {
-            if (initialRandomImage?.link) {
+            if (initialSecondaryImage?.link) {
                 secondaryLink.onclick = null;
             } else {
                 secondaryLink.onclick = (e) => {
@@ -314,11 +366,11 @@ if (featuredPrograms.length < 2) {
                 };
             }
         }
-        
-        // Start timer for secondary image changes (every 1.5 seconds)
-        secondaryImageTimer = setInterval(changeSecondaryImage, 1500);
+
+        // Rotate less frequently to prevent unnecessary network churn.
+        secondaryImageTimer = setInterval(changeSecondaryImage, 12000);
     });
-    
+
     // Clean up event listener and timer
     document.addEventListener('astro:before-preparation', () => {
         document.removeEventListener('morpherChange', changeToRandomImage);

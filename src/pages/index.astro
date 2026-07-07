@@ -341,8 +341,6 @@ if (featuredPrograms.length < 2) {
 
     // Listen for morpher changes
     document.addEventListener('astro:page-load', () => {
-        document.addEventListener('morpherChange', changeToRandomImage);
-
         // Set up initial click handler for the splash image
         const dynamicLink = document.getElementById('dynamic-image-link');
         if (dynamicLink) {
@@ -375,7 +373,6 @@ if (featuredPrograms.length < 2) {
 
     // Clean up event listener and timer
     document.addEventListener('astro:before-preparation', () => {
-        document.removeEventListener('morpherChange', changeToRandomImage);
         if (dynamicImageTimer) {
             clearInterval(dynamicImageTimer);
         }

@@ -335,6 +335,8 @@ if (featuredPrograms.length < 2) {
         }
     }
 
+    const ROTATION_INTERVAL_MS = 5000;
+    let dynamicImageTimer;
     let secondaryImageTimer;
 
     // Listen for morpher changes
@@ -367,13 +369,16 @@ if (featuredPrograms.length < 2) {
             }
         }
 
-        // Rotate less frequently to prevent unnecessary network churn.
-        secondaryImageTimer = setInterval(changeSecondaryImage, 12000);
+        dynamicImageTimer = setInterval(changeToRandomImage, ROTATION_INTERVAL_MS);
+        secondaryImageTimer = setInterval(changeSecondaryImage, ROTATION_INTERVAL_MS);
     });
 
     // Clean up event listener and timer
     document.addEventListener('astro:before-preparation', () => {
         document.removeEventListener('morpherChange', changeToRandomImage);
+        if (dynamicImageTimer) {
+            clearInterval(dynamicImageTimer);
+        }
         if (secondaryImageTimer) {
             clearInterval(secondaryImageTimer);
         }

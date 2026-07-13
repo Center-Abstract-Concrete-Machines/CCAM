@@ -11,8 +11,17 @@ const smtpPort = Number.parseInt(import.meta.env.SMTP_PORT ?? '587', 10);
 const smtpUser = import.meta.env.SMTP_USER;
 const smtpPass = import.meta.env.SMTP_PASS;
 const smtpSecure = import.meta.env.SMTP_SECURE === 'true';
-const orderFromEmail = import.meta.env.ORDER_FROM_EMAIL;
+const orderFromEmail =
+    import.meta.env.ORDER_FROM_EMAIL?.trim() || 'store@ccam.world';
 const orderFromName = import.meta.env.ORDER_FROM_NAME ?? 'CCAM Store';
+const internalOrderEmailRaw =
+    import.meta.env.ORDER_NOTIFICATION_EMAILS ??
+    import.meta.env.ORDER_NOTIFICATION_EMAIL ??
+    orderFromEmail;
+const internalOrderEmails = internalOrderEmailRaw
+    .split(',')
+    .map((email) => email.trim())
+    .filter(Boolean);
 
 const canSendOrderEmail =
     Boolean(smtpHost) &&
@@ -293,6 +302,104 @@ async function sendCartConfirmationEmail(
     });
 }
 
+async function sendInternalOrderNotificationEmail(params: {
+    subject: string;
+    text: string;
+}) {
+    if (!canSendOrderEmail || !mailTransport) {
+        console.log('Skipping internal order notification email: SMTP not configured');
+        return;
+    }
+
+    if (internalOrderEmails.length === 0) {
+        console.log('Skipping internal order notification email: no recipient configured');
+        return;
+    }
+
+    await mailTransport.sendMail({
+        from: `${orderFromName} <${orderFromEmail}>`,
+        to: internalOrderEmails.join(', '),
+        subject: params.subject,
+        text: params.text,
+    });
+}
+
+async function sendInternalCartOrderNotificationEmail(params: {
+    session: Stripe.Checkout.Session;
+    lineItems: Array<{ name: string; quantity: number }>;
+    shipping: { method: string; address: string | null } | null;
+}) {
+    const total = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: (params.session.currency ?? 'usd').toUpperCase(),
+    }).format((params.session.amount_total ?? 0) / 100);
+
+    const lines = params.lineItems
+        .map((line) => `- ${line.name} x${line.quantity}`)
+        .join('\n');
+
+    const shippingSection = params.shipping
+        ? `\nFulfillment: ${params.shipping.method}${params.shipping.address ? `\nShip to: ${params.shipping.address}` : ''}\n`
+        : '\nFulfillment: not provided\n';
+
+    const customerEmail = params.session.customer_details?.email ?? 'unknown';
+    const sessionId = params.session.id;
+    const paymentIntentId =
+        typeof params.session.payment_intent === 'string'
+            ? params.session.payment_intent
+            : params.session.payment_intent?.id ?? 'unknown';
+
+    await sendInternalOrderNotificationEmail({
+        subject: `New store order: ${sessionId}`,
+        text: `A new paid store order was received.\n\nSession: ${sessionId}\nPayment Intent: ${paymentIntentId}\nCustomer: ${customerEmail}\nTotal: ${total}${shippingSection}\nItems:\n${lines}`,
+    });
+}
+
+async function sendInternalSingleOrderNotificationEmail(params: {
+    paymentIntent: Stripe.PaymentIntent;
+}) {
+    const { paymentIntent } = params;
+    const productName = paymentIntent.metadata.productName ?? 'Order';
+    const variantLabel =
+        paymentIntent.metadata.variantLabel ?? paymentIntent.metadata.variantSize;
+    const lineTitle = variantLabel
+        ? `${productName} (${variantLabel})`
+        : productName;
+    const quantity = paymentIntent.metadata.quantity ?? '1';
+    const total = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: paymentIntent.currency.toUpperCase(),
+    }).format(paymentIntent.amount / 100);
+    const customerEmail = await resolveOrderRecipientEmail(paymentIntent);
+
+    await sendInternalOrderNotificationEmail({
+        subject: `New direct order: ${paymentIntent.id}`,
+        text: `A new paid direct order was received.\n\nPayment Intent: ${paymentIntent.id}\nCustomer: ${customerEmail ?? 'unknown'}\nProduct: ${lineTitle}\nQuantity: ${quantity}\nTotal: ${total}`,
+    });
+}
+
+async function resolveCheckoutShippingInfo(session: Stripe.Checkout.Session) {
+    const shippingRate = session.shipping_cost?.shipping_rate;
+    const shippingRateObj = shippingRate
+        ? (typeof shippingRate === 'string'
+            ? await stripe.shippingRates.retrieve(shippingRate)
+            : shippingRate as Stripe.ShippingRate)
+        : null;
+    const shippingMethodName = shippingRateObj?.display_name ?? null;
+    const isPickup = shippingMethodName?.toLowerCase().includes('pickup');
+
+    const addr = session.shipping_details?.address;
+    const shippingAddress = addr && !isPickup
+        ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code, addr.country]
+            .filter(Boolean)
+            .join(', ')
+        : null;
+
+    return shippingMethodName
+        ? { method: shippingMethodName, address: shippingAddress }
+        : null;
+}
+
 export const POST: APIRoute = async ({ request }) => {
     const body = await request.text();
     const sig = request.headers.get('stripe-signature');
@@ -380,6 +487,7 @@ export const POST: APIRoute = async ({ request }) => {
             }
 
             const recipientEmail = session.customer_details?.email;
+            const shippingInfo = await resolveCheckoutShippingInfo(session);
             if (recipientEmail) {
                 const isRegistration = session.metadata?.isRegistration === 'true';
 
@@ -392,26 +500,6 @@ export const POST: APIRoute = async ({ request }) => {
                         text: `You're registered!\n\n${workshopName}\n\nWe'll follow up with any additional details closer to the event. See you there!\n\n— CCAM`,
                     });
                 } else {
-                    // Resolve shipping info for the email
-                    const shippingRate = session.shipping_cost?.shipping_rate;
-                    const shippingRateObj = shippingRate
-                        ? (typeof shippingRate === 'string'
-                            ? await stripe.shippingRates.retrieve(shippingRate)
-                            : shippingRate as Stripe.ShippingRate)
-                        : null;
-                    const shippingMethodName = shippingRateObj?.display_name ?? null;
-                    const isPickup = shippingMethodName?.toLowerCase().includes('pickup');
-
-                    const addr = session.shipping_details?.address;
-                    const shippingAddress = addr && !isPickup
-                        ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code, addr.country]
-                            .filter(Boolean).join(', ')
-                        : null;
-
-                    const shippingInfo = shippingMethodName
-                        ? { method: shippingMethodName, address: shippingAddress }
-                        : null;
-
                     await sendCartConfirmationEmail(
                         recipientEmail,
                         session.currency ?? 'usd',
@@ -421,6 +509,15 @@ export const POST: APIRoute = async ({ request }) => {
                     );
                 }
             }
+
+            await sendInternalCartOrderNotificationEmail({
+                session,
+                lineItems: lineItems.map((line) => ({
+                    name: line.name,
+                    quantity: line.quantity,
+                })),
+                shipping: shippingInfo,
+            });
 
             await updatePaymentIntentMetadata(paymentIntentId, {
                 cartProcessed: 'true',
@@ -451,6 +548,7 @@ export const POST: APIRoute = async ({ request }) => {
 
             await decrementInventoryIfTracked(paymentIntent);
             await sendOrderConfirmationEmail(paymentIntent);
+            await sendInternalSingleOrderNotificationEmail({ paymentIntent });
             break;
         }
         case 'payment_intent.payment_failed': {

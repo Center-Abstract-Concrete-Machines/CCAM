@@ -147,7 +147,7 @@ export const POST: APIRoute = async ({ request, url }) => {
     // - Any ship_or_pickup → offer both
     // - Default → shipping address only, no explicit rates needed
     const pickupRateId = import.meta.env.STRIPE_RATE_PICKUP;
-    const shippingRateId = import.meta.env.STRIPE_RATE_SHIPPING;
+    const shippingRateId = import.meta.env.STRIPE_USPS_RATE_SHIPPING;
     const offerPickup = fulfillmentModes.has('ship_or_pickup') || fulfillmentModes.has('pickup_only');
     const offerShip = !fulfillmentModes.has('pickup_only') || fulfillmentModes.has('ship_or_pickup') || fulfillmentModes.has('ship');
 
@@ -160,6 +160,9 @@ export const POST: APIRoute = async ({ request, url }) => {
             { shipping_rate: pickupRateId },
         ];
         // Stripe requires shipping_address_collection when using shipping_options
+        shippingAddressCollection = { allowed_countries: ['US', 'CA'] };
+    } else if (offerShip && shippingRateId) {
+        shippingOptions = [{ shipping_rate: shippingRateId }];
         shippingAddressCollection = { allowed_countries: ['US', 'CA'] };
     } else {
         shippingAddressCollection = { allowed_countries: ['US', 'CA'] };

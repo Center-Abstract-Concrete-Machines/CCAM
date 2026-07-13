@@ -14,6 +14,13 @@
         inventoryCount: number | null;
         category?: string;
         tags?: string[];
+        sizeOptions?: Array<{
+            size: string;
+            label: string;
+            priceId: string;
+            unitAmount: number;
+            inventoryCount: number | null;
+        }>;
     };
 
     let {
@@ -217,6 +224,7 @@
                                 currency: product.currency,
                                 inventoryCount: product.inventoryCount,
                             }}
+                            sizeOptions={product.sizeOptions ?? []}
                         />
                         <CheckoutModal
                             priceId={product.priceId}
@@ -226,6 +234,7 @@
                             {publishableKey}
                             {returnUrl}
                             inventoryCount={product.inventoryCount}
+                            sizeOptions={product.sizeOptions ?? []}
                         />
                     </div>
                 </li>

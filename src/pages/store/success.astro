@@ -10,7 +10,13 @@ const paymentIntentId = Astro.url.searchParams.get('payment_intent');
 const redirectStatus = Astro.url.searchParams.get('redirect_status');
 const sessionId = Astro.url.searchParams.get('session_id');
 
-let orderDetails: { productName: string; quantity: string; amount: number; currency: string } | null = null;
+let orderDetails: {
+    productName: string;
+    variantLabel: string | null;
+    quantity: string;
+    amount: number;
+    currency: string;
+} | null = null;
 let cartOrderDetails: {
     total: number;
     currency: string;
@@ -23,6 +29,8 @@ if (paymentIntentId && redirectStatus === 'succeeded') {
         const pi = await stripe.paymentIntents.retrieve(paymentIntentId);
         orderDetails = {
             productName: pi.metadata.productName ?? 'Order',
+            variantLabel:
+                pi.metadata.variantLabel || pi.metadata.variantSize || null,
             quantity: pi.metadata.quantity ?? '1',
             amount: pi.amount,
             currency: pi.currency,
@@ -86,6 +94,12 @@ const failed = redirectStatus && redirectStatus !== 'succeeded';
                             <span class="text-textColor/50">Product</span>
                             <span>{orderDetails.productName}</span>
                         </div>
+                        {orderDetails.variantLabel && (
+                            <div class="flex justify-between mb-2">
+                                <span class="text-textColor/50">Size</span>
+                                <span>{orderDetails.variantLabel}</span>
+                            </div>
+                        )}
                         <div class="flex justify-between mb-2">
                             <span class="text-textColor/50">Quantity</span>
                             <span>{orderDetails.quantity}</span>

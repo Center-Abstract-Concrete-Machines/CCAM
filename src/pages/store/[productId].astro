@@ -231,11 +231,11 @@ const relatedProducts = (
                         ? `${inventoryCount} currently in stock`
                         : 'Out of stock'}
                 </p>
-            ) : (
+            ) : sizeOptions.length === 0 ? (
                 <p class="font-mono text-sm text-textColor/50">
                     Inventory not displayed for this product.
                 </p>
-            )}
+            ) : null}
 
             {productDescription ? (
                 <p class="font-mono text-sm leading-relaxed text-textColor/80">

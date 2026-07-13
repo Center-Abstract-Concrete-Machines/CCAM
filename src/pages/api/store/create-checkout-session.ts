@@ -147,22 +147,52 @@ export const POST: APIRoute = async ({ request, url }) => {
     // - Any ship_or_pickup → offer both
     // - Default → shipping address only, no explicit rates needed
     const pickupRateId = import.meta.env.STRIPE_RATE_PICKUP;
-    const shippingRateId = import.meta.env.STRIPE_USPS_RATE_SHIPPING;
+    const shippingRateId =
+        import.meta.env.STRIPE_USPS_RATE_SHIPPING ??
+        import.meta.env.STRIPE_RATE_SHIPPING;
     const offerPickup = fulfillmentModes.has('ship_or_pickup') || fulfillmentModes.has('pickup_only');
     const offerShip = !fulfillmentModes.has('pickup_only') || fulfillmentModes.has('ship_or_pickup') || fulfillmentModes.has('ship');
 
     let shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] | undefined;
     let shippingAddressCollection: Stripe.Checkout.SessionCreateParams.ShippingAddressCollection | undefined;
 
-    if (offerPickup && pickupRateId && shippingRateId) {
-        shippingOptions = [
-            ...(offerShip ? [{ shipping_rate: shippingRateId }] : []),
-            { shipping_rate: pickupRateId },
-        ];
-        // Stripe requires shipping_address_collection when using shipping_options
-        shippingAddressCollection = { allowed_countries: ['US', 'CA'] };
-    } else if (offerShip && shippingRateId) {
-        shippingOptions = [{ shipping_rate: shippingRateId }];
+    if (offerShip && !shippingRateId) {
+        return new Response(
+            JSON.stringify({
+                error:
+                    'Shipping is required for this cart, but no shipping rate is configured. Set STRIPE_USPS_RATE_SHIPPING.',
+            }),
+            {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
+    }
+
+    if (offerPickup && !offerShip && !pickupRateId) {
+        return new Response(
+            JSON.stringify({
+                error:
+                    'Pickup is required for this cart, but no pickup rate is configured. Set STRIPE_RATE_PICKUP.',
+            }),
+            {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
+    }
+
+    const resolvedShippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] = [];
+    if (offerShip && shippingRateId) {
+        resolvedShippingOptions.push({ shipping_rate: shippingRateId });
+    }
+    if (offerPickup && pickupRateId) {
+        resolvedShippingOptions.push({ shipping_rate: pickupRateId });
+    }
+
+    if (resolvedShippingOptions.length > 0) {
+        shippingOptions = resolvedShippingOptions;
+        // Stripe requires shipping_address_collection when using shipping_options.
         shippingAddressCollection = { allowed_countries: ['US', 'CA'] };
     } else {
         shippingAddressCollection = { allowed_countries: ['US', 'CA'] };

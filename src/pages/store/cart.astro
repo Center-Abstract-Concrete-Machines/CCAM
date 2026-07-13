@@ -4,8 +4,21 @@ export const prerender = false;
 import Base from 'src/layouts/Base.astro';
 import Stripe from 'stripe';
 import CartClient from '@components/Store/CartClient.svelte';
+import { getCollection } from 'astro:content';
 
 const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+
+type ProductRecord = {
+    productId: string;
+    priceId: string;
+    name: string;
+    image: string;
+    unitAmount: number;
+    currency: string;
+    inventoryCount: number | null;
+    variantSize?: string;
+    variantLabel?: string;
+};
 
 function parseInventoryCount(value: string | undefined) {
     if (!value) return null;
@@ -14,24 +27,8 @@ function parseInventoryCount(value: string | undefined) {
 }
 
 function isProductRecord(
-    value: {
-        productId: string;
-        priceId: string;
-        name: string;
-        image: string;
-        unitAmount: number;
-        currency: string;
-        inventoryCount: number | null;
-    } | null
-): value is {
-    productId: string;
-    priceId: string;
-    name: string;
-    image: string;
-    unitAmount: number;
-    currency: string;
-    inventoryCount: number | null;
-} {
+    value: ProductRecord | null
+): value is ProductRecord {
     return value !== null;
 }
 
@@ -41,7 +38,9 @@ const productsResponse = await stripe.products.list({
     limit: 100,
 });
 
-const products = productsResponse.data
+const productById = new Map(productsResponse.data.map((p) => [p.id, p]));
+
+const defaultPriceProducts: ProductRecord[] = productsResponse.data
     .map((product) => {
         const defaultPrice = product.default_price as Stripe.Price | null;
         if (
@@ -63,7 +62,70 @@ const products = productsResponse.data
             inventoryCount: parseInventoryCount(product.metadata.inventory_count),
         };
     })
-    .filter(isProductRecord);
+    .filter(isProductRecord) as ProductRecord[];
+
+const storeEntries = await getCollection('storeProducts');
+const variantPriceProducts: ProductRecord[] = (
+    await Promise.all(
+        storeEntries.flatMap((entry) => {
+            const variants = entry.data.sizeVariants ?? [];
+            return variants.map(async (variant) => {
+                try {
+                    const variantPrice = await stripe.prices.retrieve(
+                        variant.stripePriceId,
+                        { expand: ['product'] }
+                    );
+
+                    if (
+                        !variantPrice.active ||
+                        !variantPrice.unit_amount ||
+                        variantPrice.type !== 'one_time'
+                    ) {
+                        return null;
+                    }
+
+                    const variantProduct = variantPrice.product as Stripe.Product;
+                    if (!variantProduct.active) {
+                        return null;
+                    }
+
+                    const listedProduct = productById.get(variantProduct.id);
+                    const image =
+                        entry.data.heroImage?.src ??
+                        listedProduct?.images?.[0] ??
+                        variantProduct.images?.[0] ??
+                        '';
+
+                    return {
+                        productId: variantProduct.id,
+                        priceId: variantPrice.id,
+                        name: entry.data.title ?? variantProduct.name,
+                        image,
+                        unitAmount: variantPrice.unit_amount,
+                        currency: variantPrice.currency,
+                        inventoryCount: parseInventoryCount(
+                            variantPrice.metadata.inventory_count ??
+                                variantProduct.metadata.inventory_count
+                        ),
+                        variantSize: variant.size,
+                        variantLabel: variant.label ?? variant.size,
+                    };
+                } catch {
+                    return null;
+                }
+            });
+        })
+    )
+).filter((value) => value !== null) as ProductRecord[];
+
+const productsByPriceId = new Map<string, ProductRecord>(
+    [...defaultPriceProducts, ...variantPriceProducts].map((record) => [
+        record.priceId,
+        record,
+    ])
+);
+
+const products: ProductRecord[] = [...productsByPriceId.values()];
 ---
 
 <Base title="Cart">

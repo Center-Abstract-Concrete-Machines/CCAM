@@ -26,9 +26,7 @@ function parseInventoryCount(value: string | undefined) {
     return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
 }
 
-function isProductRecord(
-    value: ProductRecord | null
-): value is ProductRecord {
+function isProductRecord(value: ProductRecord | null): value is ProductRecord {
     return value !== null;
 }
 
@@ -59,7 +57,9 @@ const defaultPriceProducts: ProductRecord[] = productsResponse.data
             image: product.images[0] ?? '',
             unitAmount: defaultPrice.unit_amount,
             currency: defaultPrice.currency,
-            inventoryCount: parseInventoryCount(product.metadata.inventory_count),
+            inventoryCount: parseInventoryCount(
+                product.metadata.inventory_count
+            ),
         };
     })
     .filter(isProductRecord) as ProductRecord[];
@@ -84,7 +84,8 @@ const variantPriceProducts: ProductRecord[] = (
                         return null;
                     }
 
-                    const variantProduct = variantPrice.product as Stripe.Product;
+                    const variantProduct =
+                        variantPrice.product as Stripe.Product;
                     if (!variantProduct.active) {
                         return null;
                     }
@@ -129,8 +130,12 @@ const products: ProductRecord[] = [...productsByPriceId.values()];
 ---
 
 <Base title="Cart">
-    <section class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30">
-        <p class="font-mono text-xs text-textColor/60 uppercase tracking-wider mb-3">
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
+        <p
+            class="font-mono text-xs text-textColor/60 uppercase tracking-wider mb-3"
+        >
             <a href="/store">Store</a> / Cart
         </p>
         <h1 class="font-sans text-6xl sm:text-8xl mb-4">Cart</h1>

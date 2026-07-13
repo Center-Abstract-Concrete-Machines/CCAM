@@ -1,12 +1,5 @@
 <script lang="ts">
-    import { onMount, tick } from 'svelte';
-    import { loadStripe } from '@stripe/stripe-js';
-    import type {
-        Stripe,
-        StripeElements,
-        StripeAddressElement,
-        StripePaymentElement,
-    } from '@stripe/stripe-js';
+    import { onMount } from 'svelte';
 
     interface Props {
         priceId: string;
@@ -37,17 +30,9 @@
     }: Props = $props();
 
     let quantity = $state(1);
-    let step = $state<'idle' | 'loading' | 'form' | 'submitting' | 'error'>(
-        'idle'
-    );
+    let step = $state<'idle' | 'submitting' | 'error'>('idle');
     let errorMessage = $state('');
-    let stripe: Stripe | null = null;
-    let elements: StripeElements | null = null;
-    let addressElement: StripeAddressElement | null = null;
-    let paymentElement: StripePaymentElement | null = null;
     let dialog: HTMLDialogElement;
-    let addressContainer = $state<HTMLDivElement | null>(null);
-    let paymentContainer = $state<HTMLDivElement | null>(null);
     let selectedSize = $state('');
 
     const selectedSizeOption = $derived(
@@ -107,83 +92,50 @@
         }
     });
 
-    async function openCheckout() {
+    function openCheckout() {
         if (isOutOfStock) {
             return;
         }
 
         dialog.showModal();
-        step = 'loading';
+        step = 'idle';
+        errorMessage = '';
+    }
+
+    async function startCheckout(e: SubmitEvent) {
+        e.preventDefault();
+        if (isOutOfStock) return;
+
+        step = 'submitting';
         errorMessage = '';
 
         try {
-            if (!stripe) {
-                stripe = await loadStripe(publishableKey);
-            }
-
-            const res = await fetch('/api/store/create-payment-intent', {
+            const res = await fetch('/api/store/create-checkout-session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    priceId: activePriceId,
-                    quantity,
-                    variantSize: selectedSizeOption?.size,
-                    variantLabel: selectedSizeOption?.label,
+                    items: [
+                        {
+                            priceId: activePriceId,
+                            quantity,
+                            variantSize: selectedSizeOption?.size,
+                            variantLabel: selectedSizeOption?.label,
+                        },
+                    ],
                 }),
             });
 
             if (!res.ok) {
                 const data = await res.json();
-                throw new Error(data.error ?? 'Failed to initialize checkout');
+                throw new Error(data.error ?? 'Failed to start checkout');
             }
 
-            const { clientSecret } = await res.json();
+            const data = await res.json();
+            if (!data.url) {
+                throw new Error('Checkout URL missing from server response');
+            }
 
-            addressElement?.unmount();
-            paymentElement?.unmount();
-
-            const isDark = document.documentElement.classList.contains('dark');
-            const bgColor = isDark ? '#1e1e1e' : '#ffffff';
-            const textColor = isDark ? '#e6e6e6' : '#121212';
-            const borderColor = isDark
-                ? 'rgba(230,230,230,0.4)'
-                : 'rgba(18,18,18,0.4)';
-
-            elements = stripe!.elements({
-                clientSecret,
-                appearance: {
-                    theme: 'flat',
-                    variables: {
-                        colorBackground: bgColor,
-                        colorText: textColor,
-                        colorDanger: '#ff7a1a',
-                        fontFamily: 'ui-sans-serif, system-ui, sans-serif',
-                        borderRadius: '0px',
-                        spacingUnit: '4px',
-                    },
-                    rules: {
-                        '.Input': {
-                            border: `1px dashed ${borderColor}`,
-                            backgroundColor: bgColor,
-                            color: textColor,
-                        },
-                        '.Label': {
-                            color: textColor,
-                        },
-                    },
-                },
-            });
-
-            addressElement = elements.create('address', { mode: 'shipping' });
-            paymentElement = elements.create('payment');
-
-            // Render form containers before Stripe mounts into them
-            await tick();
-
-            addressElement.mount(addressContainer!);
-            paymentElement.mount(paymentContainer!);
-
-            step = 'form';
+            window.location.assign(data.url);
         } catch (err) {
             errorMessage =
                 err instanceof Error ? err.message : 'Something went wrong';
@@ -191,32 +143,9 @@
         }
     }
 
-    async function submitPayment(e: SubmitEvent) {
-        e.preventDefault();
-        if (!stripe || !elements) return;
-        step = 'submitting';
-        errorMessage = '';
-
-        const { error } = await stripe.confirmPayment({
-            elements,
-            confirmParams: { return_url: returnUrl },
-        });
-
-        if (error) {
-            errorMessage = error.message ?? 'Payment failed';
-            step = 'form';
-        }
-        // On success, Stripe redirects — no further handling needed here
-    }
-
     function close() {
-        addressElement?.unmount();
-        paymentElement?.unmount();
-        addressElement = null;
-        paymentElement = null;
         dialog.close();
         step = 'idle';
-        elements = null;
     }
 
     onMount(() => {
@@ -275,13 +204,7 @@
         {#if step === 'error'}
             <p class="text-Orange text-sm py-8 text-center">{errorMessage}</p>
         {:else}
-            <form onsubmit={submitPayment}>
-                {#if step === 'loading'}
-                    <p class="text-textColor/50 text-sm mb-5">
-                        Loading checkout…
-                    </p>
-                {/if}
-
+            <form onsubmit={startCheckout}>
                 <!-- Quantity -->
                 <div class="mb-5">
                     {#if hasSizeOptions}
@@ -293,8 +216,7 @@
                             id="size-select"
                             class="w-full border border-dashed border-borderColor/50 bg-backgroundColor text-textColor p-2 text-sm mb-4"
                             bind:value={selectedSize}
-                            disabled={step === 'loading' ||
-                                step === 'submitting'}
+                            disabled={step === 'submitting'}
                         >
                             {#each sizeOptions as option}
                                 <option value={option.size}>
@@ -321,8 +243,7 @@
                             onclick={() => {
                                 if (quantity > 1) quantity--;
                             }}
-                            disabled={step === 'loading' ||
-                                step === 'submitting'}>−</button
+                            disabled={step === 'submitting'}>−</button
                         >
                         <span class="w-6 text-center">{quantity}</span>
                         <button
@@ -331,8 +252,7 @@
                             onclick={() => {
                                 if (quantity < maxQuantity) quantity++;
                             }}
-                            disabled={step === 'loading' ||
-                                step === 'submitting' ||
+                            disabled={step === 'submitting' ||
                                 quantity >= maxQuantity}>+</button
                         >
                         <span class="ml-auto text-sm text-textColor/60"
@@ -346,25 +266,9 @@
                     {/if}
                 </div>
 
-                <!-- Stripe Address Element -->
-                <div class="mb-5">
-                    <p
-                        class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider"
-                    >
-                        Shipping Address
-                    </p>
-                    <div bind:this={addressContainer}></div>
-                </div>
-
-                <!-- Stripe Payment Element -->
-                <div class="mb-6">
-                    <p
-                        class="block text-sm mb-2 text-textColor/70 uppercase tracking-wider"
-                    >
-                        Payment
-                    </p>
-                    <div bind:this={paymentContainer}></div>
-                </div>
+                <p class="text-textColor/60 text-sm mb-6">
+                    Continue to Stripe Checkout for shipping, tax, and payment.
+                </p>
 
                 {#if errorMessage}
                     <p class="text-Orange text-sm mb-4">{errorMessage}</p>
@@ -373,9 +277,11 @@
                 <button
                     type="submit"
                     class="button w-full"
-                    disabled={step === 'submitting' || step === 'loading'}
+                    disabled={step === 'submitting'}
                 >
-                    {step === 'submitting' ? 'Processing…' : `Pay ${total}`}
+                    {step === 'submitting'
+                        ? 'Redirecting…'
+                        : `Continue to Checkout — ${total}`}
                 </button>
             </form>
         {/if}

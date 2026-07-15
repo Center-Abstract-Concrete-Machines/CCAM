@@ -50,7 +50,7 @@ const metadata = {
 };
 
 export const organizerList = [
-    'garrett-laroy-johnson',
+    'grace-grace-grace',
     'kim-nucci',
     'muindi-fanuel-muindi',
     'kristin-mcwharter',

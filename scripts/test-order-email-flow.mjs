@@ -1,15 +1,7 @@
 import nodemailer from 'nodemailer';
-import { readFileSync } from 'node:fs';
+import { loadScriptEnv } from './_env.mjs';
 
-const env = Object.fromEntries(
-    readFileSync('.env', 'utf8')
-        .split(/\r?\n/)
-        .filter((line) => line.trim() && !line.trim().startsWith('#') && line.includes('='))
-        .map((line) => {
-            const idx = line.indexOf('=');
-            return [line.slice(0, idx).trim(), line.slice(idx + 1).trim()];
-        })
-);
+const env = loadScriptEnv();
 
 const host = env.SMTP_HOST;
 const port = Number.parseInt(env.SMTP_PORT ?? '587', 10);
@@ -20,7 +12,7 @@ const fromEmail = (env.ORDER_FROM_EMAIL ?? '').trim();
 const fromName = (env.ORDER_FROM_NAME ?? 'CCAM Store').trim();
 
 if (!host || !user || !pass || !fromEmail) {
-    console.error('Missing SMTP config in .env');
+    console.error('Missing SMTP config in .env.local or .env');
     process.exit(1);
 }
 

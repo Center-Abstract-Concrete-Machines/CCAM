@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { readFileSync } from 'node:fs';
+import { loadScriptEnv } from './_env.mjs';
 
 const [sessionId] = process.argv.slice(2);
 if (!sessionId) {
@@ -7,15 +7,7 @@ if (!sessionId) {
     process.exit(1);
 }
 
-const env = Object.fromEntries(
-    readFileSync('.env', 'utf8')
-        .split(/\r?\n/)
-        .filter((line) => line.trim() && !line.trim().startsWith('#') && line.includes('='))
-        .map((line) => {
-            const idx = line.indexOf('=');
-            return [line.slice(0, idx).trim(), line.slice(idx + 1).trim()];
-        })
-);
+const env = loadScriptEnv();
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY);
 

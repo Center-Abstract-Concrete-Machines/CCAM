@@ -5,8 +5,9 @@ import Base from 'src/layouts/Base.astro';
 import StoreGrid from '@components/Store/StoreGrid.svelte';
 import Stripe from 'stripe';
 import { getCollection } from 'astro:content';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 
 function parseInventoryCount(value: string | undefined) {
     if (!value) return null;

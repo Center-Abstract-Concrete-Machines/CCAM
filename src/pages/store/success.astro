@@ -3,8 +3,9 @@ export const prerender = false;
 
 import Base from 'src/layouts/Base.astro';
 import Stripe from 'stripe';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 
 const paymentIntentId = Astro.url.searchParams.get('payment_intent');
 const redirectStatus = Astro.url.searchParams.get('redirect_status');

@@ -4,8 +4,9 @@ export const prerender = false;
 import Base from 'src/layouts/Base.astro';
 import Stripe from 'stripe';
 import { getCollection, getEntry, render } from 'astro:content';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 const { workshopId } = Astro.params;
 
 if (!workshopId) return Astro.redirect('/');
@@ -38,7 +39,16 @@ try {
         expand: ['default_price'],
     });
     price = product.default_price as Stripe.Price;
-} catch {
+} catch (err) {
+    if (import.meta.env.DEV) {
+        const stripeErr = err as { type?: string; code?: string; message?: string };
+        console.error('[registration] Failed to retrieve Stripe product', {
+            stripeProductId,
+            type: stripeErr?.type,
+            code: stripeErr?.code,
+            message: stripeErr?.message,
+        });
+    }
     return new Response('Not found', { status: 404 });
 }
 

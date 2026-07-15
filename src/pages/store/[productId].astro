@@ -6,8 +6,9 @@ import CheckoutModal from '@components/Store/CheckoutModal.svelte';
 import AddToCartButton from '@components/Store/AddToCartButton.svelte';
 import Stripe from 'stripe';
 import { getCollection, render } from 'astro:content';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 const { productId: routeParam } = Astro.params;
 
 if (!routeParam) {

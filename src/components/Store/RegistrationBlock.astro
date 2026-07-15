@@ -33,7 +33,16 @@ try {
         expand: ['default_price'],
     });
     price = product.default_price as Stripe.Price;
-} catch {
+} catch (err) {
+    if (import.meta.env.DEV) {
+        const stripeErr = err as { type?: string; code?: string; message?: string };
+        console.warn('[registration-block] Stripe lookup failed', {
+            stripeProductId,
+            type: stripeErr?.type,
+            code: stripeErr?.code,
+            message: stripeErr?.message,
+        });
+    }
     // Product lookup can fail during build if server env vars are unavailable.
     // Keep rendering the registration CTA so the runtime registration page still works.
 }
@@ -59,7 +68,7 @@ const isFullyBooked =
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: (price.currency ?? 'usd').toUpperCase(),
+    currency: (price?.currency ?? 'usd').toUpperCase(),
 });
 const priceDisplay = hasStripeProductData
     ? isFree

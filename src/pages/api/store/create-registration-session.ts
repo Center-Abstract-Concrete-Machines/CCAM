@@ -3,8 +3,9 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { z } from 'astro/zod';
 import Stripe from 'stripe';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 
 const schema = z.object({
     priceId: z.string().startsWith('price_'),

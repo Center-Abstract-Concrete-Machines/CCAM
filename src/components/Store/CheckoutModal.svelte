@@ -163,9 +163,11 @@
     });
 </script>
 
-<button class="button" onclick={openCheckout} disabled={isOutOfStock}>
-    {isOutOfStock ? 'Out of Stock' : 'Buy Now'}
-</button>
+{#if !isOutOfStock}
+    <button class="button" onclick={openCheckout}>
+        Buy Now
+    </button>
+{/if}
 
 <dialog bind:this={dialog} class="checkout-dialog">
     <div

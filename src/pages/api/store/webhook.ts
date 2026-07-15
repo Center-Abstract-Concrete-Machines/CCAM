@@ -3,8 +3,9 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 import nodemailer from 'nodemailer';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 
 const smtpHost = import.meta.env.SMTP_HOST;
 const smtpPort = Number.parseInt(import.meta.env.SMTP_PORT ?? '587', 10);

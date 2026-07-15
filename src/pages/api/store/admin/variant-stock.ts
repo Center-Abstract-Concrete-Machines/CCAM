@@ -4,8 +4,9 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import Stripe from 'stripe';
+import { getStripeServerClient } from '@utils/stripeServer';
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+const stripe = getStripeServerClient();
 
 const listQuerySchema = z
     .object({

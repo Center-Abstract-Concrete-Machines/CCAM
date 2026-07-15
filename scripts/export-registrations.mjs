@@ -7,20 +7,10 @@
  */
 
 import Stripe from 'stripe';
-import { readFileSync, writeFileSync } from 'fs';
-import { resolve } from 'path';
+import { writeFileSync } from 'fs';
+import { loadScriptEnv } from './_env.mjs';
 
-// Parse .env manually
-const envPath = resolve(process.cwd(), '.env');
-const envVars = Object.fromEntries(
-    readFileSync(envPath, 'utf8')
-        .split('\n')
-        .filter((line) => line.trim() && !line.startsWith('#'))
-        .map((line) => {
-            const idx = line.indexOf('=');
-            return [line.slice(0, idx).trim(), line.slice(idx + 1).trim()];
-        })
-);
+const envVars = loadScriptEnv();
 
 const stripe = new Stripe(envVars.STRIPE_SECRET_KEY);
 

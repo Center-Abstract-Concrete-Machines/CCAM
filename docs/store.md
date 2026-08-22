@@ -23,7 +23,6 @@ Main pages and APIs:
 - src/pages/store/cart.astro
 - src/pages/store/success.astro
 - src/pages/register/[workshopId].astro
-- src/pages/api/store/create-payment-intent.ts
 - src/pages/api/store/create-checkout-session.ts
 - src/pages/api/store/create-registration-session.ts
 - src/pages/api/store/webhook.ts
@@ -109,7 +108,7 @@ Important current limitation:
   - Related products by shared tags
 - Add to cart flow
 - Cart checkout with Stripe Checkout Session
-- Direct buy-now modal with Stripe Elements + PaymentIntent
+- Direct buy-now modal that creates a single-item Stripe Checkout Session
 - Out-of-stock and tracked inventory UI
 - Size variant selection (variant-specific prices and stock)
 - Success page that renders order summary
@@ -245,19 +244,6 @@ This section describes metadata read by the app from Stripe Dashboard objects.
 
 The app writes internal metadata in payment and checkout flows. You generally do not set these manually.
 
-PaymentIntent metadata (single-item modal flow):
-
-- priceId
-- productId
-- productName
-- quantity
-- inventoryTracked
-- inventoryLevel
-- inventoryAdjusted
-- confirmationEmailSent
-- variantSize
-- variantLabel
-
 Checkout Session metadata (registration flow):
 
 - isRegistration: true
@@ -326,11 +312,11 @@ Key behavior:
 
 ### A) Direct Buy Now (product page modal)
 
-1. User opens modal.
-2. Frontend calls POST /api/store/create-payment-intent with priceId, quantity, and optional variant values.
-3. Server validates price/product/inventory and creates PaymentIntent.
-4. Stripe Elements confirms payment and redirects to /store/success.
-5. Webhook payment_intent.succeeded decrements inventory (if tracked) and sends confirmation email.
+1. User opens modal and picks size/quantity.
+2. Frontend calls POST /api/store/create-checkout-session with a single line item.
+3. Server validates price/product/inventory and creates a Checkout Session.
+4. Success redirects to /store/success?session_id=...
+5. Webhook checkout.session.completed decrements inventory and sends confirmation email.
 
 ### B) Cart checkout
 
@@ -378,12 +364,10 @@ Priority order:
 
 Decrement timing:
 
-- Single-item modal flow: webhook payment_intent.succeeded
-- Cart flow and registration flow: webhook checkout.session.completed
+- Buy Now, cart, and registration flows: webhook checkout.session.completed
 
 Safety/idempotency:
 
-- payment_intent metadata flags prevent duplicate decrement in single-item flow
 - cartProcessed metadata flag prevents duplicate cart processing
 
 ## Stock admin operations
@@ -439,8 +423,7 @@ Source:
 - Success page rendering: src/pages/store/success.astro
 - Registration page: src/pages/register/[workshopId].astro
 - Registration CTA component: src/components/Store/RegistrationBlock.astro
-- PaymentIntent API: src/pages/api/store/create-payment-intent.ts
-- Cart Checkout Session API: src/pages/api/store/create-checkout-session.ts
+- Checkout Session API (buy now + cart): src/pages/api/store/create-checkout-session.ts
 - Registration Session API: src/pages/api/store/create-registration-session.ts
 - Webhook inventory + email logic: src/pages/api/store/webhook.ts
 - Variant stock admin API: src/pages/api/store/admin/variant-stock.ts
@@ -450,5 +433,5 @@ Source:
 - workshopRegistration products are intentionally hidden from /store.
 - registration=true Stripe products are also hidden from /store.
 - inventory_count must parse to a non-negative integer string.
-- Registration and cart flows decrement on checkout.session.completed; direct modal flow decrements on payment_intent.succeeded.
+- All flows decrement inventory on checkout.session.completed.
 - If SMTP settings are missing, checkout still works but confirmation emails are skipped.

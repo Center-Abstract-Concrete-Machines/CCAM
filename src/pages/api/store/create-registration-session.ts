@@ -100,6 +100,8 @@ export const POST: APIRoute = async ({ request, url }) => {
     // Skip payment method for free registrations
     if (isFree) {
         sessionParams.payment_method_collection = 'if_required';
+    } else {
+        sessionParams.allow_promotion_codes = true;
     }
 
     let session: Stripe.Checkout.Session;

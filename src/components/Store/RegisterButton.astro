@@ -1,0 +1,22 @@
+---
+/**
+ * RegisterButton — embed in any program/event MDX page to link to a workshop registration.
+ *
+ * Usage in MDX:
+ *   import RegisterButton from '@components/Store/RegisterButton.astro';
+ *   <RegisterButton workshopId="my-workshop-slug" />
+ *
+ * The workshopId must match the content file slug in src/content/store/
+ * e.g. src/content/store/my-workshop/index.mdx → workshopId="my-workshop"
+ */
+
+interface Props {
+    workshopId: string;
+    label?: string;
+}
+
+const { workshopId, label = 'Register' } = Astro.props;
+const href = `/register/${workshopId}`;
+---
+
+<a href={href} class="button inline-block">{label}</a>

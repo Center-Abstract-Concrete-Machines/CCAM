@@ -1,0 +1,392 @@
+---
+export const prerender = false;
+
+import Base from 'src/layouts/Base.astro';
+import CheckoutModal from '@components/Store/CheckoutModal.svelte';
+import AddToCartButton from '@components/Store/AddToCartButton.svelte';
+import Stripe from 'stripe';
+import { getCollection, render } from 'astro:content';
+import { getStripeServerClient } from '@utils/stripeServer';
+
+const stripe = getStripeServerClient();
+const { productId: routeParam } = Astro.params;
+
+if (!routeParam) {
+    return Astro.redirect('/store');
+}
+
+const storeContentEntries = await getCollection('storeProducts');
+const contentEntry = storeContentEntries.find(
+    (entry) => entry.id === routeParam
+);
+
+const stripeProductId = contentEntry?.data.stripeProductId ?? routeParam;
+
+const renderedContent = contentEntry ? await render(contentEntry) : null;
+const Content = renderedContent?.Content;
+
+const product = await stripe.products.retrieve(stripeProductId, {
+    expand: ['default_price'],
+});
+
+if (!product.active) {
+    return new Response('Not found', { status: 404 });
+}
+
+const price = product.default_price as Stripe.Price | null;
+if (!price || !price.unit_amount || price.type !== 'one_time') {
+    return new Response('Not found', { status: 404 });
+}
+
+function parseInventoryCount(value: string | undefined) {
+    if (!value) return null;
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
+}
+
+async function buildSizeOptions(
+    variants:
+        | Array<{
+              size: string;
+              label?: string;
+              stripePriceId: string;
+          }>
+        | undefined,
+    fallbackCurrency: string
+) {
+    if (!variants || variants.length === 0) {
+        return [];
+    }
+
+    const prices = await Promise.all(
+        variants.map(async (variant) => {
+            try {
+                const variantPrice = await stripe.prices.retrieve(
+                    variant.stripePriceId,
+                    { expand: ['product'] }
+                );
+                if (
+                    !variantPrice.active ||
+                    !variantPrice.unit_amount ||
+                    variantPrice.type !== 'one_time'
+                ) {
+                    return null;
+                }
+
+                const variantProduct = variantPrice.product as Stripe.Product;
+                if (!variantProduct.active) {
+                    return null;
+                }
+
+                const inventoryCount = parseInventoryCount(
+                    variantPrice.metadata.inventory_count ??
+                        variantProduct.metadata.inventory_count
+                );
+
+                return {
+                    size: variant.size,
+                    label: variant.label ?? variant.size,
+                    priceId: variantPrice.id,
+                    unitAmount: variantPrice.unit_amount,
+                    currency: variantPrice.currency ?? fallbackCurrency,
+                    inventoryCount,
+                };
+            } catch {
+                return null;
+            }
+        })
+    );
+
+    return prices.filter(Boolean) as Array<{
+        size: string;
+        label: string;
+        priceId: string;
+        unitAmount: number;
+        currency: string;
+        inventoryCount: number | null;
+    }>;
+}
+
+const inventoryCount = parseInventoryCount(product.metadata.inventory_count);
+const publishableKey = import.meta.env.STRIPE_PUBLISHABLE_KEY;
+const returnUrl = `${Astro.url.origin}/store/success`;
+const sizeOptions = await buildSizeOptions(
+    contentEntry?.data.sizeVariants,
+    price.currency
+);
+const galleryImages = contentEntry?.data.galleryImages ?? [];
+const heroImage = contentEntry?.data.heroImage?.src ?? product.images[0] ?? '';
+const hasImages = Boolean(heroImage) || product.images.length > 0;
+const productTitle = contentEntry?.data.title ?? product.name;
+const productDescription = contentEntry?.data.excerpt ?? product.description;
+const cardImage = heroImage || product.images[0] || '';
+
+// Related items: other content entries sharing at least one tag
+const currentTags = contentEntry?.data.tags ?? [];
+const relatedEntries =
+    currentTags.length > 0
+        ? storeContentEntries
+              .filter(
+                  (e) =>
+                      e.id !== contentEntry?.id &&
+                      (e.data.tags ?? []).some((t) => currentTags.includes(t))
+              )
+              .slice(0, 4)
+        : [];
+
+const relatedProducts = (
+    await Promise.all(
+        relatedEntries.map(async (entry) => {
+            try {
+                const p = await stripe.products.retrieve(
+                    entry.data.stripeProductId,
+                    {
+                        expand: ['default_price'],
+                    }
+                );
+                if (!p.active) return null;
+                const rPrice = p.default_price as Stripe.Price | null;
+                if (!rPrice?.unit_amount) return null;
+                return {
+                    href: `/store/${entry.id}`,
+                    name: entry.data.title ?? p.name,
+                    image: entry.data.heroImage?.src ?? p.images[0] ?? '',
+                    unitAmount: rPrice.unit_amount,
+                    currency: rPrice.currency,
+                };
+            } catch {
+                return null;
+            }
+        })
+    )
+).filter(Boolean) as Array<{
+    href: string;
+    name: string;
+    image: string;
+    unitAmount: number;
+    currency: string;
+}>;
+---
+
+<Base title={productTitle}>
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
+        <p
+            class="font-mono text-xs text-textColor/60 uppercase tracking-wider mb-3"
+        >
+            <a href="/store">Store</a> / {productTitle}
+        </p>
+        <h1 class="font-sans text-5xl sm:text-7xl mb-4">{productTitle}</h1>
+        <a href="/store/cart" class="button">View Cart</a>
+    </section>
+
+    <section class="px-4 py-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+        <div class="space-y-4">
+            {
+                hasImages ? (
+                    <>
+                        <div class="border border-dashed border-borderColor/30 bg-borderColor/10 aspect-square overflow-hidden">
+                            <img
+                                src={heroImage || product.images[0]}
+                                alt={
+                                    contentEntry?.data.heroImageAlt ??
+                                    productTitle
+                                }
+                                class="h-full w-full object-cover"
+                            />
+                        </div>
+
+                        {(galleryImages.length > 0 ||
+                            product.images.length > 1) && (
+                            <ul class="grid grid-cols-3 gap-2">
+                                {galleryImages.map((image, idx) => (
+                                    <li class="border border-dashed border-borderColor/30 bg-borderColor/10 aspect-square overflow-hidden">
+                                        <img
+                                            src={image.image.src}
+                                            alt={image.alt}
+                                            class="h-full w-full object-cover"
+                                            loading="lazy"
+                                        />
+                                    </li>
+                                ))}
+
+                                {galleryImages.length === 0 &&
+                                    product.images
+                                        .slice(1)
+                                        .map((image, idx) => (
+                                            <li class="border border-dashed border-borderColor/30 bg-borderColor/10 aspect-square overflow-hidden">
+                                                <img
+                                                    src={image}
+                                                    alt={`${productTitle} detail image ${idx + 2}`}
+                                                    class="h-full w-full object-cover"
+                                                    loading="lazy"
+                                                />
+                                            </li>
+                                        ))}
+                            </ul>
+                        )}
+                    </>
+                ) : (
+                    <div class="border border-dashed border-borderColor/30 min-h-80 flex items-center justify-center">
+                        <p class="font-mono text-sm text-textColor/50">
+                            No product images uploaded yet.
+                        </p>
+                    </div>
+                )
+            }
+        </div>
+
+        <div
+            class="border border-dashed border-borderColor/30 p-6 h-fit space-y-5"
+        >
+            <p class="font-mono text-3xl">
+                {
+                    new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: price.currency.toUpperCase(),
+                    }).format(price.unit_amount / 100)
+                }
+            </p>
+
+            {
+                typeof inventoryCount === 'number' ? (
+                    <p class="font-mono text-sm text-textColor/70">
+                        {inventoryCount > 0
+                            ? `${inventoryCount} currently in stock`
+                            : 'Out of stock'}
+                    </p>
+                ) : sizeOptions.length === 0 ? (
+                    <p class="font-mono text-sm text-textColor/50">
+                        Inventory not displayed for this product.
+                    </p>
+                ) : null
+            }
+
+            {
+                productDescription ? (
+                    <p class="font-mono text-sm leading-relaxed text-textColor/80">
+                        {productDescription}
+                    </p>
+                ) : (
+                    <p class="font-mono text-sm leading-relaxed text-textColor/50">
+                        Add a richer product story here later (sound demos,
+                        firmware notes, specs).
+                    </p>
+                )
+            }
+
+            {
+                contentEntry?.data.specs &&
+                    contentEntry.data.specs.length > 0 && (
+                        <div class="border border-dashed border-borderColor/30 p-4">
+                            <h2 class="font-sans text-lg mb-3">Specs</h2>
+                            <ul class="space-y-2">
+                                {contentEntry.data.specs.map((spec) => (
+                                    <li class="flex justify-between gap-4 font-mono text-sm">
+                                        <span class="text-textColor/60">
+                                            {spec.label}
+                                        </span>
+                                        <span>{spec.value}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+            }
+
+            {
+                contentEntry?.data.videoEmbedUrl && (
+                    <div class="border border-dashed border-borderColor/30 p-2">
+                        <div class="aspect-video">
+                            <iframe
+                                src={contentEntry.data.videoEmbedUrl}
+                                title={`${productTitle} demo video`}
+                                class="w-full h-full"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            />
+                        </div>
+                    </div>
+                )
+            }
+
+            {
+                Content && (
+                    <div class="prose max-w-none prose-sm dark:prose-invert">
+                        <Content />
+                    </div>
+                )
+            }
+
+            <div class="pt-2 flex flex-wrap gap-2">
+                <AddToCartButton
+                    client:load
+                    product={{
+                        productId: product.id,
+                        priceId: price.id,
+                        name: productTitle,
+                        image: cardImage,
+                        unitAmount: price.unit_amount,
+                        currency: price.currency,
+                        inventoryCount,
+                    }}
+                    sizeOptions={sizeOptions}
+                />
+                <CheckoutModal
+                    client:load
+                    priceId={price.id}
+                    productName={productTitle}
+                    unitAmount={price.unit_amount}
+                    currency={price.currency}
+                    publishableKey={publishableKey}
+                    returnUrl={returnUrl}
+                    inventoryCount={inventoryCount}
+                    sizeOptions={sizeOptions}
+                />
+            </div>
+        </div>
+    </section>
+
+    {
+        relatedProducts.length > 0 && (
+            <section class="px-4 py-10 border-t border-dashed border-borderColor/30">
+                <h2 class="font-sans text-2xl mb-6">Related Items</h2>
+                <ul class="grid gap-px border border-dashed border-borderColor/30 sm:grid-cols-2 lg:grid-cols-4">
+                    {relatedProducts.map((rp) => (
+                        <li class="flex flex-col gap-3 p-4 border border-dashed border-borderColor/30">
+                            {rp.image && (
+                                <a
+                                    href={rp.href}
+                                    class="aspect-square overflow-hidden bg-borderColor/10 block"
+                                >
+                                    <img
+                                        src={rp.image}
+                                        alt={rp.name}
+                                        class="w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            )}
+                            <div class="flex flex-col gap-1">
+                                <a
+                                    href={rp.href}
+                                    class="font-sans text-sm font-medium hover:underline"
+                                >
+                                    {rp.name}
+                                </a>
+                                <p class="font-mono text-sm">
+                                    {new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: rp.currency.toUpperCase(),
+                                    }).format(rp.unitAmount / 100)}
+                                </p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        )
+    }
+</Base>

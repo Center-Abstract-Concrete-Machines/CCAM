@@ -1,0 +1,181 @@
+---
+import Stripe from 'stripe';
+
+interface Props {
+    stripeProductId: string;
+    endDate?: Date | 'ongoing';
+}
+
+const { stripeProductId, endDate } = Astro.props;
+
+const isClosed = endDate && endDate !== 'ongoing' && (() => {
+    // Convert current time to Chicago timezone
+    const chicagoTime = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' });
+    const now = new Date(chicagoTime);
+    
+    // Set registration deadline to end of day (11:59:59 PM) on the endDate
+    const registrationDeadline = new Date(endDate);
+    registrationDeadline.setHours(23, 59, 59, 999);
+    
+    return now > registrationDeadline;
+})();
+
+const stripeSecretKey = import.meta.env.STRIPE_SECRET_KEY;
+const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;
+
+let product: Stripe.Product | null = null;
+let price: Stripe.Price | null = null;
+
+try {
+    if (!stripe) throw new Error('Missing Stripe secret key');
+
+    product = await stripe.products.retrieve(stripeProductId, {
+        expand: ['default_price'],
+    });
+    price = product.default_price as Stripe.Price;
+} catch (err) {
+    if (import.meta.env.DEV) {
+        const stripeErr = err as { type?: string; code?: string; message?: string };
+        console.warn('[registration-block] Stripe lookup failed', {
+            stripeProductId,
+            type: stripeErr?.type,
+            code: stripeErr?.code,
+            message: stripeErr?.message,
+        });
+    }
+    // Product lookup can fail during build if server env vars are unavailable.
+    // Keep rendering the registration CTA so the runtime registration page still works.
+}
+
+const hasStripeProductData = Boolean(product?.active && price);
+
+function parseInventoryCount(value: string | undefined) {
+    if (!value) return null;
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
+}
+
+const inventoryCount = hasStripeProductData
+    ? parseInventoryCount(product?.metadata.inventory_count)
+    : null;
+const isFree = hasStripeProductData
+    ? !price?.unit_amount || price.unit_amount === 0
+    : false;
+const isFullyBooked =
+    hasStripeProductData &&
+    typeof inventoryCount === 'number' &&
+    inventoryCount <= 0;
+
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: (price?.currency ?? 'usd').toUpperCase(),
+});
+const priceDisplay = hasStripeProductData
+    ? isFree
+        ? 'Free'
+        : formatter.format(((price?.unit_amount ?? 0) as number) / 100)
+    : null;
+const priceId = hasStripeProductData ? price?.id : null;
+---
+
+<div class="my-8 border border-dashed border-borderColor/30 p-6 space-y-4">
+    <div class="flex items-start justify-between gap-4 flex-wrap">
+        <div class="space-y-1">
+            <p
+                class="font-mono text-xs uppercase tracking-wider text-textColor/50"
+            >
+                Registration
+            </p>
+            {priceDisplay && <p class="font-sans text-2xl">{priceDisplay}</p>}
+            {
+                hasStripeProductData &&
+                    typeof inventoryCount === 'number' &&
+                    !isClosed && (
+                        <p class="font-mono text-xs text-textColor/50">
+                            {isFullyBooked
+                                ? 'Fully booked'
+                                : `${inventoryCount} spot${inventoryCount === 1 ? '' : 's'} remaining`}
+                        </p>
+                    )
+            }
+        </div>
+
+        {
+            isClosed ? (
+                <button class="button opacity-50 cursor-not-allowed" disabled>
+                    Registration Closed
+                </button>
+            ) : isFullyBooked ? (
+                <button class="button opacity-50 cursor-not-allowed" disabled>
+                    Fully Booked
+                </button>
+            ) : !hasStripeProductData ? (
+                <a href={`/register/${stripeProductId}`} class="button">
+                    Register
+                </a>
+            ) : (
+                <form
+                    data-price-id={priceId}
+                    data-is-free={String(isFree)}
+                    class="reg-form"
+                >
+                    <button type="submit" class="button reg-btn">
+                        {isFree
+                            ? 'Register — Free'
+                            : `Register — ${priceDisplay}`}
+                    </button>
+                    <p class="reg-error text-Orange text-xs font-mono mt-2 hidden" />
+                </form>
+            )
+        }
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll<HTMLFormElement>('.reg-form').forEach((form) => {
+        const btn = form.querySelector<HTMLButtonElement>('.reg-btn');
+        const errorEl = form.querySelector<HTMLParagraphElement>('.reg-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!btn) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Redirecting…';
+            if (errorEl) errorEl.classList.add('hidden');
+
+            const priceId = form.dataset.priceId;
+
+            try {
+                const res = await fetch(
+                    '/api/store/create-registration-session',
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ priceId, quantity: 1 }),
+                    }
+                );
+
+                const data = await res.json();
+                if (!res.ok)
+                    throw new Error(data.error ?? 'Registration failed');
+                window.location.assign(data.url);
+            } catch (err) {
+                if (errorEl) {
+                    errorEl.textContent =
+                        err instanceof Error
+                            ? err.message
+                            : 'Registration failed';
+                    errorEl.classList.remove('hidden');
+                }
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent =
+                        form.dataset.isFree === 'true'
+                            ? 'Register — Free'
+                            : 'Register';
+                }
+            }
+        });
+    });
+</script>

@@ -8,6 +8,8 @@ import ThemeProvider from '@components/ThemeProvider.astro';
 import ContactDialog from '@components/ContactDialog.astro';
 
 const { title } = Astro.props;
+const analyticsScriptSrc = 'https://plausible.parkerdavis.dev/js/script.js';
+const enableAnalytics = import.meta.env.PROD;
 
 let tabTitle;
 if (title) {
@@ -34,7 +36,7 @@ if (title) {
         <meta property="og:description" content={metadata.description} />
         <meta
             property="og:image"
-            content=`${Astro.site.origin}/ccam-social.png`
+            content=`${Astro.site.origin}/ccam-social-card.jpg`
         />
 
         <meta name="twitter:card" content="summary" />
@@ -42,7 +44,7 @@ if (title) {
         <meta name="twitter:title" content={tabTitle} />
         <meta
             name="twitter:image"
-            content=`${Astro.site.origin}/ccam-social.png`
+            content=`${Astro.site.origin}/ccam-social-card.jpg`
         />
 
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
@@ -59,11 +61,15 @@ if (title) {
         <title>
             {tabTitle}
         </title>
-        <script
-            defer
-            src="https://plausible.parkerdavis.dev/js/script.js"
-            onload="this.setAttribute('data-domain',window.location.host)"
-        ></script>
+        {
+            enableAnalytics && (
+                <script
+                    defer
+                    src={analyticsScriptSrc}
+                    onload="this.setAttribute('data-domain',window.location.host)"
+                ></script>
+            )
+        }
 
         <ClientRouter fallback="swap" />
     </head>

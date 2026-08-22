@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import ProgramLayout from '../../layouts/ProgramLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { YouTube } from 'astro-embed';
@@ -6,15 +8,12 @@ import ContentRenderError from '@components/ContentRenderError.astro';
 import LinkButton from '@components/LinkButton.astro';
 import { Image } from 'astro:assets';
 
-export async function getStaticPaths() {
-    const programs = await getCollection('programs');
-    return programs.map((program) => ({
-        params: { slug: program.id },
-        props: { program },
-    }));
-}
+const { slug } = Astro.params;
+const programs = await getCollection('programs');
+const program = programs.find((p) => p.id === slug);
 
-const { program } = Astro.props;
+if (!program) return new Response('Not found', { status: 404 });
+
 let renderResult: Awaited<ReturnType<typeof render>> | undefined;
 let contentError: unknown;
 

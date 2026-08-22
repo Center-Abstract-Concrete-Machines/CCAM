@@ -32,6 +32,10 @@ Public facing site (main branch)
 Actual domain
 [https://ccam.world/](https://ccam.world/)
 
+## Store Documentation
+
+- Full store operations and feature documentation: [docs/store.md](docs/store.md)
+
 ## Templates
 
 - Each content type (people, programs, projects, resources) has an associated `{type}-template.mdx` file in the `/src/content/templates/` folder. Duplicate this file, move it to the proper folder, edit the data, and rename the file. Use mdx extension for all files, in case you want to include components in the markdown like `<LinkButton />`.

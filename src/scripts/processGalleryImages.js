@@ -1,9 +1,16 @@
 import fs from 'fs';
 import path from 'path';
-import sharp from 'sharp';
 import mime from 'mime-types';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import heicConvert from 'heic-convert';
+
+// On Windows/Git Bash, a globally installed libvips can cause GLib warnings.
+// Force sharp to use its bundled libvips implementation for consistent behavior.
+if (!process.env.SHARP_IGNORE_GLOBAL_LIBVIPS) {
+    process.env.SHARP_IGNORE_GLOBAL_LIBVIPS = '1';
+}
+
+const { default: sharp } = await import('sharp');
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -190,6 +197,19 @@ async function processImage(parentDir, file) {
 
     const filePath = path.join(parentDir, file);
 
+    function createSafePipeline(input, shouldResize) {
+        const pipeline = sharp(input)
+            .rotate() // Auto-rotate based on EXIF orientation
+            // Normalize to sRGB to avoid libvips interpretation issues on odd source profiles.
+            .toColorspace('srgb');
+
+        if (shouldResize) {
+            return pipeline.resize({ width: maxWidth, withoutEnlargement: true });
+        }
+
+        return pipeline;
+    }
+
     try {
         const metadata = await sharp(filePath).metadata();
 
@@ -202,10 +222,9 @@ async function processImage(parentDir, file) {
                 format: 'JPEG',
                 quality: 1,
             });
-            await sharp(outputBuffer)
-                .resize({ width: maxWidth })
-                .rotate() // Auto-rotate based on EXIF orientation
-                .withMetadata()
+            await createSafePipeline(outputBuffer, true)
+                .withMetadata({ orientation: 1 })
+                .jpeg({ quality: 92 })
                 .toFile(newFilePath);
             console.log(
                 `\nConverted ${file} from HEIC to JPG and resized to ${maxWidth}px wide as ${newFileName}`
@@ -214,17 +233,37 @@ async function processImage(parentDir, file) {
             console.log(`Deleted original file ${filePath}`);
             //
             //
-        } else if (metadata.width > maxWidth) {
+        } else {
+            const shouldResize = metadata.width > maxWidth;
+            const hasOrientationMetadata = Boolean(metadata.orientation);
+            const hasEmbeddedMetadata =
+                Boolean(metadata.exif) ||
+                Boolean(metadata.icc) ||
+                Boolean(metadata.xmp) ||
+                Boolean(metadata.iptc);
+
+            // Re-encode files that carry metadata/orientation blocks to strip problematic tags.
+            if (!shouldResize && !hasOrientationMetadata && !hasEmbeddedMetadata) {
+                return;
+            }
+
             const newFilePath = path.join(
                 parentDir,
                 `${path.basename(file, path.extname(file))}-resized${path.extname(file)}`
             );
-            await sharp(filePath)
-                .resize({ width: maxWidth })
-                .rotate() // Auto-rotate based on EXIF orientation
-                .withMetadata()
-                .toFile(newFilePath);
-            console.log(`Resized ${file} to ${maxWidth}px wide`);
+            let output = createSafePipeline(filePath, shouldResize);
+
+            if (metadata.format === 'jpeg') {
+                output = output.withMetadata({ orientation: 1 }).jpeg({ quality: 92 });
+            }
+
+            await output.toFile(newFilePath);
+
+            if (shouldResize) {
+                console.log(`Resized ${file} to ${maxWidth}px wide`);
+            } else {
+                console.log(`Normalized metadata/colorspace for ${file}`);
+            }
 
             // Delete original image
             await delay(100);

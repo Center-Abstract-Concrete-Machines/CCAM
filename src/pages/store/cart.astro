@@ -1,0 +1,148 @@
+---
+export const prerender = false;
+
+import Base from 'src/layouts/Base.astro';
+import Stripe from 'stripe';
+import CartClient from '@components/Store/CartClient.svelte';
+import { getCollection } from 'astro:content';
+import { getStripeServerClient } from '@utils/stripeServer';
+
+const stripe = getStripeServerClient();
+
+type ProductRecord = {
+    productId: string;
+    priceId: string;
+    name: string;
+    image: string;
+    unitAmount: number;
+    currency: string;
+    inventoryCount: number | null;
+    variantSize?: string;
+    variantLabel?: string;
+};
+
+function parseInventoryCount(value: string | undefined) {
+    if (!value) return null;
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) || parsed < 0 ? null : parsed;
+}
+
+function isProductRecord(value: ProductRecord | null): value is ProductRecord {
+    return value !== null;
+}
+
+const productsResponse = await stripe.products.list({
+    active: true,
+    expand: ['data.default_price'],
+    limit: 100,
+});
+
+const productById = new Map(productsResponse.data.map((p) => [p.id, p]));
+
+const defaultPriceProducts: ProductRecord[] = productsResponse.data
+    .map((product) => {
+        const defaultPrice = product.default_price as Stripe.Price | null;
+        if (
+            !defaultPrice ||
+            !defaultPrice.unit_amount ||
+            defaultPrice.type !== 'one_time' ||
+            !product.active
+        ) {
+            return null;
+        }
+
+        return {
+            productId: product.id,
+            priceId: defaultPrice.id,
+            name: product.name,
+            image: product.images[0] ?? '',
+            unitAmount: defaultPrice.unit_amount,
+            currency: defaultPrice.currency,
+            inventoryCount: parseInventoryCount(
+                product.metadata.inventory_count
+            ),
+        };
+    })
+    .filter(isProductRecord) as ProductRecord[];
+
+const storeEntries = await getCollection('storeProducts');
+const variantPriceProducts: ProductRecord[] = (
+    await Promise.all(
+        storeEntries.flatMap((entry) => {
+            const variants = entry.data.sizeVariants ?? [];
+            return variants.map(async (variant) => {
+                try {
+                    const variantPrice = await stripe.prices.retrieve(
+                        variant.stripePriceId,
+                        { expand: ['product'] }
+                    );
+
+                    if (
+                        !variantPrice.active ||
+                        !variantPrice.unit_amount ||
+                        variantPrice.type !== 'one_time'
+                    ) {
+                        return null;
+                    }
+
+                    const variantProduct =
+                        variantPrice.product as Stripe.Product;
+                    if (!variantProduct.active) {
+                        return null;
+                    }
+
+                    const listedProduct = productById.get(variantProduct.id);
+                    const image =
+                        entry.data.heroImage?.src ??
+                        listedProduct?.images?.[0] ??
+                        variantProduct.images?.[0] ??
+                        '';
+
+                    return {
+                        productId: variantProduct.id,
+                        priceId: variantPrice.id,
+                        name: entry.data.title ?? variantProduct.name,
+                        image,
+                        unitAmount: variantPrice.unit_amount,
+                        currency: variantPrice.currency,
+                        inventoryCount: parseInventoryCount(
+                            variantPrice.metadata.inventory_count ??
+                                variantProduct.metadata.inventory_count
+                        ),
+                        variantSize: variant.size,
+                        variantLabel: variant.label ?? variant.size,
+                    };
+                } catch {
+                    return null;
+                }
+            });
+        })
+    )
+).filter((value) => value !== null) as ProductRecord[];
+
+const productsByPriceId = new Map<string, ProductRecord>(
+    [...defaultPriceProducts, ...variantPriceProducts].map((record) => [
+        record.priceId,
+        record,
+    ])
+);
+
+const products: ProductRecord[] = [...productsByPriceId.values()];
+---
+
+<Base title="Cart">
+    <section
+        class="px-4 pt-12 pb-8 border-b border-dashed border-borderColor/30"
+    >
+        <p
+            class="font-mono text-xs text-textColor/60 uppercase tracking-wider mb-3"
+        >
+            <a href="/store">Store</a> / Cart
+        </p>
+        <h1 class="font-sans text-6xl sm:text-8xl mb-4">Cart</h1>
+    </section>
+
+    <section class="px-4 py-10">
+        <CartClient client:load products={products} />
+    </section>
+</Base>

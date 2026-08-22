@@ -203,6 +203,7 @@ export const POST: APIRoute = async ({ request, url }) => {
         mode: 'payment',
         line_items: lineItems,
         automatic_tax: { enabled: true },
+        allow_promotion_codes: true,
         success_url: `${origin}/store/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${origin}/store/cart`,
         ...(shippingOptions ? { shipping_options: shippingOptions } : {}),

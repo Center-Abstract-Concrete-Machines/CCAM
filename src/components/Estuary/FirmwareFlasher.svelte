@@ -93,22 +93,68 @@
                 throw new Error('No DFU interfaces found. Make sure the device is in bootloader mode.');
             }
 
-            device = new DFUse.Device(usbDevice, interfaces[0]);
+            // Some platforms (notably Windows) don't expose interface names via WebUSB.
+            // DFUse needs those names to parse the memory map, so read them manually.
+            await fixInterfaceNames(usbDevice, interfaces);
+
+            // Pick the alt setting whose memory map covers the QSPI target address
+            // (the Daisy bootloader exposes several; interfaces[0] is not guaranteed).
+            const target = interfaces.find((intf: any) => {
+                try {
+                    const map = DFUse.parseMemoryDescriptor(intf.name ?? '');
+                    return map.segments.some((s: any) => s.start <= FLASH_START_ADDRESS && FLASH_START_ADDRESS < s.end);
+                } catch {
+                    return false;
+                }
+            });
+            if (!target) {
+                throw new Error('Could not find a DFU interface for QSPI flash. Make sure the Daisy bootloader (not the STM32 system bootloader) is running.');
+            }
+
+            device = new DFUse.Device(usbDevice, target);
             await device.open();
-            await device.reset();
+
+            // Clear any leftover error state from a previous session and return to dfuIDLE.
+            // (webdfu has no reset(); abortToIdle() is the equivalent.)
+            await device.abortToIdle();
 
             status = 'connected';
             statusMessage = 'Device connected. Ready to flash.';
         } catch (e: any) {
-            if (e.name !== 'NotFoundError') {
+            if (e?.name !== 'NotFoundError') {
                 status = 'error';
-                statusMessage = e.message ?? 'Failed to connect.';
+                statusMessage = e?.message ?? String(e) ?? 'Failed to connect.';
             } else {
                 status = 'idle';
                 statusMessage = '';
             }
-            device = null;
+            await closeDevice();
         }
+    }
+
+    async function fixInterfaceNames(usbDevice: USBDevice, interfaces: any[]) {
+        if (!interfaces.some((intf) => intf.name == null)) return;
+        const temp = new DFU.Device(usbDevice, interfaces[0]);
+        await usbDevice.open();
+        if (usbDevice.configuration === null) {
+            await usbDevice.selectConfiguration(1);
+        }
+        const mapping = await temp.readInterfaceNames();
+        await temp.close();
+        for (const intf of interfaces) {
+            if (intf.name == null) {
+                const conf = intf.configuration.configurationValue;
+                const num = intf.interface.interfaceNumber;
+                const alt = intf.alternate.alternateSetting;
+                intf.name = mapping[conf]?.[num]?.[alt] ?? null;
+            }
+        }
+    }
+
+    async function closeDevice() {
+        const d = device;
+        device = null;
+        if (d) await d.close();
     }
 
     async function flashFirmware() {
@@ -119,8 +165,9 @@
             statusMessage = `Downloading ${selectedFirmware.label}…`;
             progress = 0;
 
-            const res = await fetch(selectedFirmware.download_url);
-            if (!res.ok) throw new Error(`Failed to fetch firmware: ${res.status}`);
+            // Proxied through our server: GitHub release assets don't allow cross-origin fetches.
+            const res = await fetch(`/api/estuary/firmware-bin?url=${encodeURIComponent(selectedFirmware.download_url)}`);
+            if (!res.ok) throw new Error(`Failed to fetch firmware (${res.status}): ${await res.text()}`);
             const data = await res.arrayBuffer();
 
             device.startAddress = FLASH_START_ADDRESS;
@@ -144,15 +191,16 @@
             progress = 100;
         } catch (e: any) {
             status = 'error';
-            statusMessage = e.message ?? 'Flash failed.';
+            statusMessage = e?.message ?? String(e) ?? 'Flash failed.';
+            await closeDevice();
         }
     }
 
-    function reset() {
+    async function reset() {
         status = 'idle';
         statusMessage = '';
         progress = 0;
-        device = null;
+        await closeDevice();
     }
 </script>
 
@@ -171,7 +219,7 @@
             {#each (['earth', 'estuary'] as Hardware[]) as hw}
                 <button
                     type="button"
-                    onclick={() => { selectedHardware = hw; status = 'idle'; device = null; }}
+                    onclick={() => { selectedHardware = hw; status = 'idle'; closeDevice(); }}
                     disabled={isWorking}
                     class="flex-1 py-2 px-4 text-center transition-colors
                         {selectedHardware === hw
